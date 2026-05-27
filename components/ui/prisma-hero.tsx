@@ -84,15 +84,16 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
 
 const PrismaHero = () => {
   return (
-    <section className="h-screen w-full" id="home">
+    <section className="h-[100dvh] w-full" id="home">
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
         
-        {/* Background video */}
+        {/* Background video with poster fallback */}
         <video
           autoPlay
           loop
           muted
           playsInline
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='100%25' height='100%25' fill='%23000'/%3E%3C/svg%3E"
           className="absolute inset-0 h-full w-full object-cover"
           src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
         />
@@ -100,31 +101,44 @@ const PrismaHero = () => {
         {/* Noise overlay */}
         <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
-        {/* Gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-
+        {/* Enhanced gradient overlay for contrast */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/50" />
 
         {/* Hero content */}
-        <div className="absolute bottom-0 left-0 right-0 px-4 pb-2 sm:px-6 md:px-10">
+        <div className="absolute bottom-0 left-0 right-0 px-4 pb-8 sm:px-6 sm:pb-12 md:px-10 md:pb-16">
           <div className="grid grid-cols-12 items-end gap-4">
             
             <div className="col-span-12 lg:col-span-8">
-              <h1
-                className="font-medium leading-[0.85] tracking-[-0.07em] text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16vw] xl:text-[15vw] 2xl:text-[16vw]"
+              {/* Specialization & Full Name Subtitle */}
+              <motion.span 
+                initial={{ y: 15, opacity: 0 }}
+                animate={{ y: 0, opacity: 0.8 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-mono block mb-2 sm:mb-4"
                 style={{ color: "#E1E0CC" }}
               >
-                <WordsPullUp text="Tanmay" showAsterisk />
+                TANMAY SINGH // CLOUD & SYSTEMS
+              </motion.span>
+              
+              <h1
+                aria-label="Tanmay Singh"
+                className="font-medium leading-[0.85] tracking-[-0.07em] text-[20vw] sm:text-[18vw] md:text-[16vw] lg:text-[14vw] xl:text-[12vw]"
+                style={{ color: "#E1E0CC" }}
+              >
+                <span aria-hidden="true">
+                  <WordsPullUp text="Tanmay" showAsterisk />
+                </span>
               </h1>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-5 pb-6 lg:col-span-4 lg:pb-10">
+            <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4">
               
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xs text-white/70 sm:text-sm md:text-base"
-                style={{ lineHeight: 1.3 }}
+                className="text-xs text-white/70 sm:text-sm md:text-base font-sans"
+                style={{ lineHeight: 1.4 }}
               >
                 Tanmay Singh is a B.Tech Computer Science student specializing in Cloud Computing, focused on building robust backend systems, distributed cloud pipelines, and experimenting with agentic AI products.
               </motion.p>
