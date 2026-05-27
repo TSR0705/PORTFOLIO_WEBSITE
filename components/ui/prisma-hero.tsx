@@ -83,11 +83,17 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
 };
 
 /* ---------------- Hero ---------------- */
-const navItems = ["Our story", "Collective", "Workshops", "Programs", "Inquiries"];
+const navItems = [
+  { name: "About", target: "#about" },
+  { name: "Projects", target: "#projects" },
+  { name: "Skills", target: "#skills" },
+  { name: "Achievements", target: "#achievements" },
+  { name: "Contact", target: "#contact" },
+];
 
 const PrismaHero = () => {
   return (
-    <section className="h-screen w-full">
+    <section className="h-screen w-full" id="home">
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
         
         {/* Background video */}
@@ -111,14 +117,14 @@ const PrismaHero = () => {
           <div className="flex items-center gap-3 rounded-b-2xl bg-black px-4 py-2 sm:gap-6 md:gap-12 md:rounded-b-3xl md:px-8 lg:gap-14">
             {navItems.map((item) => (
               <a
-                key={item}
-                href="#"
-                className="text-[10px] transition-colors sm:text-xs md:text-sm"
+                key={item.name}
+                href={item.target}
+                className="text-[10px] transition-colors sm:text-xs md:text-sm font-medium"
                 style={{ color: "rgba(225, 224, 204, 0.8)" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
                 onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225, 224, 204, 0.8)")}
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </div>
@@ -130,10 +136,10 @@ const PrismaHero = () => {
             
             <div className="col-span-12 lg:col-span-8">
               <h1
-                className="font-medium leading-[0.85] tracking-[-0.07em] text-[26vw] sm:text-[24vw] md:text-[22vw] lg:text-[20vw] xl:text-[19vw] 2xl:text-[20vw]"
+                className="font-medium leading-[0.85] tracking-[-0.07em] text-[22vw] sm:text-[20vw] md:text-[18vw] lg:text-[16vw] xl:text-[15vw] 2xl:text-[16vw]"
                 style={{ color: "#E1E0CC" }}
               >
-                <WordsPullUp text="Prisma" showAsterisk />
+                <WordsPullUp text="Tanmay" showAsterisk />
               </h1>
             </div>
 
@@ -144,22 +150,23 @@ const PrismaHero = () => {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="text-xs text-white/70 sm:text-sm md:text-base"
-                style={{ lineHeight: 1.2 }}
+                style={{ lineHeight: 1.3 }}
               >
-                Prisma is a worldwide network of visual artists, filmmakers and storytellers bound not by place, status or labels but by passion and hunger to unlock potential through our unique perspectives.
+                Tanmay Singh is a B.Tech Computer Science student specializing in Cloud Computing, focused on building robust backend systems, distributed cloud pipelines, and experimenting with agentic AI products.
               </motion.p>
 
-              <motion.button
+              <motion.a
+                href="#projects"
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="group inline-flex items-center gap-2 self-start rounded-full bg-white py-1 pl-5 pr-1 text-sm font-medium text-black transition-all hover:gap-3 sm:text-base"
+                className="group inline-flex items-center gap-2 self-start rounded-full bg-white py-1 pl-5 pr-1 text-sm font-medium text-black transition-all hover:gap-3 sm:text-base cursor-pointer"
               >
-                Join the lab
+                Explore projects
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform group-hover:scale-110 sm:h-10 sm:w-10">
                   <ArrowRight className="h-4 w-4" style={{ color: "#E1E0CC" }} />
                 </span>
-              </motion.button>
+              </motion.a>
 
             </div>
           </div>
