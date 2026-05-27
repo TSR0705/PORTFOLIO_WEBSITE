@@ -88,6 +88,42 @@ export const ProfessionalConnect = () => {
       shadowColor: "rgba(239, 68, 68, 0.4)",
       link: "https://www.youtube.com/@tanmaysingh6110",
       description: "Video Content"
+    },
+    {
+      name: "LeetCode",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+          <path d="M13.483 0a1.374 1.374 0 0 0-.961.414l-9.777 9.778a3.75 3.75 0 0 0 0 5.304l2.217 2.216a1.39 1.39 0 0 0 1.966 0l9.777-9.778a3.75 3.75 0 0 0 0-5.304l-2.216-2.217A1.374 1.374 0 0 0 13.483 0zm-5.632 10.43c.27 0 .487.218.487.487v2.247c0 .27-.218.487-.487.487H5.604c-.27 0-.487-.218-.487-.487v-2.247c0-.27.218-.487.487-.487h2.247zm8.243 0c.27 0 .487.218.487.487v2.247c0 .27-.218.487-.487.487h-2.247c-.27 0-.487-.218-.487-.487v-2.247c0-.27.218-.487.487-.487h2.247z"/>
+        </svg>
+      ),
+      gradient: "from-amber-600 to-yellow-500",
+      shadowColor: "rgba(245, 158, 11, 0.4)",
+      link: "https://leetcode.com/u/tanmay_singh_rajput/",
+      description: "Algorithms & Problems"
+    },
+    {
+      name: "Personal Mail",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+          <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      ),
+      gradient: "from-emerald-600 to-teal-500",
+      shadowColor: "rgba(16, 185, 129, 0.4)",
+      link: "mailto:tanmaysingh8246@gmail.com",
+      description: "tanmaysingh8246@gmail.com"
+    },
+    {
+      name: "Academic Mail",
+      icon: (
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 13c-2.76 0-5-2.24-5-5 0-1.25.47-2.4 1.24-3.28L12 11.23l3.76-3.51c.77.88 1.24 2.03 1.24 3.28 0 2.76-2.24 5-5 5z"/>
+        </svg>
+      ),
+      gradient: "from-cyan-600 to-blue-500",
+      shadowColor: "rgba(6, 182, 212, 0.4)",
+      link: "mailto:ts7583@srmist.edu.in",
+      description: "ts7583@srmist.edu.in"
     }
   ];
 
@@ -132,11 +168,9 @@ export const ProfessionalConnect = () => {
                 isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onMouseLeave={() => setHoveredIndex(null)}
             >
               {/* Card Container */}
-              <div className="relative bg-white/[0.02] backdrop-blur-md rounded-2xl p-6 border border-white/10 overflow-hidden transition-all duration-500 hover:scale-105 hover:border-white/20 hover:bg-white/[0.04]">
+              <div className="relative bg-white/[0.02] backdrop-blur-md rounded-2xl p-6 border border-white/10 overflow-hidden transition-all duration-500 hover:scale-105 hover:border-white/20 hover:bg-white/[0.04] h-full flex flex-col justify-between">
                 {/* Hover Gradient Effect */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${platform.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                 
@@ -161,7 +195,7 @@ export const ProfessionalConnect = () => {
                     <h3 className="text-white font-semibold text-lg mb-1 transition-colors duration-300">
                       {platform.name}
                     </h3>
-                    <p className="text-white/40 text-xs md:text-sm transition-colors duration-300 group-hover:text-white/60 font-sans">
+                    <p className="text-white/40 text-xs md:text-sm transition-colors duration-300 group-hover:text-white/60 font-sans break-all">
                       {platform.description}
                     </p>
                   </div>
