@@ -9,27 +9,32 @@ export function NotFoundPage() {
   return (
     <section className="bg-black font-sans min-h-screen flex items-center justify-center relative text-white">
       {/* Noise overlay */}
-      <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
+      <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay animate-pulse" />
 
       <div className="container mx-auto relative z-10 px-6">
         <div className="flex justify-center">
           <div className="w-full sm:w-10/12 md:w-8/12 text-center">
             
-            {/* Styled GIF container with invert filters to blend with black theme */}
-            <div
-              className="bg-[url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif)] h-[250px] sm:h-[350px] md:h-[400px] bg-center bg-no-repeat bg-contain"
-              style={{ filter: "invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1)" }}
-              aria-hidden="true"
-            >
+            {/* Layered container to render clean cream 404 behind the screen-blended GIF */}
+            <div className="relative h-[250px] sm:h-[350px] md:h-[400px] flex items-center justify-center overflow-hidden mb-8">
+              
+              {/* 404 Text - Rendered in clean `#E1E0CC` with no filters applied */}
               <h1 
-                className="text-center text-8xl sm:text-9xl md:text-[10rem] font-bold pt-6 sm:pt-8 tracking-[-0.07em]"
-                style={{ color: "#E1E0CC" }}
+                className="absolute text-center text-[24vw] sm:text-[20vw] md:text-[16vw] font-bold tracking-[-0.07em] select-none pointer-events-none z-0"
+                style={{ color: "#E1E0CC", opacity: 0.8 }}
               >
                 404
               </h1>
+
+              {/* Inverted and screen-blended GIF container */}
+              <div
+                className="absolute inset-0 bg-[url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif)] bg-center bg-no-repeat bg-contain z-10 mix-blend-screen"
+                style={{ filter: "invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1)" }}
+                aria-hidden="true"
+              />
             </div>
 
-            <div className="mt-[-20px] sm:mt-[-40px]">
+            <div>
               <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-3 text-white">
                 Look like you&apos;re lost
               </h3>
@@ -39,7 +44,7 @@ export function NotFoundPage() {
 
               <Button
                 onClick={() => router.push("/")}
-                className="my-5 bg-white text-black font-medium hover:bg-white/90 px-6 py-2 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-105"
+                className="bg-white text-black font-medium hover:bg-[#E1E0CC] px-8 py-3 rounded-full cursor-pointer transition-all duration-300 transform hover:scale-105"
               >
                 Go to Home
               </Button>
