@@ -41,7 +41,7 @@ export function GlassmorphismPortfolioBlock() {
   const quickMetrics = [
     "10+ Scalable Systems Built (Databases, Observability, AI)",
     "Samsung PRISM Selected Researcher",
-    "GitHub OSSome Hacks 2.0 1st Place Winner",
+    "Best Freshers Award — GitHub OSSome Hacks 2.0",
     "Multi-Domain Systems & Security Builds"
   ];
 
@@ -50,7 +50,7 @@ export function GlassmorphismPortfolioBlock() {
       title: "Backend Engineering Intern",
       subtitle: "MedGency",
       type: "role",
-      highlight: true
+      highlight: false
     },
     {
       title: "Samsung PRISM Research Contributor",
@@ -59,20 +59,14 @@ export function GlassmorphismPortfolioBlock() {
       highlight: true
     },
     {
-      title: "Winner — GitHub OSSome Hacks 2.0",
-      subtitle: "1st Place Winner",
+      title: "Best Freshers Award — GitHub OSSome Hacks 2.0",
+      subtitle: "Winner",
       type: "achievement",
       highlight: false
     },
     {
       title: "3rd Place — SRM Java Project Expo 2025",
       subtitle: "SRMIST",
-      type: "achievement",
-      highlight: false
-    },
-    {
-      title: "Top 10 Finalist — CodeNex DayZero",
-      subtitle: "Systems Track",
       type: "achievement",
       highlight: false
     }
@@ -102,16 +96,16 @@ export function GlassmorphismPortfolioBlock() {
                 className="inline-flex items-center gap-2 rounded-full border-[#E1E0CC]/20 bg-white/5 px-4.5 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]"
               >
                 <Terminal className="h-3.5 w-3.5 animate-pulse text-[#E1E0CC]" />
-                Identity Overview // active_node
+                B.Tech CSE (Cloud Computing) · 2nd Year
               </Badge>
               <div className="h-[1px] flex-grow bg-white/10" />
             </div>
 
             {/* Title & Stands */}
             <div className="space-y-4">
-              <span className="text-xs font-mono tracking-[0.3em] uppercase text-white/40 block">
+              {/* <span className="text-xs font-mono tracking-[0.3em] uppercase text-white/40 block">
                 B.Tech CSE (Cloud Computing) · 2nd Year
-              </span>
+              </span> */}
               <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-none">
                 Tanmay Singh
               </h1>
