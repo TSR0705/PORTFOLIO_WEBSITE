@@ -1,16 +1,17 @@
-"use client";
+"use client"
 
-import React from "react";
-import { motion } from "motion/react";
+import React from "react"
+import { motion } from "motion/react"
+import Image from "next/image"
 
 interface GradientTracingProps {
-  width: number;
-  height: number;
-  baseColor?: string;
-  gradientColors?: [string, string, string];
-  animationDuration?: number;
-  strokeWidth?: number;
-  path?: string;
+  width: number
+  height: number
+  baseColor?: string
+  gradientColors?: [string, string, string]
+  animationDuration?: number
+  strokeWidth?: number
+  path?: string
 }
 
 export const GradientTracing: React.FC<GradientTracingProps> = ({
@@ -22,7 +23,7 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
   strokeWidth = 2,
   path = `M0,${height / 2} L${width},${height / 2}`,
 }) => {
-  const gradientId = `pulse-${Math.random().toString(36).substring(2, 9)}`;
+  const gradientId = `pulse-${Math.random().toString(36).substr(2, 9)}`
 
   return (
     <div className="relative" style={{ width, height }}>
@@ -65,5 +66,5 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
         </defs>
       </svg>
     </div>
-  );
-};
+  )
+}
