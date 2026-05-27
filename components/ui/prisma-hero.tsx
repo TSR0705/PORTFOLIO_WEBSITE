@@ -82,15 +82,6 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
   );
 };
 
-/* ---------------- Hero ---------------- */
-const navItems = [
-  { name: "About", target: "#about" },
-  { name: "Projects", target: "#projects" },
-  { name: "Skills", target: "#skills" },
-  { name: "Achievements", target: "#achievements" },
-  { name: "Contact", target: "#contact" },
-];
-
 const PrismaHero = () => {
   return (
     <section className="h-screen w-full" id="home">
@@ -112,23 +103,6 @@ const PrismaHero = () => {
         {/* Gradient overlay */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
 
-        {/* Navbar */}
-        <nav className="absolute left-1/2 top-0 z-20 -translate-x-1/2">
-          <div className="flex items-center gap-3 rounded-b-2xl bg-black px-4 py-2 sm:gap-6 md:gap-12 md:rounded-b-3xl md:px-8 lg:gap-14">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.target}
-                className="text-[10px] transition-colors sm:text-xs md:text-sm font-medium"
-                style={{ color: "rgba(225, 224, 204, 0.8)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225, 224, 204, 0.8)")}
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </nav>
 
         {/* Hero content */}
         <div className="absolute bottom-0 left-0 right-0 px-4 pb-2 sm:px-6 md:px-10">
