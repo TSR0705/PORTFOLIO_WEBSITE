@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useId } from "react"
 import { motion } from "motion/react"
 import Image from "next/image"
 
@@ -23,7 +23,9 @@ export const GradientTracing: React.FC<GradientTracingProps> = ({
   strokeWidth = 2,
   path = `M0,${height / 2} L${width},${height / 2}`,
 }) => {
-  const gradientId = `pulse-${Math.random().toString(36).substr(2, 9)}`
+  const reactId = useId()
+  const cleanId = reactId.replace(/:/g, "")
+  const gradientId = `pulse-${cleanId}`
 
   return (
     <div className="relative" style={{ width, height }}>
