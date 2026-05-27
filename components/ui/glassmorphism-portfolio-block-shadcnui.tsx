@@ -1,200 +1,189 @@
 "use client"
 
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { motion, Variants } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-
-type Highlight = {
-  title: string;
-  description: string;
-};
-
-type SocialLink = {
-  label: string;
-  handle: string;
-  href: string;
-  icon: React.ComponentType<{ className?: string }>;
-};
-
-// Inline SVG components for maximum robustness
-const LinkedInIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-  </svg>
-);
-
-const GitHubIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-  </svg>
-);
-
-const DevfolioIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.828 12.828l-4 4A1.17 1.17 0 0 1 13 17.17v-10.34a1.17 1.17 0 0 1 .828.34l4 4a1.17 1.17 0 0 1 0 1.658zM6.828 6.83a1.17 1.17 0 0 1 1.658 0l4 4a1.17 1.17 0 0 1 0 1.658l-4 4a1.17 1.17 0 0 1-1.658-1.658L9.172 12 6.83 9.658a1.17 1.17 0 0 1 0-1.658z"/>
-  </svg>
-);
-
-const TwitterIcon = ({ className }: { className?: string }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-  </svg>
-);
-
-const highlights: Highlight[] = [
-  {
-    title: "Academics",
-    description:
-      "B.Tech CSE (Cloud Computing) at SRMIST Kattankulathur (2024–2028). Focus on distributed systems and cloud architectures.",
-  },
-  {
-    title: "Key Achievements",
-    description:
-      "Samsung PRISM 2026 Selection · Winner of GitHub OSSome Hacks 2.0 · 3rd Place at SRM Java Project Expo 2025.",
-  },
-  {
-    title: "Core Focus",
-    description:
-      "AI automation, cloud-native orchestration (Docker/Kubernetes), DevOps (AWS/Redis), and resilient backend architectures.",
-  },
-];
-
-const socialLinks: SocialLink[] = [
-  {
-    label: "LinkedIn",
-    handle: "Tanmay Singh Rajput",
-    href: "https://linkedin.com/in/tanmay-singh-rajput",
-    icon: LinkedInIcon,
-  },
-  {
-    label: "GitHub",
-    handle: "TSR0705",
-    href: "https://github.com/TSR0705",
-    icon: GitHubIcon,
-  },
-  {
-    label: "Devfolio",
-    handle: "tanmay8246",
-    href: "https://devfolio.co/@tanmay8246",
-    icon: DevfolioIcon,
-  },
-  {
-    label: "Twitter",
-    handle: "@TanmaySinghRa18",
-    href: "https://x.com/TanmaySinghRa18",
-    icon: TwitterIcon,
-  },
-];
-
-const listVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.35,
-    },
-  },
-};
+import { motion } from "framer-motion";
+import { 
+  ArrowUpRight, 
+  Award, 
+  BookOpen, 
+  MapPin, 
+  Briefcase, 
+  Sparkles,
+  Terminal,
+  Activity,
+  CheckCircle2,
+  Bookmark
+} from "lucide-react";
 
 export function GlassmorphismPortfolioBlock() {
+  const [imgError, setImgError] = useState(false);
+
+  const technicalFocus = [
+    "AI Systems",
+    "Cloud Infrastructure",
+    "Backend Engineering",
+    "DevOps Automation",
+    "System Design",
+    "Scalable Full Stack Applications"
+  ];
+
+  const quickMetrics = [
+    "10+ Engineering Projects",
+    "Multiple Research / Product Builds",
+    "Hackathon Winner",
+    "Industry Research Experience"
+  ];
+
+  const logEntries = [
+    {
+      title: "Backend Engineering Intern",
+      subtitle: "MedGency",
+      type: "role",
+      highlight: true
+    },
+    {
+      title: "Samsung PRISM Research Contributor",
+      subtitle: "Samsung India",
+      type: "role",
+      highlight: true
+    },
+    {
+      title: "Winner — GitHub OSSome Hacks 2.0",
+      subtitle: "1st Place Winner",
+      type: "achievement",
+      highlight: false
+    },
+    {
+      title: "3rd Place — SRM Java Project Expo 2025",
+      subtitle: "SRMIST",
+      type: "achievement",
+      highlight: false
+    },
+    {
+      title: "Top 10 Finalist — CodeNex DayZero",
+      subtitle: "Systems Track",
+      type: "achievement",
+      highlight: false
+    }
+  ];
+
   return (
-    <section className="relative min-h-screen overflow-hidden px-6 py-12 lg:py-20 flex items-center justify-center bg-black">
+    <section className="relative min-h-screen overflow-hidden px-6 py-20 lg:py-32 flex items-center justify-center bg-black text-white">
       {/* Noise overlay */}
-      <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
+      <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.75] mix-blend-overlay" />
+
+      {/* Cinematic theme lighting */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E1E0CC]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="mx-auto max-w-6xl w-full z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 backdrop-blur-2xl md:p-12"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.01] p-6 sm:p-10 md:p-14 backdrop-blur-3xl"
         >
-          {/* Glass gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none" />
+          {/* Glass glare overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
 
-          <div className="relative grid gap-12 lg:grid-cols-2">
-            {/* Left column - Main content */}
-            <div className="space-y-8 flex flex-col justify-between">
+          <div className="relative grid gap-12 lg:grid-cols-12 items-stretch">
+            
+            {/* LEFT COLUMN: Identity + Technical Focus + Experience & Achievements Log + CTA */}
+            <div className="space-y-8 lg:col-span-7 flex flex-col justify-between">
+              
               <div className="space-y-6">
-                <div>
+                
+                {/* Core Header Badge */}
+                <div className="flex items-center gap-3">
                   <Badge
                     variant="outline"
-                    className="inline-flex items-center gap-2 rounded-full border-[#E1E0CC]/20 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.3em] text-[#E1E0CC] backdrop-blur transition-colors hover:bg-white/10"
+                    className="inline-flex items-center gap-2 rounded-full border-[#E1E0CC]/30 bg-[#E1E0CC]/5 px-4 py-1 text-[10px] font-mono uppercase tracking-[0.25em] text-[#E1E0CC]"
                   >
-                    About Me
+                    <Terminal className="h-3 w-3 animate-pulse" />
+                    2nd Year B.Tech CSE Student · SRMIST
                   </Badge>
+                  <div className="h-[1px] flex-grow bg-white/10" />
                 </div>
 
-                <div className="space-y-4">
-                  <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-2xl font-semibold tracking-tight text-white md:text-3xl"
-                  >
-                    Tanmay Singh, Full Stack Engineer & Cloud Specialist
-                  </motion.h2>
-                  <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="max-w-xl text-base leading-relaxed text-white/70"
-                  >
-                    I’m a Full Stack Engineer specializing in Cloud Computing, scalable backend systems, and intelligent automation platforms. I focus on building production-oriented systems that combine modern web engineering, cloud infrastructure, and AI-driven workflows — with a strong emphasis on architecture, scalability, observability, and long-term maintainability.
-                  </motion.p>
+                {/* Main Name & Subtitles */}
+                <div className="space-y-2">
+                  <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white leading-tight">
+                    Tanmay Singh
+                  </h1>
+                  <p className="text-lg sm:text-xl font-medium tracking-tight text-white/80" style={{ color: "#E1E0CC" }}>
+                    Full Stack Engineer | Cloud Systems Builder
+                  </p>
                 </div>
 
-                {/* Highlights grid */}
-                <div className="grid gap-4 sm:grid-cols-1">
-                  {highlights.map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.1 * index }}
-                      whileHover={{ y: -4 }}
-                      className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur transition-all hover:border-white/20 hover:bg-white/[0.04]"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 -z-10" />
-                      <div className="relative space-y-2">
-                        <p className="text-xs font-semibold uppercase tracking-[0.25em]" style={{ color: "#E1E0CC" }}>
-                          {item.title}
-                        </p>
-                        <p className="text-sm leading-relaxed text-white/60">
-                          {item.description}
-                        </p>
+                {/* Short Manifesto Biography */}
+                <p className="text-white/70 text-sm sm:text-base leading-relaxed font-sans max-w-xl">
+                  I focus on designing and building reliable, scalable backend architectures, cloud-native systems, and intelligent automation platforms. I prioritize developer tooling and observability, turning complex workflow demands into maintainable systems built for production scale.
+                </p>
+
+                {/* Technical Focus Grid */}
+                <div className="space-y-3">
+                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40 block">
+                    technical_focus // areas
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {technicalFocus.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-xs px-3 py-1 rounded-full border border-white/5 bg-white/[0.02] text-white/85 font-sans"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Professional Log Timeline (Unified Experience & Achievements) */}
+                <div className="space-y-4 pt-2">
+                  <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40 flex items-center gap-2">
+                    <Activity className="h-3.5 w-3.5 text-[#E1E0CC]" />
+                    professional_log // achievements & roles
+                  </span>
+                  
+                  <div className="relative border-l border-white/10 pl-5 space-y-4">
+                    {logEntries.map((entry, index) => (
+                      <div key={index} className="relative group">
+                        {/* Dot indicator */}
+                        <div 
+                          className={`absolute -left-[27px] top-1.5 h-2.5 w-2.5 rounded-full border border-black transition-all group-hover:scale-125 ${
+                            entry.highlight 
+                              ? "bg-[#E1E0CC] ring-4 ring-[#E1E0CC]/20" 
+                              : "bg-white/30"
+                          }`} 
+                        />
+                        <div className="flex justify-between items-start gap-4">
+                          <div>
+                            <h4 className={`text-xs font-semibold leading-none ${entry.highlight ? "text-white" : "text-white/80"}`}>
+                              {entry.title}
+                            </h4>
+                            <p className="text-[10px] text-white/40 font-mono mt-1">{entry.subtitle}</p>
+                          </div>
+                          {entry.type === "role" ? (
+                            <span className="text-[9px] font-mono px-2 py-0.5 rounded border border-white/10 bg-white/5 text-white/60">
+                              EXPERIENCE
+                            </span>
+                          ) : (
+                            <span className="text-[9px] font-mono px-2 py-0.5 rounded border border-[#E1E0CC]/20 bg-[#E1E0CC]/5 text-[#E1E0CC]">
+                              AWARD
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </motion.div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
+
               </div>
 
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="grid grid-cols-1 gap-4 pt-4"
-              >
+              {/* Primary Action Call */}
+              <div className="pt-4">
                 <Button
                   size="lg"
                   onClick={() => {
@@ -205,102 +194,116 @@ export function GlassmorphismPortfolioBlock() {
                       window.location.href = "/#projects";
                     }
                   }}
-                  className="h-12 w-full gap-2 rounded-full px-8 text-sm uppercase tracking-[0.25em] transition-all hover:shadow-lg sm:w-auto cursor-pointer bg-white text-black hover:bg-white/90 border-transparent"
+                  className="h-12 w-full sm:w-auto gap-2 rounded-full px-8 text-xs font-mono uppercase tracking-[0.25em] transition-all hover:scale-[1.02] cursor-pointer bg-white text-black hover:bg-white/90"
                 >
                   Explore Projects
                   <ArrowUpRight className="h-4 w-4" />
                 </Button>
-              </motion.div>
+              </div>
+
             </div>
 
-            {/* Right column - Profile card */}
-            <div className="relative flex flex-col justify-center">
-              <div className="absolute inset-0 rounded-[32px] bg-gradient-to-b from-[#E1E0CC]/5 via-transparent to-transparent blur-3xl" />
-              <div className="relative flex h-full flex-col justify-between overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.01] p-8 backdrop-blur-xl">
-                <div className="flex flex-col items-center text-center">
-                  {/* Avatar with glow */}
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="relative mb-6"
-                  >
-                    <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E1E0CC]/10 blur-2xl" />
-                    <img
-                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&q=80"
-                      alt="Tanmay Singh"
-                      className="relative h-32 w-32 rounded-full border border-white/10 object-cover shadow-[0_25px_60px_rgba(0,0,0,0.6)]"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="space-y-1"
-                  >
-                    <h3 className="text-2xl font-semibold tracking-tight text-white">
-                      Tanmay Singh
-                    </h3>
-                    <p className="text-xs font-semibold uppercase tracking-[0.35em]" style={{ color: "#E1E0CC" }}>
-                      Cloud & Systems Engineer
-                    </p>
-                  </motion.div>
-
-                  <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="mt-4 max-w-sm text-sm leading-relaxed text-white/60"
-                  >
-                    Partnering with future-facing teams to design architectures that feel resilient, scalable, and optimized for automation.
-                  </motion.p>
+            {/* RIGHT COLUMN: Polaroid Frame + Education (with GPA) + Quick Metrics Panel + Facts */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+              
+              {/* Profile Photo Frame */}
+              <div className="relative group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.01] p-5 flex flex-col items-center">
+                
+                {/* Active LED Pulse (Status indicator) */}
+                <div className="absolute top-4 right-4 z-20 flex items-center gap-2 px-2.5 py-1 rounded-full bg-black/50 border border-white/5 backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping absolute" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 relative" />
+                  <span className="text-[9px] font-mono tracking-widest text-emerald-400 uppercase">
+                    online // chn
+                  </span>
                 </div>
 
-                {/* Social links */}
-                <motion.div
-                  variants={listVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: "-80px" }}
-                  className="mt-8 flex flex-col gap-3"
-                >
-                  {socialLinks.map((social) => {
-                    const Icon = social.icon;
-                    return (
-                      <motion.a
-                        key={social.label}
-                        variants={itemVariants}
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left transition-all hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.04]"
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.985 }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/80 shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-all group-hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-                            <Icon className="h-4 w-4" />
-                          </span>
-                          <div>
-                            <p className="text-sm font-semibold text-white">
-                              {social.label}
-                            </p>
-                            <p className="text-xs text-white/40">
-                              {social.handle}
-                            </p>
-                          </div>
-                        </div>
-                        <ArrowUpRight className="h-4 w-4 text-white/30 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
-                      </motion.a>
-                    );
-                  })}
-                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10 pointer-events-none" />
+
+                {/* Photo Element */}
+                <div className="relative w-full aspect-square max-w-[220px] rounded-2xl overflow-hidden border border-white/10 bg-white/5 flex items-center justify-center">
+                  {!imgError ? (
+                    <img
+                      src="/profile.jpg"
+                      alt="Tanmay Singh"
+                      onError={() => setImgError(true)}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center p-6 text-center h-full w-full bg-[#080808]">
+                      <svg className="w-12 h-12 text-[#E1E0CC]/20 mb-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                      </svg>
+                      <span className="text-[9px] uppercase tracking-[0.2em] text-[#E1E0CC]/40 font-mono">
+                        Add photo in
+                      </span>
+                      <span className="text-[10px] text-white/60 font-mono select-all bg-white/5 px-2 py-0.5 rounded mt-1 border border-white/5">
+                        public/profile.jpg
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                <div className="relative z-20 mt-4 text-center">
+                  <h4 className="font-semibold text-sm tracking-tight text-white">
+                    Tanmay Singh
+                  </h4>
+                  <p className="text-[9px] font-mono tracking-[0.25em] text-[#E1E0CC]/80 uppercase mt-0.5">
+                    Bihar ➔ Chennai, India
+                  </p>
+                </div>
+
               </div>
+
+              {/* Education Card & CGPA Spotlight */}
+              <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.01] space-y-4">
+                <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em] block">
+                  academic_node // credentials
+                </span>
+                
+                <div className="flex justify-between items-center gap-4">
+                  <div className="flex items-start gap-3">
+                    <div className="h-7 w-7 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-[#E1E0CC] mt-0.5">
+                      <BookOpen className="h-3.5 w-3.5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-semibold text-white leading-tight">SRM Institute of Science & Technology</h4>
+                      <p className="text-[10px] text-white/40 font-mono mt-1">Cloud Computing · 2024–2028</p>
+                    </div>
+                  </div>
+
+                  {/* GPA Box */}
+                  <div className="px-3 py-1.5 rounded-xl border border-[#E1E0CC]/20 bg-[#E1E0CC]/5 text-center flex flex-col justify-center">
+                    <span className="text-xs font-mono text-white/40 uppercase leading-none block">CGPA</span>
+                    <span className="text-sm font-bold text-white mt-1 leading-none">9.37 / 10</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Quick Proof Metrics Checklist */}
+              <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.01] space-y-3.5">
+                <span className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em] block">
+                  quick_metrics // verification
+                </span>
+                
+                <div className="grid gap-2.5">
+                  {quickMetrics.map((metric) => (
+                    <div key={metric} className="flex items-center gap-2.5 text-xs text-white/80">
+                      <CheckCircle2 className="h-4 w-4 text-emerald-500 flex-shrink-0" />
+                      <span className="font-sans leading-none">{metric}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Geographic Context (Minor footer fact) */}
+              <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center gap-2.5 text-[10px] text-white/50 font-mono">
+                <MapPin className="h-3.5 w-3.5 text-[#E1E0CC]" />
+                Originally from Bihar, India · Currently studying in Chennai
+              </div>
+
             </div>
+
           </div>
         </motion.div>
       </div>
