@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 const navItems = [
   { name: "Home", target: "/" },
   { name: "About", target: "/about" },
-  { name: "Projects", target: "/#projects" },
+  { name: "Projects", target: "/projects" },
   { name: "Skills", target: "/#skills" },
   { name: "Recognition", target: "/recognition" },
   { name: "Contact", target: "/#contact" },
