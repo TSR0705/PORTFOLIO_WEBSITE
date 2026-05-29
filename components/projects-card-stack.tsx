@@ -2,22 +2,21 @@
 
 import React, { useMemo, useState, useEffect } from "react";
 import { CardStack, CardStackItem } from "@/components/ui/card-stack";
-import { projectsData } from "@/lib/portfolio-data";
+import { projects } from "@/lib/projects";
 import { Sparkles, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
 // Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
 const PROJECT_IMAGES: Record<string, string> = {
-  webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+  "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
   "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-  "samvidhan-setu": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-  indisure: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-  "multiplayer-chess": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-  margsetu: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
-  "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+  "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+  webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+  codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
   "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
-  filex: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+  "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+  "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
 };
 
 interface CustomCardItem extends CardStackItem {
@@ -60,12 +59,12 @@ export default function ProjectsCardStack() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Convert our projectsData into the custom items array
+  // Convert our projects into the custom items array
   const stackItems = useMemo<CustomCardItem[]>(() => {
-    return projectsData.map((project) => ({
+    return projects.filter((p) => p.featured).map((project) => ({
       id: project.id,
       title: project.title,
-      description: project.description,
+      description: project.shortDescription,
       imageSrc: PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
       href: project.liveUrl || project.githubUrl,
       techStack: project.techStack,

@@ -1,4 +1,4 @@
-import { projectsData } from "@/lib/portfolio-data";
+import { projects } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Sparkles, AlertCircle, Cpu, CheckCircle } from "lucide-react";
@@ -9,14 +9,14 @@ interface Props {
 }
 
 export function generateStaticParams() {
-  return projectsData.map((project) => ({
+  return projects.map((project) => ({
     id: project.id,
   }));
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { id } = await params;
-  const project = projectsData.find((p) => p.id === id);
+  const project = projects.find((p) => p.id === id);
 
   if (!project) {
     notFound();
@@ -24,15 +24,18 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   // Same mapping for illustrations
   const PROJECT_IMAGES: Record<string, string> = {
-    webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
     "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-    "samvidhan-setu": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-    indisure: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-    "multiplayer-chess": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-    margsetu: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
-    "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+    webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
     "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
-    filex: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+    "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+    "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    "android-task-manager": "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+    "who-i-am": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    "fcfs-scheduler-simulator": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+    "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
   };
 
   const imageSrc = PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
@@ -60,10 +63,10 @@ export default async function ProjectDetailPage({ params }: Props) {
         <div className="space-y-6">
           <div className="flex flex-wrap gap-2.5 items-center">
             <span className="text-[10px] font-mono tracking-wider uppercase text-white/50 bg-white/5 border border-white/10 px-3 py-1 rounded-md">
-              {project.category.replace("-", " ")}
+              {project.category}
             </span>
             <span className={`text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-full border bg-white/5 ${
-              project.status === "hackathon-winner"
+              project.featured
                 ? "border-[#E1E0CC]/40 text-[#E1E0CC]"
                 : "border-white/10 text-white/50"
             }`}>
@@ -72,11 +75,11 @@ export default async function ProjectDetailPage({ params }: Props) {
           </div>
 
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tighter leading-none text-white">
-            {project.title} {project.status === "hackathon-winner" && <Sparkles className="inline-block w-8 h-8 text-[#E1E0CC] ml-2 align-middle" />}
+            {project.title} {project.featured && <Sparkles className="inline-block w-8 h-8 text-[#E1E0CC] ml-2 align-middle" />}
           </h1>
 
           <p className="text-white/60 text-sm sm:text-base font-sans max-w-2xl leading-relaxed">
-            {project.description}
+            {project.shortDescription}
           </p>
         </div>
 
@@ -96,10 +99,10 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="md:col-span-7 space-y-6">
             <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
               <Cpu className="w-3.5 h-3.5 text-[#E1E0CC]" />
-              Detailed Narrative
+              Why It Matters
             </h3>
             <p className="text-white/80 text-sm sm:text-base font-sans leading-relaxed">
-              {project.longDescription || "No detailed long description available for this project yet."}
+              {project.fullDescription}
             </p>
             
             {/* Tech stack */}
@@ -118,32 +121,26 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
           </div>
 
-          {/* Core Challenges & Solutions (Right) */}
+          {/* Core Features & Deliverables (Right) */}
           <div className="md:col-span-5 space-y-8 md:border-l md:border-white/10 md:pl-8">
-            {/* Challenge */}
-            <div className="space-y-3">
+            {/* Key Features */}
+            <div className="space-y-4">
               <h3 className="text-xs font-mono uppercase tracking-widest text-[#E1E0CC] flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                The Challenge
-              </h3>
-              <p className="text-white/70 text-xs md:text-sm font-sans leading-relaxed">
-                {project.challenge || "Detailing the core system issues and scalability bottlenecks faced during implementation."}
-              </p>
-            </div>
-
-            {/* Solution */}
-            <div className="space-y-3">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                The Solution
+                Key Features
               </h3>
-              <p className="text-white/70 text-xs md:text-sm font-sans leading-relaxed">
-                {project.solution || "Deploying automated pipelines, load-balanced backends, and caching protocols to solve performance issues."}
-              </p>
+              <ul className="space-y-3 pl-1">
+                {project.keyFeatures.map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-2.5 text-white/70 text-xs md:text-sm font-sans leading-relaxed">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#E1E0CC] mt-1.5 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Action buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-white/10">
+            <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
               {project.githubUrl && (
                 <a
                   href={project.githubUrl}
@@ -164,6 +161,17 @@ export default async function ProjectDetailPage({ params }: Props) {
                 >
                   Live Demo
                   <ArrowUpRight className="w-4 h-4" />
+                </a>
+              )}
+              {project.demoUrl && (
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                  Video Demo
                 </a>
               )}
             </div>

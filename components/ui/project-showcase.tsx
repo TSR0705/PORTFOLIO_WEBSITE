@@ -3,6 +3,7 @@
 import type React from "react";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { projects as centralProjects } from "@/lib/projects";
 
 interface Project {
   title: string;
@@ -12,36 +13,29 @@ interface Project {
   image: string;
 }
 
-const projects: Project[] = [
-  {
-    title: "Lumina",
-    description: "AI-powered design system generator.",
-    year: "2024",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    title: "Flux",
-    description: "Real-time collaboration for creative teams.",
-    year: "2024",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    title: "Prism",
-    description: "Color palette extraction from any image.",
-    year: "2023",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-  },
-  {
-    title: "Vertex",
-    description: "3D modeling toolkit for the web.",
-    year: "2023",
-    link: "#",
-    image: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-  },
-];
+// Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
+const PROJECT_IMAGES: Record<string, string> = {
+  "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
+  "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+  "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+  webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+  codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+  "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
+  "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+  "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+  "android-task-manager": "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+  "who-i-am": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+  "fcfs-scheduler-simulator": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+  "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+};
+
+const projects = centralProjects.map((p) => ({
+  title: p.title,
+  description: p.shortDescription,
+  year: p.year,
+  link: `/projects/${p.id}`,
+  image: PROJECT_IMAGES[p.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+}));
 
 export function ProjectShowcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
