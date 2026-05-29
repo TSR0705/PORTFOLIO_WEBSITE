@@ -151,19 +151,22 @@ export default function SkillsSection() {
         </div>
 
         {/* Right Side: Orbit Visualization (Spans 5 columns) */}
-        <div className="lg:col-span-5 relative w-full h-[24rem] lg:h-[35rem] flex items-center justify-center overflow-hidden">
-          <div className="relative w-[34rem] h-[34rem] translate-y-[10%] lg:translate-y-0 lg:translate-x-[20%] flex items-center justify-center">
+        <div className="lg:col-span-5 relative w-full h-[30rem] lg:h-[40rem] flex items-center justify-end overflow-hidden">
+          <div 
+            className="absolute right-0 top-1/2 w-[50rem] h-[50rem] flex items-center justify-center"
+            style={{ transform: "translate(50%, -50%)" }}
+          >
             
             {/* Center Circle - Personal Engineering Identity Monogram */}
-            <div className="w-20 h-20 rounded-full bg-neutral-900 border border-[#E1E0CC]/20 shadow-[0_0_30px_rgba(225,224,204,0.1)] flex items-center justify-center z-20">
-              <span className="text-xl font-mono font-bold tracking-tighter text-[#E1E0CC]">
+            <div className="w-24 h-24 rounded-full bg-[#080808] border border-[#E1E0CC]/20 shadow-[0_0_50px_rgba(225,224,204,0.15)] flex items-center justify-center z-20">
+              <span className="text-2xl font-mono font-bold tracking-tighter text-[#E1E0CC]">
                 TS
               </span>
             </div>
 
             {/* Generated Orbits */}
             {[...Array(orbitCount)].map((_, orbitIdx) => {
-              const size = `${6.5 + orbitGap * (orbitIdx + 1)}rem`; // equal spacing
+              const size = `${12 + 8 * (orbitIdx + 1)}rem`; // wider spacing to fill the 50rem area
               const angleStep = (2 * Math.PI) / iconsPerOrbit;
 
               return (
@@ -186,14 +189,14 @@ export default function SkillsSection() {
                       return (
                         <div
                           key={iconIdx}
-                          className="absolute bg-neutral-900 border border-white/5 rounded-full p-2 shadow-lg"
+                          className="absolute bg-neutral-900 border border-white/5 rounded-full p-2.5 shadow-lg flex items-center justify-center hover:border-amber-400/50 transition-colors duration-300"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
                             transform: "translate(-50%, -50%)",
                           }}
                         >
-                          <cfg.Icon className="w-5 h-5" style={{ color: cfg.color }} />
+                          <cfg.Icon className="w-6 h-6" style={{ color: cfg.color }} />
                         </div>
                       );
                     })}
