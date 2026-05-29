@@ -103,7 +103,7 @@ export default function FeatureSection() {
           <Button
             variant="outline"
             onClick={handleContactScroll}
-            className="border border-white/15 hover:bg-white/10 hover:border-white/30 text-white px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-[0.15em] transition-transform active:scale-95 cursor-pointer"
+            className="border border-white/15 bg-transparent hover:bg-white/10 hover:border-white/30 text-white px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-[0.15em] transition-transform active:scale-95 cursor-pointer"
           >
             Let's Connect
           </Button>
@@ -130,7 +130,7 @@ export default function FeatureSection() {
                 style={{
                   width: size,
                   height: size,
-                  animation: `spin ${15 + orbitIdx * 8}s linear infinite`,
+                  animation: `orbit-spin ${15 + orbitIdx * 8}s linear infinite`,
                 }}
               >
                 {iconConfigs
@@ -170,8 +170,8 @@ export default function FeatureSection() {
       </div>
 
       {/* Animation keyframes */}
-      <style jsx>{`
-        @keyframes spin {
+      <style>{`
+        @keyframes orbit-spin {
           from {
             transform: rotate(0deg);
           }
