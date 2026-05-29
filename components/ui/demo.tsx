@@ -1,5 +1,5 @@
-import IntegrationsSection from "@/components/ui/integrations-section";
+import FeatureSection from "@/components/ui/stack-feature-section";
 
 export default function DemoOne() {
-  return <IntegrationsSection />;
+  return <FeatureSection />;
 }
