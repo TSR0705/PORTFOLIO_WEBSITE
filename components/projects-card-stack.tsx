@@ -5,6 +5,7 @@ import { CardStack, CardStackItem } from "@/components/ui/card-stack";
 import { projectsData } from "@/lib/portfolio-data";
 import { Sparkles, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 // Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
 const PROJECT_IMAGES: Record<string, string> = {
@@ -28,6 +29,7 @@ interface CustomCardItem extends CardStackItem {
 }
 
 export default function ProjectsCardStack() {
+  const router = useRouter();
   // Convert our projectsData into the custom items array
   const stackItems = useMemo<CustomCardItem[]>(() => {
     return projectsData.map((project) => ({
@@ -79,7 +81,16 @@ export default function ProjectsCardStack() {
             autoAdvance={false}
             showDots={true}
             renderCard={(item, { active }) => (
-              <div className="relative h-full w-full bg-black overflow-hidden flex flex-col justify-between">
+              <div 
+                onClick={() => {
+                  if (active) {
+                    router.push(`/projects/${item.id}`);
+                  }
+                }}
+                className={`relative h-full w-full bg-black overflow-hidden flex flex-col justify-between ${
+                  active ? "cursor-pointer" : "cursor-default"
+                }`}
+              >
                 
                 {/* Background Image with overlay gradient */}
                 <div className="absolute inset-0 z-0">
