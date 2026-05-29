@@ -53,38 +53,38 @@ const orbitIconConfigs = [
   { Icon: FaGithub, color: "#FFFFFF", name: "GitHub" },
 ];
 
-// Detailed brand background, text color, and icon configuration for premium translucent badges
+// Detailed brand background, text color, and icon configuration for solid badges
 const skillDetails: Record<string, { icon: any; bg: string; text: string; border?: string }> = {
-  "HTML": { icon: SiHtml5, bg: "bg-[#E34F26]/[0.08]", text: "text-[#E34F26]", border: "border-[#E34F26]/20" },
-  "CSS": { icon: SiCss, bg: "bg-[#1572B6]/[0.08]", text: "text-[#1572B6]", border: "border-[#1572B6]/20" },
-  "JavaScript": { icon: SiJavascript, bg: "bg-[#F7DF1E]/[0.08]", text: "text-[#F7DF1E]", border: "border-[#F7DF1E]/20" },
-  "React": { icon: FaReact, bg: "bg-[#61DAFB]/[0.08]", text: "text-[#61DAFB]", border: "border-[#61DAFB]/20" },
-  "Next.js": { icon: SiNextdotjs, bg: "bg-white/[0.04]", text: "text-white", border: "border-white/10" },
-  "Tailwind CSS": { icon: SiTailwindcss, bg: "bg-[#06B6D4]/[0.08]", text: "text-[#06B6D4]", border: "border-[#06B6D4]/20" },
+  "HTML": { icon: SiHtml5, bg: "bg-[#E34F26]", text: "text-white" },
+  "CSS": { icon: SiCss, bg: "bg-[#1572B6]", text: "text-white" },
+  "JavaScript": { icon: SiJavascript, bg: "bg-[#F7DF1E]", text: "text-black" },
+  "React": { icon: FaReact, bg: "bg-[#61DAFB]", text: "text-black" },
+  "Next.js": { icon: SiNextdotjs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Tailwind CSS": { icon: SiTailwindcss, bg: "bg-[#06B6D4]", text: "text-white" },
   
-  "Node.js": { icon: FaNodeJs, bg: "bg-[#339933]/[0.08]", text: "text-[#339933]", border: "border-[#339933]/20" },
-  "Express.js": { icon: SiExpress, bg: "bg-white/[0.04]", text: "text-white", border: "border-white/10" },
-  "REST APIs": { icon: SiSwagger, bg: "bg-[#0052CC]/[0.08]", text: "text-[#0052CC]", border: "border-[#0052CC]/20" },
-  "MySQL": { icon: SiMysql, bg: "bg-[#00758F]/[0.08]", text: "text-[#00758F]", border: "border-[#00758F]/20" },
-  "MongoDB": { icon: SiMongodb, bg: "bg-[#47A248]/[0.08]", text: "text-[#47A248]", border: "border-[#47A248]/20" },
+  "Node.js": { icon: FaNodeJs, bg: "bg-[#339933]", text: "text-white" },
+  "Express.js": { icon: SiExpress, bg: "bg-[#000000]", text: "text-white", border: "border-white/25" },
+  "REST APIs": { icon: SiSwagger, bg: "bg-[#0052CC]", text: "text-white" },
+  "MySQL": { icon: SiMysql, bg: "bg-[#00758F]", text: "text-white" },
+  "MongoDB": { icon: SiMongodb, bg: "bg-[#47A248]", text: "text-white" },
   
-  "Docker": { icon: FaDocker, bg: "bg-[#2496ED]/[0.08]", text: "text-[#2496ED]", border: "border-[#2496ED]/20" },
-  "Kubernetes": { icon: SiKubernetes, bg: "bg-[#326CE5]/[0.08]", text: "text-[#326CE5]", border: "border-[#326CE5]/20" },
-  "Jenkins": { icon: SiJenkins, bg: "bg-[#D24939]/[0.08]", text: "text-[#D24939]", border: "border-[#D24939]/20" },
-  "GitHub Actions": { icon: SiGithubactions, bg: "bg-white/[0.04]", text: "text-white", border: "border-white/10" },
-  "AWS EC2": { icon: FaAws, bg: "bg-[#FF9900]/[0.08]", text: "text-[#FF9900]", border: "border-[#FF9900]/20" },
-  "AWS IAM": { icon: FaAws, bg: "bg-[#232F3E]/[0.08]", text: "text-[#8b9bb4]", border: "border-[#232F3E]/20" },
-  "RabbitMQ": { icon: SiRabbitmq, bg: "bg-[#FF6600]/[0.08]", text: "text-[#FF6600]", border: "border-[#FF6600]/20" },
-  "Grafana": { icon: SiGrafana, bg: "bg-[#F46800]/[0.08]", text: "text-[#F46800]", border: "border-[#F46800]/20" },
+  "Docker": { icon: FaDocker, bg: "bg-[#2496ED]", text: "text-white" },
+  "Kubernetes": { icon: SiKubernetes, bg: "bg-[#326CE5]", text: "text-white" },
+  "Jenkins": { icon: SiJenkins, bg: "bg-[#D24939]", text: "text-white" },
+  "GitHub Actions": { icon: SiGithubactions, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "AWS EC2": { icon: FaAws, bg: "bg-[#FF9900]", text: "text-white" },
+  "AWS IAM": { icon: FaAws, bg: "bg-[#232F3E]", text: "text-white" },
+  "RabbitMQ": { icon: SiRabbitmq, bg: "bg-[#FF6600]", text: "text-white" },
+  "Grafana": { icon: SiGrafana, bg: "bg-[#F46800]", text: "text-white" },
   
-  "Git": { icon: SiGit, bg: "bg-white/[0.04]", text: "text-white", border: "border-white/10" },
-  "GitHub": { icon: FaGithub, bg: "bg-white/[0.04]", text: "text-white", border: "border-white/10" },
-  "Postman": { icon: SiPostman, bg: "bg-[#FF6C37]/[0.08]", text: "text-[#FF6C37]", border: "border-[#FF6C37]/20" },
-  "Python": { icon: FaPython, bg: "bg-[#3776AB]/[0.08]", text: "text-[#3776AB]", border: "border-[#3776AB]/20" },
-  "Java": { icon: FaJava, bg: "bg-[#B07219]/[0.08]", text: "text-[#B07219]", border: "border-[#B07219]/20" },
-  "C++": { icon: SiCplusplus, bg: "bg-[#00599C]/[0.08]", text: "text-[#00599C]", border: "border-[#00599C]/20" },
-  "C": { icon: SiC, bg: "bg-[#00599C]/[0.08]", text: "text-[#00599C]", border: "border-[#00599C]/20" },
-  "Hugging Face": { icon: SiHuggingface, bg: "bg-[#FFD21E]/[0.08]", text: "text-[#FFD21E]", border: "border-[#FFD21E]/20" }
+  "Git": { icon: SiGit, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "GitHub": { icon: FaGithub, bg: "bg-[#181717]", text: "text-white", border: "border-white/20" },
+  "Postman": { icon: SiPostman, bg: "bg-[#FF6C37]", text: "text-white" },
+  "Python": { icon: FaPython, bg: "bg-[#3776AB]", text: "text-white" },
+  "Java": { icon: FaJava, bg: "bg-[#B07219]", text: "text-white" },
+  "C++": { icon: SiCplusplus, bg: "bg-[#00599C]", text: "text-white" },
+  "C": { icon: SiC, bg: "bg-[#00599C]", text: "text-white" },
+  "Hugging Face": { icon: SiHuggingface, bg: "bg-[#FFD21E]", text: "text-black" }
 };
 
 const categories = [
@@ -144,10 +144,11 @@ export default function SkillsSection() {
             <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#E1E0CC]/80 block">
               Technical Expertise
             </span>
-            <h2 className="text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
-              Engineering Toolkit.
+            <h2 className="text-4xl sm:text-6xl font-bold tracking-tighter leading-none">
+              <span className="text-white">Engineering </span>
+              <span className="text-[#E1E0CC]">Toolkit.</span>
             </h2>
-            <div className="h-[2px] w-20 bg-[#E1E0CC]/20 rounded mt-2" />
+            <div className="h-[1px] w-28 bg-gradient-to-r from-[#E1E0CC]/60 to-transparent mt-3" />
             <p className="text-white/60 text-sm sm:text-base leading-relaxed font-sans max-w-2xl pt-2">
               A curated stack of technologies, platforms, and tools used to design, build, and deploy scalable software systems.
             </p>
@@ -162,7 +163,7 @@ export default function SkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="p-6 rounded-2xl border border-white/10 bg-white/[0.01] hover:bg-white/[0.03] hover:border-white/20 transition-all duration-300 backdrop-blur-md flex flex-col justify-start min-h-[14rem]"
+                className="p-6 rounded-2xl border border-white/10 bg-neutral-900/20 backdrop-blur-sm flex flex-col justify-start min-h-[14rem]"
               >
                 <h3 className="text-lg font-semibold tracking-tight text-[#E1E0CC] mb-5 flex items-center justify-between">
                   {cat.title}
@@ -175,7 +176,7 @@ export default function SkillsSection() {
                     return (
                       <span
                         key={skill}
-                        className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-300 hover:scale-105 cursor-default shadow-md`}
+                        className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md`}
                       >
                         <IconComp className="w-4 h-4 flex-shrink-0" />
                         {skill}
@@ -228,7 +229,7 @@ export default function SkillsSection() {
                       return (
                         <div
                           key={iconIdx}
-                          className="absolute bg-neutral-950 border border-white/15 hover:border-[#E1E0CC]/50 rounded-full p-2.5 shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 pointer-events-auto"
+                          className="absolute bg-neutral-900 border border-white/10 rounded-full p-2.5 shadow-md flex items-center justify-center transition-colors pointer-events-auto"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
