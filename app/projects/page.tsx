@@ -1,6 +1,4 @@
-import ProjectsSection from "@/components/projects-section";
-import ProjectShowcase from "@/components/project-showcase";
-import { ProfessionalConnect } from "@/components/ui/get-in-touch";
+import { ProjectShowcase } from "@/components/ui/project-showcase";
 
 export const metadata = {
   title: "Projects | Tanmay Singh",
@@ -9,10 +7,8 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen w-full bg-black pt-20">
-      <ProjectsSection />
+    <main className="min-h-screen w-full bg-black flex items-center justify-center pt-24 pb-16">
       <ProjectShowcase />
-      <ProfessionalConnect />
     </main>
   );
 }
