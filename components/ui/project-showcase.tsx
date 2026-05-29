@@ -48,8 +48,18 @@ export function ProjectShowcase() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [smoothPosition, setSmoothPosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const lerp = (start: number, end: number, factor: number) => {
@@ -111,35 +121,37 @@ export function ProjectShowcase() {
       </div>
 
       {/* Hover Image Preview Card */}
-      <div
-        className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl border border-white/10 shadow-black/80"
-        style={{
-          left: containerRef.current?.getBoundingClientRect().left ?? 0,
-          top: containerRef.current?.getBoundingClientRect().top ?? 0,
-          transform: `translate3d(${smoothPosition.x + 20}px, ${smoothPosition.y - 100}px, 0)`,
-          opacity: isVisible ? 1 : 0,
-          scale: isVisible ? 1 : 0.8,
-          transition: "opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), scale 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
-      >
-        <div className="relative w-[320px] h-[200px] bg-neutral-950 rounded-xl overflow-hidden">
-          {projects.map((project, index) => (
-            <img
-              key={project.title}
-              src={project.image || "/placeholder.svg"}
-              alt={project.title}
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
-              style={{
-                opacity: hoveredIndex === index ? 1 : 0,
-                scale: hoveredIndex === index ? 1 : 1.1,
-                filter: hoveredIndex === index ? "none" : "blur(10px)",
-              }}
-            />
-          ))}
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+      {!isMobile && (
+        <div
+          className="pointer-events-none fixed z-50 overflow-hidden rounded-xl shadow-2xl border border-white/10 shadow-black/80"
+          style={{
+            left: containerRef.current?.getBoundingClientRect().left ?? 0,
+            top: containerRef.current?.getBoundingClientRect().top ?? 0,
+            transform: `translate3d(${smoothPosition.x + 20}px, ${smoothPosition.y - 100}px, 0)`,
+            opacity: isVisible ? 1 : 0,
+            scale: isVisible ? 1 : 0.8,
+            transition: "opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), scale 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        >
+          <div className="relative w-[320px] h-[200px] bg-neutral-950 rounded-xl overflow-hidden">
+            {projects.map((project, index) => (
+              <img
+                key={project.title}
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                className="absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-out"
+                style={{
+                  opacity: hoveredIndex === index ? 1 : 0,
+                  scale: hoveredIndex === index ? 1 : 1.1,
+                  filter: hoveredIndex === index ? "none" : "blur(10px)",
+                }}
+              />
+            ))}
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Projects List */}
       <div className="space-y-0 border-b border-white/10">
@@ -203,6 +215,17 @@ export function ProjectShowcase() {
                   >
                     {project.description}
                   </p>
+
+                  {isMobile && (
+                    <div className="mt-4 w-full aspect-[16/10] rounded-xl overflow-hidden border border-[#E1E0CC]/10 relative shadow-md">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Year badge */}

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -126,7 +127,36 @@ const categories = [
 
 export default function SkillsSection() {
   const orbitCount = 3;
-  const orbitGap = 6.5; // rem spacing between orbits
+  const [isMobile, setIsMobile] = useState(false);
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      const mobile = w < 1024;
+      setIsMobile(mobile);
+      
+      if (mobile) {
+        // Calculate container width: screen width minus padding (approx 48px)
+        const containerW = w - 48;
+        const baseDiagWidth = 352; // 22rem (22 * 16px)
+        if (containerW < baseDiagWidth) {
+          setScale(containerW / baseDiagWidth);
+        } else {
+          setScale(1);
+        }
+      } else {
+        setScale(1);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const orbitGap = isMobile ? 3.5 : 6.5; // rem spacing between orbits
+  const baseSize = isMobile ? 8 : 14;   // rem base size
   const iconsPerOrbit = Math.ceil(orbitIconConfigs.length / orbitCount);
 
   return (
@@ -189,23 +219,31 @@ export default function SkillsSection() {
 
         </div>
 
-        {/* Right Side: Orbit Visualization (Spans 5 columns) - cut in half on the very right edge */}
-        <div className="lg:col-span-5 relative w-full h-[30rem] lg:h-[42rem] flex items-center justify-end overflow-hidden">
+        {/* Right Side: Orbit Visualization (Spans 5 columns) - scaled dynamically */}
+        <div className="lg:col-span-5 relative w-full h-[22rem] lg:h-[42rem] flex items-center justify-center lg:justify-end overflow-hidden mt-8 lg:mt-0">
           <div 
-            className="absolute right-0 top-1/2 w-[55rem] h-[55rem] flex items-center justify-center"
-            style={{ transform: "translate(43%, -50%)" }}
+            className={`absolute top-1/2 flex items-center justify-center transition-all duration-300 ${
+              isMobile 
+                ? "left-1/2 w-[22rem] h-[22rem]" 
+                : "right-0 w-[55rem] h-[55rem]"
+            }`}
+            style={{
+              transform: isMobile 
+                ? `translate(-50%, -50%) scale(${scale})` 
+                : "translate(43%, -50%)"
+            }}
           >
             
-            {/* Center Circle - Flat, clean brand core without pulsing glows */}
-            <div className="w-24 h-24 rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20">
-              <span className="text-2xl font-mono font-bold tracking-tighter text-[#E1E0CC]">
+            {/* Center Circle */}
+            <div className={`${isMobile ? "w-16 h-16" : "w-24 h-24"} rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20`}>
+              <span className={`${isMobile ? "text-lg" : "text-2xl"} font-mono font-bold tracking-tighter text-[#E1E0CC]`}>
                 TS
               </span>
             </div>
 
             {/* Generated Orbits - clean dotted circles */}
             {[...Array(orbitCount)].map((_, orbitIdx) => {
-              const size = `${14 + 7.5 * (orbitIdx + 1)}rem`;
+              const size = `${baseSize + orbitGap * (orbitIdx + 1)}rem`;
               const angleStep = (2 * Math.PI) / iconsPerOrbit;
 
               return (
@@ -228,14 +266,14 @@ export default function SkillsSection() {
                       return (
                         <div
                           key={iconIdx}
-                          className="absolute bg-neutral-900 border border-white/10 rounded-full p-2.5 shadow-md flex items-center justify-center transition-colors pointer-events-auto"
+                          className="absolute bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-colors pointer-events-auto"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
                             transform: "translate(-50%, -50%)",
                           }}
                         >
-                          <cfg.Icon className="w-6 h-6" style={{ color: cfg.color }} />
+                          <cfg.Icon className={`${isMobile ? "w-4 h-4" : "w-6 h-6"}`} style={{ color: cfg.color }} />
                         </div>
                       );
                     })}

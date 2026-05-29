@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { CardStack, CardStackItem } from "@/components/ui/card-stack";
 import { projectsData } from "@/lib/portfolio-data";
 import { Sparkles, ExternalLink } from "lucide-react";
@@ -30,6 +30,36 @@ interface CustomCardItem extends CardStackItem {
 
 export default function ProjectsCardStack() {
   const router = useRouter();
+  const [dimensions, setDimensions] = useState({ width: 520, height: 340 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = window.innerWidth;
+      if (w < 480) {
+        // Very small screens (320px - 479px)
+        const width = w - 48; // Allow 24px margins on each side
+        setDimensions({
+          width: width,
+          height: Math.round(width * 0.7)
+        });
+      } else if (w < 640) {
+        // Small screens (480px - 639px)
+        const width = w - 64; // Allow 32px margins on each side
+        setDimensions({
+          width: width,
+          height: Math.round(width * 0.66)
+        });
+      } else {
+        // Desktop / tablets (>= 640px)
+        setDimensions({ width: 520, height: 340 });
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Run immediately on mount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Convert our projectsData into the custom items array
   const stackItems = useMemo<CustomCardItem[]>(() => {
     return projectsData.map((project) => ({
@@ -73,8 +103,8 @@ export default function ProjectsCardStack() {
           <CardStack
             items={stackItems}
             initialIndex={0}
-            cardWidth={520}
-            cardHeight={340}
+            cardWidth={dimensions.width}
+            cardHeight={dimensions.height}
             maxVisible={5}
             overlap={0.52}
             spreadDeg={35}

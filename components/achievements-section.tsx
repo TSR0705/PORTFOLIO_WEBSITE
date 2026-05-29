@@ -66,7 +66,7 @@ export default function AchievementsSection() {
         </div>
 
         {/* Right Column: Hackathon participations */}
-        <div className="col-span-12 lg:col-span-4 flex flex-col gap-6 lg:border-l lg:border-white/10 lg:pl-12">
+        <div className="col-span-12 lg:col-span-4 flex flex-col gap-6 border-t border-white/10 pt-8 mt-4 lg:border-t-0 lg:pt-0 lg:mt-0 lg:border-l lg:border-white/10 lg:pl-12">
           <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 mb-2">Hackathons Log</h3>
           <div className="flex flex-col gap-4">
             {participations.map((p, idx) => (

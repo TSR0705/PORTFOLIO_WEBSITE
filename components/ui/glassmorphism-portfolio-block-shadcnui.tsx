@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -18,6 +19,7 @@ import {
 } from "lucide-react";
 
 export function GlassmorphismPortfolioBlock() {
+  const router = useRouter();
   const [imgSrc, setImgSrc] = useState("/MY_IMAGE.jpeg");
   const [imgError, setImgError] = useState(false);
 
@@ -188,14 +190,7 @@ export function GlassmorphismPortfolioBlock() {
           <div className="pt-8">
             <Button
               size="lg"
-              onClick={() => {
-                const projectsSection = document.getElementById("projects");
-                if (projectsSection) {
-                  projectsSection.scrollIntoView({ behavior: "smooth" });
-                } else {
-                  window.location.href = "/#projects";
-                }
-              }}
+              onClick={() => router.push("/projects")}
               className="h-13 w-full sm:w-auto gap-3.5 rounded-full px-10 text-xs font-mono uppercase tracking-[0.2em] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-white/5"
             >
               Explore Engineering Projects
@@ -267,9 +262,9 @@ export function GlassmorphismPortfolioBlock() {
               Education Credentials
             </span>
             
-            <div className="flex justify-between items-center gap-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-6">
               <div className="flex items-start gap-3">
-                <div className="h-8 w-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-[#E1E0CC] mt-0.5">
+                <div className="h-8 w-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-[#E1E0CC] mt-0.5 flex-shrink-0">
                   <GraduationCap className="h-4.5 w-4.5" />
                 </div>
                 <div>
@@ -279,7 +274,7 @@ export function GlassmorphismPortfolioBlock() {
               </div>
 
               {/* CGPA Spotlight Badge */}
-              <div className="px-3.5 py-2.5 rounded-xl border border-amber-500/25 bg-amber-500/5 text-center flex flex-col justify-center min-w-[100px]">
+              <div className="px-3.5 py-2.5 rounded-xl border border-amber-500/25 bg-amber-500/5 text-center flex flex-col justify-center min-w-[100px] w-full sm:w-auto flex-shrink-0">
                 <span className="text-[9px] font-mono text-amber-400 uppercase leading-none block">CGPA</span>
                 <span className="text-sm font-bold text-white mt-1.5 leading-none">9.37 / 10</span>
               </div>

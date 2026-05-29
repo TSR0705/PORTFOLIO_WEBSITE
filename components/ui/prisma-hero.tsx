@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useRef } from "react";
+import Link from "next/link";
 
 /* ---------------- WordsPullUp ---------------- */
 interface WordsPullUpProps {
@@ -143,18 +144,22 @@ const PrismaHero = () => {
                 Tanmay Singh is a B.Tech Computer Science student specializing in Cloud Computing, focused on building robust backend systems, distributed cloud pipelines, and experimenting with agentic AI products.
               </motion.p>
 
-              <motion.a
-                href="#projects"
+              <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="group inline-flex items-center gap-2 self-start rounded-full bg-white py-1 pl-5 pr-1 text-sm font-medium text-black transition-all hover:gap-3 sm:text-base cursor-pointer"
+                className="self-start"
               >
-                Explore projects
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform group-hover:scale-110 sm:h-10 sm:w-10">
-                  <ArrowRight className="h-4 w-4" style={{ color: "#E1E0CC" }} />
-                </span>
-              </motion.a>
+                <Link
+                  href="/projects"
+                  className="group inline-flex items-center gap-2 rounded-full bg-white py-1 pl-5 pr-1 text-sm font-medium text-black transition-all hover:gap-3 sm:text-base cursor-pointer"
+                >
+                  Explore projects
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-black transition-transform group-hover:scale-110 sm:h-10 sm:w-10">
+                    <ArrowRight className="h-4 w-4" style={{ color: "#E1E0CC" }} />
+                  </span>
+                </Link>
+              </motion.div>
 
             </div>
           </div>
