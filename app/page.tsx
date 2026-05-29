@@ -2,6 +2,7 @@ import { PrismaHero } from "@/components/ui/prisma-hero";
 import ProjectsSection from "@/components/projects-section";
 import SkillsSection from "@/components/skills-section";
 import ProjectShowcase from "@/components/project-showcase";
+import ProjectsCardStack from "@/components/projects-card-stack";
 import { ProfessionalConnect } from "@/components/ui/get-in-touch";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <ProjectsSection />
       <SkillsSection />
       <ProjectShowcase />
+      <ProjectsCardStack />
       <ProfessionalConnect />
     </main>
   );
