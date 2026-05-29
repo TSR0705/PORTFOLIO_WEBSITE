@@ -3,21 +3,9 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { CardStack, CardStackItem } from "@/components/ui/card-stack";
 import { projects } from "@/lib/projects";
-import { Sparkles, ExternalLink } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-
-// Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
-const PROJECT_IMAGES: Record<string, string> = {
-  "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-  "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-  "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-  webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-  codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-  "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
-  "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
-  "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-};
+import { getProjectTheme } from "@/lib/project-design";
+import { ProjectCard } from "@/components/ui/project-components";
 
 interface CustomCardItem extends CardStackItem {
   techStack: string[];
@@ -65,7 +53,7 @@ export default function ProjectsCardStack() {
       id: project.id,
       title: project.title,
       description: project.shortDescription,
-      imageSrc: PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+      imageSrc: getProjectTheme(project.id).imageSrc,
       href: project.liveUrl || project.githubUrl,
       techStack: project.techStack,
       category: project.category,
@@ -110,100 +98,16 @@ export default function ProjectsCardStack() {
             autoAdvance={false}
             showDots={true}
             renderCard={(item, { active }) => (
-              <div 
+              <ProjectCard
+                item={item}
+                active={active}
+                theme={getProjectTheme(String(item.id))}
                 onClick={() => {
                   if (active) {
                     router.push(`/projects/${item.id}`);
                   }
                 }}
-                className={`relative h-full w-full bg-black overflow-hidden flex flex-col justify-between ${
-                  active ? "cursor-pointer" : "cursor-default"
-                }`}
-              >
-                
-                {/* Background Image with overlay gradient */}
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src={item.imageSrc}
-                    alt={item.title}
-                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    draggable={false}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                </div>
-
-                {/* Card Content Header */}
-                <div className="relative z-20 p-5 flex justify-between items-start gap-4">
-                  <span className="text-[9px] font-mono tracking-wider uppercase text-white/50 bg-black/40 border border-white/10 px-2 py-0.5 rounded-md">
-                    {item.category.replace("-", " ")}
-                  </span>
-                  
-                  <span className={`text-[9px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-full border bg-black/30 ${
-                    item.status === "hackathon-winner"
-                      ? "border-[#E1E0CC]/40 text-[#E1E0CC]"
-                      : "border-white/10 text-white/50"
-                  }`}>
-                    {item.status.replace("-", " ")}
-                  </span>
-                </div>
-
-                {/* Card Content Footer & Details */}
-                <div className="relative z-20 p-6 pt-0 space-y-4">
-                  <div>
-                    <h3 className="text-xl font-medium tracking-tight text-white flex items-center gap-2 mb-1.5">
-                      {item.title}
-                      {item.status === "hackathon-winner" && <Sparkles className="w-4 h-4 text-[#E1E0CC]" />}
-                    </h3>
-                    <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans line-clamp-2">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {/* Tech stack & Action buttons */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-white/5">
-                    {/* Tech Pills */}
-                    <div className="flex flex-wrap gap-1">
-                      {item.techStack.slice(0, 3).map((tech) => (
-                        <span 
-                          key={tech} 
-                          className="text-[9px] font-mono text-white/40 bg-white/5 px-2 py-0.5 rounded"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Links */}
-                    <div className="flex items-center gap-2">
-                      {item.githubUrl && (
-                        <a 
-                          href={item.githubUrl}
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="p-1.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white/70 hover:text-white transition-colors"
-                          title="GitHub Code"
-                          onClick={(e) => e.stopPropagation()} // Prevent card swiping/activating trigger
-                        >
-                          <FaGithub className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                      {item.liveUrl && (
-                        <a 
-                          href={item.liveUrl}
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="p-1.5 rounded-lg bg-[#E1E0CC] hover:bg-[#E1E0CC]/95 text-black transition-colors"
-                          title="Live Demo"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+              />
             )}
           />
         </div>

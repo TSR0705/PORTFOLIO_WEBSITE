@@ -1,9 +1,10 @@
 import { projects } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Sparkles, AlertCircle, Cpu, CheckCircle } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
-import { skillDetails } from "@/components/skills-section";
+import { ArrowLeft, CheckCircle } from "lucide-react";
+import * as Lucide from "lucide-react";
+import { getProjectTheme } from "@/lib/project-design";
+import { ProjectHeader, ProjectLinks, TechBadge } from "@/components/ui/project-components";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -23,33 +24,14 @@ export default async function ProjectDetailPage({ params }: Props) {
     notFound();
   }
 
-  // Same mapping for illustrations
-  const PROJECT_IMAGES: Record<string, string> = {
-    "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-    "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-    "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-    webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-    "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
-    "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
-    "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-    "android-task-manager": "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
-    "who-i-am": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    "fcfs-scheduler-simulator": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-    "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-  };
-
-  const imageSrc = PROJECT_IMAGES[project.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop";
+  const theme = getProjectTheme(project.id);
+  const IconComponent = (Lucide as any)[theme.iconName] || Lucide.Cpu;
 
   return (
     <main className="min-h-screen w-full bg-black text-white px-6 md:px-12 py-28 md:py-36 relative overflow-hidden flex flex-col items-center">
       {/* Noise overlay */}
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
       
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#E1E0CC]/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[500px] h-[500px] bg-amber-600/5 rounded-full blur-[140px] pointer-events-none" />
-
       <div className="w-full max-w-4xl z-10 space-y-12">
         {/* Back Link */}
         <Link
@@ -60,46 +42,15 @@ export default async function ProjectDetailPage({ params }: Props) {
           Back to Projects Deck
         </Link>
 
-        {/* Cinematic Title & Meta */}
-        <div className="space-y-6">
-          <div className="flex flex-wrap gap-2.5 items-center">
-            <span className="text-[10px] font-mono tracking-wider uppercase text-white/50 bg-white/5 border border-white/10 px-3 py-1 rounded-md">
-              {project.category}
-            </span>
-            <span className={`text-[10px] font-mono tracking-wider uppercase px-3 py-1 rounded-full border bg-white/5 ${
-              project.featured
-                ? "border-[#E1E0CC]/40 text-[#E1E0CC]"
-                : "border-white/10 text-white/50"
-            }`}>
-              {project.status.replace("-", " ")}
-            </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tighter leading-none text-white">
-            {project.title} {project.featured && <Sparkles className="inline-block w-8 h-8 text-[#E1E0CC] ml-2 align-middle" />}
-          </h1>
-
-          <p className="text-white/60 text-sm sm:text-base font-sans max-w-2xl leading-relaxed">
-            {project.shortDescription}
-          </p>
-        </div>
-
-        {/* Project Image Banner */}
-        <div className="w-full aspect-video rounded-3xl overflow-hidden border border-white/10 relative shadow-2xl">
-          <img
-            src={imageSrc}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
-        </div>
+        {/* Cinematic Header System */}
+        <ProjectHeader project={project} theme={theme} />
 
         {/* Detail Matrix Grid */}
         <div className="grid md:grid-cols-12 gap-8 pt-4">
           {/* Main Narrative (Left) */}
           <div className="md:col-span-7 space-y-6">
             <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Cpu className="w-3.5 h-3.5 text-[#E1E0CC]" />
+              <IconComponent className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
               Why It Matters
             </h3>
             <p className="text-white/80 text-sm sm:text-base font-sans leading-relaxed">
@@ -109,25 +60,10 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* Tech stack */}
             <div className="space-y-3 pt-4">
               <h4 className="text-[10px] font-mono tracking-wider uppercase text-white/40">Technologies Employed</h4>
-              <div className="flex flex-wrap gap-2.5">
-                {project.techStack.map((tech) => {
-                  const details = skillDetails[tech] || {
-                    icon: Cpu,
-                    bg: "bg-neutral-900",
-                    text: "text-white/80",
-                    border: "border-white/10"
-                  };
-                  const IconComp = details.icon;
-                  return (
-                    <span
-                      key={tech}
-                      className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md`}
-                    >
-                      <IconComp className="w-4 h-4 flex-shrink-0" />
-                      {tech}
-                    </span>
-                  );
-                })}
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map((tech) => (
+                  <TechBadge key={tech} tech={tech} />
+                ))}
               </div>
             </div>
           </div>
@@ -136,56 +72,27 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="md:col-span-5 space-y-8 md:border-l md:border-white/10 md:pl-8">
             {/* Key Features */}
             <div className="space-y-4">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-[#E1E0CC] flex items-center gap-2">
+              <h3 className={`text-xs font-mono uppercase tracking-widest flex items-center gap-2 ${theme.accentText}`}>
                 <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
                 Key Features
               </h3>
               <ul className="space-y-3 pl-1">
                 {project.keyFeatures.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-2.5 text-white/70 text-xs md:text-sm font-sans leading-relaxed">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#E1E0CC] mt-1.5 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
                     {feature}
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Action buttons */}
-            <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full"
-                >
-                  <FaGithub className="w-4 h-4" />
-                  Source Code
-                </a>
-              )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full bg-[#E1E0CC] text-black hover:bg-[#E1E0CC]/90 transition-colors text-center w-full"
-                >
-                  Live Demo
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              )}
-              {project.demoUrl && (
-                <a
-                  href={project.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                  Video Demo
-                </a>
-              )}
-            </div>
+            {/* Centralized Action Button Links */}
+            <ProjectLinks
+              githubUrl={project.githubUrl}
+              liveUrl={project.liveUrl}
+              demoUrl={project.demoUrl}
+              theme={theme}
+            />
           </div>
         </div>
       </div>

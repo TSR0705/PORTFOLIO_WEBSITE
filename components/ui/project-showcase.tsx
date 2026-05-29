@@ -4,38 +4,30 @@ import type React from "react";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { projects as centralProjects } from "@/lib/projects";
+import { getProjectTheme, ProjectTheme } from "@/lib/project-design";
 
 interface Project {
+  id: string;
   title: string;
   description: string;
   year: string;
   link: string;
   image: string;
+  theme: ProjectTheme;
 }
 
-// Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
-const PROJECT_IMAGES: Record<string, string> = {
-  "openci-runner": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-  "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-  "dbms-self-healing": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-  webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-  codeweave: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-  "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
-  "saylix-translator": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
-  "smart-tab-organizer": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-  "android-task-manager": "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
-  "who-i-am": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-  "fcfs-scheduler-simulator": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-  "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
-};
-
-const projects = centralProjects.map((p) => ({
-  title: p.title,
-  description: p.shortDescription,
-  year: p.year,
-  link: `/projects/${p.id}`,
-  image: PROJECT_IMAGES[p.id] || "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-}));
+const projects = centralProjects.map((p) => {
+  const theme = getProjectTheme(p.id);
+  return {
+    id: p.id,
+    title: p.title,
+    description: p.shortDescription,
+    year: p.year,
+    link: `/projects/${p.id}`,
+    image: theme.imageSrc,
+    theme: theme,
+  };
+});
 
 export function ProjectShowcase() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -161,9 +153,9 @@ export function ProjectShowcase() {
               {/* Background highlight on hover */}
               <div
                 className={`
-                  absolute inset-0 -mx-4 px-4 bg-white/[0.02] border border-white/5 backdrop-blur-sm rounded-xl
+                  absolute inset-0 -mx-4 px-4 border backdrop-blur-sm rounded-xl
                   transition-all duration-300 ease-out
-                  ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-95"}
+                  ${hoveredIndex === index ? `opacity-100 scale-100 ${project.theme.bgGlow} ${project.theme.borderMuted}` : "opacity-0 scale-95 border-transparent"}
                 `}
               />
 
@@ -171,16 +163,17 @@ export function ProjectShowcase() {
                 <div className="flex-1 min-w-0">
                   {/* Title with animated underline */}
                   <div className="inline-flex items-center gap-2">
-                    <h3 className="text-white font-medium text-xl md:text-2xl tracking-tight transition-colors duration-300 group-hover:text-[#E1E0CC]">
+                    <h3 className={`text-white font-medium text-xl md:text-2xl tracking-tight transition-colors duration-300 group-hover:${project.theme.accentText}`}>
                       <span className="relative">
                         {project.title}
                         {/* Animated underline */}
                         <span
                           className={`
-                            absolute left-0 -bottom-1 h-[2px] bg-[#E1E0CC]
+                            absolute left-0 -bottom-1 h-[2px]
                             transition-all duration-300 ease-out
                             ${hoveredIndex === index ? "w-full" : "w-0"}
                           `}
+                          style={{ backgroundColor: project.theme.primaryColor }}
                         />
                       </span>
                     </h3>
@@ -188,7 +181,7 @@ export function ProjectShowcase() {
                     {/* Arrow that slides in */}
                     <ArrowUpRight
                       className={`
-                        w-5 h-5 text-[#E1E0CC]
+                        w-5 h-5
                         transition-all duration-300 ease-out
                         ${
                           hoveredIndex === index
@@ -196,6 +189,7 @@ export function ProjectShowcase() {
                             : "opacity-0 -translate-x-2 translate-y-2"
                         }
                       `}
+                      style={{ color: project.theme.primaryColor }}
                     />
                   </div>
 
@@ -204,14 +198,14 @@ export function ProjectShowcase() {
                     className={`
                       text-white/40 text-xs md:text-sm mt-2 leading-relaxed max-w-xl
                       transition-all duration-300 ease-out
-                      ${hoveredIndex === index ? "text-[#E1E0CC]/80" : "text-white/40"}
+                      ${hoveredIndex === index ? "text-white/70" : "text-white/40"}
                     `}
                   >
                     {project.description}
                   </p>
 
                   {isMobile && (
-                    <div className="mt-4 w-full aspect-[16/10] rounded-xl overflow-hidden border border-[#E1E0CC]/10 relative shadow-md">
+                    <div className={`mt-4 w-full aspect-[16/10] rounded-xl overflow-hidden border ${project.theme.borderMuted} relative shadow-md`}>
                       <img
                         src={project.image}
                         alt={project.title}
@@ -227,7 +221,7 @@ export function ProjectShowcase() {
                   className={`
                     text-xs md:text-sm font-mono text-white/30 tabular-nums
                     transition-all duration-300 ease-out
-                    ${hoveredIndex === index ? "text-[#E1E0CC]/80" : ""}
+                    ${hoveredIndex === index ? project.theme.accentText : ""}
                   `}
                 >
                   {project.year}
