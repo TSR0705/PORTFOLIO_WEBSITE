@@ -6,17 +6,17 @@ import { projectsData } from "@/lib/portfolio-data";
 import { Sparkles, ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
-// Map real projects to matching premium images
+// Map real projects to matching premium images (vibrant, abstract, high-contrast 3D renders)
 const PROJECT_IMAGES: Record<string, string> = {
   webloom: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-  "loadlab-deploybot": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
-  "samvidhan-setu": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=1200&auto=format&fit=crop",
-  indisure: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=1200&auto=format&fit=crop",
-  "multiplayer-chess": "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?q=80&w=1200&auto=format&fit=crop",
-  margsetu: "https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop",
-  "quiz-arena": "https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1200&auto=format&fit=crop",
-  "lms-platform": "https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1200&auto=format&fit=crop",
-  filex: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1200&auto=format&fit=crop",
+  "loadlab-deploybot": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+  "samvidhan-setu": "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+  indisure: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
+  "multiplayer-chess": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+  margsetu: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+  "quiz-arena": "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+  "lms-platform": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
+  filex: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
 };
 
 interface CustomCardItem extends CardStackItem {
@@ -79,17 +79,17 @@ export default function ProjectsCardStack() {
             autoAdvance={false}
             showDots={true}
             renderCard={(item, { active }) => (
-              <div className="relative h-full w-full bg-neutral-900 overflow-hidden flex flex-col justify-between">
+              <div className="relative h-full w-full bg-black overflow-hidden flex flex-col justify-between">
                 
                 {/* Background Image with overlay gradient */}
                 <div className="absolute inset-0 z-0">
                   <img
                     src={item.imageSrc}
                     alt={item.title}
-                    className="h-full w-full object-cover opacity-35 filter brightness-75 group-hover:scale-105 transition-transform duration-700"
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/30 z-10" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
                 </div>
 
                 {/* Card Content Header */}
