@@ -26,10 +26,10 @@ export default function AchievementsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-medium leading-[0.85] tracking-[-0.07em] text-[10vw] md:text-[6vw]" 
-            style={{ color: "#E1E0CC" }}
+            className="font-bold leading-[0.85] tracking-tighter text-[10vw] md:text-[6vw]" 
           >
-            RECOGNITION
+            <span className="text-white">RECOG</span>
+            <span className="text-[#E1E0CC]">NITION</span>
           </motion.h2>
           <div className="h-[1px] w-full bg-white/10 mt-6 md:mt-8" />
         </div>

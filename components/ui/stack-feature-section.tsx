@@ -86,8 +86,9 @@ export default function FeatureSection() {
           <span className="inline-flex items-center rounded-full border border-[#E1E0CC]/20 bg-white/5 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.2em] text-[#E1E0CC] mb-4">
             System Infrastructure
           </span>
-          <h2 className="text-4xl sm:text-6xl font-bold tracking-tight text-white leading-tight">
-            Build your ideas with scale.
+          <h2 className="text-4xl sm:text-6xl font-bold tracking-tighter leading-tight">
+            <span className="text-white">Build your ideas </span>
+            <span className="text-[#E1E0CC]">with scale.</span>
           </h2>
           <p className="text-white/60 mt-4 max-w-lg text-sm sm:text-base leading-relaxed font-sans">
             Leveraging containerized orchestrations, highly resilient backend workflows, and optimized cloud architectures to build production-grade automation systems.

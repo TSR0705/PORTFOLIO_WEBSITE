@@ -148,8 +148,9 @@ export const ProfessionalConnect = () => {
             </span>
           </div>
           
-          <h2 className="font-medium leading-[0.85] tracking-[-0.07em] text-[10vw] md:text-[6vw] mb-6" style={{ color: "#E1E0CC" }}>
-            GET IN TOUCH
+          <h2 className="font-bold leading-[0.85] tracking-tighter text-[10vw] md:text-[6vw] mb-6">
+            <span className="text-white">GET IN </span>
+            <span className="text-[#E1E0CC]">TOUCH</span>
           </h2>
           
           <p className="text-white/60 text-sm md:text-base font-sans max-w-xl mx-auto leading-relaxed">
