@@ -175,9 +175,9 @@ export default function SkillsSection() {
                     return (
                       <span
                         key={skill}
-                        className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1.2 rounded ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-sm`}
+                        className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md`}
                       >
-                        <IconComp className="w-3.5 h-3.5 flex-shrink-0" />
+                        <IconComp className="w-4 h-4 flex-shrink-0" />
                         {skill}
                       </span>
                     );
@@ -192,8 +192,8 @@ export default function SkillsSection() {
         {/* Right Side: Orbit Visualization (Spans 5 columns) - cut in half on the very right edge */}
         <div className="lg:col-span-5 relative w-full h-[30rem] lg:h-[42rem] flex items-center justify-end overflow-hidden">
           <div 
-            className="absolute right-0 top-1/2 w-[50rem] h-[50rem] flex items-center justify-center"
-            style={{ transform: "translate(50%, -50%)" }}
+            className="absolute right-0 top-1/2 w-[55rem] h-[55rem] flex items-center justify-center"
+            style={{ transform: "translate(32%, -50%)" }}
           >
             
             {/* Center Circle - Flat, clean brand core without pulsing glows */}
@@ -205,7 +205,7 @@ export default function SkillsSection() {
 
             {/* Generated Orbits - clean dotted circles */}
             {[...Array(orbitCount)].map((_, orbitIdx) => {
-              const size = `${12 + orbitGap * (orbitIdx + 1)}rem`;
+              const size = `${14 + 7.5 * (orbitIdx + 1)}rem`;
               const angleStep = (2 * Math.PI) / iconsPerOrbit;
 
               return (
