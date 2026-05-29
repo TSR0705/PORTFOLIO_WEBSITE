@@ -193,7 +193,7 @@ export default function SkillsSection() {
         <div className="lg:col-span-5 relative w-full h-[30rem] lg:h-[42rem] flex items-center justify-end overflow-hidden">
           <div 
             className="absolute right-0 top-1/2 w-[55rem] h-[55rem] flex items-center justify-center"
-            style={{ transform: "translate(32%, -50%)" }}
+            style={{ transform: "translate(43%, -50%)" }}
           >
             
             {/* Center Circle - Flat, clean brand core without pulsing glows */}
