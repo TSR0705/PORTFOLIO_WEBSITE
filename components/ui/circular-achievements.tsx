@@ -9,16 +9,16 @@ import React, {
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
-interface Testimonial {
-  quote: string;
-  name: string;
-  designation: string;
-  src: string;
+interface AchievementItem {
+  quote: string;      // Description/Details of the achievement
+  name: string;       // Title/Name of the achievement
+  designation: string; // Award details, organization, and year
+  src: string;        // Visual background image URL
 }
 interface Colors {
   name?: string;
   designation?: string;
-  testimony?: string;
+  quote?: string;
   arrowBackground?: string;
   arrowForeground?: string;
   arrowHoverBackground?: string;
@@ -28,8 +28,8 @@ interface FontSizes {
   designation?: string;
   quote?: string;
 }
-interface CircularTestimonialsProps {
-  testimonials: Testimonial[];
+interface CircularAchievementsProps {
+  achievements: AchievementItem[];
   autoplay?: boolean;
   colors?: Colors;
   fontSizes?: FontSizes;
@@ -46,16 +46,16 @@ function calculateGap(width: number) {
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
 
-export const CircularTestimonials = ({
-  testimonials,
+export const CircularAchievements = ({
+  achievements,
   autoplay = true,
   colors = {},
   fontSizes = {},
-}: CircularTestimonialsProps) => {
+}: CircularAchievementsProps) => {
   // Color & font config
   const colorName = colors.name ?? "#000";
   const colorDesignation = colors.designation ?? "#6b7280";
-  const colorTestimony = colors.testimony ?? "#4b5563";
+  const colorQuote = colors.quote ?? "#4b5563";
   const colorArrowBg = colors.arrowBackground ?? "#141414";
   const colorArrowFg = colors.arrowForeground ?? "#f1f1f7";
   const colorArrowHoverBg = colors.arrowHoverBackground ?? "#00a6fb";
@@ -72,10 +72,10 @@ export const CircularTestimonials = ({
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  const testimonialsLength = useMemo(() => testimonials.length, [testimonials]);
-  const activeTestimonial = useMemo(
-    () => testimonials[activeIndex],
-    [activeIndex, testimonials]
+  const achievementsLength = useMemo(() => achievements.length, [achievements]);
+  const activeAchievement = useMemo(
+    () => achievements[activeIndex],
+    [activeIndex, achievements]
   );
 
   // Responsive gap calculation
@@ -94,13 +94,13 @@ export const CircularTestimonials = ({
   useEffect(() => {
     if (autoplay) {
       autoplayIntervalRef.current = setInterval(() => {
-        setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+        setActiveIndex((prev) => (prev + 1) % achievementsLength);
       }, 5000);
     }
     return () => {
       if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
     };
-  }, [autoplay, testimonialsLength]);
+  }, [autoplay, achievementsLength]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -111,27 +111,26 @@ export const CircularTestimonials = ({
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
     // eslint-disable-next-line
-  }, [activeIndex, testimonialsLength]);
+  }, [activeIndex, achievementsLength]);
 
   // Navigation handlers
   const handleNext = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % testimonialsLength);
+    setActiveIndex((prev) => (prev + 1) % achievementsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-  }, [testimonialsLength]);
+  }, [achievementsLength]);
   const handlePrev = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + testimonialsLength) % testimonialsLength);
+    setActiveIndex((prev) => (prev - 1 + achievementsLength) % achievementsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
-  }, [testimonialsLength]);
+  }, [achievementsLength]);
 
   // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
     const gap = calculateGap(containerWidth);
     const maxStickUp = gap * 0.8;
-    const offset = (index - activeIndex + testimonialsLength) % testimonialsLength;
-    // const zIndex = testimonialsLength - Math.abs(offset);
+    const offset = (index - activeIndex + achievementsLength) % achievementsLength;
     const isActive = index === activeIndex;
-    const isLeft = (activeIndex - 1 + testimonialsLength) % testimonialsLength === index;
-    const isRight = (activeIndex + 1) % testimonialsLength === index;
+    const isLeft = (activeIndex - 1 + achievementsLength) % achievementsLength === index;
+    const isRight = (activeIndex + 1) % achievementsLength === index;
     if (isActive) {
       return {
         zIndex: 3,
@@ -168,35 +167,35 @@ export const CircularTestimonials = ({
     };
   }
 
-  // Framer Motion variants for quote
-  const quoteVariants = {
+  // Framer Motion variants for text content
+  const contentVariants = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: -20 },
   };
 
   return (
-    <div className="testimonial-container">
-      <div className="testimonial-grid">
+    <div className="achievement-container">
+      <div className="achievement-grid">
         {/* Images */}
         <div className="image-container" ref={imageContainerRef}>
-          {testimonials.map((testimonial, index) => (
+          {achievements.map((achievement, index) => (
             <img
-              key={testimonial.src}
-              src={testimonial.src}
-              alt={testimonial.name}
-              className="testimonial-image"
+              key={achievement.src}
+              src={achievement.src}
+              alt={achievement.name}
+              className="achievement-image"
               data-index={index}
               style={getImageStyle(index)}
             />
           ))}
         </div>
         {/* Content */}
-        <div className="testimonial-content">
+        <div className="achievement-content">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              variants={quoteVariants}
+              variants={contentVariants}
               initial="initial"
               animate="animate"
               exit="exit"
@@ -206,19 +205,19 @@ export const CircularTestimonials = ({
                 className="name"
                 style={{ color: colorName, fontSize: fontSizeName }}
               >
-                {activeTestimonial.name}
+                {activeAchievement.name}
               </h3>
               <p
                 className="designation"
                 style={{ color: colorDesignation, fontSize: fontSizeDesignation }}
               >
-                {activeTestimonial.designation}
+                {activeAchievement.designation}
               </p>
               <motion.p
                 className="quote"
-                style={{ color: colorTestimony, fontSize: fontSizeQuote }}
+                style={{ color: colorQuote, fontSize: fontSizeQuote }}
               >
-                {activeTestimonial.quote.split(" ").map((word, i) => (
+                {activeAchievement.quote.split(" ").map((word, i) => (
                   <motion.span
                     key={i}
                     initial={{
@@ -253,7 +252,7 @@ export const CircularTestimonials = ({
               }}
               onMouseEnter={() => setHoverPrev(true)}
               onMouseLeave={() => setHoverPrev(false)}
-              aria-label="Previous testimonial"
+              aria-label="Previous achievement"
             >
               <FaArrowLeft size={28} color={colorArrowFg} />
             </button>
@@ -265,7 +264,7 @@ export const CircularTestimonials = ({
               }}
               onMouseEnter={() => setHoverNext(true)}
               onMouseLeave={() => setHoverNext(false)}
-              aria-label="Next testimonial"
+              aria-label="Next achievement"
             >
               <FaArrowRight size={28} color={colorArrowFg} />
             </button>
@@ -273,12 +272,12 @@ export const CircularTestimonials = ({
         </div>
       </div>
       <style jsx>{`
-        .testimonial-container {
+        .achievement-container {
           width: 100%;
-          max-width: 56rem;
-          padding: 2rem;
+          max-width: 100%;
+          padding: 0;
         }
-        .testimonial-grid {
+        .achievement-grid {
           display: grid;
           gap: 5rem;
         }
@@ -288,7 +287,7 @@ export const CircularTestimonials = ({
           height: 24rem;
           perspective: 1000px;
         }
-        .testimonial-image {
+        .achievement-image {
           position: absolute;
           width: 100%;
           height: 100%;
@@ -296,7 +295,7 @@ export const CircularTestimonials = ({
           border-radius: 1.5rem;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        .testimonial-content {
+        .achievement-content {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
@@ -331,7 +330,7 @@ export const CircularTestimonials = ({
           display: inline-block;
         }
         @media (min-width: 768px) {
-          .testimonial-grid {
+          .achievement-grid {
             grid-template-columns: 1fr 1fr;
           }
           .arrow-buttons {
@@ -343,4 +342,4 @@ export const CircularTestimonials = ({
   );
 };
 
-export default CircularTestimonials;
+export default CircularAchievements;
