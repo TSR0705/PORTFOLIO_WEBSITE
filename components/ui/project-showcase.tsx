@@ -102,9 +102,8 @@ export function ProjectShowcase() {
           <span className="h-[1px] w-6 bg-[#E1E0CC]" />
           <span className="text-[10px] font-mono tracking-[0.2em] text-[#E1E0CC]/80 uppercase">PORTFOLIO LOG</span>
         </div>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none mb-4">
-          <span className="text-white">SELECTED </span>
-          <span className="text-[#E1E0CC]">WORKS</span>
+        <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-none text-white mb-4">
+          Selected <span className="font-medium text-[#E1E0CC]">Works</span>
         </h1>
         <p className="text-white/40 text-xs md:text-sm font-sans max-w-lg leading-relaxed">
           A dynamic archive of interactive designs, real-time collaboration engines, and spatial computing constructs.

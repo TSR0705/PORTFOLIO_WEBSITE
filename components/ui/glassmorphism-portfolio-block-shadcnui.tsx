@@ -106,9 +106,8 @@ export function GlassmorphismPortfolioBlock() {
               {/* <span className="text-xs font-mono tracking-[0.3em] uppercase text-white/40 block">
                 B.Tech CSE (Cloud Computing) · 2nd Year
               </span> */}
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-none">
-                <span className="text-white">Tanmay </span>
-                <span className="text-[#E1E0CC]">Singh</span>
+              <h1 className="text-5xl sm:text-6xl md:text-7xl font-light tracking-tighter leading-none text-white">
+                Tanmay <span className="font-medium text-[#E1E0CC]">Singh</span>
               </h1>
               <p className="text-xl sm:text-2xl font-medium tracking-tight bg-gradient-to-r from-amber-400 via-amber-200 to-white bg-clip-text text-transparent">
                 Systems Engineer & Backend Architect

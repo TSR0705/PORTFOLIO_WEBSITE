@@ -60,8 +60,8 @@ export default function ProjectsCardStack() {
             <span className="text-[10px] font-mono tracking-[0.25em] text-[#E1E0CC]/80 uppercase">DECK VIEW</span>
             <span className="h-[1px] w-4 bg-[#E1E0CC]" />
           </div>
-          <h2 className="font-medium tracking-tight text-3xl md:text-5xl text-[#E1E0CC] mb-3">
-            PROJECT DECK
+          <h2 className="text-3xl md:text-5xl font-light tracking-tighter leading-none text-white mb-4">
+            Project <span className="font-medium text-[#E1E0CC]">Deck</span>
           </h2>
           <p className="text-white/40 text-xs md:text-sm max-w-lg mx-auto font-sans leading-relaxed">
             Swipe or use arrow keys to browse through my portfolio of products, services, and experimental designs.

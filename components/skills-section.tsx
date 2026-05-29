@@ -144,9 +144,8 @@ export default function SkillsSection() {
             <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#E1E0CC]/80 block">
               Technical Expertise
             </span>
-            <h2 className="text-4xl sm:text-6xl font-bold tracking-tighter leading-none">
-              <span className="text-white">Engineering </span>
-              <span className="text-[#E1E0CC]">Toolkit.</span>
+            <h2 className="text-4xl sm:text-6xl font-light tracking-tighter leading-none text-white">
+              Engineering <span className="font-medium text-[#E1E0CC]">Toolkit.</span>
             </h2>
             <div className="h-[1px] w-28 bg-gradient-to-r from-[#E1E0CC]/60 to-transparent mt-3" />
             <p className="text-white/60 text-sm sm:text-base leading-relaxed font-sans max-w-2xl pt-2">

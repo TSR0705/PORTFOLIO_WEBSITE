@@ -39,9 +39,8 @@ export default function IntegrationsSection() {
         <p className="uppercase text-xs font-mono tracking-widest text-amber-400">
           Components
         </p>
-        <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4 tracking-tighter leading-tight">
-          <span className="text-white">Supercharge your </span>
-          <span className="text-[#E1E0CC]">workflow</span>
+        <h2 className="text-4xl md:text-5xl font-light tracking-tighter leading-tight text-white mt-2 mb-4">
+          Supercharge your <span className="font-medium text-[#E1E0CC]">workflow</span>
         </h2>
         <p className="text-white/70 mb-6 text-sm md:text-base max-w-md font-sans">
           Build sleek, responsive interfaces in record time with our carefully crafted React and Tailwind CSS components.
