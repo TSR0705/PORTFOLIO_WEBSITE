@@ -20,6 +20,11 @@ export default function GlobalNavbar() {
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
+  // Hide navbar on 404 page (when pathname is not matching any defined routes)
+  const validRoutes = ["/", "/about", "/projects", "/recognition"];
+  const isProjectDetail = pathname ? pathname.startsWith("/projects/") : false;
+  const showNavbar = pathname ? (validRoutes.includes(pathname) || isProjectDetail) : true;
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -51,6 +56,8 @@ export default function GlobalNavbar() {
 
   // Enlarge state: Scrolled on home page OR on any subpage
   const isEnlarged = isScrolled || pathname !== "/";
+
+  if (!showNavbar) return null;
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 pointer-events-none flex justify-center px-4">
