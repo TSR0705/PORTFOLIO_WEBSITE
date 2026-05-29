@@ -1,7 +1,7 @@
 import React from "react";
 import * as Lucide from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { skillDetails } from "@/components/skills-section";
+import { skillDetails } from "@/lib/project-design";
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
 
