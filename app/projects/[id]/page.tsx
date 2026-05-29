@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight, Sparkles, AlertCircle, Cpu, CheckCircle } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
+import { skillDetails } from "@/components/skills-section";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -108,15 +109,25 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* Tech stack */}
             <div className="space-y-3 pt-4">
               <h4 className="text-[10px] font-mono tracking-wider uppercase text-white/40">Technologies Employed</h4>
-              <div className="flex flex-wrap gap-2">
-                {project.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs px-3.5 py-1.5 rounded-lg bg-neutral-900 border border-white/10 text-white/80 font-sans"
-                  >
-                    {tech}
-                  </span>
-                ))}
+              <div className="flex flex-wrap gap-2.5">
+                {project.techStack.map((tech) => {
+                  const details = skillDetails[tech] || {
+                    icon: Cpu,
+                    bg: "bg-neutral-900",
+                    text: "text-white/80",
+                    border: "border-white/10"
+                  };
+                  const IconComp = details.icon;
+                  return (
+                    <span
+                      key={tech}
+                      className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md`}
+                    >
+                      <IconComp className="w-4 h-4 flex-shrink-0" />
+                      {tech}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           </div>
