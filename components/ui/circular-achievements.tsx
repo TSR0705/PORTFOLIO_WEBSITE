@@ -63,14 +63,17 @@ export const CircularAchievements = ({
   const fontSizeDesignation = fontSizes.designation ?? "0.925rem";
   const fontSizeQuote = fontSizes.quote ?? "1.125rem";
 
-  // State
+  // State & Gestures
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoverPrev, setHoverPrev] = useState(false);
   const [hoverNext, setHoverNext] = useState(false);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const [isHovered, setIsHovered] = useState(false);
 
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   const achievementsLength = useMemo(() => achievements.length, [achievements]);
   const activeAchievement = useMemo(
@@ -90,9 +93,9 @@ export const CircularAchievements = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Autoplay
+  // Autoplay with hover pause
   useEffect(() => {
-    if (autoplay) {
+    if (autoplay && !isHovered) {
       autoplayIntervalRef.current = setInterval(() => {
         setActiveIndex((prev) => (prev + 1) % achievementsLength);
       }, 5000);
@@ -100,7 +103,7 @@ export const CircularAchievements = ({
     return () => {
       if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
     };
-  }, [autoplay, achievementsLength]);
+  }, [autoplay, isHovered, achievementsLength]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -118,19 +121,47 @@ export const CircularAchievements = ({
     setActiveIndex((prev) => (prev + 1) % achievementsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [achievementsLength]);
+
   const handlePrev = useCallback(() => {
     setActiveIndex((prev) => (prev - 1 + achievementsLength) % achievementsLength);
     if (autoplayIntervalRef.current) clearInterval(autoplayIntervalRef.current);
   }, [achievementsLength]);
 
+  // Touch Swipe Handlers for Mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    const diff = touchStartX.current - touchEndX.current;
+    const swipeThreshold = 50; // swipe offset threshold
+    if (diff > swipeThreshold) {
+      handleNext();
+    } else if (diff < -swipeThreshold) {
+      handlePrev();
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   // Compute transforms for each image (always show 3: left, center, right)
   function getImageStyle(index: number): React.CSSProperties {
     const gap = calculateGap(containerWidth);
-    const maxStickUp = gap * 0.8;
-    const offset = (index - activeIndex + achievementsLength) % achievementsLength;
+    const maxStickUp = gap * 0.7; // slightly reduced upward shift on desktop for better spacing
     const isActive = index === activeIndex;
     const isLeft = (activeIndex - 1 + achievementsLength) % achievementsLength === index;
     const isRight = (activeIndex + 1) % achievementsLength === index;
+
+    const isMobile = containerWidth < 640;
+    const mobileScale = 0.6;
+    const mobileGap = containerWidth * 0.22; // responsive narrow shift
+    const mobileStickUp = mobileGap * 0.3; // smaller upward shift on mobile
+
     if (isActive) {
       return {
         zIndex: 3,
@@ -143,18 +174,22 @@ export const CircularAchievements = ({
     if (isLeft) {
       return {
         zIndex: 2,
-        opacity: 1,
+        opacity: isMobile ? 0.35 : 0.6,
         pointerEvents: "auto",
-        transform: `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(15deg)`,
+        transform: isMobile
+          ? `translateX(-${mobileGap}px) translateY(-${mobileStickUp}px) scale(${mobileScale}) rotateY(10deg)`
+          : `translateX(-${gap}px) translateY(-${maxStickUp}px) scale(0.82) rotateY(12deg)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
     if (isRight) {
       return {
         zIndex: 2,
-        opacity: 1,
+        opacity: isMobile ? 0.35 : 0.6,
         pointerEvents: "auto",
-        transform: `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.85) rotateY(-15deg)`,
+        transform: isMobile
+          ? `translateX(${mobileGap}px) translateY(-${mobileStickUp}px) scale(${mobileScale}) rotateY(-10deg)`
+          : `translateX(${gap}px) translateY(-${maxStickUp}px) scale(0.82) rotateY(-12deg)`,
         transition: "all 0.8s cubic-bezier(.4,2,.3,1)",
       };
     }
@@ -175,10 +210,20 @@ export const CircularAchievements = ({
   };
 
   return (
-    <div className="achievement-container">
+    <div 
+      className="achievement-container"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="achievement-grid">
         {/* Images */}
-        <div className="image-container" ref={imageContainerRef}>
+        <div 
+          className="image-container" 
+          ref={imageContainerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           {achievements.map((achievement, index) => (
             <img
               key={achievement.src}
@@ -186,6 +231,7 @@ export const CircularAchievements = ({
               alt={achievement.name}
               className="achievement-image"
               data-index={index}
+              data-active={index === activeIndex}
               style={getImageStyle(index)}
             />
           ))}
@@ -279,13 +325,18 @@ export const CircularAchievements = ({
         }
         .achievement-grid {
           display: grid;
-          gap: 5rem;
+          gap: 3.5rem;
         }
         .image-container {
           position: relative;
           width: 100%;
-          height: 24rem;
+          height: 18rem;
           perspective: 1000px;
+          margin-top: 3.5rem; /* Margin spacing to avoid overlapping the heading above */
+          cursor: grab;
+        }
+        .image-container:active {
+          cursor: grabbing;
         }
         .achievement-image {
           position: absolute;
@@ -293,48 +344,83 @@ export const CircularAchievements = ({
           height: 100%;
           object-fit: cover;
           border-radius: 1.5rem;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+          transition: transform 0.8s cubic-bezier(.4,2,.3,1), opacity 0.8s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+        .achievement-image[data-active="true"] {
+          border-color: rgba(225, 224, 204, 0.45);
+          box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 35px rgba(225, 224, 204, 0.18);
         }
         .achievement-content {
           display: flex;
           flex-direction: column;
-          justify-content: space-between;
+          justify-content: center;
+          gap: 1.5rem;
         }
         .name {
-          font-weight: bold;
-          margin-bottom: 0.25rem;
+          font-weight: 300;
+          letter-spacing: 0.05em;
+          margin-bottom: 0.15rem;
         }
         .designation {
-          margin-bottom: 2rem;
+          font-family: monospace;
+          letter-spacing: 0.05em;
+          margin-bottom: 1rem;
         }
         .quote {
-          line-height: 1.75;
+          line-height: 1.8;
+          font-weight: 300;
         }
         .arrow-buttons {
           display: flex;
-          gap: 1.5rem;
-          padding-top: 3rem;
+          gap: 1.25rem;
+          padding-top: 1.5rem;
         }
         .arrow-button {
-          width: 2.7rem;
-          height: 2.7rem;
+          width: 3rem;
+          height: 3rem;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          transition: background-color 0.3s;
-          border: none;
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease, border-color 0.3s ease;
+          border: 1px solid rgba(225, 224, 204, 0.15);
+        }
+        .arrow-button:hover {
+          transform: scale(1.08);
+          border-color: rgba(225, 224, 204, 0.45);
+        }
+        .arrow-button :global(svg) {
+          transition: transform 0.2s ease;
+        }
+        .prev-button:hover :global(svg) {
+          transform: translateX(-3px);
+        }
+        .next-button:hover :global(svg) {
+          transform: translateX(3px);
         }
         .word {
           display: inline-block;
         }
+        @media (min-width: 640px) {
+          .image-container {
+            height: 22rem;
+            margin-top: 4.5rem;
+          }
+        }
         @media (min-width: 768px) {
           .achievement-grid {
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 5.5rem;
+          }
+          .image-container {
+            height: 24rem;
+            margin-top: 4.5rem;
           }
           .arrow-buttons {
-            padding-top: 0;
+            padding-top: 0.5rem;
           }
         }
       `}</style>
