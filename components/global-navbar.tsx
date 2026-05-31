@@ -129,6 +129,18 @@ export default function GlobalNavbar() {
                       </Link>
                     );
                   })}
+                  
+                  {/* Resume Action Mobile */}
+                  <button
+                    onClick={() => {
+                      setIsOpen(false);
+                      window.dispatchEvent(new CustomEvent("open-resume"));
+                    }}
+                    className="text-[11px] font-mono uppercase tracking-[0.15em] py-1 text-left block w-full hover:text-white transition-colors cursor-pointer focus:outline-none"
+                    style={{ color: "rgba(225, 224, 204, 0.6)" }}
+                  >
+                    Resume
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -153,6 +165,14 @@ export default function GlobalNavbar() {
                 </Link>
               );
             })}
+
+            {/* Resume Action Desktop */}
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent("open-resume"))}
+              className="text-xs md:text-sm font-medium transition-colors cursor-pointer select-none text-[rgba(225, 224, 204, 0.8)] hover:text-[#E1E0CC] focus:outline-none"
+            >
+              Resume
+            </button>
           </div>
         )}
       </motion.nav>

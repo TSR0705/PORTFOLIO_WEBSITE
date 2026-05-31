@@ -148,7 +148,7 @@ const PrismaHero = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                className="self-start"
+                className="flex flex-wrap items-center gap-4 self-start"
               >
                 <Link
                   href="/projects"
@@ -159,6 +159,13 @@ const PrismaHero = () => {
                     <ArrowRight className="h-4 w-4" style={{ color: "#E1E0CC" }} />
                   </span>
                 </Link>
+
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-resume"))}
+                  className="group inline-flex items-center gap-2 rounded-full border border-[#E1E0CC]/20 bg-white/5 backdrop-blur-md py-2.5 px-6 text-sm font-medium text-white transition-all hover:bg-white/10 hover:border-[#E1E0CC]/40 sm:text-base cursor-pointer"
+                >
+                  View Resume
+                </button>
               </motion.div>
 
             </div>

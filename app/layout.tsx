@@ -4,6 +4,7 @@ import "./globals.css";
 import GlobalNavbar from "@/components/global-navbar";
 import AppPreloader from "@/components/app-preloader";
 import GlobalFooter from "@/components/global-footer";
+import ResumeModal from "@/components/resume-modal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <GlobalNavbar />
         <div className="flex-grow w-full flex flex-col">{children}</div>
         <GlobalFooter />
+        <ResumeModal />
       </body>
     </html>
   );
