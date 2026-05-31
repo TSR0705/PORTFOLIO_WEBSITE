@@ -169,7 +169,10 @@ export default function GlobalNavbar() {
             {/* Resume Action Desktop */}
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-resume"))}
-              className="text-xs md:text-sm font-medium transition-colors cursor-pointer select-none text-[rgba(225, 224, 204, 0.8)] hover:text-[#E1E0CC] focus:outline-none"
+              className="text-xs md:text-sm font-medium transition-colors cursor-pointer select-none focus:outline-none"
+              style={{ color: "rgba(225, 224, 204, 0.8)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225, 224, 204, 0.8)")}
             >
               Resume
             </button>
