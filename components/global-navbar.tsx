@@ -11,7 +11,7 @@ const navItems = [
   { name: "Projects", target: "/projects" },
   { name: "Skills", target: "/#skills" },
   { name: "Recognition", target: "/recognition" },
-  { name: "Contact", target: "/#contact" },
+  { name: "Contact", target: "/contact" },
 ];
 
 export default function GlobalNavbar() {
@@ -21,7 +21,7 @@ export default function GlobalNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Hide navbar on 404 page (when pathname is not matching any defined routes)
-  const validRoutes = ["/", "/about", "/projects", "/recognition"];
+  const validRoutes = ["/", "/about", "/projects", "/recognition", "/contact"];
   const isProjectDetail = pathname ? pathname.startsWith("/projects/") : false;
   const showNavbar = pathname ? (validRoutes.includes(pathname) || isProjectDetail) : true;
 

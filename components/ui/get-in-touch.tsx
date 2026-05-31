@@ -234,12 +234,6 @@ export const ProfessionalConnect = () => {
           top: `${mousePosition.y - 192}px`,
         }}
       />
-
-      {/* Global Footer */}
-      <div className="max-w-7xl mx-auto w-full relative z-10 border-t border-white/10 pt-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-white/40">
-        <div>&copy; {new Date().getFullYear()} Tanmay Singh. All rights reserved.</div>
-        <div>Designed with Prisma & Next.js</div>
-      </div>
     </section>
   );
 };
