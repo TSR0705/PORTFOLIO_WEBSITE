@@ -303,3 +303,180 @@ export function ProjectHeader({
     </>
   );
 }
+
+// Renders dynamic, glowing stats metric blocks
+export function MetricsDashboard({
+  metrics,
+  theme,
+}: {
+  metrics: { value: string; label: string; description: string }[];
+  theme: ProjectTheme;
+}) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      {metrics.map((m, idx) => (
+        <div
+          key={idx}
+          className={`p-6 rounded-2xl border ${theme.borderMuted} bg-white/[0.01] backdrop-blur-sm relative overflow-hidden group hover:border-[#E1E0CC]/20 hover:shadow-[0_0_20px_rgba(225,224,204,0.04)] transition-all duration-500`}
+        >
+          <div className={`absolute top-0 right-0 w-20 h-20 ${theme.bgGlow} rounded-full blur-2xl pointer-events-none opacity-40`} />
+          <div className="relative z-10 space-y-2">
+            <span
+              className={`text-3xl md:text-4xl font-light tracking-tight block ${theme.accentText}`}
+            >
+              {m.value}
+            </span>
+            <h4 className="text-xs font-mono uppercase tracking-wider text-white/80 font-medium">
+              {m.label}
+            </h4>
+            <p className="text-white/40 text-[11px] leading-relaxed font-sans">
+              {m.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Renders system architecture layer breakdown
+export function ArchitectureGrid({
+  layers,
+  theme,
+}: {
+  layers: { name: string; tech: string; description: string }[];
+  theme: ProjectTheme;
+}) {
+  return (
+    <div className="flex flex-col gap-4">
+      {layers.map((layer, idx) => (
+        <div
+          key={idx}
+          className={`p-5 rounded-2xl border ${theme.borderMuted} bg-white/[0.01] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between hover:bg-white/[0.02] transition-all duration-300`}
+        >
+          <div className="space-y-1 md:max-w-[30%]">
+            <span className="text-[10px] font-mono tracking-widest uppercase text-white/30">
+              Layer {idx + 1}
+            </span>
+            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
+              {layer.name}
+            </h4>
+          </div>
+
+          <div className="flex-shrink-0">
+            <TechBadge tech={layer.tech} />
+          </div>
+
+          <p className="text-white/60 text-xs md:text-sm font-sans md:max-w-[50%] leading-relaxed">
+            {layer.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Renders engineering decision details
+export function EngineeringDecisions({
+  decisions,
+  theme,
+}: {
+  decisions: { decision: string; rationale: string }[];
+  theme: ProjectTheme;
+}) {
+  return (
+    <div className="grid md:grid-cols-2 gap-6">
+      {decisions.map((d, idx) => (
+        <div
+          key={idx}
+          className={`p-6 rounded-2xl border ${theme.borderMuted} bg-white/[0.01] space-y-3 relative hover:border-white/20 transition-all duration-300`}
+        >
+          <span className="text-[9px] font-mono tracking-widest text-white/30 uppercase block">
+            Decision {idx + 1}
+          </span>
+          <h4 className="text-base font-medium tracking-tight text-white">
+            {d.decision}
+          </h4>
+          <p className="text-white/60 text-xs md:text-sm leading-relaxed font-sans">
+            {d.rationale}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Renders side-by-side Roadblocks vs Resolutions comparisons
+export function ChallengesSolutions({
+  challenges,
+  theme,
+}: {
+  challenges: { challenge: string; solution: string }[];
+  theme: ProjectTheme;
+}) {
+  return (
+    <div className="space-y-6">
+      {challenges.map((c, idx) => (
+        <div key={idx} className="grid md:grid-cols-12 gap-4 md:gap-8 items-stretch">
+          {/* Challenge Column */}
+          <div
+            className={`md:col-span-6 p-5 md:p-6 rounded-2xl border ${theme.borderMuted} bg-red-950/5 relative overflow-hidden flex flex-col justify-between`}
+          >
+            <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
+            <div className="space-y-3 relative z-10">
+              <h4 className="text-xs font-mono uppercase tracking-widest text-red-400 flex items-center gap-2">
+                <Lucide.AlertTriangle className="w-3.5 h-3.5" />
+                Roadblock
+              </h4>
+              <p className="text-white/80 text-xs md:text-sm leading-relaxed font-sans">
+                {c.challenge}
+              </p>
+            </div>
+          </div>
+
+          {/* Solution Column */}
+          <div
+            className={`md:col-span-6 p-5 md:p-6 rounded-2xl border ${theme.borderMuted} bg-emerald-950/5 relative overflow-hidden flex flex-col justify-between`}
+          >
+            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
+            <div className="space-y-3 relative z-10">
+              <h4 className="text-xs font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-2">
+                <Lucide.CheckCircle className="w-3.5 h-3.5" />
+                Resolution
+              </h4>
+              <p className="text-white/80 text-xs md:text-sm leading-relaxed font-sans">
+                {c.solution}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Renders dynamic carousel/grid of screens
+export function ScreenshotsGallery({
+  images,
+  theme,
+}: {
+  images: string[];
+  theme: ProjectTheme;
+}) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-6">
+      {images.map((img, idx) => (
+        <div
+          key={idx}
+          className={`rounded-2xl overflow-hidden border ${theme.borderMuted} bg-neutral-950 shadow-xl group hover:border-[#E1E0CC]/20 transition-all duration-500`}
+        >
+          <img
+            src={img}
+            alt={`Screenshot ${idx + 1}`}
+            className="w-full aspect-[4/3] object-cover group-hover:scale-[1.03] transition-transform duration-750"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
