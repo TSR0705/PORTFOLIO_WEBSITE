@@ -19,6 +19,10 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
   const activeIndex = sections.findIndex((s) => s.id === activeSection);
   const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
+  const isCompact = sections.length > 8;
+  const gapClass = isCompact ? "gap-3" : "gap-5";
+  const pyClass = isCompact ? "py-1" : "py-1.5";
+
   useEffect(() => {
     const observerOptions = {
       root: null,
@@ -100,7 +104,7 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
       </div>
 
       {/* 2. Interactive Rail Body Container */}
-      <div className="relative flex flex-col items-end gap-6 pr-1.5 w-full">
+      <div className={`relative flex flex-col items-end ${gapClass} pr-1.5 w-full`}>
         {/* Continuous Vertical Rail Track */}
         <div className="absolute right-[4px] top-2 bottom-2 w-[1px] bg-white/15 rounded-full overflow-hidden">
           {/* Active progress fill */}
@@ -121,7 +125,7 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
           return (
             <div
               key={section.id}
-              className="group relative flex items-center justify-end pointer-events-auto cursor-pointer py-2 w-full"
+              className={`group relative flex items-center justify-end pointer-events-auto cursor-pointer ${pyClass} w-full`}
               onClick={() => handleScrollToSection(section.id)}
             >
               {/* Tooltip Label (Spring transition via CSS micro-adjustments or classes) */}
@@ -137,12 +141,12 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
               </span>
 
               {/* Horizontal Dash Indicator (Framer-motion spring animated) */}
-              <div className="relative flex items-center h-4 w-6 justify-end">
+              <div className="relative flex items-center h-4 w-12 justify-end">
                 <motion.div
                   animate={{
-                    width: isActive ? 24 : 12,
-                    height: isActive ? 2 : 1.5,
-                    backgroundColor: isActive ? primaryColor : "rgba(255, 255, 255, 0.45)",
+                    width: isActive ? 28 : 14,
+                    height: isActive ? 2 : 1,
+                    backgroundColor: isActive ? primaryColor : "rgba(255, 255, 255, 0.3)",
                   }}
                   transition={{ type: "spring", stiffness: 220, damping: 22 }}
                   className="rounded-full"
