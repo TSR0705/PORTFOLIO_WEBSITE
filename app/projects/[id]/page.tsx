@@ -117,7 +117,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 2. MOTIVATION */}
         {project.motivation && (
-          <section id="motivation" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
+          <section id="motivation" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -128,12 +128,33 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
               {project.motivation}
             </p>
+            
+            {project.motivationPoints && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                {project.motivationPoints.map((point, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
+                    <div className="absolute top-0 left-0 w-1 h-full transition-colors" style={{ backgroundColor: `${theme.primaryColor}20` }} />
+                    <div className="space-y-2">
+                      <span className="font-mono text-[9px] tracking-widest text-[#E1E0CC]/40 block uppercase">
+                        Goal 0{idx + 1}
+                      </span>
+                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                        {point.title}
+                      </h4>
+                      <p className="text-white/60 text-xs leading-relaxed font-sans">
+                        {point.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
         )}
 
         {/* 3. PROBLEM STATEMENT */}
         {project.problemStatement && (
-          <section id="problem" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
+          <section id="problem" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -144,12 +165,33 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
               {project.problemStatement}
             </p>
+
+            {project.problemPoints && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                {project.problemPoints.map((point, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl border border-red-950/20 bg-red-950/[0.01] hover:border-red-950/40 hover:bg-red-950/[0.03] transition-all duration-300 relative group overflow-hidden">
+                    <div className="absolute top-0 left-0 w-1 h-full bg-red-500/10 group-hover:bg-red-500/30 transition-colors" />
+                    <div className="space-y-2">
+                      <span className="font-mono text-[9px] tracking-widest text-red-400/50 block uppercase">
+                        Symptom 0{idx + 1}
+                      </span>
+                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                        {point.title}
+                      </h4>
+                      <p className="text-[#E1E0CC]/70 text-xs leading-relaxed font-sans">
+                        {point.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
         )}
 
         {/* 4. SOLUTION OVERVIEW */}
         {project.solutionOverview && (
-          <section id="solution" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
+          <section id="solution" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -160,6 +202,27 @@ export default async function ProjectDetailPage({ params }: Props) {
             <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
               {project.solutionOverview}
             </p>
+
+            {project.solutionPoints && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                {project.solutionPoints.map((point, idx) => (
+                  <div key={idx} className="p-5 rounded-2xl border border-emerald-950/20 bg-emerald-950/[0.01] hover:border-emerald-950/40 hover:bg-emerald-950/[0.03] transition-all duration-300 relative group overflow-hidden">
+                    <div className="absolute top-0 left-0 w-1 h-full transition-colors" style={{ backgroundColor: `${theme.primaryColor}20` }} />
+                    <div className="space-y-2">
+                      <span className="font-mono text-[9px] tracking-widest text-emerald-400/50 block uppercase" style={{ color: `${theme.primaryColor}80` }}>
+                        Strategy 0{idx + 1}
+                      </span>
+                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                        {point.title}
+                      </h4>
+                      <p className="text-[#E1E0CC]/70 text-xs leading-relaxed font-sans">
+                        {point.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </section>
         )}
 

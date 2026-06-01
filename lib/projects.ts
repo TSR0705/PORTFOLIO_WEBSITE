@@ -17,9 +17,12 @@ export interface Project {
   projectType: string;
 
   // Case Study Fields (Optional)
-  problemStatement?: string;
-  solutionOverview?: string;
   motivation?: string;
+  motivationPoints?: { title: string; desc: string }[];
+  problemStatement?: string;
+  problemPoints?: { title: string; desc: string }[];
+  solutionOverview?: string;
+  solutionPoints?: { title: string; desc: string }[];
   mermaidDiagram?: string;
   architectureDiagram?: string;
   architectureLayers?: { name: string; tech: string; description: string }[];
@@ -58,8 +61,23 @@ export const projects: Project[] = [
 
     // Case Study Content
     problemStatement: "Exposing public cloud instances to **untrusted user code** during CI pipeline execution creates massive security loops. **Runaway CPU tasks**, **host environment data leaks**, and **local file system tampering** are constant threats. Standard virtual machines are too slow to boot on-demand, while containerized systems easily leak host privileges if configured incorrectly.",
+    problemPoints: [
+      { title: "Host Privileges Leakage", desc: "Untrusted build scripts can exploit root permissions to access the host kernel and filesystem." },
+      { title: "Resource Exhaustion", desc: "Infinite CPU loops and memory leaks in user code hang nodes, degrading cloud cluster performance." },
+      { title: "Vulnerability Breakout", desc: "Provisioning full VMs is too slow for quick commits, but standard containers easily leak network boundaries." }
+    ],
     motivation: "I built OpenCI Runner to solve the security vulnerability of running untrusted third-party code. While platforms like GitHub Actions or Travis CI exist, they are optimized for trusted development pipelines. Developers needed a **secure, sandbox-isolated system** to execute public check scripts on on-demand test environments **without risking host system integrity** or leaking API credentials.",
+    motivationPoints: [
+      { title: "Sandboxed Isolation", desc: "Build a secure execution platform that locks user scripts inside unprivileged container pods." },
+      { title: "Verifiable Outcomes", desc: "Ensure developers can review real-time execution logs securely without exposing backend variables." },
+      { title: "Commit Agility", desc: "Offer sub-5s cold boot sandboxes that compile and analyze commits immediately upon submission." }
+    ],
     solutionOverview: "OpenCI Runner addresses this by building an **ephemeral, sandboxed container orchestration pipeline**. When a developer submits a GitHub repository, the orchestrator pulls the codebase, spawns an **isolated container with zero host root privileges**, mounts **cgroup CPU limits**, runs checks, dumps streams in real-time, and destroys the container instantly.",
+    solutionPoints: [
+      { title: "Rootless Execution Model", desc: "Runs all sandbox tasks under non-root user IDs, blocking kernel breakout exploits at the system boundary." },
+      { title: "Strict CGroups & Limits", desc: "Caps resource allocations strictly at 512MB RAM and automatically terminates tasks exceeding 120 seconds." },
+      { title: "Fenced Networking", desc: "Disables container default network cards during the run phase to block port-scanning on host private nets." }
+    ],
     mermaidDiagram: `flowchart TD
     A[Web Client] -->|Submit Repo URL| B[Node.js Orchestrator]
     B -->|Enqueue Job| C[(Redis Job Queue)]
@@ -141,8 +159,23 @@ export const projects: Project[] = [
 
     // Case Study Content
     problemStatement: "Exposing **raw Kubernetes access** to client portals or user-driven automation creates huge orchestration challenges. Concurrent scaling calls from multiple clients can **overload cluster schedulers**, trigger **race conditions**, or crash resource pools. Standard Kube dashboards do not offer safe, sandbox-capped mutations for educational or demo scenarios.",
+    problemPoints: [
+      { title: "Direct Token Exposure", desc: "Exposing Kubeconfig access or raw tokens to browser clients opens severe cluster hijacking vectors." },
+      { title: "Concurrency Overload", desc: "Concurrent manual scale commands from multiple users crash nodes or trigger scheduler lock deadlocks." },
+      { title: "Resource Drain", desc: "Without namespace boundaries, users can spawn hundreds of test replica pods, crashing the cluster nodes." }
+    ],
     motivation: "I wanted to build a sandbox environment where students and developers can **practice Kubernetes operations safely**. Exposing a raw kubectl interface or terminal to public users invites **resource exhaustion and security exploits**. By routing scaling and configuration commands through a **chat-controlled interface with queue boundaries**, users can interact with live container infrastructures without system compromise.",
+    motivationPoints: [
+      { title: "Practical Sandbox", desc: "Provide an educational space to trigger cluster actions safely under strict administrative constraints." },
+      { title: "Validated Execution", desc: "Clean and validate all user-driven deployment mutations using middleware filters before API dispatch." },
+      { title: "WebSocket State Tracking", desc: "Keep users connected to the live cluster pods state with real-time reactive socket streams." }
+    ],
     solutionOverview: "LoadLab + DeployBot creates a structured, **queue-controlled Kubernetes playground**. It uses a Chatbot command interface that translates developer messages (e.g., 'scale up pods to 5') into cluster queries, filters and validates commands through **security middleware**, and routes them to a **sequential task worker** that interfaces directly with Kube APIs.",
+    solutionPoints: [
+      { title: "Restricted Namespace RBAC", desc: "Restricts all system mutations strictly to a sandbox namespace using secure service accounts." },
+      { title: "Redis Locking Mutex", desc: "Sequences all scaling and configuration actions through a single-worker lock queue to block collisions." },
+      { title: "Interactive Chat Gateway", desc: "Translates human-readable chat commands into scoped, validated API queries automatically." }
+    ],
     mermaidDiagram: `flowchart TD
     A[Chat UI Client] -->|WebSocket Command| B[Bun API Orchestrator]
     B -->|Verify Session & Quota| C[Clerk Auth & Quota Guard]
@@ -225,8 +258,23 @@ export const projects: Project[] = [
 
     // Case Study Content
     problemStatement: "Database service interruptions directly impact application availability. Traditional monitoring platforms alert human database administrators (DBAs) **after failures have occurred**, leading to minutes of downtime. **High connection pools**, **un-indexed queries**, and **query deadlocks** require rapid, surgical recovery actions to prevent site outages.",
+    problemPoints: [
+      { title: "Costly System Downtime", desc: "Outages degrade user trust and cost organizations significant money; manualDBA responses are too slow." },
+      { title: "Query Cascading Blocks", desc: "Un-indexed operations and lock deadlocks block SQL threads, spreading blockages to the web nodes." },
+      { title: "Blind Thread Killing", desc: "Terminating connections indiscriminately risks corrupting database writes or analytical reporting pipelines." }
+    ],
     motivation: "Downtime is extremely expensive, yet traditional database monitoring systems only alert developers after an outage occurs. I wanted to build an **automated agent that acts as a resident DBA**—actively **monitoring telemetry**, **predicting service crashes**, and applying **safe, transactional healing procedures** autonomously in **under 12 seconds**.",
+    motivationPoints: [
+      { title: "Proactive Interventions", desc: "Build a resident virtual DBA agent to detect system stress anomalies before crashes happen." },
+      { title: "Transactional Healing", desc: "Deploy targeted queries (e.g., killing rogue locks, indexing tips) dynamically inside transaction wrappers." },
+      { title: "Observability Boards", desc: "Expose diagnostic events in a real-time database dashboard for easy human audit validation." }
+    ],
     solutionOverview: "The Self-Healing DBMS engine acts as an automated virtual DBA. It continuously checks database telemetry (active threads, slow queries, memory usage), runs **stats profiling to identify outliers**, scores risk thresholds, and executes **scripted repairs**—like safely killing long-running rogue locks or scaling resource limits—within seconds, before users report problems.",
+    solutionPoints: [
+      { title: "Statistical Outlier Scoring", desc: "Uses rolling averages and statistical anomalies to isolate rogue query locks cleanly." },
+      { title: "Cooldown Gatekeepers", desc: "Implements transactional limits to block consecutive execution of recovery queries, avoiding cascades." },
+      { title: "Isolated Health Daemon", desc: "Runs tracking daemons out-of-process, guaranteeing telemetry logging remains online if DB crashes." }
+    ],
     mermaidDiagram: `flowchart TD
     A[MySQL 8.0 Engine] -->|Telemetry Stream| B[Python Telemetry Daemon]
     B -->|Query Anomalies| C[FastAPI Decision Engine]
@@ -324,8 +372,23 @@ export const projects: Project[] = [
 
     // Case Study Content
     problemStatement: "Asynchronous coding collaboration introduces **high data drift**. Standard text areas cannot track user edits in real-time, resulting in **text overwrite collisions**. Managing multi-file workspaces and launching file debugging pipelines requires **low-latency synchronization structures** and fast file state tracking.",
+    problemPoints: [
+      { title: "High Asynchronous Drift", desc: "Collaborators typing in raw text areas create overlapping sync edits, causing content overwrite bugs." },
+      { title: "Network Lag & Stutter", desc: "Standard REST API polling is too slow to reflect dynamic cursor locations and typing streams smoothly." },
+      { title: "LLM Context Resolution", desc: "Resolving and formatting active workspace multi-file structures into LLM inputs requires parsing file trees." }
+    ],
     motivation: "Real-time code collaboration is prone to **sync conflicts**, **high latency**, and **complex workspace states**. I built CodeWeave to create a lightweight, collaborative IDE with **real-time text synchronization**, **multi-file code editing**, and **integrated AI assistance**, enabling engineers to work together interactively with **near-zero latency**.",
+    motivationPoints: [
+      { title: "Smooth Cooperative Typing", desc: "Build a fluid web workspace where developers type simultaneously with near-zero latency." },
+      { title: "Sub-50ms keystroke sync", desc: "Keep remote cursors and text nodes synchronized in real time via fast server pipes." },
+      { title: "Embedded Code Insights", desc: "Feed active code context directly into AI model API endpoints for fast, context-aware debugging." }
+    ],
     solutionOverview: "CodeWeave addresses this by integrating **real-time Socket.io channels** with Monaco Editor. It uses a Node.js server backed by an **active Redis buffer** to synchronize workspace edits in real-time, stores files within structured JSON tree documents, and routes workspace metadata directly to Google's **Gemini API** for context-aware code debugging.",
+    solutionPoints: [
+      { title: "Keystroke Replicators", desc: "Orchestrates live Express and Socket.io instances to coordinate editor room connection state namespaces." },
+      { title: "Redis Workspace Cache", desc: "Buffers editor room cursor positions in Redis memory logs before pushing state updates to databases." },
+      { title: "File Tree Documents", desc: "Formats nested folder structures as single JSON state documents, making folder mutations easy to track." }
+    ],
     mermaidDiagram: `flowchart TD
     A[React Monaco Client] <-->|Keystroke Sync| B[Socket.io WebSockets]
     B <-->|Session Control| C[Express.js Backend]
