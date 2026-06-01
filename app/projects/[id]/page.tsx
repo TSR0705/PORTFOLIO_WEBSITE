@@ -1,7 +1,7 @@
 import { projects } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle, Shield, Wrench, Sparkles, BookOpen, AlertCircle, ArrowUpRight, Cpu } from "lucide-react";
+import { ArrowLeft, CheckCircle, Shield, Wrench, Sparkles, BookOpen, AlertCircle, ArrowUpRight, Cpu, ListChecks } from "lucide-react";
 import * as Lucide from "lucide-react";
 import { getProjectTheme } from "@/lib/project-design";
 import {
@@ -10,11 +10,10 @@ import {
   TechBadge,
   MetricsDashboard,
   ArchitectureGrid,
-  EngineeringDecisions,
-  ChallengesSolutions,
   ScreenshotsGallery
 } from "@/components/ui/project-components";
 import ProjectScrollRail from "@/components/ui/project-scroll-rail";
+import MermaidRenderer from "@/components/ui/mermaid-renderer";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -40,19 +39,13 @@ export default async function ProjectDetailPage({ params }: Props) {
   // Dynamic Case Study Rails Section Array
   const sections = [
     { id: "overview", label: "Overview" },
+    ...(project.motivation ? [{ id: "motivation", label: "Motivation" }] : []),
     ...(project.problemStatement ? [{ id: "problem", label: "Problem" }] : []),
     ...(project.solutionOverview ? [{ id: "solution", label: "Solution" }] : []),
-    ...(project.architectureLayers || project.architectureDiagram ? [{ id: "architecture", label: "Architecture" }] : []),
-    ...(project.keyMetrics ? [{ id: "metrics", label: "Metrics" }] : []),
-    { id: "tech", label: "Tech Stack" },
-    ...(project.engineeringDecisions ? [{ id: "decisions", label: "Decisions" }] : []),
-    ...(project.challengesSolutions ? [{ id: "challenges", label: "Challenges" }] : []),
-    ...(project.securityMeasures ? [{ id: "security", label: "Security" }] : []),
-    ...(project.deploymentDetails ? [{ id: "deployment", label: "Deployment" }] : []),
+    ...(project.keyFeatures && project.keyFeatures.length > 0 ? [{ id: "features", label: "Features" }] : []),
+    ...(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers ? [{ id: "architecture", label: "Architecture" }] : []),
     ...(project.screenshots ? [{ id: "screenshots", label: "Screenshots" }] : []),
-    ...(project.lessonsLearned ? [{ id: "learnings", label: "Learnings" }] : []),
-    ...(project.futureImprovements ? [{ id: "future", label: "Roadmap" }] : []),
-    { id: "links", label: "Links" },
+    ...(project.keyMetrics ? [{ id: "performance", label: "Performance" }] : []),
   ];
 
   return (
@@ -78,74 +71,127 @@ export default async function ProjectDetailPage({ params }: Props) {
         <section id="overview" className="space-y-12">
           <ProjectHeader project={project} theme={theme} />
           
-          <div className="space-y-4 pt-6 border-t border-white/5">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <IconComponent className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Why It Matters
-            </h3>
-            <p className="text-white/80 text-sm sm:text-base font-sans leading-relaxed">
-              {project.fullDescription}
-            </p>
-            
-            {/* Display key features for simple projects as fallback */}
-            {!project.problemStatement && project.keyFeatures && (
-              <div className="space-y-3 pt-4">
-                <h4 className="text-[10px] font-mono tracking-wider uppercase text-white/40">Core Deliverables</h4>
-                <ul className="space-y-2">
-                  {project.keyFeatures.map((kf, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-white/70 text-xs md:text-sm font-sans leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-                      {kf}
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
+            {/* Left Column: Tech Stack badges */}
+            <div className="space-y-4">
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Lucide.FolderCode className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
+                Technologies Employed
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {project.techStack.map((tech) => (
+                  <TechBadge key={tech} tech={tech} />
+                ))}
               </div>
-            )}
+            </div>
+
+            {/* Right Column: Source Code / Live Demo buttons */}
+            <div className="space-y-4 flex flex-col justify-start">
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Lucide.Link2 className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
+                Project Access
+              </h3>
+              <ProjectLinks
+                githubUrl={project.githubUrl}
+                liveUrl={project.liveUrl}
+                demoUrl={project.demoUrl}
+                theme={theme}
+                className="!pt-0 !border-t-0"
+              />
+            </div>
           </div>
         </section>
 
-        {/* 2. PROBLEM STATEMENT */}
+        {/* 2. MOTIVATION */}
+        {project.motivation && (
+          <section id="motivation" className="py-12 border-t border-white/5 space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-400/80" />
+                Motivation: Why I Built This
+              </h3>
+            </div>
+            <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
+              {project.motivation}
+            </p>
+          </section>
+        )}
+
+        {/* 3. PROBLEM STATEMENT */}
         {project.problemStatement && (
           <section id="problem" className="py-12 border-t border-white/5 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 text-red-500" />
-              The Core Problem
-            </h3>
-            <p className="text-white/75 text-sm sm:text-base font-sans leading-relaxed">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-500/80" />
+                The Core Problem
+              </h3>
+            </div>
+            <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
               {project.problemStatement}
             </p>
           </section>
         )}
 
-        {/* 3. SOLUTION OVERVIEW */}
+        {/* 4. SOLUTION OVERVIEW */}
         {project.solutionOverview && (
           <section id="solution" className="py-12 border-t border-white/5 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2" style={{ color: theme.primaryColor }}>
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
-              Our Solution Strategy
-            </h3>
-            <p className="text-white/75 text-sm sm:text-base font-sans leading-relaxed">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-500/80" />
+                Our Solution Strategy
+              </h3>
+            </div>
+            <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
               {project.solutionOverview}
             </p>
           </section>
         )}
 
-        {/* 4. SYSTEM ARCHITECTURE & FLOW */}
-        {(project.architectureLayers || project.architectureDiagram) && (
+        {/* 5. KEY FEATURES */}
+        {project.keyFeatures && project.keyFeatures.length > 0 && (
+          <section id="features" className="py-12 border-t border-white/5 space-y-6">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <ListChecks className="w-4 h-4 text-emerald-400/80" />
+                Key Features
+              </h3>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {project.keyFeatures.map((kf, i) => (
+                <div key={i} className="flex items-start gap-3 p-4 rounded-xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-colors duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+                  <span className="text-xs md:text-sm font-sans text-white/80 leading-relaxed">{kf}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 6. SYSTEM ARCHITECTURE & FLOW (Mermaid Chart) */}
+        {(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers) && (
           <section id="architecture" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Cpu className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              System Architecture
-            </h3>
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                System Architecture
+              </h3>
+            </div>
             
-            {/* Text Flowchart Blueprint */}
-            {project.architectureDiagram && (
+            {/* Native Mermaid Canvas */}
+            {project.mermaidDiagram ? (
+              <MermaidRenderer chart={project.mermaidDiagram} id={project.id} />
+            ) : project.architectureDiagram ? (
               <div className="rounded-xl border border-white/5 bg-[#050505] p-5 md:p-6 overflow-x-auto shadow-inner">
                 <pre className="font-mono text-[10px] md:text-xs leading-relaxed text-[#E1E0CC]/80 whitespace-pre">
                   {project.architectureDiagram}
                 </pre>
               </div>
-            )}
+            ) : null}
 
             {/* Structured Table Layers */}
             {project.architectureLayers && (
@@ -154,143 +200,33 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         )}
 
-        {/* 5. KEY METRICS */}
-        {project.keyMetrics && (
-          <section id="metrics" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Lucide.BarChart2 className={`w-4 h-4 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Measurable Performance
-            </h3>
-            <MetricsDashboard metrics={project.keyMetrics} theme={theme} />
-          </section>
-        )}
-
-        {/* 6. TECH STACK */}
-        <section id="tech" className="py-12 border-t border-white/5 space-y-6">
-          <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-            <Lucide.FolderCode className={`w-4 h-4 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-            Technologies Employed
-          </h3>
-          <div className="flex flex-wrap gap-2.5">
-            {project.techStack.map((tech) => (
-              <TechBadge key={tech} tech={tech} />
-            ))}
-          </div>
-        </section>
-
-        {/* 7. ENGINEERING DECISIONS */}
-        {project.engineeringDecisions && (
-          <section id="decisions" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Wrench className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Engineering Decisions
-            </h3>
-            <EngineeringDecisions decisions={project.engineeringDecisions} theme={theme} />
-          </section>
-        )}
-
-        {/* 8. CHALLENGES & RESOLUTIONS */}
-        {project.challengesSolutions && (
-          <section id="challenges" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Wrench className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Technical Roadblocks & Solutions
-            </h3>
-            <ChallengesSolutions challenges={project.challengesSolutions} theme={theme} />
-          </section>
-        )}
-
-        {/* 9. SECURITY MEASURES */}
-        {project.securityMeasures && (
-          <section id="security" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Shield className="w-4 h-4 text-emerald-400" />
-              Security Architecture
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {project.securityMeasures.map((measure, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                  <Shield className="w-4 h-4 text-emerald-500/80 flex-shrink-0" />
-                  <span className="text-xs md:text-sm font-sans text-white/80">{measure}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 10. DEPLOYMENT */}
-        {project.deploymentDetails && (
-          <section id="deployment" className="py-12 border-t border-white/5 space-y-4">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Lucide.Server className={`w-4 h-4 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Deployment Pipeline
-            </h3>
-            <p className="text-white/75 text-sm sm:text-base font-sans leading-relaxed">
-              {project.deploymentDetails}
-            </p>
-          </section>
-        )}
-
-        {/* 11. SCREENSHOTS */}
+        {/* 7. SCREENSHOTS */}
         {project.screenshots && (
           <section id="screenshots" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Lucide.Image className={`w-4 h-4 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Visual Interface Preview
-            </h3>
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Lucide.Image className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                Visual Interface Preview
+              </h3>
+            </div>
             <ScreenshotsGallery images={project.screenshots} theme={theme} />
           </section>
         )}
 
-        {/* 12. LESSONS LEARNED */}
-        {project.lessonsLearned && (
-          <section id="learnings" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <BookOpen className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Reflective Takeaways
-            </h3>
-            <div className="rounded-xl border border-white/5 bg-[#050505]/40 p-5 md:p-6 space-y-4">
-              {project.lessonsLearned.map((learning, idx) => (
-                <div key={idx} className="flex gap-3 text-xs md:text-sm font-sans leading-relaxed text-white/75">
-                  <span className="font-mono text-[#E1E0CC]/55 select-none font-bold">0{idx + 1}.</span>
-                  <p>{learning}</p>
-                </div>
-              ))}
+        {/* 8. KEY METRICS */}
+        {project.keyMetrics && (
+          <section id="performance" className="py-12 border-t border-white/5 space-y-6">
+            <div className="flex items-center gap-3">
+              <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <Lucide.BarChart2 className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                Measurable Performance
+              </h3>
             </div>
+            <MetricsDashboard metrics={project.keyMetrics} theme={theme} />
           </section>
         )}
-
-        {/* 13. FUTURE IMPROVEMENTS */}
-        {project.futureImprovements && (
-          <section id="future" className="py-12 border-t border-white/5 space-y-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-              <Sparkles className={`w-3.5 h-3.5 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-              Roadmap & Future Goals
-            </h3>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {project.futureImprovements.map((goal, idx) => (
-                <div key={idx} className="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                  <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-                  <span className="text-xs md:text-sm font-sans text-white/80">{goal}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* 14. LINKS */}
-        <section id="links" className="py-12 border-t border-white/5 space-y-4">
-          <h3 className="text-xs font-mono uppercase tracking-widest text-white/40 flex items-center gap-2">
-            <Lucide.Link2 className={`w-4 h-4 ${theme.accentText}`} style={{ color: theme.primaryColor }} />
-            Project Links & Resources
-          </h3>
-          <ProjectLinks
-            githubUrl={project.githubUrl}
-            liveUrl={project.liveUrl}
-            demoUrl={project.demoUrl}
-            theme={theme}
-          />
-        </section>
 
       </div>
     </main>

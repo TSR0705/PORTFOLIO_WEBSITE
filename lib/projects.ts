@@ -19,6 +19,8 @@ export interface Project {
   // Case Study Fields (Optional)
   problemStatement?: string;
   solutionOverview?: string;
+  motivation?: string;
+  mermaidDiagram?: string;
   architectureDiagram?: string;
   architectureLayers?: { name: string; tech: string; description: string }[];
   keyMetrics?: { value: string; label: string; description: string }[];
@@ -55,8 +57,16 @@ export const projects: Project[] = [
     projectType: "Secure CI Demo Platform",
 
     // Case Study Content
-    problemStatement: "Exposing public cloud instances to untrusted user code during CI pipeline execution creates massive security loops. Runaway CPU tasks, host environment data leaks, and local file system tampering are constant threats. Standard virtual machines are too slow to boot on-demand, while containerized systems easily leak host privileges if configured incorrectly.",
-    solutionOverview: "OpenCI Runner addresses this by building an ephemeral, sandboxed container orchestration pipeline. When a developer submits a GitHub repository, the orchestrator pulls the codebase, spawns an isolated container with zero host root privileges, mounts cgroup CPU limits, runs checks, dumps streams in real-time, and destroys the container instantly.",
+    problemStatement: "Exposing public cloud instances to **untrusted user code** during CI pipeline execution creates massive security loops. **Runaway CPU tasks**, **host environment data leaks**, and **local file system tampering** are constant threats. Standard virtual machines are too slow to boot on-demand, while containerized systems easily leak host privileges if configured incorrectly.",
+    motivation: "I built OpenCI Runner to solve the security vulnerability of running untrusted third-party code. While platforms like GitHub Actions or Travis CI exist, they are optimized for trusted development pipelines. Developers needed a **secure, sandbox-isolated system** to execute public check scripts on on-demand test environments **without risking host system integrity** or leaking API credentials.",
+    solutionOverview: "OpenCI Runner addresses this by building an **ephemeral, sandboxed container orchestration pipeline**. When a developer submits a GitHub repository, the orchestrator pulls the codebase, spawns an **isolated container with zero host root privileges**, mounts **cgroup CPU limits**, runs checks, dumps streams in real-time, and destroys the container instantly.",
+    mermaidDiagram: `flowchart TD
+    A[Web Client] -->|Submit Repo URL| B[Node.js Orchestrator]
+    B -->|Enqueue Job| C[(Redis Job Queue)]
+    C -->|Execute Task| D[Rootless Docker Worker]
+    D -->|Spawn Sandbox Container| E[Isolated Pod cgroups]
+    E -->|Capture Logs| F[Secure Storage S3]
+    F -->|Stream Console Output| A`,
     architectureDiagram: `[Developer CLI / Web Client]
            │
            ▼ (HTTPS / Repo Submission)
@@ -130,8 +140,16 @@ export const projects: Project[] = [
     projectType: "DevOps Playground / Kubernetes Control System",
 
     // Case Study Content
-    problemStatement: "Exposing raw Kubernetes access to client portals or user-driven automation creates huge orchestration challenges. Concurrent scaling calls from multiple clients can overload cluster schedulers, trigger race conditions, or crash resource pools. Standard Kube dashboards do not offer safe, sandbox-capped mutations for educational or demo scenarios.",
-    solutionOverview: "LoadLab + DeployBot creates a structured, queue-controlled Kubernetes playground. It uses a Chatbot command interface that translates developer messages (e.g., 'scale up pods to 5') into cluster queries, filters and validates commands through security middleware, and routes them to a sequential task worker that interfaces directly with Kube APIs.",
+    problemStatement: "Exposing **raw Kubernetes access** to client portals or user-driven automation creates huge orchestration challenges. Concurrent scaling calls from multiple clients can **overload cluster schedulers**, trigger **race conditions**, or crash resource pools. Standard Kube dashboards do not offer safe, sandbox-capped mutations for educational or demo scenarios.",
+    motivation: "I wanted to build a sandbox environment where students and developers can **practice Kubernetes operations safely**. Exposing a raw kubectl interface or terminal to public users invites **resource exhaustion and security exploits**. By routing scaling and configuration commands through a **chat-controlled interface with queue boundaries**, users can interact with live container infrastructures without system compromise.",
+    solutionOverview: "LoadLab + DeployBot creates a structured, **queue-controlled Kubernetes playground**. It uses a Chatbot command interface that translates developer messages (e.g., 'scale up pods to 5') into cluster queries, filters and validates commands through **security middleware**, and routes them to a **sequential task worker** that interfaces directly with Kube APIs.",
+    mermaidDiagram: `flowchart TD
+    A[Chat UI Client] -->|WebSocket Command| B[Bun API Orchestrator]
+    B -->|Verify Session & Quota| C[Clerk Auth & Quota Guard]
+    C -->|Acquire Locks| D[Redis Distributed Mutex]
+    D -->|Emit Pod Actions| E[Kubernetes Client Node]
+    E -->|Scale Deployments| F[Minikube Pod Sandbox]
+    F -->|Push State Updates| A`,
     architectureDiagram: `[Web UI Chat Interface] ──► [WebSocket Connection]
                                     │
                                     ▼ (Validation Engine)
@@ -206,8 +224,16 @@ export const projects: Project[] = [
     projectType: "Systems / Database Reliability / AI-Assisted Automation",
 
     // Case Study Content
-    problemStatement: "Database service interruptions directly impact application availability. Traditional monitoring platforms alert human database administrators (DBAs) after failures have occurred, leading to minutes of downtime. High connection pools, un-indexed queries, and query deadlocks require rapid, surgical recovery actions to prevent site outages.",
-    solutionOverview: "The Self-Healing DBMS engine acts as an automated virtual DBA. It continuously checks database telemetry (active threads, slow queries, memory usage), runs stats profiling to identify outliers, scores risk thresholds, and executes scripted repairs—like safely killing long-running rogue locks or scaling resource limits—within seconds, before users report problems.",
+    problemStatement: "Database service interruptions directly impact application availability. Traditional monitoring platforms alert human database administrators (DBAs) **after failures have occurred**, leading to minutes of downtime. **High connection pools**, **un-indexed queries**, and **query deadlocks** require rapid, surgical recovery actions to prevent site outages.",
+    motivation: "Downtime is extremely expensive, yet traditional database monitoring systems only alert developers after an outage occurs. I wanted to build an **automated agent that acts as a resident DBA**—actively **monitoring telemetry**, **predicting service crashes**, and applying **safe, transactional healing procedures** autonomously in **under 12 seconds**.",
+    solutionOverview: "The Self-Healing DBMS engine acts as an automated virtual DBA. It continuously checks database telemetry (active threads, slow queries, memory usage), runs **stats profiling to identify outliers**, scores risk thresholds, and executes **scripted repairs**—like safely killing long-running rogue locks or scaling resource limits—within seconds, before users report problems.",
+    mermaidDiagram: `flowchart TD
+    A[MySQL 8.0 Engine] -->|Telemetry Stream| B[Python Telemetry Daemon]
+    B -->|Query Anomalies| C[FastAPI Decision Engine]
+    C -->|Trigger Action| D[SQL Recovery API]
+    D -->|Surgical Heal Query| A
+    C -->|Live Update Event| E[Next.js Observability Board]
+    E -->|Admin Manual Control| D`,
     architectureDiagram: `[MySQL 8.0 Engine] ──► [Telemetry Daemon (Python)]
                               │                        │
                               │ (Heal Actions)         ▼ (Stats Logging)
@@ -297,8 +323,15 @@ export const projects: Project[] = [
     projectType: "Collaborative Web Sandbox / AI Coding Workspace",
 
     // Case Study Content
-    problemStatement: "Asynchronous coding collaboration introduces high data drift. Standard text areas cannot track user edits in real-time, resulting in text overwrite collisions. Managing multi-file workspaces and launching file debugging pipelines requires low-latency synchronization structures and fast file state tracking.",
-    solutionOverview: "CodeWeave addresses this by integrating real-time Socket.io channels with Monaco Editor. It uses a Node.js server backed by an active Redis buffer to synchronize workspace edits in real-time, stores files within structured JSON tree documents, and routes workspace metadata directly to Google's Gemini API for context-aware code debugging.",
+    problemStatement: "Asynchronous coding collaboration introduces **high data drift**. Standard text areas cannot track user edits in real-time, resulting in **text overwrite collisions**. Managing multi-file workspaces and launching file debugging pipelines requires **low-latency synchronization structures** and fast file state tracking.",
+    motivation: "Real-time code collaboration is prone to **sync conflicts**, **high latency**, and **complex workspace states**. I built CodeWeave to create a lightweight, collaborative IDE with **real-time text synchronization**, **multi-file code editing**, and **integrated AI assistance**, enabling engineers to work together interactively with **near-zero latency**.",
+    solutionOverview: "CodeWeave addresses this by integrating **real-time Socket.io channels** with Monaco Editor. It uses a Node.js server backed by an **active Redis buffer** to synchronize workspace edits in real-time, stores files within structured JSON tree documents, and routes workspace metadata directly to Google's **Gemini API** for context-aware code debugging.",
+    mermaidDiagram: `flowchart TD
+    A[React Monaco Client] <-->|Keystroke Sync| B[Socket.io WebSockets]
+    B <-->|Session Control| C[Express.js Backend]
+    C <-->|Active Buffer Caching| D[(Redis Memory Buffer)]
+    C <-->|Workspace Sync State| E[(MongoDB Database)]
+    C -->|Contextual Debug Queries| F[Gemini AI Engine]`,
     architectureDiagram: `[React Monaco Editor Client] ◄──► [Socket.io WebSockets]
                                               │
                                               ▼ (Operation Sync Buffer)
