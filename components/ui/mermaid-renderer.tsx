@@ -65,8 +65,17 @@ export default function MermaidRenderer({ chart, id }: MermaidRendererProps) {
 
   if (!svg) {
     return (
-      <div className="w-full h-64 rounded-xl border border-white/5 bg-[#050505] flex items-center justify-center animate-pulse">
-        <span className="text-xs font-mono text-white/40">Initializing SVG canvas...</span>
+      <div className="w-full h-72 rounded-xl border border-white/5 bg-[#030303] flex flex-col items-center justify-center p-6 space-y-4 animate-pulse">
+        <div className="flex items-center space-x-3 opacity-25">
+          <div className="w-14 h-8 rounded border border-white/20 bg-white/5" />
+          <div className="w-6 h-[1px] bg-white/20" />
+          <div className="w-14 h-8 rounded border border-white/20 bg-white/5" />
+          <div className="w-6 h-[1px] bg-white/20" />
+          <div className="w-14 h-8 rounded border border-white/20 bg-white/5" />
+        </div>
+        <span className="text-[10px] font-mono tracking-widest uppercase text-white/30">
+          Compiling Architecture Schema...
+        </span>
       </div>
     );
   }

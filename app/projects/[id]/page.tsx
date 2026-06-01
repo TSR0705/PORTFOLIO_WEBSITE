@@ -68,7 +68,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </Link>
 
         {/* 1. HERO SECTION (Overview) */}
-        <section id="overview" className="space-y-12">
+        <section id="overview" className="space-y-12 scroll-mt-28">
           <ProjectHeader project={project} theme={theme} />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-white/5">
@@ -100,11 +100,24 @@ export default async function ProjectDetailPage({ params }: Props) {
               />
             </div>
           </div>
+
+          {/* Simple project description fallback (Why It Matters) */}
+          {!project.problemStatement && project.fullDescription && (
+            <div className="space-y-4 pt-8 border-t border-white/5">
+              <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
+                <BookOpen className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
+                Why It Matters
+              </h3>
+              <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-sans leading-relaxed tracking-wide">
+                {project.fullDescription}
+              </p>
+            </div>
+          )}
         </section>
 
         {/* 2. MOTIVATION */}
         {project.motivation && (
-          <section id="motivation" className="py-12 border-t border-white/5 space-y-4">
+          <section id="motivation" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -120,7 +133,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 3. PROBLEM STATEMENT */}
         {project.problemStatement && (
-          <section id="problem" className="py-12 border-t border-white/5 space-y-4">
+          <section id="problem" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -136,7 +149,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 4. SOLUTION OVERVIEW */}
         {project.solutionOverview && (
-          <section id="solution" className="py-12 border-t border-white/5 space-y-4">
+          <section id="solution" className="py-12 border-t border-white/5 space-y-4 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -152,7 +165,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 5. KEY FEATURES */}
         {project.keyFeatures && project.keyFeatures.length > 0 && (
-          <section id="features" className="py-12 border-t border-white/5 space-y-6">
+          <section id="features" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -173,7 +186,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 6. SYSTEM ARCHITECTURE & FLOW (Mermaid Chart) */}
         {(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers) && (
-          <section id="architecture" className="py-12 border-t border-white/5 space-y-6">
+          <section id="architecture" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -202,7 +215,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 7. SCREENSHOTS */}
         {project.screenshots && (
-          <section id="screenshots" className="py-12 border-t border-white/5 space-y-6">
+          <section id="screenshots" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
@@ -216,7 +229,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
         {/* 8. KEY METRICS */}
         {project.keyMetrics && (
-          <section id="performance" className="py-12 border-t border-white/5 space-y-6">
+          <section id="performance" className="py-12 border-t border-white/5 space-y-6 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
               <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/50 flex items-center gap-2">
