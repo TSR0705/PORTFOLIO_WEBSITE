@@ -23,6 +23,7 @@ import {
   BarChart2
 } from "lucide-react";
 import * as Lucide from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { getProjectTheme } from "@/lib/project-design";
 import {
   ProjectBadge,
@@ -122,16 +123,16 @@ export default async function ProjectDetailPage({ params }: Props) {
               )}
             </div>
 
-            {/* Right Column: Project Access Card */}
-            <div className="lg:col-span-4 p-6 rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-sm relative overflow-hidden space-y-6">
+            {/* Right Column: Project Access Card (Premium Sidebar Layout) */}
+            <div className={`lg:col-span-4 p-7 rounded-3xl border ${theme.borderMuted} bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-md relative overflow-hidden space-y-6 transition-all duration-500 ${theme.borderActive} shadow-2xl`}>
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20 pointer-events-none" style={{ backgroundColor: theme.primaryColor }} />
               
               <div className="space-y-4">
-                <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/40 flex items-center gap-2 border-b border-white/5 pb-2">
+                <h3 className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/40 flex items-center gap-2 border-b border-white/5 pb-2.5">
                   <FolderCode className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
                   Tech Employed
                 </h3>
-                <div className="flex flex-wrap gap-1.5">
+                <div className="flex flex-wrap gap-2">
                   {project.techStack.map((tech) => (
                     <TechBadge key={tech} tech={tech} variant="compact" />
                   ))}
@@ -139,27 +140,62 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/40 flex items-center gap-2 border-b border-white/5 pb-2">
+                <h3 className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/40 flex items-center gap-2 border-b border-white/5 pb-2.5">
                   <Link2 className="w-3.5 h-3.5" style={{ color: theme.primaryColor }} />
                   Project Access
                 </h3>
-                <ProjectLinks
-                  githubUrl={project.githubUrl}
-                  liveUrl={project.liveUrl}
-                  demoUrl={project.demoUrl}
-                  theme={theme}
-                  className="!pt-0 !border-t-0 flex flex-col gap-2"
-                />
+                <div className="flex flex-col gap-2.5">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300 text-center w-full text-white/80 hover:text-white"
+                    >
+                      <FaGithub className="w-4 h-4" />
+                      Source Code
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl transition-all duration-300 text-center w-full text-black font-semibold hover:scale-[1.02] shadow-[0_4px_15px_var(--glow-color)] hover:shadow-[0_6px_20px_var(--hover-glow-color)]"
+                      style={{ 
+                        backgroundColor: theme.primaryColor,
+                        "--glow-color": `${theme.primaryColor}25`,
+                        "--hover-glow-color": `${theme.primaryColor}40`
+                      } as React.CSSProperties}
+                    >
+                      Live Demo
+                      <Lucide.ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                    </a>
+                  )}
+                  {project.demoUrl && (
+                    <a
+                      href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300 text-center w-full text-white/80 hover:text-white"
+                    >
+                      <Lucide.Play className="w-4 h-4 fill-white/10" />
+                      Video Demo
+                    </a>
+                  )}
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 text-xs font-mono border-t border-white/5 pt-4">
-                <div>
-                  <span className="text-[#E1E0CC]/40 block text-[9px] uppercase tracking-widest">Year</span>
-                  <span className="text-white font-medium">{project.year}</span>
+              <div className="border-t border-white/5 pt-4 space-y-3.5">
+                <div className="flex justify-between items-center text-xs">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#E1E0CC]/40">Released</span>
+                  <span className="text-white font-medium font-mono">{project.year}</span>
                 </div>
-                <div>
-                  <span className="text-[#E1E0CC]/40 block text-[9px] uppercase tracking-widest">Type</span>
-                  <span className="text-white font-medium">{project.projectType}</span>
+                <div className="flex flex-col gap-1 border-t border-white/5 pt-3 text-xs">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#E1E0CC]/40">Classification</span>
+                  <span className="text-[#E1E0CC]/80 text-[11px] leading-relaxed font-sans font-normal">
+                    {project.projectType}
+                  </span>
                 </div>
               </div>
             </div>

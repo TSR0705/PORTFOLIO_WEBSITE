@@ -45,9 +45,9 @@ export function TechBadge({
   if (variant === "compact") {
     return (
       <span
-        className={`inline-flex items-center gap-1 text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-950/80 border border-white/5 text-white/60 ${className}`}
+        className={`inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-1 rounded bg-neutral-950/60 border border-white/10 text-[#E1E0CC]/85 hover:border-white/25 hover:text-white transition-all duration-300 select-none hover:bg-neutral-950/90 cursor-default ${className}`}
       >
-        <IconComp className="w-3 h-3 text-[#E1E0CC]/80 flex-shrink-0" />
+        <IconComp className="w-3.5 h-3.5 text-[#E1E0CC]/75 flex-shrink-0" />
         {tech}
       </span>
     );
