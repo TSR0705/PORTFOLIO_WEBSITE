@@ -36,18 +36,18 @@ export function TechBadge({
 }) {
   const details = skillDetails[tech] || {
     icon: Lucide.Cpu,
-    bg: "bg-neutral-900",
-    text: "text-white/80",
-    border: "border-white/10",
+    bg: "bg-[#1E1F22]",
+    text: "text-white",
+    border: "border-white/5",
   };
   const IconComp = details.icon;
 
   if (variant === "compact") {
     return (
       <span
-        className={`inline-flex items-center gap-1.5 text-[10px] font-mono px-2.5 py-1 rounded bg-neutral-950/60 border border-white/10 text-[#E1E0CC]/85 hover:border-white/25 hover:text-white transition-all duration-300 select-none hover:bg-neutral-950/90 cursor-default ${className}`}
+        className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3.5 py-1 rounded-full transition-all duration-300 select-none hover:scale-[1.03] shadow-sm hover:shadow-md cursor-default ${details.bg} ${details.text} ${details.border || "border border-transparent"} ${className}`}
       >
-        <IconComp className="w-3.5 h-3.5 text-[#E1E0CC]/75 flex-shrink-0" />
+        <IconComp className="w-3.5 h-3.5 flex-shrink-0" />
         {tech}
       </span>
     );
@@ -55,7 +55,7 @@ export function TechBadge({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md hover:scale-[1.02] ${className}`}
+      className={`inline-flex items-center gap-2 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300 select-none hover:scale-[1.03] shadow-md cursor-default ${details.bg} ${details.text} ${details.border || "border border-transparent"} ${className}`}
     >
       <IconComp className="w-4 h-4 flex-shrink-0" />
       {tech}

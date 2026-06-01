@@ -23,6 +23,7 @@ import {
   SiTypescript
 } from "react-icons/si";
 import { skillDetails } from "@/lib/project-design";
+import { TechBadge } from "@/components/ui/project-components";
 
 // Curated icons for the Orbit visualizer - clean, flat, matching the project styling without custom glowing outlines
 const orbitIconConfigs = [
@@ -155,19 +156,9 @@ export default function SkillsSection() {
                   <span className="text-[10px] font-mono text-white/20">0{idx + 1}</span>
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
-                  {cat.skills.map((skill) => {
-                    const details = skillDetails[skill] || { icon: FaReact, bg: "bg-neutral-800", text: "text-white" };
-                    const IconComp = details.icon;
-                    return (
-                      <span
-                        key={skill}
-                        className={`inline-flex items-center gap-1.5 text-xs md:text-sm font-bold px-3 py-1.5 rounded-lg ${details.bg} ${details.text} ${details.border || "border border-transparent"} transition-all duration-200 cursor-default shadow-md`}
-                      >
-                        <IconComp className="w-4 h-4 flex-shrink-0" />
-                        {skill}
-                      </span>
-                    );
-                  })}
+                  {cat.skills.map((skill) => (
+                    <TechBadge key={skill} tech={skill} />
+                  ))}
                 </div>
               </motion.div>
             ))}

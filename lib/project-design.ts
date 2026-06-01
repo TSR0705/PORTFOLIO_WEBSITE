@@ -7,6 +7,21 @@ import {
   FaJava,
   FaPython,
   FaChartLine,
+  FaCode,
+  FaMicrochip,
+  FaFileAlt,
+  FaMicrophone,
+  FaDatabase,
+  FaMobileAlt,
+  FaUniversalAccess,
+  FaBrain,
+  FaProjectDiagram,
+  FaPlug,
+  FaSyncAlt,
+  FaStream,
+  FaSitemap,
+  FaShieldAlt,
+  FaGlobe,
 } from "react-icons/fa";
 import {
   SiHtml5,
@@ -136,7 +151,25 @@ export const skillDetails: Record<string, { icon: any; bg: string; text: string;
   "Pydantic": { icon: SiPydantic, bg: "bg-[#E92063]", text: "text-white" },
   "shadcn/ui": { icon: SiShadcnui, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
   "Recharts": { icon: FaChartLine, bg: "bg-[#2563EB]", text: "text-white" },
-  "Chart.js / Recharts": { icon: FaChartLine, bg: "bg-[#2563EB]", text: "text-white" }
+  "Chart.js / Recharts": { icon: FaChartLine, bg: "bg-[#2563EB]", text: "text-white" },
+
+  // Newly mapped custom tags
+  "Sandbox execution model": { icon: FaMicrochip, bg: "bg-[#1E1F22]", text: "text-white" },
+  "Monaco Editor": { icon: FaCode, bg: "bg-[#007ACC]", text: "text-white" },
+  "Winston logging": { icon: FaFileAlt, bg: "bg-[#1C1C1E]", text: "text-white/90", border: "border-white/10" },
+  "Web Speech API": { icon: FaMicrophone, bg: "bg-[#0070F3]", text: "text-white" },
+  "localStorage": { icon: FaDatabase, bg: "bg-[#F39C12]", text: "text-white" },
+  "Responsive UI": { icon: FaMobileAlt, bg: "bg-[#3498DB]", text: "text-white" },
+  "Accessibility-first design": { icon: FaUniversalAccess, bg: "bg-[#2ECC71]", text: "text-white" },
+  "TF-IDF Vectorizer": { icon: FaBrain, bg: "bg-[#8E44AD]", text: "text-white" },
+  "DBSCAN": { icon: FaProjectDiagram, bg: "bg-[#1ABC9C]", text: "text-white" },
+  "Room": { icon: FaDatabase, bg: "bg-[#4285F4]", text: "text-white" },
+  "Hilt": { icon: FaPlug, bg: "bg-[#00E676]", text: "text-black" },
+  "Coroutines": { icon: FaSyncAlt, bg: "bg-[#7F52FF]", text: "text-white" },
+  "Flow / StateFlow": { icon: FaStream, bg: "bg-[#3F51B5]", text: "text-white" },
+  "MVVM": { icon: FaSitemap, bg: "bg-[#9C27B0]", text: "text-white" },
+  "Clean Architecture": { icon: FaShieldAlt, bg: "bg-[#607D8B]", text: "text-white" },
+  "IP detection API": { icon: FaGlobe, bg: "bg-[#E74C3C]", text: "text-white" }
 };
 
 export const PROJECT_THEMES: Record<string, ProjectTheme> = {
