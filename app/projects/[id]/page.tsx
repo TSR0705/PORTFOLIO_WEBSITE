@@ -44,6 +44,19 @@ export function generateStaticParams() {
   }));
 }
 
+// Helper function to render text containing markdown **bold** markers as React nodes
+function renderBoldText(text: string) {
+  if (!text) return null;
+  const parts = text.split("**");
+  return parts.map((part, index) => {
+    return index % 2 === 1 ? (
+      <strong key={index} className="font-semibold text-white">{part}</strong>
+    ) : (
+      part
+    );
+  });
+}
+
 export default async function ProjectDetailPage({ params }: Props) {
   const { id } = await params;
   const project = projects.find((p) => p.id === id);
@@ -113,12 +126,12 @@ export default async function ProjectDetailPage({ params }: Props) {
               </h1>
 
               <p className="text-[#E1E0CC]/95 text-lg md:text-xl font-normal leading-relaxed tracking-wide max-w-2xl font-sans">
-                {project.shortDescription}
+                {renderBoldText(project.shortDescription)}
               </p>
 
               {project.fullDescription && (
                 <p className="text-[#E1E0CC]/90 text-sm md:text-base font-normal leading-relaxed tracking-wide max-w-2xl pt-2">
-                  {project.fullDescription}
+                  {renderBoldText(project.fullDescription)}
                 </p>
               )}
             </div>
@@ -226,7 +239,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             
             <div className="border-l-2 pl-4 border-red-500/40 space-y-4 max-w-3xl">
               <p className="text-lg md:text-xl font-normal text-[#E1E0CC]/95 leading-relaxed font-sans">
-                {project.problemStatement}
+                {renderBoldText(project.problemStatement)}
               </p>
             </div>
 
@@ -265,7 +278,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
 
             <blockquote className="text-xl md:text-2xl font-normal text-[#E1E0CC]/95 italic leading-relaxed max-w-3xl pl-4 border-l-2 border-white/10">
-              &ldquo;{project.motivation.replace(/\*\*/g, "")}&rdquo;
+              &ldquo;{renderBoldText(project.motivation)}&rdquo;
             </blockquote>
 
             {project.motivationPoints && (
@@ -302,7 +315,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   The Aha Moment
                 </span>
                 <h3 className="text-2xl md:text-3xl font-normal tracking-tight text-white leading-snug">
-                  {project.ahaMoment}
+                  {renderBoldText(project.ahaMoment)}
                 </h3>
               </div>
             </div>
@@ -321,7 +334,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
             
             <p className="text-[#E1E0CC]/90 text-sm sm:text-base font-normal leading-relaxed tracking-wide max-w-3xl">
-              {project.solutionOverview}
+              {renderBoldText(project.solutionOverview)}
             </p>
 
             {project.solutionPoints && (
