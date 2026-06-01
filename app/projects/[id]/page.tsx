@@ -112,12 +112,12 @@ export default async function ProjectDetailPage({ params }: Props) {
                 )}
               </h1>
 
-              <p className="text-[#E1E0CC]/95 text-lg md:text-xl font-light leading-relaxed tracking-wide max-w-2xl font-sans">
+              <p className="text-[#E1E0CC]/95 text-lg md:text-xl font-normal leading-relaxed tracking-wide max-w-2xl font-sans">
                 {project.shortDescription}
               </p>
 
               {project.fullDescription && (
-                <p className="text-[#E1E0CC]/75 text-sm md:text-base font-normal leading-relaxed tracking-wide max-w-2xl pt-2">
+                <p className="text-[#E1E0CC]/90 text-sm md:text-base font-normal leading-relaxed tracking-wide max-w-2xl pt-2">
                   {project.fullDescription}
                 </p>
               )}
@@ -218,14 +218,14 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="problem" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 text-red-500/80" />
                 The Core Problem
               </h3>
             </div>
             
             <div className="border-l-2 pl-4 border-red-500/40 space-y-4 max-w-3xl">
-              <p className="text-lg md:text-xl font-light text-[#E1E0CC]/95 leading-relaxed font-sans">
+              <p className="text-lg md:text-xl font-normal text-[#E1E0CC]/95 leading-relaxed font-sans">
                 {project.problemStatement}
               </p>
             </div>
@@ -236,13 +236,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <div key={idx} className="p-5 rounded-2xl border border-red-950/20 bg-red-950/[0.01] hover:border-red-950/40 hover:bg-red-950/[0.03] transition-all duration-300 relative group overflow-hidden">
                     <div className="absolute top-0 left-0 w-1 h-full bg-red-500/10 group-hover:bg-red-500/30 transition-colors" />
                     <div className="space-y-2">
-                      <span className="font-mono text-[9px] tracking-widest text-red-400/50 block uppercase">
+                      <span className="font-mono text-[9px] tracking-widest text-red-400/80 block uppercase">
                         Symptom 0{idx + 1}
                       </span>
                       <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
                         {point.title}
                       </h4>
-                      <p className="text-[#E1E0CC]/70 text-xs leading-relaxed font-sans">
+                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
                         {point.desc}
                       </p>
                     </div>
@@ -258,13 +258,13 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="motivation" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-amber-400/80" />
                 Motivation
               </h3>
             </div>
 
-            <blockquote className="text-xl md:text-2xl font-light text-[#E1E0CC]/90 italic leading-relaxed max-w-3xl pl-4 border-l-2 border-white/10">
+            <blockquote className="text-xl md:text-2xl font-normal text-[#E1E0CC]/95 italic leading-relaxed max-w-3xl pl-4 border-l-2 border-white/10">
               &ldquo;{project.motivation.replace(/\*\*/g, "")}&rdquo;
             </blockquote>
 
@@ -274,13 +274,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
                     <div className="absolute top-0 left-0 w-1 h-full transition-colors" style={{ backgroundColor: `${theme.primaryColor}20` }} />
                     <div className="space-y-2">
-                      <span className="font-mono text-[9px] tracking-widest text-[#E1E0CC]/40 block uppercase">
+                      <span className="font-mono text-[9px] tracking-widest text-[#E1E0CC]/70 block uppercase">
                         Goal 0{idx + 1}
                       </span>
                       <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
                         {point.title}
                       </h4>
-                      <p className="text-white/60 text-xs leading-relaxed font-sans">
+                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
                         {point.desc}
                       </p>
                     </div>
@@ -301,7 +301,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <Sparkles className="w-3.5 h-3.5" />
                   The Aha Moment
                 </span>
-                <h3 className="text-2xl md:text-3xl font-light tracking-tight text-white leading-snug">
+                <h3 className="text-2xl md:text-3xl font-normal tracking-tight text-white leading-snug">
                   {project.ahaMoment}
                 </h3>
               </div>
@@ -314,13 +314,13 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="solution" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-emerald-500/80" />
                 Solution Strategy
               </h3>
             </div>
             
-            <p className="text-[#E1E0CC]/80 text-sm sm:text-base font-normal leading-relaxed tracking-wide max-w-3xl">
+            <p className="text-[#E1E0CC]/90 text-sm sm:text-base font-normal leading-relaxed tracking-wide max-w-3xl">
               {project.solutionOverview}
             </p>
 
@@ -330,13 +330,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-[2px] transition-colors" style={{ backgroundColor: theme.primaryColor }} />
                     <div className="space-y-2 pt-2">
-                      <span className="font-mono text-[9px] tracking-widest block uppercase text-white/40">
+                      <span className="font-mono text-[9px] tracking-widest block uppercase text-white/70">
                         Strategy 0{idx + 1}
                       </span>
                       <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
                         {point.title}
                       </h4>
-                      <p className="text-[#E1E0CC]/70 text-xs leading-relaxed font-sans">
+                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
                         {point.desc}
                       </p>
                     </div>
@@ -352,7 +352,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="flow" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Execution Pipeline
               </h3>
@@ -370,13 +370,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                     }} 
                   />
                   <div className="space-y-1">
-                    <span className="font-mono text-[9px] tracking-widest text-white/30 block uppercase">
+                    <span className="font-mono text-[9px] tracking-widest text-white/70 block uppercase">
                       Phase {flow.step}
                     </span>
                     <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
                       {flow.title}
                     </h4>
-                    <p className="text-[#E1E0CC]/70 text-xs md:text-sm leading-relaxed max-w-2xl font-sans">
+                    <p className="text-[#E1E0CC]/90 text-sm leading-relaxed max-w-2xl font-sans">
                       {flow.desc}
                     </p>
                   </div>
@@ -391,7 +391,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="architecture" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 System Architecture
               </h3>
@@ -401,7 +401,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <MermaidRenderer chart={project.mermaidDiagram} id={project.id} />
             ) : project.architectureDiagram ? (
               <div className="rounded-xl border border-white/5 bg-[#050505] p-5 md:p-6 overflow-x-auto shadow-inner">
-                <pre className="font-mono text-[10px] md:text-xs leading-relaxed text-[#E1E0CC]/80 whitespace-pre">
+                <pre className="font-mono text-[10px] md:text-xs leading-relaxed text-[#E1E0CC]/95 whitespace-pre">
                   {project.architectureDiagram}
                 </pre>
               </div>
@@ -409,7 +409,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             {project.architectureLayers && (
               <div className="space-y-4 pt-4">
-                <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/40 uppercase block">
+                <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/75 uppercase block">
                   Interactive Architectural Layer Breakdown
                 </h4>
                 <ArchitectureGrid layers={project.architectureLayers} theme={theme} />
@@ -423,7 +423,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="decisions" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Wrench className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Engineering Decisions
               </h3>
@@ -434,7 +434,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 <div key={idx} className="p-6 rounded-2xl border border-white/5 bg-[#050505] space-y-4 relative overflow-hidden hover:border-white/10 transition-all duration-300">
                   <div className="flex justify-between items-start">
                     <div>
-                      <span className="text-[9px] font-mono tracking-widest uppercase text-white/30 block mb-1">
+                      <span className="text-[9px] font-mono tracking-widest uppercase text-white/70 block mb-1">
                         Decision 0{idx + 1}
                       </span>
                       <h4 className="text-base font-semibold text-white tracking-wide uppercase">
@@ -450,15 +450,15 @@ export default async function ProjectDetailPage({ params }: Props) {
                     </div>
                     <div>
                       <span className="text-red-400 block mb-1 uppercase tracking-wider text-[9px]">✗ Evaluated Alternative</span>
-                      <span className="text-white/60">{d.alternative}</span>
+                      <span className="text-white/85">{d.alternative}</span>
                     </div>
                   </div>
 
                   <div className="space-y-2 border-t border-white/5 pt-4 text-xs leading-relaxed font-sans border-t border-white/5">
-                    <p className="text-white/80">
+                    <p className="text-white/90">
                       <strong>Design Rationale:</strong> {d.rationale}
                     </p>
-                    <p className="text-white/40 italic text-[11px]">
+                    <p className="text-white/70 italic text-xs">
                       <strong>Rejected Drawback:</strong> {d.alternativeRationale}
                     </p>
                   </div>
@@ -473,7 +473,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="tradeoffs" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Shield className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Constraints & Tradeoffs
               </h3>
@@ -487,14 +487,14 @@ export default async function ProjectDetailPage({ params }: Props) {
                     <span className="text-[9px] font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1.5">
                       <PlusCircle className="w-3.5 h-3.5" /> Optimized Architecture
                     </span>
-                    <p className="text-white/90 leading-relaxed font-medium">{t.optimized}</p>
+                    <p className="text-white/95 leading-relaxed font-semibold">{t.optimized}</p>
                   </div>
                   {/* Sacrificed side */}
                   <div className="bg-red-950/[0.04] p-5 space-y-2">
                     <span className="text-[9px] font-mono uppercase tracking-wider text-red-400 font-semibold flex items-center gap-1.5">
                       <MinusCircle className="w-3.5 h-3.5" /> Accepted Tradeoff
                     </span>
-                    <p className="text-[#E1E0CC]/80 leading-relaxed">{t.sacrificed}</p>
+                    <p className="text-[#E1E0CC]/95 leading-relaxed font-medium">{t.sacrificed}</p>
                   </div>
                 </div>
               ))}
@@ -507,7 +507,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="failures" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Failure Scenarios
               </h3>
@@ -528,7 +528,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                         <span className={`text-[9px] font-mono uppercase tracking-widest px-2 py-0.5 rounded border ${riskColors}`}>
                           Risk: {fs.riskLevel}
                         </span>
-                        <span className="text-xs font-mono text-white/30">Scenario 0{idx + 1}</span>
+                        <span className="text-xs font-mono text-white/65">Scenario 0{idx + 1}</span>
                       </div>
                       <h4 className="text-sm font-semibold text-white uppercase tracking-wider leading-snug">
                         {fs.scenario}
@@ -538,7 +538,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       <span className="text-[9px] font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1">
                         <ShieldCheck className="w-3.5 h-3.5" /> Active Guardrail
                       </span>
-                      <p className="text-[#E1E0CC]/80 text-xs md:text-sm leading-relaxed font-sans">
+                      <p className="text-[#E1E0CC]/95 text-sm leading-relaxed font-sans">
                         {fs.prevention}
                       </p>
                     </div>
@@ -554,7 +554,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="screenshots" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <ImageIcon className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Product Walkthrough
               </h3>
@@ -570,7 +570,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-700"
                     />
                   </div>
-                  <p className="text-[10px] font-mono text-[#E1E0CC]/40 uppercase tracking-widest block text-right pr-2">
+                  <p className="text-[10px] font-mono text-[#E1E0CC]/70 uppercase tracking-widest block text-right pr-2">
                     Interface View 0{idx + 1}
                   </p>
                 </div>
@@ -584,7 +584,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="metrics" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <BarChart2 className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Metrics & Validation
               </h3>
@@ -599,15 +599,15 @@ export default async function ProjectDetailPage({ params }: Props) {
                   <div className="absolute top-0 right-0 w-24 h-24 rounded-full blur-3xl opacity-30 pointer-events-none" style={{ backgroundColor: theme.primaryColor }} />
                   <div className="relative z-10 space-y-2">
                     <span
-                      className="text-4xl md:text-5xl font-light tracking-tighter block"
+                      className="text-4xl md:text-5xl font-normal tracking-tighter block"
                       style={{ color: theme.primaryColor }}
                     >
                       {m.value}
                     </span>
-                    <h4 className="text-xs font-mono uppercase tracking-wider text-white/80 font-medium">
+                    <h4 className="text-xs font-mono uppercase tracking-wider text-white/90 font-semibold">
                       {m.label}
                     </h4>
-                    <p className="text-white/40 text-[11px] leading-relaxed font-sans">
+                    <p className="text-white/75 text-xs leading-relaxed font-sans">
                       {m.description}
                     </p>
                   </div>
@@ -622,7 +622,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="lessons" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <Terminal className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Lessons Learned
               </h3>
@@ -633,12 +633,12 @@ export default async function ProjectDetailPage({ params }: Props) {
                 <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                <span className="text-white/30 text-[10px] ml-2">lessons_learned.log</span>
+                <span className="text-white/60 text-[10px] ml-2">lessons_learned.log</span>
               </div>
-              <div className="space-y-3 pt-2 text-[#E1E0CC]/80">
+              <div className="space-y-3 pt-2 text-[#E1E0CC]/95">
                 {project.lessonsLearned.map((lesson, idx) => (
                   <p key={idx}>
-                    <span className="text-white/30">0{idx + 1} //</span> {lesson}
+                    <span className="text-white/70">0{idx + 1} //</span> {lesson}
                   </p>
                 ))}
               </div>
@@ -651,7 +651,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <section id="future" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/50 flex items-center gap-2">
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
                 <ListChecks className="w-4 h-4" style={{ color: theme.primaryColor }} />
                 Future Evolution
               </h3>
@@ -661,7 +661,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               {((project.futureEvolution || project.futureImprovements) as string[]).map((item, idx) => (
                 <div key={idx} className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.01] text-xs md:text-sm">
                   <CheckSquare className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: theme.primaryColor }} />
-                  <span className="text-[#E1E0CC]/80 font-sans leading-relaxed">{item}</span>
+                  <span className="text-[#E1E0CC]/95 font-sans font-medium leading-relaxed">{item}</span>
                 </div>
               ))}
             </div>

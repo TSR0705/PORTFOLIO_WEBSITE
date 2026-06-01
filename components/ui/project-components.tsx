@@ -355,7 +355,7 @@ export function ArchitectureGrid({
           className={`p-5 rounded-2xl border ${theme.borderMuted} bg-white/[0.01] flex flex-col md:flex-row gap-4 items-start md:items-center justify-between hover:bg-white/[0.02] transition-all duration-300`}
         >
           <div className="space-y-1 md:max-w-[30%]">
-            <span className="text-[10px] font-mono tracking-widest uppercase text-white/30">
+            <span className="text-[10px] font-mono tracking-widest uppercase text-white/70">
               Layer {idx + 1}
             </span>
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider">
@@ -367,7 +367,7 @@ export function ArchitectureGrid({
             <TechBadge tech={layer.tech} />
           </div>
 
-          <p className="text-white/60 text-xs md:text-sm font-sans md:max-w-[50%] leading-relaxed">
+          <p className="text-white/85 text-sm font-sans md:max-w-[50%] leading-relaxed">
             {layer.description}
           </p>
         </div>

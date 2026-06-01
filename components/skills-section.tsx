@@ -128,14 +128,14 @@ export default function SkillsSection() {
           
           {/* Headline & Description */}
           <div className="space-y-4">
-            <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#E1E0CC]/80 block">
+            <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#E1E0CC]/95 font-medium block">
               Technical Expertise
             </span>
             <h2 className="text-4xl sm:text-6xl font-light tracking-tighter leading-none text-white">
               Engineering <span className="font-medium text-[#E1E0CC]">Toolkit.</span>
             </h2>
             <div className="h-[1px] w-28 bg-gradient-to-r from-[#E1E0CC]/60 to-transparent mt-3" />
-            <p className="text-white/60 text-sm sm:text-base leading-relaxed font-sans max-w-2xl pt-2">
+            <p className="text-white/85 text-sm sm:text-base leading-relaxed font-sans max-w-2xl pt-2">
               A curated stack of technologies, platforms, and tools used to design, build, and deploy scalable software systems.
             </p>
           </div>
