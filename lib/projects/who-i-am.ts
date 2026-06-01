@@ -1,0 +1,23 @@
+import { Project } from "../projects";
+
+export const whoIAmProject: Project = {
+    id: "who-i-am",
+    title: "WHO-I-AM",
+    slug: "who-i-am",
+    category: "Cloud / DevOps",
+    shortDescription: "A simple web app that displays user environment details such as IP, browser, OS, device type, and location, built while learning Docker.",
+    fullDescription: "This was a practical learning project focused on containerization and deployment portability rather than app complexity.",
+    techStack: ["Docker", "Containerized deployment", "IP detection API", "Node.js", "Express"],
+    keyFeatures: [
+      "Detects client IP information",
+      "Shows browser and OS details",
+      "Identifies device type",
+      "Displays location-related information",
+      "Demonstrates Dockerized deployment"
+    ],
+    status: "completed",
+    tags: ["Cloud / DevOps", "Security / Reliability"],
+    featured: false,
+    year: "2024",
+    projectType: "Docker Learning Project / Personal Utility App"
+  };
