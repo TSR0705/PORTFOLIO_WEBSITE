@@ -173,17 +173,6 @@ export const skillDetails: Record<string, { icon: any; bg: string; text: string;
 };
 
 export const PROJECT_THEMES: Record<string, ProjectTheme> = {
-  "openci-runner": {
-    primaryColor: "#10B981",
-    accentText: "text-emerald-400",
-    bgGlow: "bg-emerald-500/5",
-    borderMuted: "border-emerald-500/10",
-    borderActive: "hover:border-emerald-500/40",
-    gradient: "from-emerald-950/15 via-neutral-950 to-neutral-950",
-    shadow: "shadow-emerald-500/20",
-    iconName: "Terminal",
-    imageSrc: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200&auto=format&fit=crop",
-  },
   "loadlab-deploybot": {
     primaryColor: "#06B6D4",
     accentText: "text-cyan-400",

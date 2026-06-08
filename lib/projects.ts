@@ -41,7 +41,6 @@ export interface Project {
   futureEvolution?: string[];
 }
 
-import { openciRunnerProject } from "./projects/openci-runner";
 import { loadlabDeploybotProject } from "./projects/loadlab-deploybot";
 import { dbmsSelfHealingProject } from "./projects/dbms-self-healing";
 import { webloomProject } from "./projects/webloom";
@@ -55,7 +54,6 @@ import { fcfsSchedulerSimulatorProject } from "./projects/fcfs-scheduler-simulat
 import { quizArenaProject } from "./projects/quiz-arena";
 
 export const projects: Project[] = [
-  openciRunnerProject,
   loadlabDeploybotProject,
   dbmsSelfHealingProject,
   webloomProject,
