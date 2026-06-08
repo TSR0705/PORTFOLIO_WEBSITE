@@ -75,7 +75,7 @@ export function GlassmorphismPortfolioBlock() {
   ];
 
   return (
-    <section className="relative w-full min-h-screen bg-black text-white px-6 md:px-12 py-20 md:py-32 flex items-center justify-center">
+    <section className="relative w-full min-h-screen bg-black text-white px-4 sm:px-6 md:px-12 py-20 md:py-32 flex items-center justify-center overflow-hidden">
       {/* Noise overlay */}
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
@@ -95,12 +95,12 @@ export function GlassmorphismPortfolioBlock() {
             <div className="flex items-center gap-4">
               <Badge
                 variant="outline"
-                className="inline-flex items-center gap-2 rounded-full border-[#E1E0CC]/20 bg-white/5 px-4.5 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC]"
+                className="inline-flex items-center justify-center sm:justify-start gap-2 rounded-2xl sm:rounded-full border-[#E1E0CC]/20 bg-white/5 px-4.5 py-2 sm:py-1.5 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-[#E1E0CC] whitespace-normal sm:whitespace-nowrap text-center sm:text-left h-auto"
               >
-                <Terminal className="h-3.5 w-3.5 animate-pulse text-[#E1E0CC]" />
+                <Terminal className="h-3.5 w-3.5 animate-pulse text-[#E1E0CC] flex-shrink-0" />
                 B.Tech CSE (Cloud Computing) · 2nd Year
               </Badge>
-              <div className="h-[1px] flex-grow bg-white/10" />
+              <div className="h-[1px] flex-grow bg-white/10 hidden sm:block" />
             </div>
 
             {/* Title & Stands */}
@@ -161,7 +161,7 @@ export function GlassmorphismPortfolioBlock() {
                       }`} 
                     />
                     
-                    <div className="flex-grow flex justify-between items-start gap-4">
+                    <div className="flex-grow flex flex-col sm:flex-row justify-between items-start gap-2 sm:gap-4">
                       <div>
                         <h4 className={`text-sm sm:text-base font-semibold leading-tight transition-colors group-hover:text-amber-300 ${entry.highlight ? "text-white" : "text-white/85"}`}>
                           {entry.title}
@@ -191,10 +191,10 @@ export function GlassmorphismPortfolioBlock() {
             <Button
               size="lg"
               onClick={() => router.push("/projects")}
-              className="h-13 w-full sm:w-auto gap-3.5 rounded-full px-10 text-xs font-mono uppercase tracking-[0.2em] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-white/5"
+              className="h-13 w-full sm:w-auto gap-3.5 rounded-full px-6 sm:px-10 text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer bg-white text-black hover:bg-white/90 shadow-lg hover:shadow-white/5 whitespace-normal sm:whitespace-nowrap h-auto py-3"
             >
               Explore Engineering Projects
-              <ArrowUpRight className="h-4.5 w-4.5" />
+              <ArrowUpRight className="h-4.5 w-4.5 flex-shrink-0" />
             </Button>
           </div>
 
@@ -298,9 +298,9 @@ export function GlassmorphismPortfolioBlock() {
           </div>
 
           {/* Geographic facts */}
-          <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center gap-2.5 text-xs text-white/50 font-mono">
-            <MapPin className="h-4 w-4 text-[#E1E0CC]" />
-            Originally from Bihar, India · Currently studying in Chennai
+          <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-start sm:items-center gap-3 text-xs sm:text-sm text-white/50 font-mono">
+            <MapPin className="h-4 w-4 text-[#E1E0CC] flex-shrink-0 mt-0.5 sm:mt-0" />
+            <span className="leading-snug">Originally from Bihar, India · Currently studying in Chennai</span>
           </div>
 
         </div>

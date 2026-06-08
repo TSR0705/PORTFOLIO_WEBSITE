@@ -79,14 +79,22 @@ export default function SkillsSection() {
       if (mobile) {
         // Calculate container width: screen width minus padding (approx 48px)
         const containerW = w - 48;
-        const baseDiagWidth = 416; // 26rem (26 * 16px)
+        const baseDiagWidth = 400; // 25rem (25 * 16px)
         if (containerW < baseDiagWidth) {
           setScale(containerW / baseDiagWidth);
         } else {
           setScale(1);
         }
       } else {
-        setScale(1);
+        // Desktop container width is roughly 5/12 of content area
+        const contentW = Math.min(w, 1440) - 128; // max-w-90rem is 1440px, padding is px-16 (128px)
+        const containerW = contentW * (5 / 12);
+        const baseDiagWidth = 500; // Expected desktop width of the visible part of orbit
+        if (containerW < baseDiagWidth) {
+          setScale(containerW / baseDiagWidth);
+        } else {
+          setScale(1);
+        }
       }
     };
 
@@ -95,8 +103,8 @@ export default function SkillsSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const orbitGap = isMobile ? 4.5 : 6.5; // rem spacing between orbits
-  const baseSize = isMobile ? 10 : 14;   // rem base size
+  const orbitGap = isMobile ? 3.5 : 5.5; // rem spacing between orbits
+  const baseSize = isMobile ? 10 : 16;   // rem base size
   const iconsPerOrbit = Math.ceil(orbitIconConfigs.length / orbitCount);
 
   return (
@@ -132,7 +140,7 @@ export default function SkillsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="p-6 rounded-2xl border border-white/10 bg-neutral-900/20 backdrop-blur-sm flex flex-col justify-start min-h-[14rem]"
+                className="p-6 rounded-2xl border border-white/10 bg-neutral-900/20 backdrop-blur-sm flex flex-col justify-start"
               >
                 <h3 className="text-lg font-semibold tracking-tight text-[#E1E0CC] mb-5 flex items-center justify-between">
                   {cat.title}
@@ -152,18 +160,21 @@ export default function SkillsSection() {
         {/* Right Side: Orbit Visualization (Spans 5 columns) - scaled dynamically */}
         <div className="lg:col-span-5 relative w-full h-[22rem] lg:h-[42rem] flex items-center justify-center lg:justify-end overflow-hidden mt-8 lg:mt-0">
           <div 
-            className={`absolute top-1/2 flex items-center justify-center transition-all duration-300 ${
+            className={`absolute top-1/2 flex items-center justify-center transition-all duration-300 orbit-container-group ${
               isMobile 
-                ? "left-1/2 w-[26rem] h-[26rem]" 
+                ? "left-1/2 w-[30rem] h-[30rem]" 
                 : "right-0 w-[55rem] h-[55rem]"
-            }`}
+             }`}
             style={{
               transform: isMobile 
                 ? `translate(-50%, -50%) scale(${scale})` 
-                : "translate(43%, -50%)"
+                : `translate(43%, -50%) scale(${scale})`
             }}
           >
             
+            {/* Radial gradient background behind orbits */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(225,224,204,0.02)_0%,transparent_70%)] pointer-events-none rounded-full" />
+
             {/* Center Circle */}
             <div className={`${isMobile ? "w-24 h-24" : "w-32 h-32"} rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20`}>
               <span className={`${isMobile ? "text-2xl" : "text-4xl"} font-mono font-bold tracking-tighter text-[#E1E0CC]`}>
@@ -173,16 +184,17 @@ export default function SkillsSection() {
 
             {/* Generated Orbits - clean dotted circles */}
             {[...Array(orbitCount)].map((_, orbitIdx) => {
-              const size = `${baseSize + orbitGap * (orbitIdx + 1)}rem`;
+              const size = `${baseSize + 2 * orbitGap * orbitIdx}rem`;
               const angleStep = (2 * Math.PI) / iconsPerOrbit;
 
               return (
                 <div
                   key={orbitIdx}
-                  className="absolute rounded-full border border-dotted border-white/10 pointer-events-none"
+                  className="absolute top-1/2 left-1/2 rounded-full border border-dotted border-[#E1E0CC]/15 pointer-events-none orbit-ring-anim"
                   style={{
                     width: size,
                     height: size,
+                    transform: "translate(-50%, -50%)",
                     animation: `orbit-spin ${20 + orbitIdx * 10}s linear infinite`,
                   }}
                 >
@@ -205,7 +217,7 @@ export default function SkillsSection() {
                         >
                           <div
                             title={cfg.name}
-                            className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer"
+                            className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer orbit-icon-anim"
                             style={{
                               animation: `counter-spin ${20 + orbitIdx * 10}s linear infinite`,
                             }}
@@ -228,10 +240,10 @@ export default function SkillsSection() {
       <style>{`
         @keyframes orbit-spin {
           from {
-            transform: rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
           }
           to {
-            transform: rotate(360deg);
+            transform: translate(-50%, -50%) rotate(360deg);
           }
         }
         @keyframes counter-spin {
@@ -240,6 +252,14 @@ export default function SkillsSection() {
           }
           to {
             transform: rotate(-360deg);
+          }
+        }
+        @media (hover: hover) {
+          .orbit-container-group:hover .orbit-ring-anim {
+            animation-play-state: paused;
+          }
+          .orbit-container-group:hover .orbit-icon-anim {
+            animation-play-state: paused;
           }
         }
       `}</style>
