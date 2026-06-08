@@ -9,16 +9,12 @@ import {
   FaNodeJs,
   FaGithub,
   FaJava,
-  FaPython,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
   SiKubernetes,
   SiJenkins,
-  SiRabbitmq,
-  SiGrafana,
   SiPostman,
-  SiHuggingface,
   SiMongodb,
   SiTypescript
 } from "react-icons/si";
@@ -32,16 +28,12 @@ const orbitIconConfigs = [
   { Icon: FaNodeJs, color: "#339933", name: "Node.js" },
   { Icon: SiTypescript, color: "#3178C6", name: "TypeScript" },
   { Icon: FaJava, color: "#F89820", name: "Java" },
-  { Icon: FaPython, color: "#3776AB", name: "Python" },
   { Icon: FaDocker, color: "#2496ED", name: "Docker" },
   { Icon: SiKubernetes, color: "#326CE5", name: "Kubernetes" },
   { Icon: FaAws, color: "#FF9900", name: "AWS" },
   { Icon: SiMongodb, color: "#47A248", name: "MongoDB" },
   { Icon: SiJenkins, color: "#D24939", name: "Jenkins" },
-  { Icon: SiRabbitmq, color: "#FF6600", name: "RabbitMQ" },
-  { Icon: SiGrafana, color: "#F46800", name: "Grafana" },
   { Icon: SiPostman, color: "#FF6C37", name: "Postman" },
-  { Icon: SiHuggingface, color: "#FFD21E", name: "Hugging Face" },
   { Icon: FaGithub, color: "#FFFFFF", name: "GitHub" },
 ];
 
@@ -61,10 +53,6 @@ const categories = [
       "Kubernetes",
       "Jenkins",
       "GitHub Actions",
-      "AWS EC2",
-      "AWS IAM",
-      "RabbitMQ",
-      "Grafana",
     ],
   },
   {
@@ -73,11 +61,8 @@ const categories = [
       "Git",
       "GitHub",
       "Postman",
-      "Python",
       "Java",
-      "C++",
       "C",
-      "Hugging Face",
     ],
   },
 ];
