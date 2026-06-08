@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
-  FaAws,
   FaDocker,
   FaNodeJs,
   FaGithub,
@@ -30,7 +29,6 @@ const orbitIconConfigs = [
   { Icon: FaJava, color: "#F89820", name: "Java" },
   { Icon: FaDocker, color: "#2496ED", name: "Docker" },
   { Icon: SiKubernetes, color: "#326CE5", name: "Kubernetes" },
-  { Icon: FaAws, color: "#FF9900", name: "AWS" },
   { Icon: SiMongodb, color: "#47A248", name: "MongoDB" },
   { Icon: SiJenkins, color: "#D24939", name: "Jenkins" },
   { Icon: SiPostman, color: "#FF6C37", name: "Postman" },
@@ -81,7 +79,7 @@ export default function SkillsSection() {
       if (mobile) {
         // Calculate container width: screen width minus padding (approx 48px)
         const containerW = w - 48;
-        const baseDiagWidth = 352; // 22rem (22 * 16px)
+        const baseDiagWidth = 416; // 26rem (26 * 16px)
         if (containerW < baseDiagWidth) {
           setScale(containerW / baseDiagWidth);
         } else {
@@ -97,8 +95,8 @@ export default function SkillsSection() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const orbitGap = isMobile ? 3.5 : 6.5; // rem spacing between orbits
-  const baseSize = isMobile ? 8 : 14;   // rem base size
+  const orbitGap = isMobile ? 4.5 : 6.5; // rem spacing between orbits
+  const baseSize = isMobile ? 10 : 14;   // rem base size
   const iconsPerOrbit = Math.ceil(orbitIconConfigs.length / orbitCount);
 
   return (
@@ -156,7 +154,7 @@ export default function SkillsSection() {
           <div 
             className={`absolute top-1/2 flex items-center justify-center transition-all duration-300 ${
               isMobile 
-                ? "left-1/2 w-[22rem] h-[22rem]" 
+                ? "left-1/2 w-[26rem] h-[26rem]" 
                 : "right-0 w-[55rem] h-[55rem]"
             }`}
             style={{
@@ -167,8 +165,8 @@ export default function SkillsSection() {
           >
             
             {/* Center Circle */}
-            <div className={`${isMobile ? "w-16 h-16" : "w-24 h-24"} rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20`}>
-              <span className={`${isMobile ? "text-lg" : "text-2xl"} font-mono font-bold tracking-tighter text-[#E1E0CC]`}>
+            <div className={`${isMobile ? "w-24 h-24" : "w-32 h-32"} rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20`}>
+              <span className={`${isMobile ? "text-2xl" : "text-4xl"} font-mono font-bold tracking-tighter text-[#E1E0CC]`}>
                 TS
               </span>
             </div>
@@ -198,14 +196,22 @@ export default function SkillsSection() {
                       return (
                         <div
                           key={iconIdx}
-                          className="absolute bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-colors pointer-events-auto"
+                          className="absolute pointer-events-auto"
                           style={{
                             left: `${x}%`,
                             top: `${y}%`,
                             transform: "translate(-50%, -50%)",
                           }}
                         >
-                          <cfg.Icon className={`${isMobile ? "w-4 h-4" : "w-6 h-6"}`} style={{ color: cfg.color }} />
+                          <div
+                            title={cfg.name}
+                            className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer"
+                            style={{
+                              animation: `counter-spin ${20 + orbitIdx * 10}s linear infinite`,
+                            }}
+                          >
+                            <cfg.Icon className={`${isMobile ? "w-5 h-5" : "w-6 h-6"}`} style={{ color: cfg.color }} />
+                          </div>
                         </div>
                       );
                     })}
@@ -226,6 +232,14 @@ export default function SkillsSection() {
           }
           to {
             transform: rotate(360deg);
+          }
+        }
+        @keyframes counter-spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(-360deg);
           }
         }
       `}</style>
