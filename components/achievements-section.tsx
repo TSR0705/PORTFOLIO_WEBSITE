@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { achievementsData, academicDetails } from "@/lib/portfolio-data";
 import { CircularAchievements } from "@/components/ui/circular-achievements";
+import { CertificateGallery } from "@/components/ui/certificate-gallery";
 
 const participations = [
   "Adobe India Hackathon",
@@ -150,6 +151,11 @@ export default function AchievementsSection() {
 
         </div>
 
+      </div>
+
+      {/* Certificate Gallery Full Width Marquee */}
+      <div className="relative z-10 mt-20 md:mt-32 w-full">
+        <CertificateGallery />
       </div>
     </section>
   );
