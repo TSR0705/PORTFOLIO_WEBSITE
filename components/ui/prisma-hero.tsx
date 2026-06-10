@@ -127,22 +127,33 @@ const PrismaHero = () => {
                 style={{ color: "#E1E0CC" }}
               >
                 <span aria-hidden="true">
-                  <WordsPullUp text="Tanmay" showAsterisk />
+                  <WordsPullUp text="Tanmay Singh" showAsterisk />
                 </span>
               </h1>
             </div>
 
             <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4">
               
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="text-xs text-white/70 sm:text-sm md:text-base font-sans"
-                style={{ lineHeight: 1.4 }}
-              >
-                Tanmay Singh is a B.Tech Computer Science student specializing in Cloud Computing, focused on building robust backend systems, distributed cloud pipelines, and experimenting with agentic AI products.
-              </motion.p>
+              <div className="flex flex-col gap-3">
+                <motion.h2
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-sm sm:text-base md:text-lg font-medium text-[#E1E0CC] leading-snug"
+                >
+                  Software Developer building scalable systems and modern web platforms.
+                </motion.h2>
+
+                <motion.p
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-xs text-white/70 sm:text-sm font-sans"
+                  style={{ lineHeight: 1.5 }}
+                >
+                  Computer Science student specializing in Cloud Computing at SRMIST. I build full-stack applications, backend systems, developer tools, and intelligent software products while exploring cloud infrastructure, DevOps, and distributed systems. My focus is on creating reliable, scalable, and production-oriented solutions through continuous learning and hands-on engineering.
+                </motion.p>
+              </div>
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
