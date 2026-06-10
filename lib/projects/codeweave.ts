@@ -120,8 +120,8 @@ export const codeweaveProject: Project = {
     ],
     deploymentDetails: "The web frontend is deployed on Vercel, the real-time node server is hosted on Render, and databases are managed via MongoDB Atlas.",
     screenshots: [
-      "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop"
+      "/window.svg",
+      "/window.svg"
     ],
     lessonsLearned: [
       "Event-driven socket servers must handle server reboots cleanly by storing active sessions in memory state buffers.",

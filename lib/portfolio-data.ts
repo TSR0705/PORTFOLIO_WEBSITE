@@ -90,8 +90,8 @@ export const achievementsData: Achievement[] = [
   },
   {
     id: "ossome-hacks-winner",
-    title: "Ossome Hacks 2.0 Winner",
-    award: "1st Place Winner",
+    title: "Ossome Hacks 2.0",
+    award: "Best Freshers Team",
     organization: "Ossome Hacks",
     year: "2025"
   },

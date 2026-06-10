@@ -119,8 +119,8 @@ export const dbmsSelfHealingProject: Project = {
     ],
     deploymentDetails: "The database monitoring service is deployed on Railway, and the real-time observability dashboard is hosted on Vercel.",
     screenshots: [
-      "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"
+      "/window.svg",
+      "/window.svg"
     ],
     lessonsLearned: [
       "Self-healing systems must prioritize safe failure states; failing safe is always better than applying incorrect recovery steps.",

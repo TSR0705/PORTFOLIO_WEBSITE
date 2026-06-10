@@ -122,8 +122,8 @@ export const loadlabDeploybotProject: Project = {
     ],
     deploymentDetails: "Deployed in a local minikube sandbox and orchestrated with Clerk authentication pipelines, using Docker containers for web nodes.",
     screenshots: [
-      "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1618001471353-b98aedd07871?q=80&w=1200&auto=format&fit=crop"
+      "/window.svg",
+      "/window.svg"
     ],
     lessonsLearned: [
       "Distributed queues are essential even in micro-deployments if physical infra mutations are involved.",

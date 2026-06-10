@@ -182,7 +182,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-cyan-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-cyan-500/20",
     iconName: "Bot",
-    imageSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "dbms-self-healing": {
     primaryColor: "#F43F5E",
@@ -193,7 +193,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-rose-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-rose-500/20",
     iconName: "Database",
-    imageSrc: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "webloom": {
     primaryColor: "#8B5CF6",
@@ -204,7 +204,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-violet-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-violet-500/20",
     iconName: "Eye",
-    imageSrc: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "codeweave": {
     primaryColor: "#F59E0B",
@@ -215,7 +215,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-amber-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-amber-500/20",
     iconName: "Code",
-    imageSrc: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "lms-platform": {
     primaryColor: "#3B82F6",
@@ -226,7 +226,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-blue-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-blue-500/20",
     iconName: "GraduationCap",
-    imageSrc: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "saylix-translator": {
     primaryColor: "#14B8A6",
@@ -237,7 +237,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-teal-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-teal-500/20",
     iconName: "Languages",
-    imageSrc: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "smart-tab-organizer": {
     primaryColor: "#0EA5E9",
@@ -248,7 +248,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-sky-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-sky-500/20",
     iconName: "Layers",
-    imageSrc: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "android-task-manager": {
     primaryColor: "#22C55E",
@@ -259,7 +259,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-green-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-green-500/20",
     iconName: "Smartphone",
-    imageSrc: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "who-i-am": {
     primaryColor: "#E1E0CC",
@@ -270,7 +270,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-[#E1E0CC]/10 via-neutral-950 to-neutral-950",
     shadow: "shadow-[#E1E0CC]/20",
     iconName: "UserCheck",
-    imageSrc: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "fcfs-scheduler-simulator": {
     primaryColor: "#F97316",
@@ -281,7 +281,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-orange-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-orange-500/20",
     iconName: "Cpu",
-    imageSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
   "quiz-arena": {
     primaryColor: "#D946EF",
@@ -292,7 +292,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-fuchsia-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-fuchsia-500/20",
     iconName: "Trophy",
-    imageSrc: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/window.svg",
   },
 };
 
@@ -305,7 +305,7 @@ export const DEFAULT_THEME: ProjectTheme = {
   gradient: "from-[#E1E0CC]/10 via-neutral-950 to-neutral-950",
   shadow: "shadow-[#E1E0CC]/20",
   iconName: "Code",
-  imageSrc: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+  imageSrc: "/window.svg",
 };
 
 export const getProjectTheme = (id: string): ProjectTheme => {

@@ -73,8 +73,8 @@ export function GlassmorphismPortfolioBlock() {
     {
       year: "2024",
       title: "Best Freshers Award — GitHub OSSome Hacks 2.0",
-      subtitle: "Winner",
-      description: "Built multi-domain secure data verification pipelines, earning the top spot in the freshers category.",
+      subtitle: "Best Freshers Team",
+      description: "Won the Best Freshers Team Award at the 36-hour hackathon, recognized for exceptional teamwork, project execution, and rewarded with XYZ vouchers.",
       color: "text-amber-400",
     },
   ];
@@ -200,7 +200,7 @@ export function GlassmorphismPortfolioBlock() {
                       Add photo in
                     </span>
                     <span className="text-[10px] text-white/50 font-mono select-all bg-white/5 px-2 py-0.5 rounded mt-1 border border-white/5">
-                      public/MY_IMAGE.jpeg
+                      public/MY_IMAGE.webp
                     </span>
                   </div>
                 )}

@@ -226,7 +226,7 @@ export const CircularAchievements = ({
         >
           {achievements.map((achievement, index) => (
             <img
-              key={achievement.src}
+              key={`${achievement.name}-${index}`}
               src={achievement.src}
               alt={achievement.name}
               className="achievement-image"

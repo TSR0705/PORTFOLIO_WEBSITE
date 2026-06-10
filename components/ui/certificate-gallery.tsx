@@ -18,8 +18,11 @@ const certificates: Certificate[] = [
   { id: "devtrails", name: "DevTrails Hackathon", src: "/Participation_Certificate/DEVTRAILS_HACKATHON.webp" },
   { id: "ideathon", name: "Ideathon Pokiverse", src: "/Participation_Certificate/IDEATHON_POKIVERSE.webp" },
   { id: "impact", name: "Impact-AIThon", src: "/Participation_Certificate/Impact-AIThon.webp" },
+  { id: "java-expo", name: "Java Project Expo 2025", src: "/achivements_pics/JAVA_PROJECT_EXPO_CERTIFICATE.webp" },
   { id: "nptel-dbms", name: "NPTEL DBMS", src: "/Participation_Certificate/NPTEL_DBMS.webp" },
   { id: "nptel", name: "NPTEL Java", src: "/Participation_Certificate/NPTEL_JAVA.webp" },
+  { id: "ossome-2-app", name: "Ossome Hacks 2.0 Appreciation", src: "/achivements_pics/OSSOME_HACKS_2.0_GITHUB_HACKATHON_APPRECIATION.webp" },
+  { id: "ossome-2", name: "Ossome Hacks 2.0 Winner", src: "/achivements_pics/OSSOME_HACKS_2.0_GITHUB_HACKATHON_RECOGNITION_CERTIFICATE.webp" },
   { id: "ossome", name: "Ossome Hacks 3.0", src: "/Participation_Certificate/OSSOME_HACKS_3.0.webp" },
   { id: "devsecops", name: "DevSecOps Workshop", src: "/Participation_Certificate/WORKSHOP_PARTICIPATION_DevSecOps.webp" },
 ];

@@ -62,8 +62,8 @@ const DEFAULT_EVENTS: TimelineEvent[] = [
   {
     year: "2024",
     title: "Best Freshers Award — GitHub OSSome Hacks 2.0",
-    subtitle: "OSSome Hacks Winner",
-    description: "Built multi-domain secure data verification pipelines, earning the top spot in the freshers category.",
+    subtitle: "Best Freshers Team",
+    description: "Won the Best Freshers Team Award at the rigorous 36-hour hackathon, recognized for exceptional teamwork, project execution, and rewarded with XYZ vouchers.",
     color: "text-amber-400",
   },
   {
