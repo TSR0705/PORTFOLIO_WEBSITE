@@ -1,18 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { achievementsData, academicDetails } from "@/lib/portfolio-data";
+import { achievementsData } from "@/lib/portfolio-data";
 import { CircularAchievements } from "@/components/ui/circular-achievements";
 import { CertificateGallery } from "@/components/ui/certificate-gallery";
-
-const participations = [
-  "Adobe India Hackathon",
-  "CodeNex DayZero",
-  "HackPick",
-  "OSSome Hacks 3.0",
-  "Impact-AI-Thon",
-  "DevTrail"
-];
 
 // Local mapping for high-fidelity images and descriptions of achievements
 const achievementsList = achievementsData
@@ -88,71 +79,6 @@ export default function AchievementsSection() {
             />
           </div>
         </div>
-
-        {/* Credentials Grid */}
-        <div className="grid grid-cols-12 gap-8 md:gap-12 pt-12 border-t border-white/10">
-          
-          {/* Left Column: Hackathons Log */}
-          <div className="col-span-12 lg:col-span-6 flex flex-col gap-6">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40">Hackathons Log</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {participations.map((p, idx) => (
-                <motion.div
-                  key={p}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.6, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center gap-3 p-4 rounded-xl border border-white/5 bg-white/[0.01] backdrop-blur-sm hover:bg-[#E1E0CC]/5 hover:border-[#E1E0CC]/20 hover:shadow-[0_0_20px_rgba(225,224,204,0.05)] transition-all duration-500 cursor-default group"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E1E0CC]/40 group-hover:bg-[#E1E0CC] group-hover:scale-125 transition-all duration-300 flex-shrink-0" />
-                  <span className="text-sm font-sans text-white/80 group-hover:text-white transition-colors duration-300">{p}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column: Academic Foundation */}
-          <div className="col-span-12 lg:col-span-6 flex flex-col gap-6 lg:pl-12 lg:border-l lg:border-white/10">
-            <h3 className="text-xs font-mono uppercase tracking-widest text-white/40">Academic Foundation</h3>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] backdrop-blur-sm relative overflow-hidden hover:border-[#E1E0CC]/20 hover:shadow-[0_0_30px_rgba(225,224,204,0.06)] transition-all duration-700 group"
-            >
-              {/* Radial glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-[#E1E0CC]/5 rounded-full blur-2xl pointer-events-none group-hover:bg-[#E1E0CC]/10 transition-all duration-700" />
-              
-              <div className="space-y-5 relative z-10">
-                <div>
-                  <h4 className="text-lg md:text-xl font-medium text-white group-hover:text-[#E1E0CC] transition-colors duration-500">{academicDetails.name}</h4>
-                  <p className="text-[#E1E0CC]/70 text-xs font-mono mt-1">{academicDetails.degree} &bull; {academicDetails.specialization}</p>
-                </div>
-                
-                <div className="h-[1px] w-full bg-white/10" />
-                
-                <div className="grid grid-cols-2 gap-5 text-sm font-sans">
-                  <div>
-                    <span className="text-white/40 text-xs block font-mono uppercase tracking-wider mb-0.5">Institution</span>
-                    <span className="text-white/80 font-medium">{academicDetails.college}</span>
-                  </div>
-                  <div>
-                    <span className="text-white/40 text-xs block font-mono uppercase tracking-wider mb-0.5">Academic Period</span>
-                    <span className="text-white/80 font-medium">{academicDetails.batch}</span>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="text-white/40 text-xs block font-mono uppercase tracking-wider mb-0.5">Cumulative CGPA</span>
-                    <span className="text-[#E1E0CC] font-semibold text-xl tracking-tight">{academicDetails.cgpa}</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-        </div>
-
       </div>
 
       {/* Certificate Gallery Full Width Marquee */}
