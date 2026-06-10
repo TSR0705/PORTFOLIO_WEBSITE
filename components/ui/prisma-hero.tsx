@@ -118,7 +118,7 @@ const PrismaHero = () => {
                 className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-mono block mb-2 sm:mb-4"
                 style={{ color: "#E1E0CC" }}
               >
-                TANMAY SINGH // SYSTEMS & PLATFORMS
+                TANMAY SINGH // SOFTWARE & SYSTEMS
               </motion.span>
               
               <h1
@@ -127,48 +127,22 @@ const PrismaHero = () => {
                 style={{ color: "#E1E0CC" }}
               >
                 <span aria-hidden="true">
-                  <WordsPullUp text="Tanmay Singh" showAsterisk />
+                  <WordsPullUp text="Tanmay" showAsterisk />
                 </span>
               </h1>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4 lg:-translate-y-[15%]">
+            <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4">
               
-              <div className="flex flex-col gap-3">
-                <motion.h2
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-sm sm:text-base md:text-lg font-medium text-[#E1E0CC] leading-snug"
-                >
-                  Engineering products, platforms, and systems that scale.
-                </motion.h2>
-
-                <motion.p
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-xs text-white/70 sm:text-sm font-sans"
-                  style={{ lineHeight: 1.5 }}
-                >
-                  Computer Science student at SRMIST building full-stack applications, backend systems, and developer tools while exploring cloud infrastructure, DevOps, and distributed systems.
-                </motion.p>
-
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 0.6 }}
-                  transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-white/50 flex flex-wrap items-center gap-2 pt-1 pb-1"
-                >
-                  <span>Samsung PRISM</span>
-                  <span className="text-[#E1E0CC]/30">&bull;</span>
-                  <span>9.37 CGPA</span>
-                  <span className="text-[#E1E0CC]/30">&bull;</span>
-                  <span>Hackathon Winner</span>
-                  <span className="text-[#E1E0CC]/30">&bull;</span>
-                  <span>Backend Intern</span>
-                </motion.div>
-              </div>
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className="text-xs text-white/70 sm:text-sm md:text-base font-sans"
+                style={{ lineHeight: 1.4 }}
+              >
+                Tanmay Singh is a B.Tech Computer Science student specializing in Cloud Computing, focused on building robust backend systems, distributed cloud pipelines, and experimenting with agentic AI products.
+              </motion.p>
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
