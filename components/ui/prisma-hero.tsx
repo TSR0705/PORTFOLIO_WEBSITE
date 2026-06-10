@@ -118,7 +118,7 @@ const PrismaHero = () => {
                 className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-mono block mb-2 sm:mb-4"
                 style={{ color: "#E1E0CC" }}
               >
-                TANMAY SINGH // CLOUD & SYSTEMS
+                TANMAY SINGH // SYSTEMS & PLATFORMS
               </motion.span>
               
               <h1
@@ -132,7 +132,7 @@ const PrismaHero = () => {
               </h1>
             </div>
 
-            <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4">
+            <div className="col-span-12 flex flex-col gap-5 pb-2 lg:col-span-4 lg:pb-4 lg:-translate-y-[15%]">
               
               <div className="flex flex-col gap-3">
                 <motion.h2
@@ -141,7 +141,7 @@ const PrismaHero = () => {
                   transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="text-sm sm:text-base md:text-lg font-medium text-[#E1E0CC] leading-snug"
                 >
-                  Software Developer building scalable systems and modern web platforms.
+                  Engineering products, platforms, and systems that scale.
                 </motion.h2>
 
                 <motion.p
@@ -151,8 +151,23 @@ const PrismaHero = () => {
                   className="text-xs text-white/70 sm:text-sm font-sans"
                   style={{ lineHeight: 1.5 }}
                 >
-                  Computer Science student specializing in Cloud Computing at SRMIST. I build full-stack applications, backend systems, developer tools, and intelligent software products while exploring cloud infrastructure, DevOps, and distributed systems. My focus is on creating reliable, scalable, and production-oriented solutions through continuous learning and hands-on engineering.
+                  Computer Science student at SRMIST building full-stack applications, backend systems, and developer tools while exploring cloud infrastructure, DevOps, and distributed systems.
                 </motion.p>
+
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 0.6 }}
+                  transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                  className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-white/50 flex flex-wrap items-center gap-2 pt-1 pb-1"
+                >
+                  <span>Samsung PRISM</span>
+                  <span className="text-[#E1E0CC]/30">&bull;</span>
+                  <span>9.37 CGPA</span>
+                  <span className="text-[#E1E0CC]/30">&bull;</span>
+                  <span>Hackathon Winner</span>
+                  <span className="text-[#E1E0CC]/30">&bull;</span>
+                  <span>Backend Intern</span>
+                </motion.div>
               </div>
 
               <motion.div
