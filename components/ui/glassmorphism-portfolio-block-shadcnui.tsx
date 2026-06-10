@@ -51,9 +51,9 @@ export function GlassmorphismPortfolioBlock() {
   const timelineEvents = [
     {
       year: "2025",
-      title: "3rd Place — SRM Java Project Expo 2025",
-      subtitle: "SRMIST",
-      description: "Developed a self-healing database operations framework that detects anomalies, scores risk, and triggers recovery flows.",
+      title: "SRM Java Project Expo 2025",
+      subtitle: "3rd Prize @ SRMIST",
+      description: "Awarded 3rd Prize at the SRM Java Project Expo 2025 for FileX, a security-focused file monitoring and insider-threat detection system designed to identify suspicious file activity, unauthorized access patterns, and potential data exfiltration risks through real-time monitoring and behavioral analysis.",
       color: "text-purple-400",
     },
     {
@@ -71,10 +71,10 @@ export function GlassmorphismPortfolioBlock() {
       color: "text-cyan-400",
     },
     {
-      year: "2024",
-      title: "Best Freshers Award — GitHub OSSome Hacks 2.0",
-      subtitle: "Best Freshers Team",
-      description: "Won the Best Freshers Team Award at the 36-hour hackathon, recognized for exceptional teamwork, project execution, and rewarded with XYZ vouchers.",
+      year: "2025",
+      title: "GitHub OSSome Hacks 2.0",
+      subtitle: "Best Freshers Team @ OSSome Hacks 2.0 (2025)",
+      description: "Secured the Best Freshers Team Award at GitHub OSSome Hacks 2.0 for Samvidhan Setu, an AI-assisted legal research and dispute management platform. The project was recognized for its practical social impact, strong technical implementation, innovative problem-solving approach, and effective team collaboration throughout the hackathon.",
       color: "text-amber-400",
     },
   ];

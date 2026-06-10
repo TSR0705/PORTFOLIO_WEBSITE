@@ -46,6 +46,44 @@ function calculateGap(width: number) {
   return minGap + (maxGap - minGap) * ((width - minWidth) / (maxWidth - minWidth));
 }
 
+// Parses text with markdown **bold** syntax for word-by-word animation and color highlighting
+function parseHighlightText(text: string) {
+  const words = text.split(" ");
+  const result: { text: string; isHighlighted: boolean; spaceAfter?: boolean }[] = [];
+  let inHighlight = false;
+
+  words.forEach((word) => {
+    if (!word) return;
+
+    let currentWord = word;
+
+    if (currentWord.startsWith("**")) {
+      currentWord = currentWord.slice(2);
+      inHighlight = true;
+    }
+
+    if (currentWord.includes("**")) {
+      const parts = currentWord.split("**");
+      const before = parts[0];
+      const after = parts[1] || "";
+
+      if (before) {
+        result.push({ text: before, isHighlighted: inHighlight, spaceAfter: !after });
+      }
+      
+      inHighlight = false;
+
+      if (after) {
+        result.push({ text: after, isHighlighted: false, spaceAfter: true });
+      }
+    } else {
+      result.push({ text: currentWord, isHighlighted: inHighlight, spaceAfter: true });
+    }
+  });
+
+  return result;
+}
+
 export const CircularAchievements = ({
   achievements,
   autoplay = true,
@@ -75,10 +113,18 @@ export const CircularAchievements = ({
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  const achievementsLength = useMemo(() => achievements.length, [achievements]);
+  // If we only have 2 achievements, double them to 4 internally to avoid missing left/right slot layout bugs
+  const displayAchievements = useMemo(() => {
+    if (achievements && achievements.length === 2) {
+      return [...achievements, ...achievements];
+    }
+    return achievements;
+  }, [achievements]);
+
+  const achievementsLength = useMemo(() => displayAchievements.length, [displayAchievements]);
   const activeAchievement = useMemo(
-    () => achievements[activeIndex],
-    [activeIndex, achievements]
+    () => displayAchievements[activeIndex],
+    [activeIndex, displayAchievements]
   );
 
   // Responsive gap calculation
@@ -224,7 +270,7 @@ export const CircularAchievements = ({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {achievements.map((achievement, index) => (
+          {displayAchievements.map((achievement, index) => (
             <img
               key={`${achievement.name}-${index}`}
               src={achievement.src}
@@ -263,7 +309,7 @@ export const CircularAchievements = ({
                 className="quote"
                 style={{ color: colorQuote, fontSize: fontSizeQuote }}
               >
-                {activeAchievement.quote.split(" ").map((word, i) => (
+                {parseHighlightText(activeAchievement.quote).map((token, i) => (
                   <motion.span
                     key={i}
                     initial={{
@@ -281,9 +327,13 @@ export const CircularAchievements = ({
                       ease: "easeInOut",
                       delay: 0.025 * i,
                     }}
-                    style={{ display: "inline-block" }}
+                    style={{
+                      display: "inline-block",
+                      color: token.isHighlighted ? "#e2b857" : colorQuote,
+                      fontWeight: token.isHighlighted ? "500" : "300",
+                    }}
                   >
-                    {word}&nbsp;
+                    {token.text}{token.spaceAfter ? "\u00A0" : ""}
                   </motion.span>
                 ))}
               </motion.p>
@@ -300,7 +350,7 @@ export const CircularAchievements = ({
               onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous achievement"
             >
-              <FaArrowLeft size={28} color={colorArrowFg} />
+              <FaArrowLeft size={28} color={hoverPrev ? "#121212" : colorArrowFg} />
             </button>
             <button
               className="arrow-button next-button"
@@ -312,7 +362,7 @@ export const CircularAchievements = ({
               onMouseLeave={() => setHoverNext(false)}
               aria-label="Next achievement"
             >
-              <FaArrowRight size={28} color={colorArrowFg} />
+              <FaArrowRight size={28} color={hoverNext ? "#121212" : colorArrowFg} />
             </button>
           </div>
         </div>

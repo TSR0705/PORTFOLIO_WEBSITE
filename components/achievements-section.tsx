@@ -9,7 +9,7 @@ const participations = [
   "Adobe India Hackathon",
   "CodeNex DayZero",
   "HackPick",
-  "Ossome Hacks 3.0",
+  "OSSome Hacks 3.0",
   "Impact-AI-Thon",
   "DevTrail"
 ];
@@ -27,11 +27,11 @@ const achievementsList = achievementsData
   };
   
   const quotes: Record<string, string> = {
-    "samsung-prism": "Selected to collaborate on research and development projects under Samsung PRISM, focusing on advanced computing and systems research.",
-    "ossome-hacks-winner": "Won the Best Freshers Team Award at the rigorous 36-hour Ossome Hacks 2.0 hackathon, recognized for exceptional teamwork, project execution, and rewarded with XYZ vouchers.",
-    "srm-java-expo": "Presented object-oriented Java concepts and highly optimized architectural patterns, winning 3rd prize at the SRM Java Expo.",
-    "github-hackathon": "Recognized as a hackathon winner in the GitHub Community developer track, building open-source developer productivity tools and accessible automation plugins.",
-    "codenex-dayzero": "Finished in the top 10 finalists out of competitive developer cohorts in the CodeNex DayZero hackathon, demonstrating exceptional debugging and high-performance algorithms."
+    "samsung-prism": "Selected to collaborate on research and development projects under **Samsung PRISM**.",
+    "ossome-hacks-winner": "Secured the **Best Freshers Team Award** at GitHub OSSome Hacks 2.0 for **Samvidhan Setu**, an AI-assisted legal research and dispute management platform. The project was recognized for its practical social impact, strong technical implementation, innovative problem-solving approach, and effective team collaboration throughout the hackathon.",
+    "srm-java-expo": "Awarded **3rd Prize** at the SRM Java Project Expo 2025 for **FileX**, a security-focused file monitoring and insider-threat detection system designed to identify suspicious file activity, unauthorized access patterns, and potential data exfiltration risks through real-time monitoring and behavioral analysis.",
+    "github-hackathon": "Recognized as a **hackathon winner** in the GitHub Community developer track, building open-source developer productivity tools and accessible automation plugins.",
+    "codenex-dayzero": "Finished in the **top 10 finalists** out of competitive developer cohorts in the CodeNex DayZero hackathon, demonstrating exceptional debugging and high-performance algorithms."
   };
 
   return {

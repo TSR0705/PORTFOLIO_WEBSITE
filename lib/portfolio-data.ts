@@ -90,14 +90,14 @@ export const achievementsData: Achievement[] = [
   },
   {
     id: "ossome-hacks-winner",
-    title: "Ossome Hacks 2.0",
+    title: "GitHub OSSome Hacks 2.0",
     award: "Best Freshers Team",
-    organization: "Ossome Hacks",
+    organization: "OSSome Hacks 2.0",
     year: "2025"
   },
   {
     id: "srm-java-expo",
-    title: "SRM Java Expo",
+    title: "SRM Java Project Expo 2025",
     award: "3rd Prize",
     organization: "SRMIST",
     year: "2025"
