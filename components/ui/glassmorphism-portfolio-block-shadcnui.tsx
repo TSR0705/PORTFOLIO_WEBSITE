@@ -21,15 +21,11 @@ import {
 
 export function GlassmorphismPortfolioBlock() {
   const router = useRouter();
-  const [imgSrc, setImgSrc] = useState("/MY_IMAGE.jpeg");
+  const [imgSrc, setImgSrc] = useState("/MY_IMAGE.webp");
   const [imgError, setImgError] = useState(false);
 
   const handleImageError = () => {
-    if (imgSrc === "/MY_IMAGE.jpeg") {
-      setImgSrc("/profile.jpg");
-    } else {
-      setImgError(true);
-    }
+    setImgError(true);
   };
 
   const technicalFocus = [
