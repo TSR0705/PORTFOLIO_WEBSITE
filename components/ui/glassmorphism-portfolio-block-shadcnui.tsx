@@ -14,7 +14,6 @@ import {
   Sparkles,
   Terminal,
   Activity,
-  CheckCircle2,
   GraduationCap,
   Award
 } from "lucide-react";
@@ -37,12 +36,6 @@ export function GlassmorphismPortfolioBlock() {
     "Scalable Full Stack Applications"
   ];
 
-  const quickMetrics = [
-    "10+ Scalable Systems Built (Databases, Observability, AI)",
-    "Samsung PRISM Selected Researcher",
-    "Best Freshers Award — GitHub OSSome Hacks 2.0",
-    "Multi-Domain Systems & Security Builds"
-  ];
 
   const timelineEvents = [
     {
@@ -239,21 +232,6 @@ export function GlassmorphismPortfolioBlock() {
               </div>
             </div>
 
-            {/* Verified Engineering Metrics Checklist */}
-            <div className="p-6 rounded-2xl border border-white/10 bg-[#000000]/30 space-y-4 shadow-[inset_0_2px_4px_rgba(255,255,255,0.03)]">
-              <span className="text-xs font-mono text-white/30 uppercase tracking-[0.2em] block">
-                Core Engineering Metrics
-              </span>
-              
-              <div className="grid gap-3.5">
-                {quickMetrics.map((metric) => (
-                  <div key={metric} className="flex items-center gap-3 text-xs sm:text-sm text-white/85">
-                    <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500 flex-shrink-0" />
-                    <span className="font-sans leading-none">{metric}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
 
             {/* Geographic facts */}
             <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-start sm:items-center gap-3 text-xs sm:text-sm text-white/50 font-mono">
