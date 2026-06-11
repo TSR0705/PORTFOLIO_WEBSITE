@@ -9,7 +9,6 @@ import { ScrollTimeline } from "./scroll-timeline";
 import { 
   ArrowUpRight, 
   BookOpen, 
-  MapPin, 
   Briefcase, 
   Sparkles,
   Terminal,
@@ -230,13 +229,6 @@ export function GlassmorphismPortfolioBlock() {
                   <span className="text-sm font-bold text-white mt-1.5 leading-none">9.37 / 10</span>
                 </div>
               </div>
-            </div>
-
-
-            {/* Geographic facts */}
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-start sm:items-center gap-3 text-xs sm:text-sm text-white/50 font-mono">
-              <MapPin className="h-4 w-4 text-[#E1E0CC] flex-shrink-0 mt-0.5 sm:mt-0" />
-              <span className="leading-snug">Originally from Bihar, India · Currently studying in Chennai</span>
             </div>
 
           </div>
