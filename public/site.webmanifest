@@ -1,0 +1,24 @@
+{
+  "name": "Tanmay Singh | Software Developer",
+  "short_name": "Tanmay Singh",
+  "description": "Portfolio of Tanmay Singh, a B.Tech Computer Science and Engineering (Cloud Computing) student at SRMIST. Exploring backend systems, distributed systems, and cloud-native software.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/MY_LOGO.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/MY_LOGO.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

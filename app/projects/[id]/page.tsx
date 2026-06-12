@@ -34,8 +34,63 @@ import {
 import ProjectScrollRail from "@/components/ui/project-scroll-rail";
 import MermaidRenderer from "@/components/ui/mermaid-renderer";
 
+import { Metadata } from "next";
+
 interface Props {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const project = projects.find((p) => p.id === id);
+  if (!project) {
+    return {
+      title: "Project Not Found",
+    };
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
+  const projectUrl = `${siteUrl}/projects/${project.id}`;
+
+  return {
+    title: `${project.title} | Software Engineering Case Study`,
+    description: project.shortDescription,
+    keywords: [
+      project.title,
+      project.category,
+      ...project.tags,
+      "Software Engineering Case Study",
+      "Tanmay Singh Projects",
+      "Backend Systems",
+      "System Architecture"
+    ],
+    alternates: {
+      canonical: projectUrl,
+    },
+    openGraph: {
+      type: "article",
+      locale: "en_US",
+      url: projectUrl,
+      title: `${project.title} | Software Engineering Case Study`,
+      description: project.shortDescription,
+      siteName: "Tanmay Singh Portfolio",
+      images: [
+        {
+          url: "/MY_IMAGE.webp",
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} - Technical Case Study`,
+      description: project.shortDescription,
+      creator: "@TanmaySinghRa18",
+      images: ["/MY_IMAGE.webp"],
+    },
+  };
 }
 
 export function generateStaticParams() {
@@ -86,8 +141,39 @@ export default async function ProjectDetailPage({ params }: Props) {
     ...(project.futureEvolution || project.futureImprovements ? [{ id: "future", label: "Roadmap" }] : []),
   ];
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
+  const projectUrl = `${siteUrl}/projects/${project.id}`;
+  
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${projectUrl}/#software`,
+    "name": project.title,
+    "description": project.shortDescription,
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "All",
+    "programmingLanguage": project.techStack,
+    "url": projectUrl,
+    "author": {
+      "@type": "Person",
+      "name": "Tanmay Singh",
+      "url": siteUrl
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  };
+
   return (
     <main className="min-h-screen w-full bg-black text-white px-6 md:px-12 py-28 md:py-36 relative overflow-hidden flex flex-col items-center">
+      {/* Inject Project Case Study Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+
       {/* Noise overlay */}
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
       
