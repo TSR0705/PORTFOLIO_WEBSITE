@@ -1,7 +1,7 @@
 "use client";
 
-import { GlassmorphismPortfolioBlock } from "@/components/ui/glassmorphism-portfolio-block-shadcnui";
+import NewAboutSection from "@/components/new-about-section";
 
 export default function AboutSection() {
-  return <GlassmorphismPortfolioBlock />;
+  return <NewAboutSection />;
 }
