@@ -250,15 +250,13 @@ export default function NewAboutSection() {
               </Magnetic>
 
               <Magnetic>
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => window.dispatchEvent(new CustomEvent("open-resume"))}
                   className="group inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 md:px-6.5 py-3 text-xs md:text-sm font-medium tracking-wider text-white/95 backdrop-blur-sm transition-all duration-300 hover:border-white/35 hover:bg-white/10"
                 >
                   <FileText className="h-3.5 w-3.5 text-white/50 transition-colors group-hover:text-white" />
                   <span>View Resume</span>
-                </a>
+                </button>
               </Magnetic>
             </motion.div>
           </div>
