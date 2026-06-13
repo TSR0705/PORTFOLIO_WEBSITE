@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function GlobalFooter() {
   const [time, setTime] = useState("");
+  const pathname = usePathname();
 
   useEffect(() => {
     const updateTime = () => {
@@ -27,6 +29,13 @@ export default function GlobalFooter() {
 
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const directoryLinks = [
@@ -55,7 +64,7 @@ export default function GlobalFooter() {
           {/* Col 1: Brand and Availability Status */}
           <div className="col-span-12 md:col-span-5 flex flex-col gap-5">
             <div className="flex flex-col gap-4">
-              <Link href="/" className="flex items-center gap-3 w-fit group select-none">
+              <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 w-fit group select-none">
                 <Image
                   src="/MY_LOGO.webp"
                   alt="Tanmay Singh Logo"
@@ -72,7 +81,7 @@ export default function GlobalFooter() {
                 <p className="text-sm text-white/85 font-medium tracking-wide">
                   Software Developer
                 </p>
-                <p className="text-xs text-white/30 mt-1 font-mono uppercase tracking-wider">
+                <p className="text-xs text-[#E1E0CC]/70 mt-1 font-mono uppercase tracking-wider">
                   Backend &bull; Cloud &bull; DevOps
                 </p>
               </div>
@@ -84,15 +93,15 @@ export default function GlobalFooter() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
-              <span className="text-[11px] font-mono tracking-wider text-white/75 uppercase">
-                OPEN TO SOFTWARE ENGINEERING OPPORTUNITIES
+              <span className="text-[11px] font-mono tracking-wider text-[#E1E0CC]/90 uppercase">
+                AVAILABLE FOR SDE • BACKEND • CLOUD ROLES
               </span>
             </div>
 
             {/* Live Time Clock */}
             {time && (
-              <div className="text-xs font-mono text-white/30 uppercase tracking-widest">
-                Chennai, IN &bull; <span className="text-white/70">{time}</span> (IST)
+              <div className="text-xs font-mono text-white/50 uppercase tracking-widest">
+                Chennai, IN &bull; <span className="text-[#E1E0CC]">{time}</span> (IST)
               </div>
             )}
           </div>
@@ -107,7 +116,7 @@ export default function GlobalFooter() {
                 <li key={link.name}>
                   <Link
                     href={link.target}
-                    className="text-sm text-white/50 hover:text-white hover:underline transition-colors duration-300 decoration-[#E1E0CC]/50 decoration-1 underline-offset-4"
+                    className="text-sm text-white/70 hover:text-white hover:underline transition-colors duration-300 decoration-[#E1E0CC]/50 decoration-1 underline-offset-4"
                   >
                     {link.name}
                   </Link>
@@ -128,7 +137,7 @@ export default function GlobalFooter() {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-white/50 hover:text-white hover:underline transition-colors duration-300 decoration-[#E1E0CC]/50 decoration-1 underline-offset-4"
+                    className="text-sm text-white/70 hover:text-white hover:underline transition-colors duration-300 decoration-[#E1E0CC]/50 decoration-1 underline-offset-4"
                   >
                     {link.name}
                   </a>
@@ -140,18 +149,18 @@ export default function GlobalFooter() {
         </div>
 
         {/* Bottom Row */}
-        <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-mono uppercase tracking-wider text-white/30">
+        <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] font-mono uppercase tracking-wider text-white/50">
           <div>
             &copy; {new Date().getFullYear()} Tanmay Singh. All rights reserved.
           </div>
           
           <div className="flex items-center gap-6">
-            <span className="hidden md:inline hover:text-white/50 transition-colors cursor-default">
+            <span className="hidden md:inline hover:text-white/80 transition-colors cursor-default">
               Built with Next.js & Tailwind CSS
             </span>
             <button
               onClick={handleBackToTop}
-              className="flex items-center gap-1.5 text-white/40 hover:text-white transition-colors cursor-pointer group"
+              className="flex items-center gap-1.5 text-white/60 hover:text-white transition-colors cursor-pointer group"
               aria-label="Scroll back to top"
             >
               <span>Back to Top</span>
