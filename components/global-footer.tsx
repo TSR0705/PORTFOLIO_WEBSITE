@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function GlobalFooter() {
   const [time, setTime] = useState("");
@@ -53,13 +54,28 @@ export default function GlobalFooter() {
           
           {/* Col 1: Brand and Availability Status */}
           <div className="col-span-12 md:col-span-5 flex flex-col gap-5">
-            <div>
-              <h3 className="text-white font-mono tracking-[0.25em] text-sm uppercase font-semibold">
-                Tanmay Singh
-              </h3>
-              <p className="text-xs text-white/30 mt-1 font-mono uppercase tracking-wider">
-                Systems Engineer & Cloud Specialist
-              </p>
+            <div className="flex flex-col gap-4">
+              <Link href="/" className="flex items-center gap-3 w-fit group select-none">
+                <Image
+                  src="/MY_LOGO.webp"
+                  alt="Tanmay Singh Logo"
+                  width={42}
+                  height={42}
+                  className="h-[42px] w-[42px] object-contain opacity-75 group-hover:opacity-100 group-hover:-translate-y-0.5 transition-all duration-300"
+                  priority
+                />
+                <h3 className="text-white font-mono tracking-[0.25em] text-sm uppercase font-semibold transition-colors duration-300 group-hover:text-[#E1E0CC]">
+                  Tanmay Singh
+                </h3>
+              </Link>
+              <div>
+                <p className="text-sm text-white/85 font-medium tracking-wide">
+                  Software Developer
+                </p>
+                <p className="text-xs text-white/30 mt-1 font-mono uppercase tracking-wider">
+                  Backend &bull; Cloud &bull; DevOps
+                </p>
+              </div>
             </div>
             
             {/* Live Availability Status Card */}
@@ -69,7 +85,7 @@ export default function GlobalFooter() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span className="text-[11px] font-mono tracking-wider text-white/75 uppercase">
-                Available for opportunities
+                OPEN TO SOFTWARE ENGINEERING OPPORTUNITIES
               </span>
             </div>
 
