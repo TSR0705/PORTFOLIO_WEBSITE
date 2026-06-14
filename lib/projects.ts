@@ -1,3 +1,5 @@
+import { ProjectTheme, DEFAULT_THEME } from "./project-design";
+
 export interface Project {
   id: string;
   title: string;
@@ -15,6 +17,7 @@ export interface Project {
   featured: boolean;
   year: string;
   projectType: string;
+  theme: ProjectTheme;
 
   // Case Study Fields (Optional)
   motivation?: string;
@@ -71,3 +74,8 @@ export const projects: Project[] = [
   fcfsSchedulerSimulatorProject,
   quizArenaProject,
 ];
+
+export const getProjectTheme = (id: string): ProjectTheme => {
+  const project = projects.find((p) => p.id === id);
+  return project?.theme || DEFAULT_THEME;
+};
