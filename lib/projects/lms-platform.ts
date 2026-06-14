@@ -21,5 +21,16 @@ export const lmsPlatformProject: Project = {
     tags: ["Full Stack", "Product Engineering", "Education"],
     featured: true,
     year: "2024",
-    projectType: "Learning Management System / Full-Stack Product"
+    projectType: "Learning Management System / Full-Stack Product",
+    theme: {
+      primaryColor: "#3B82F6",
+      accentText: "text-blue-400",
+      bgGlow: "bg-blue-500/5",
+      borderMuted: "border-blue-500/10",
+      borderActive: "hover:border-blue-500/40",
+      gradient: "from-blue-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-blue-500/20",
+      iconName: "GraduationCap",
+      imageSrc: "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?q=80&w=1200&auto=format&fit=crop",
+    }
   };
