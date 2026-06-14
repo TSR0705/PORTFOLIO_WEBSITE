@@ -20,5 +20,16 @@ export const androidTaskManagerProject: Project = {
     tags: ["Android", "Clean Architecture", "MVVM", "Product Engineering"],
     featured: false,
     year: "2024",
-    projectType: "Android / Learning Project"
+    projectType: "Android / Learning Project",
+    theme: {
+      primaryColor: "#22C55E",
+      accentText: "text-green-400",
+      bgGlow: "bg-green-500/5",
+      borderMuted: "border-green-500/10",
+      borderActive: "hover:border-green-500/40",
+      gradient: "from-green-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-green-500/20",
+      iconName: "Smartphone",
+      imageSrc: "https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?q=80&w=1200&auto=format&fit=crop",
+    }
   };
