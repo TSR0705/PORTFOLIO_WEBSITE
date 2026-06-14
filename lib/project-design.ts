@@ -193,7 +193,7 @@ export const PROJECT_THEMES: Record<string, ProjectTheme> = {
     gradient: "from-rose-950/15 via-neutral-950 to-neutral-950",
     shadow: "shadow-rose-500/20",
     iconName: "Database",
-    imageSrc: "https://images.unsplash.com/photo-1604871000636-074fa5117945?q=80&w=1200&auto=format&fit=crop",
+    imageSrc: "/PROJECTS/DBMS_SELF_HEALING/HERO_SECTION.webp",
   },
   "webloom": {
     primaryColor: "#8B5CF6",
