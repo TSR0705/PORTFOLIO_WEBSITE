@@ -4,7 +4,8 @@ import type React from "react";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { projects as centralProjects } from "@/lib/projects";
-import { getProjectTheme, ProjectTheme } from "@/lib/project-design";
+import { ProjectTheme } from "@/lib/project-design";
+import { getProjectTheme } from "@/lib/projects";
 
 interface Project {
   id: string;
