@@ -20,5 +20,16 @@ export const quizArenaProject: Project = {
     tags: ["Full Stack", "Education", "Civic Education"],
     featured: false,
     year: "2024",
-    projectType: "Interactive Quiz Platform / Civic Education Product"
+    projectType: "Interactive Quiz Platform / Civic Education Product",
+    theme: {
+      primaryColor: "#D946EF",
+      accentText: "text-fuchsia-400",
+      bgGlow: "bg-fuchsia-500/5",
+      borderMuted: "border-fuchsia-500/10",
+      borderActive: "hover:border-fuchsia-500/40",
+      gradient: "from-fuchsia-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-fuchsia-500/20",
+      iconName: "Trophy",
+      imageSrc: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    }
   };
