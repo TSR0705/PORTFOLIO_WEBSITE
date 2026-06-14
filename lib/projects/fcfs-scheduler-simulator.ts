@@ -19,5 +19,16 @@ export const fcfsSchedulerSimulatorProject: Project = {
     tags: ["Desktop App", "Systems Engineering", "Education"],
     featured: false,
     year: "2023",
-    projectType: "Desktop App / OS Visualization Tool"
+    projectType: "Desktop App / OS Visualization Tool",
+    theme: {
+      primaryColor: "#F97316",
+      accentText: "text-orange-400",
+      bgGlow: "bg-orange-500/5",
+      borderMuted: "border-orange-500/10",
+      borderActive: "hover:border-orange-500/40",
+      gradient: "from-orange-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-orange-500/20",
+      iconName: "Cpu",
+      imageSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+    }
   };
