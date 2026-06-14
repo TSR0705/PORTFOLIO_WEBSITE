@@ -3,6 +3,8 @@
 import React from "react";
 import { Sparkles, Cpu, AlertCircle, CheckCircle, Terminal, Database } from "lucide-react";
 import { ProjectTheme } from "@/lib/project-design";
+import { Project } from "@/lib/projects";
+import PremiumGallery from "@/components/ui/premium-gallery";
 
 interface ComponentProps {
   theme: ProjectTheme;
@@ -362,5 +364,36 @@ export function DbmsStatisticalEngine({ theme }: ComponentProps) {
         </div>
       </div>
     </section>
+  );
+}
+
+// 06. WALKTHROUGH
+export function DbmsWalkthrough({ project, theme }: { project: Project; theme: ProjectTheme }) {
+  if (!project.detailedScreenshots) return null;
+  return (
+    <section id="screenshots" className="py-16 border-t border-white/5 space-y-10 scroll-mt-28">
+      <div className="flex items-center gap-3">
+        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+          <Database className="w-4 h-4" style={{ color: theme.primaryColor }} />
+          Product Walkthrough
+        </h3>
+      </div>
+      <PremiumGallery screenshots={project.detailedScreenshots} theme={theme} />
+    </section>
+  );
+}
+
+// Main Default Export
+export default function DbmsSelfHealingCaseStudy({ project, theme }: { project: Project; theme: ProjectTheme }) {
+  return (
+    <>
+      <DbmsCoreProblem theme={theme} />
+      <DbmsWhyIBuiltThis theme={theme} />
+      <DbmsTheSolution theme={theme} />
+      <DbmsStatisticalEngine theme={theme} />
+      <DbmsSystemArchitecture theme={theme} />
+      <DbmsWalkthrough project={project} theme={theme} />
+    </>
   );
 }
