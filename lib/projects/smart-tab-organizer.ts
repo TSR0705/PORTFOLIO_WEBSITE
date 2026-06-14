@@ -19,5 +19,16 @@ export const smartTabOrganizerProject: Project = {
     tags: ["Chrome Extension", "AI / Automation", "Product Engineering"],
     featured: true,
     year: "2024",
-    projectType: "Chrome Extension / AI Productivity Tool"
+    projectType: "Chrome Extension / AI Productivity Tool",
+    theme: {
+      primaryColor: "#0EA5E9",
+      accentText: "text-sky-400",
+      bgGlow: "bg-sky-500/5",
+      borderMuted: "border-sky-500/10",
+      borderActive: "hover:border-sky-500/40",
+      gradient: "from-sky-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-sky-500/20",
+      iconName: "Layers",
+      imageSrc: "https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?q=80&w=1200&auto=format&fit=crop",
+    }
   };
