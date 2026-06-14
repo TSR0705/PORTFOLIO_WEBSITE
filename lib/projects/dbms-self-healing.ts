@@ -92,11 +92,22 @@ export const dbmsSelfHealingProject: Project = {
         description: "Interface for database administrators to review AI suggestions, manually approve indices, inspect proposed query changes, and override auto-actions.",
         category: "Healing Actions"
       },
-      {
-        url: "/PROJECTS/DBMS_SELF_HEALING/DASHBOARD-LEARNING_HISTORY.jpg",
-        title: "Healing Learning History",
-        description: "A detailed archive of past system incidents, recovery durations, action success rates, and reinforcement training logs to refine detection bounds.",
-        category: "Healing Actions"
+        {
+          url: "/PROJECTS/DBMS_SELF_HEALING/DASHBOARD-LEARNING_HISTORY.jpg",
+          title: "Healing Learning History",
+          description: "A detailed archive of past system incidents, recovery durations, action success rates, and reinforcement training logs to refine detection bounds.",
+          category: "Healing Actions"
+        }
+      ],
+      theme: {
+        primaryColor: "#F43F5E",
+        accentText: "text-rose-400",
+        bgGlow: "bg-rose-500/5",
+        borderMuted: "border-rose-500/10",
+        borderActive: "hover:border-rose-500/40",
+        gradient: "from-rose-950/15 via-neutral-950 to-neutral-950",
+        shadow: "shadow-rose-500/20",
+        iconName: "Database",
+        imageSrc: "/PROJECTS/DBMS_SELF_HEALING/HERO_SECTION.webp",
       }
-    ]
-  }
+    };
