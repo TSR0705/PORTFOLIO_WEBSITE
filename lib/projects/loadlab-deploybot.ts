@@ -136,5 +136,16 @@ export const loadlabDeploybotProject: Project = {
     futureEvolution: [
       "Integrating chaos engineering triggers (e.g. killing nodes randomly) to show Kubernetes self-healing patterns in real-time.",
       "Support for multi-namespace sandboxes, allocating distinct network namespaces dynamically to authenticated users."
-    ]
+    ],
+    theme: {
+      primaryColor: "#06B6D4",
+      accentText: "text-cyan-400",
+      bgGlow: "bg-cyan-500/5",
+      borderMuted: "border-cyan-500/10",
+      borderActive: "hover:border-cyan-500/40",
+      gradient: "from-cyan-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-cyan-500/20",
+      iconName: "Bot",
+      imageSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
+    }
   };
