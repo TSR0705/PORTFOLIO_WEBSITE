@@ -39,6 +39,11 @@ export interface Project {
   lessonsLearned?: string[];
   futureImprovements?: string[];
   futureEvolution?: string[];
+  
+  // Custom Media and Detail Sections
+  flowImage?: string;
+  architectureImages?: { url: string; title: string; description?: string }[];
+  detailedScreenshots?: { url: string; title: string; description: string; category: string }[];
 }
 
 import { loadlabDeploybotProject } from "./projects/loadlab-deploybot";
