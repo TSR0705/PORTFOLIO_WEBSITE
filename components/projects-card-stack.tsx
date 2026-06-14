@@ -4,7 +4,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { CardStack, CardStackItem } from "@/components/ui/card-stack";
 import { projects } from "@/lib/projects";
 import { useRouter } from "next/navigation";
-import { getProjectTheme } from "@/lib/project-design";
+import { getProjectTheme } from "@/lib/projects";
 import { ProjectCard } from "@/components/ui/project-components";
 
 interface CustomCardItem extends CardStackItem {
