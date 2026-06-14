@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import * as Lucide from "lucide-react";
 import { FaGithub } from "react-icons/fa";
-import { getProjectTheme } from "@/lib/project-design";
+import { getProjectTheme } from "@/lib/projects";
 import {
   ProjectBadge,
   ProjectLinks,
