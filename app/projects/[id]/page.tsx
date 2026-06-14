@@ -33,6 +33,8 @@ import {
 } from "@/components/ui/project-components";
 import ProjectScrollRail from "@/components/ui/project-scroll-rail";
 import MermaidRenderer from "@/components/ui/mermaid-renderer";
+import PremiumGallery from "@/components/ui/premium-gallery";
+import { DbmsCoreProblem, DbmsWhyIBuiltThis, DbmsTheSolution, DbmsSystemArchitecture, DbmsStatisticalEngine } from "@/components/projects/dbms-self-healing-case-study";
 
 import { Metadata } from "next";
 
@@ -121,21 +123,34 @@ export default async function ProjectDetailPage({ params }: Props) {
   }
 
   const theme = getProjectTheme(project.id);
+
+
   const IconComponent = (Lucide as any)[theme.iconName] || Lucide.Cpu;
 
   // Dynamic Case Study Rails Section Array
-  const sections = [
+  const sections = project.id === "dbms-self-healing" ? [
+    { id: "overview", label: "Executive Summary" },
+    { id: "problem", label: "Core Problem" },
+    { id: "motivation", label: "Why I Built This" },
+    { id: "solution", label: "The Solution" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "statistics", label: "Statistical Engine" },
+    ...(project.screenshots || project.detailedScreenshots ? [{ id: "screenshots", label: "Walkthrough" }] : []),
+  ] : [
     { id: "overview", label: "Executive Summary" },
     ...(project.problemStatement ? [{ id: "problem", label: "Core Problem" }] : []),
     ...(project.motivation ? [{ id: "motivation", label: "Motivation" }] : []),
     ...(project.ahaMoment ? [{ id: "aha", label: "Aha Moment" }] : []),
     ...(project.solutionOverview ? [{ id: "solution", label: "Solution Strategy" }] : []),
+
     ...(project.systemFlow ? [{ id: "flow", label: "System Flow" }] : []),
-    ...(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers ? [{ id: "architecture", label: "Architecture" }] : []),
+    ...(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers || project.architectureImages ? [{ id: "architecture", label: "Architecture" }] : []),
     ...(project.engineeringDecisions ? [{ id: "decisions", label: "Decisions" }] : []),
     ...(project.tradeoffs ? [{ id: "tradeoffs", label: "Tradeoffs" }] : []),
     ...(project.failureScenarios ? [{ id: "failures", label: "Failure Modes" }] : []),
-    ...(project.screenshots ? [{ id: "screenshots", label: "Walkthrough" }] : []),
+    ...(project.challengesSolutions ? [{ id: "challenges", label: "Challenges" }] : []),
+    ...(project.securityMeasures ? [{ id: "security", label: "Security & Guardrails" }] : []),
+    ...(project.screenshots || project.detailedScreenshots ? [{ id: "screenshots", label: "Walkthrough" }] : []),
     ...(project.keyMetrics ? [{ id: "metrics", label: "Metrics" }] : []),
     ...(project.lessonsLearned ? [{ id: "lessons", label: "Lessons" }] : []),
     ...(project.futureEvolution || project.futureImprovements ? [{ id: "future", label: "Roadmap" }] : []),
@@ -299,152 +314,189 @@ export default async function ProjectDetailPage({ params }: Props) {
               </div>
             </div>
           </div>
+        </section>
+      </div>
 
-          {/* Cinematic Banner */}
-          <div className={`w-full aspect-video rounded-3xl overflow-hidden border ${theme.borderMuted} relative shadow-2xl transition-all duration-500 hover:shadow-3xl`}>
+      {/* MASSIVE HERO PRODUCT IMAGE (Breaks out of container, Apple/Stripe Style) */}
+      <div className="w-full max-w-[80vw] lg:max-w-[900px] z-10 my-12 relative flex flex-col items-center justify-center">
+        {/* Ambient Project Accent Glow Layer (10-15% subtle atmosphere) */}
+        <div 
+          className="absolute inset-0 rounded-[32px] blur-[120px] opacity-100 pointer-events-none -z-20"
+          style={{
+            background: project.id === "dbms-self-healing"
+              ? "radial-gradient(circle at center, rgba(0, 255, 180, 0.08) 0%, transparent 70%)"
+              : `radial-gradient(circle at center, ${theme.primaryColor}14, transparent 70%)`
+          }} 
+        />
+
+        {/* Shadow Layer & Screenshot Frame (No browser mockup header or container) */}
+        <div className={`w-full rounded-[32px] overflow-hidden border ${theme.borderMuted} bg-black shadow-[0_30px_100px_rgba(0,0,0,0.95)] transition-all duration-500 hover:border-white/10 relative group p-1 sm:p-2`}>
+          <div className="relative w-full overflow-hidden rounded-[24px]">
             <img
               src={theme.imageSrc}
               alt={project.title}
-              className="w-full h-full object-cover"
+              className="w-full h-auto block object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent" />
-            <div className={`absolute inset-0 opacity-[0.05] ${theme.bgGlow} mix-blend-color`} />
+            {/* Edge-blending subtle vignette (12% fade at edges) */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/12 via-transparent to-black/12 pointer-events-none rounded-[24px]" />
           </div>
-        </section>
+        </div>
+      </div>
+
+      <div className="w-full max-w-4xl z-10 space-y-16">
 
         {/* 2. THE CORE PROBLEM */}
-        {project.problemStatement && (
-          <section id="problem" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 text-red-500/80" />
-                The Core Problem
-              </h3>
-            </div>
-            
-            <div className="border-l-2 pl-4 border-red-500/40 space-y-4 max-w-3xl">
-              <p className="text-lg md:text-xl font-normal text-[#E1E0CC]/95 leading-relaxed font-sans">
-                {renderBoldText(project.problemStatement)}
-              </p>
-            </div>
-
-            {project.problemPoints && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                {project.problemPoints.map((point, idx) => (
-                  <div key={idx} className="p-5 rounded-2xl border border-red-950/20 bg-red-950/[0.01] hover:border-red-950/40 hover:bg-red-950/[0.03] transition-all duration-300 relative group overflow-hidden">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-red-500/10 group-hover:bg-red-500/30 transition-colors" />
-                    <div className="space-y-2">
-                      <span className="font-mono text-[9px] tracking-widest text-red-400/80 block uppercase">
-                        Symptom 0{idx + 1}
-                      </span>
-                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
-                        {point.title}
-                      </h4>
-                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
-                        {point.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
+        {project.id === "dbms-self-healing" ? (
+          <DbmsCoreProblem theme={theme} />
+        ) : (
+          project.problemStatement && (
+            <section id="problem" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+                <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-red-500/80" />
+                  The Core Problem
+                </h3>
               </div>
-            )}
-          </section>
+              
+              <div className="border-l-2 pl-4 border-red-500/40 space-y-4 max-w-3xl">
+                <p className="text-lg md:text-xl font-normal text-[#E1E0CC]/95 leading-relaxed font-sans">
+                  {renderBoldText(project.problemStatement)}
+                </p>
+              </div>
+
+              {project.problemPoints && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                  {project.problemPoints.map((point, idx) => (
+                    <div key={idx} className="p-5 rounded-2xl border border-red-950/20 bg-red-950/[0.01] hover:border-red-950/40 hover:bg-red-950/[0.03] transition-all duration-300 relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-1 h-full bg-red-500/10 group-hover:bg-red-500/30 transition-colors" />
+                      <div className="space-y-2">
+                        <span className="font-mono text-[9px] tracking-widest text-red-400/80 block uppercase">
+                          Symptom 0{idx + 1}
+                        </span>
+                        <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                          {point.title}
+                        </h4>
+                        <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
+                          {point.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
+          )
         )}
 
         {/* 3. MOTIVATION */}
-        {project.motivation && (
-          <section id="motivation" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-amber-400/80" />
-                Motivation
-              </h3>
-            </div>
-
-            <blockquote className="text-xl md:text-2xl font-normal text-[#E1E0CC]/95 italic leading-relaxed max-w-3xl pl-4 border-l-2 border-white/10">
-              &ldquo;{renderBoldText(project.motivation)}&rdquo;
-            </blockquote>
-
-            {project.motivationPoints && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                {project.motivationPoints.map((point, idx) => (
-                  <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
-                    <div className="absolute top-0 left-0 w-1 h-full transition-colors" style={{ backgroundColor: `${theme.primaryColor}20` }} />
-                    <div className="space-y-2">
-                      <span className="font-mono text-[9px] tracking-widest text-[#E1E0CC]/70 block uppercase">
-                        Goal 0{idx + 1}
-                      </span>
-                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
-                        {point.title}
-                      </h4>
-                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
-                        {point.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
-        )}
-
-        {/* 4. THE AHA MOMENT */}
-        {project.ahaMoment && (
-          <section id="aha" className="py-12 border-t border-white/5 scroll-mt-28">
-            <div className="p-8 rounded-3xl border bg-white/[0.01] relative overflow-hidden group shadow-2xl transition-all duration-500" style={{ borderColor: `${theme.primaryColor}20` }}>
-              <div className="absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none animate-pulse" style={{ backgroundColor: theme.primaryColor }} />
-              <div className="relative z-10 space-y-4 max-w-3xl">
-                <span className="font-mono text-[9px] tracking-[0.25em] uppercase flex items-center gap-1.5" style={{ color: theme.primaryColor }}>
-                  <Sparkles className="w-3.5 h-3.5" />
-                  The Aha Moment
-                </span>
-                <h3 className="text-2xl md:text-3xl font-normal tracking-tight text-white leading-snug">
-                  {renderBoldText(project.ahaMoment)}
+        {project.id === "dbms-self-healing" ? (
+          <DbmsWhyIBuiltThis theme={theme} />
+        ) : (
+          project.motivation && (
+            <section id="motivation" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+                <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-amber-400/80" />
+                  Motivation
                 </h3>
               </div>
-            </div>
-          </section>
-        )}
 
-        {/* 5. SOLUTION STRATEGY */}
-        {project.solutionOverview && (
-          <section id="solution" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-500/80" />
-                Solution Strategy
-              </h3>
-            </div>
-            
-            <p className="text-[#E1E0CC]/90 text-sm sm:text-base font-normal leading-relaxed tracking-wide max-w-3xl">
-              {renderBoldText(project.solutionOverview)}
-            </p>
+              <blockquote className="text-xl md:text-2xl font-normal text-[#E1E0CC]/95 italic leading-relaxed max-w-3xl pl-4 border-l-2 border-white/10">
+                &ldquo;{renderBoldText(project.motivation)}&rdquo;
+              </blockquote>
 
-            {project.solutionPoints && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-                {project.solutionPoints.map((point, idx) => (
-                  <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-[2px] transition-colors" style={{ backgroundColor: theme.primaryColor }} />
-                    <div className="space-y-2 pt-2">
-                      <span className="font-mono text-[9px] tracking-widest block uppercase text-white/70">
-                        Strategy 0{idx + 1}
-                      </span>
-                      <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
-                        {point.title}
-                      </h4>
-                      <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
-                        {point.desc}
-                      </p>
+              {project.motivationPoints && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                  {project.motivationPoints.map((point, idx) => (
+                    <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-white/10 hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
+                      <div className="absolute top-0 left-0 w-1 h-full transition-colors" style={{ backgroundColor: `${theme.primaryColor}20` }} />
+                      <div className="space-y-2">
+                        <span className="font-mono text-[9px] tracking-widest text-[#E1E0CC]/70 block uppercase">
+                          Goal 0{idx + 1}
+                        </span>
+                        <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                          {point.title}
+                        </h4>
+                        <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
+                          {point.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
+                  ))}
+                </div>
+              )}
+            </section>
+          )
         )}
+
+        {/* 4. THE SOLUTION */}
+        {project.id === "dbms-self-healing" ? (
+          <DbmsTheSolution theme={theme} />
+        ) : (
+          <>
+            {project.ahaMoment && (
+              <section id="aha" className="py-12 border-t border-white/5 scroll-mt-28">
+                <div className="p-8 rounded-3xl border bg-white/[0.01] relative overflow-hidden group shadow-2xl transition-all duration-500" style={{ borderColor: `${theme.primaryColor}20` }}>
+                  <div className="absolute top-0 right-0 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none animate-pulse" style={{ backgroundColor: theme.primaryColor }} />
+                  <div className="relative z-10 space-y-4 max-w-3xl">
+                    <span className="font-mono text-[9px] tracking-[0.25em] uppercase flex items-center gap-1.5" style={{ color: theme.primaryColor }}>
+                      <Sparkles className="w-3.5 h-3.5" />
+                      The Aha Moment
+                    </span>
+                    <h3 className="text-xl md:text-2xl font-normal tracking-tight text-[#E1E0CC]/95 leading-relaxed font-sans">
+                      {renderBoldText(project.ahaMoment)}
+                    </h3>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {project.solutionOverview && (
+              <section id="solution" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+                <div className="flex items-center gap-3">
+                  <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+                  <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-emerald-500/80" />
+                    Solution Strategy
+                  </h3>
+                </div>
+                
+                <p className="text-[#E1E0CC]/90 text-sm sm:text-base font-normal leading-relaxed tracking-wide max-w-3xl">
+                  {renderBoldText(project.solutionOverview)}
+                </p>
+
+                {project.solutionPoints && (
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+                    {project.solutionPoints.map((point, idx) => (
+                      <div key={idx} className="p-5 rounded-2xl border border-white/5 bg-white/[0.01] hover:bg-white/[0.02] transition-all duration-300 relative group overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-[2px] transition-colors" style={{ backgroundColor: theme.primaryColor }} />
+                        <div className="space-y-2 pt-2">
+                          <span className="font-mono text-[9px] tracking-widest block uppercase text-white/70">
+                            Strategy 0{idx + 1}
+                          </span>
+                          <h4 className="text-sm font-semibold text-white tracking-wide uppercase">
+                            {point.title}
+                          </h4>
+                          <p className="text-[#E1E0CC]/90 text-sm leading-relaxed font-sans">
+                            {point.desc}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            )}
+          </>
+        )}
+
+        {/* STATISTICAL INTELLIGENCE ENGINE */}
+        {project.id === "dbms-self-healing" && (
+          <DbmsStatisticalEngine theme={theme} />
+        )}
+
 
         {/* 6. HOW SYSTEM WORKS (Timeline Flow) */}
         {project.systemFlow && (
@@ -482,39 +534,82 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </div>
               ))}
             </div>
+            {project.flowImage && (
+              <div className="pt-6 space-y-4">
+                <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/75 uppercase block pl-2">
+                  Self-Healing Cycle Lifecycle Flow
+                </h4>
+                <div className={`rounded-3xl overflow-hidden border ${theme.borderMuted} bg-[#050505] p-3 md:p-6 shadow-2xl relative group`}>
+                  <img
+                    src={project.flowImage}
+                    alt="Self-Healing Lifecycle diagram"
+                    className="w-full h-auto rounded-2xl object-contain hover:scale-[1.01] transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            )}
           </section>
         )}
 
         {/* 7. SYSTEM ARCHITECTURE & FLOW */}
-        {(project.mermaidDiagram || project.architectureDiagram || project.architectureLayers) && (
-          <section id="architecture" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
-            <div className="flex items-center gap-3">
-              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-                <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
-                System Architecture
-              </h3>
-            </div>
-            
-            {project.mermaidDiagram ? (
-              <MermaidRenderer chart={project.mermaidDiagram} id={project.id} />
-            ) : project.architectureDiagram ? (
-              <div className="rounded-xl border border-white/5 bg-[#050505] p-5 md:p-6 overflow-x-auto shadow-inner">
-                <pre className="font-mono text-[10px] md:text-xs leading-relaxed text-[#E1E0CC]/95 whitespace-pre">
-                  {project.architectureDiagram}
-                </pre>
+        {project.id === "dbms-self-healing" ? (
+          <DbmsSystemArchitecture theme={theme} />
+        ) : (
+          (project.mermaidDiagram || project.architectureDiagram || project.architectureLayers) && (
+            <section id="architecture" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+              <div className="flex items-center gap-3">
+                <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+                <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                  <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                  System Architecture
+                </h3>
               </div>
-            ) : null}
+              
+              {project.mermaidDiagram ? (
+                <MermaidRenderer chart={project.mermaidDiagram} id={project.id} />
+              ) : project.architectureDiagram ? (
+                <div className="rounded-xl border border-white/5 bg-[#050505] p-5 md:p-6 overflow-x-auto shadow-inner">
+                  <pre className="font-mono text-[10px] md:text-xs leading-relaxed text-[#E1E0CC]/95 whitespace-pre">
+                    {project.architectureDiagram}
+                  </pre>
+                </div>
+              ) : null}
 
-            {project.architectureLayers && (
-              <div className="space-y-4 pt-4">
-                <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/75 uppercase block">
-                  Interactive Architectural Layer Breakdown
-                </h4>
-                <ArchitectureGrid layers={project.architectureLayers} theme={theme} />
-              </div>
-            )}
-          </section>
+              {project.architectureLayers && (
+                <div className="space-y-4 pt-4">
+                  <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/75 uppercase block">
+                    Interactive Architectural Layer Breakdown
+                  </h4>
+                  <ArchitectureGrid layers={project.architectureLayers} theme={theme} />
+                </div>
+              )}
+
+              {project.architectureImages && (
+                <div className="space-y-6 pt-6 border-t border-white/5">
+                  <h4 className="font-mono text-[10px] tracking-widest text-[#E1E0CC]/75 uppercase block">
+                    System Architecture Diagrams
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    {project.architectureImages.map((img, idx) => (
+                      <div key={idx} className="space-y-3">
+                        <div className={`rounded-2xl overflow-hidden border ${theme.borderMuted} bg-[#050505] shadow-2xl relative group p-3 flex items-center justify-center aspect-[1.4]`}>
+                          <img
+                            src={img.url}
+                            alt={img.title}
+                            className="max-w-full max-h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                          />
+                        </div>
+                        <div className="px-2 space-y-1">
+                          <h4 className="text-sm font-semibold text-white uppercase tracking-wider">{img.title}</h4>
+                          {img.description && <p className="text-xs text-[#E1E0CC]/75 font-sans leading-relaxed">{img.description}</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </section>
+          )
         )}
 
         {/* 8. ENGINEERING DECISIONS */}
@@ -648,8 +743,60 @@ export default async function ProjectDetailPage({ params }: Props) {
           </section>
         )}
 
+        {/* CHALLENGES & KEY SOLUTIONS */}
+        {project.challengesSolutions && (
+          <section id="challenges" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+            <div className="flex items-center gap-3">
+              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                <Wrench className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                Challenges & Solutions
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {project.challengesSolutions.map((item, idx) => (
+                <div key={idx} className="p-6 rounded-2xl border border-white/5 bg-[#050505] space-y-3 relative overflow-hidden hover:border-white/10 transition-all duration-300">
+                  <span className="text-[9px] font-mono tracking-widest uppercase text-white/50 block">
+                    Challenge 0{idx + 1}
+                  </span>
+                  <h4 className="text-sm font-semibold text-white uppercase tracking-wider leading-snug">
+                    {item.challenge}
+                  </h4>
+                  <div className="pt-2 border-t border-white/5 text-xs text-[#E1E0CC]/90 leading-relaxed font-sans">
+                    <strong className="text-emerald-400 font-mono tracking-wider uppercase text-[9px] block mb-1">✓ Solution Approach</strong>
+                    <p>{item.solution}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* SECURITY & SAFEGARDS */}
+        {project.securityMeasures && (
+          <section id="security" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
+            <div className="flex items-center gap-3">
+              <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
+              <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4" style={{ color: theme.primaryColor }} />
+                Security & Guardrails
+              </h3>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {project.securityMeasures.map((measure, idx) => (
+                <div key={idx} className="flex items-start gap-4 p-4 rounded-xl border border-white/5 bg-white/[0.01]">
+                  <span className="font-mono text-xs font-semibold text-[#E1E0CC]/40 mt-0.5">0{idx + 1}.</span>
+                  <span className="text-[#E1E0CC]/95 font-sans font-medium leading-relaxed text-xs md:text-sm">{measure}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* 11. SCREENSHOTS & WALKTHROUGH */}
-        {project.screenshots && (
+        {(project.screenshots || project.detailedScreenshots) && (
           <section id="screenshots" className="py-12 border-t border-white/5 space-y-8 scroll-mt-28">
             <div className="flex items-center gap-3">
               <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
@@ -659,24 +806,30 @@ export default async function ProjectDetailPage({ params }: Props) {
               </h3>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {project.screenshots.map((img, idx) => (
-                <div key={idx} className="space-y-3">
-                  <div className="rounded-2xl overflow-hidden border border-white/10 bg-neutral-950 shadow-2xl relative group">
-                    <img
-                      src={img}
-                      alt={`Walkthrough screenshot ${idx + 1}`}
-                      className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-700"
-                    />
+            {project.detailedScreenshots ? (
+              <PremiumGallery screenshots={project.detailedScreenshots} theme={theme} />
+            ) : project.screenshots ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {project.screenshots.map((img, idx) => (
+                  <div key={idx} className="space-y-3">
+                    <div className="rounded-2xl overflow-hidden border border-white/10 bg-neutral-950 shadow-2xl relative group">
+                      <img
+                        src={img}
+                        alt={`Walkthrough screenshot ${idx + 1}`}
+                        className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                      />
+                    </div>
+                    <p className="text-[10px] font-mono text-[#E1E0CC]/70 uppercase tracking-widest block text-right pr-2">
+                      Interface View 0{idx + 1}
+                    </p>
                   </div>
-                  <p className="text-[10px] font-mono text-[#E1E0CC]/70 uppercase tracking-widest block text-right pr-2">
-                    Interface View 0{idx + 1}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            ) : null}
           </section>
         )}
+
+
 
         {/* 12. KEY METRICS */}
         {project.keyMetrics && (
