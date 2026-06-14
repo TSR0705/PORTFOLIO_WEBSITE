@@ -134,5 +134,16 @@ export const codeweaveProject: Project = {
     futureEvolution: [
       "Secure sandboxed container runtimes to compile and run code files directly inside the workspace editor panel.",
       "Integrated visual Git branch comparison tool, highlighting code changes with side-by-side split panels."
-    ]
+    ],
+    theme: {
+      primaryColor: "#F59E0B",
+      accentText: "text-amber-400",
+      bgGlow: "bg-amber-500/5",
+      borderMuted: "border-amber-500/10",
+      borderActive: "hover:border-amber-500/40",
+      gradient: "from-amber-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-amber-500/20",
+      iconName: "Code",
+      imageSrc: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
+    }
   };
