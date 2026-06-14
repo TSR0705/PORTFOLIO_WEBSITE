@@ -21,5 +21,16 @@ export const saylixTranslatorProject: Project = {
     tags: ["Full Stack", "Accessibility", "Product Engineering"],
     featured: true,
     year: "2024",
-    projectType: "Translation / Accessibility / UX Product"
+    projectType: "Translation / Accessibility / UX Product",
+    theme: {
+      primaryColor: "#14B8A6",
+      accentText: "text-teal-400",
+      bgGlow: "bg-teal-500/5",
+      borderMuted: "border-teal-500/10",
+      borderActive: "hover:border-teal-500/40",
+      gradient: "from-teal-950/15 via-neutral-950 to-neutral-950",
+      shadow: "shadow-teal-500/20",
+      iconName: "Languages",
+      imageSrc: "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=1200&auto=format&fit=crop",
+    }
   };
