@@ -1,7 +1,18 @@
 "use client";
 
 import React from "react";
-import { Sparkles, Cpu, AlertCircle, CheckCircle, Terminal, Database } from "lucide-react";
+import { 
+  Sparkles, 
+  Cpu, 
+  AlertCircle, 
+  CheckCircle, 
+  Terminal, 
+  Database,
+  ArrowRight,
+  XCircle,
+  Zap,
+  Activity
+} from "lucide-react";
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
 import PremiumGallery from "@/components/ui/premium-gallery";
@@ -13,33 +24,39 @@ interface ComponentProps {
 // 01. THE CORE PROBLEM
 export function DbmsCoreProblem({ theme }: ComponentProps) {
   return (
-    <section id="problem" className="py-16 border-t border-white/5 space-y-10 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-          <AlertCircle className="w-4 h-4 text-rose-500/80" />
+    <section id="problem" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-rose-500/10 border border-rose-500/20">
+          <AlertCircle className="w-4 h-4 text-rose-500" />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
           The Core Problem
         </h3>
       </div>
       
-      <div className="space-y-8 max-w-4xl">
-        <h4 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
-          Reactive operations fail when milliseconds determine database survival.
+      <div className="space-y-10 max-w-5xl">
+        <h4 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-[1.15]">
+          Monitoring tells you something broke. Healing fixes it before <span className="font-medium text-rose-400">anyone notices.</span>
         </h4>
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 text-[#E1E0CC]/80 font-light leading-relaxed text-base md:text-lg">
-          <div className="md:col-span-8 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-7 space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg">
             <p>
-              Traditional database monitoring models are fundamentally reactive. They rely on external telemetry agents to query status metrics, output log file sequences, and push event anomalies to paging services. By the time an incident triggers a notification and a database administrator logs in to diagnose the stack, the bottleneck has already cascaded.
+              We are great at building dashboards that turn red when a database is struggling. But alerting isn't the same as fixing. When a deadlock occurs or a rogue query starts hogging the CPU, an alert goes out. Then, we wait for an on-call engineer to wake up, log in, diagnose the issue, and manually kill the bad query.
             </p>
             <p>
-              Under heavy transactional concurrency, issues like database deadlocks, slow execution plans, connection queue starvation, and index fragmentation propagate through microservices in seconds. Waiting for human assessment or external script runbooks introduces catastrophic latency, transforming minor database anomalies into global service outages.
+              By the time that human intervention happens, a minor bottleneck has already cascaded into a full-blown service outage. Under heavy traffic, issues like <span className="text-white font-normal">connection queue starvation and index fragmentation</span> rip through microservices instantly. Human reaction time is simply too slow to stop it.
             </p>
           </div>
-          <div className="md:col-span-4 flex flex-col justify-center border-l border-white/5 pl-6">
-            <blockquote className="text-white italic font-normal text-base md:text-lg leading-relaxed">
-              "Alerting is not healing. In high-concurrency systems, the window between anomaly threshold crossing and service degradation is measured in milliseconds, not minutes."
-            </blockquote>
+          
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm group hover:border-white/20 transition-colors duration-500">
+              <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: theme.primaryColor }} />
+              <QuoteIcon className="w-10 h-10 text-white/10 absolute top-4 left-6" />
+              <blockquote className="relative z-10 text-white/90 italic font-light text-xl leading-relaxed pt-4">
+                "Dashboards don't fix databases. When traffic spikes and threads lock up, the gap between an alert firing and a system crashing is measured in milliseconds, not minutes."
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>
@@ -50,29 +67,31 @@ export function DbmsCoreProblem({ theme }: ComponentProps) {
 // 02. WHY I BUILT THIS
 export function DbmsWhyIBuiltThis({ theme }: ComponentProps) {
   return (
-    <section id="motivation" className="py-16 border-t border-white/5 space-y-10 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-          <Sparkles className="w-4 h-4 text-amber-400/80" />
+    <section id="motivation" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20">
+          <Sparkles className="w-4 h-4 text-amber-400" />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
           Why I Built This
         </h3>
       </div>
 
       <div className="space-y-8 max-w-4xl">
-        <h4 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
-          Challenging the assumption of out-of-process reliability.
+        <h4 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-[1.15]">
+          What happens if we teach a database <br className="hidden md:block"/>
+          <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-amber-400">to defend itself?</span>
         </h4>
 
-        <div className="space-y-6 text-[#E1E0CC]/80 font-light leading-relaxed text-base md:text-lg max-w-3xl">
+        <div className="space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
           <p>
-            Most engineering teams treat databases as passive storage nodes monitored by external agents. This creates architectural vulnerabilities: if the monitoring daemon crashes, loses network routing, or consumes host CPU during a workload spike, the database is left completely blind and defenseless.
+            I've always found it strange that we treat databases as passive storage buckets. We wrap them in external monitoring agents and assume that's enough. But if the monitoring daemon crashes, or the network drops during a massive workload spike, the database is left completely blind and defenseless.
           </p>
+          <div className="p-6 rounded-xl border border-white/10 bg-black/50 text-white font-medium text-xl shadow-inner">
+            Can the database participate directly in its own survival?
+          </div>
           <p>
-            I built this engine to explore a database-native paradigm. I wanted to answer a fundamental systems question: <strong className="font-normal text-white">Can the database participate directly in its own reliability lifecycle?</strong> 
-          </p>
-          <p>
-            By embedding detection, routing, execution, and verification logic natively within the database engine itself, we decouple reliability from external network dependencies. The storage engine ceases to be a passive container; it becomes an active, self-correcting organism capable of preserving its own uptime under operational pressure.
+            I built this engine to explore a different approach. By moving the logic for detecting, deciding, and fixing issues <strong className="font-normal text-white">natively inside the database engine itself</strong>, we remove the fragile network hops between an alert and a fix. The database ceases to be a passive container and becomes an active, self-correcting system.
           </p>
         </div>
       </div>
@@ -83,107 +102,84 @@ export function DbmsWhyIBuiltThis({ theme }: ComponentProps) {
 // 03. THE SOLUTION
 export function DbmsTheSolution({ theme }: ComponentProps) {
   return (
-    <section id="solution" className="py-16 border-t border-white/5 space-y-12 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
-          <CheckCircle className="w-4 h-4 text-emerald-500/80" />
+    <section id="solution" className="py-20 border-t border-white/5 space-y-16 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+          <CheckCircle className="w-4 h-4 text-emerald-500" />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
           The Solution
         </h3>
       </div>
 
-      <div className="space-y-12 max-w-4xl">
-        <div className="space-y-4">
-          <h4 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
-            Intelligence embedded directly inside the database kernel.
-          </h4>
-        </div>
-
-        {/* Giant Graphic Text Statement */}
-        <div className="py-14 px-8 rounded-3xl border border-white/5 bg-[#030303] relative overflow-hidden group shadow-2xl flex flex-col justify-center items-center text-center">
+      <div className="space-y-16 max-w-5xl">
+        
+        {/* Hero Statement */}
+        <div className="py-20 px-8 rounded-[2rem] border border-white/10 bg-[#050505] relative overflow-hidden group shadow-2xl flex flex-col justify-center items-center text-center">
           <div 
-            className="absolute inset-0 opacity-10 blur-3xl pointer-events-none" 
-            style={{ background: `radial-gradient(circle, ${theme.primaryColor} 0%, transparent 60%)` }}
+            className="absolute inset-0 opacity-20 blur-[100px] transition-opacity duration-700 group-hover:opacity-30 pointer-events-none" 
+            style={{ background: `radial-gradient(circle at 50% 50%, ${theme.primaryColor}, transparent 70%)` }}
           />
-          <span className="text-xs font-mono uppercase tracking-[0.25em] text-white/40 mb-3 block">Architectural Paradigm</span>
-          <h3 className="text-xl sm:text-2xl md:text-4xl font-extralight tracking-tight leading-snug text-white max-w-2xl">
-            "We don't monitor from <span className="font-semibold text-white relative">outside<span className="absolute bottom-1 left-0 w-full h-[2px]" style={{ backgroundColor: theme.primaryColor }} /></span>. We heal from <span className="font-semibold" style={{ color: theme.primaryColor }}>within</span>."
+          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+          
+          <span className="text-xs font-mono uppercase tracking-[0.3em] text-white/50 mb-6 block z-10">Architectural Paradigm</span>
+          <h3 className="text-2xl sm:text-4xl md:text-5xl font-extralight tracking-tight leading-tight text-white max-w-3xl z-10">
+            "We don't monitor from <span className="font-medium text-white/50 line-through decoration-rose-500/50">outside</span>. <br className="hidden md:block"/>
+            We heal from <span className="font-semibold drop-shadow-lg" style={{ color: theme.primaryColor }}>within</span>."
           </h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-[#E1E0CC]/80 font-light leading-relaxed text-base">
-          <div className="space-y-3">
-            <h5 className="text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-              Database-Native Execution
-            </h5>
-            <p className="text-sm md:text-base">
-              Instead of log-scraping or polling queries from external hosts, the engine evaluates transactional health directly from MySQL system statistics and tables. Telemetry, baseline scoring, and recovery pipelines compile and execute natively inside the storage engine, reducing detection-to-remediation latency to zero network hops.
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h5 className="text-sm font-semibold uppercase tracking-wider text-white flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-              Closed-Loop Reliability
-            </h5>
-            <p className="text-sm md:text-base">
-              Every autonomous action executes inside a strict validation envelope. The database does not blind-kill threads. It evaluates anomalous context, schedules transaction safe rollbacks, executes remediation, verifies outcome metrics, and updates a statistical learning matrix to optimize future recovery actions.
-            </p>
-          </div>
-        </div>
-
         {/* Comparison Grid */}
-        <div className="pt-6 space-y-4">
-          <h5 className="text-xs font-mono uppercase tracking-widest text-white/40 text-center">Architectural Comparison</h5>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] space-y-3">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-white/40 block">Traditional Pull Model</span>
-              <ul className="space-y-2 text-xs text-[#E1E0CC]/70 font-light">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
-                  External metrics scrapers query host stats
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
-                  Alert systems push notifications to on-call engineers
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
-                  Network roundtrips introduce minutes of lag
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-neutral-600" />
-                  Remediation scripts execute in high-risk shell environments
-                </li>
+        <div className="space-y-8">
+          <div className="text-center space-y-2">
+            <h5 className="text-sm font-mono uppercase tracking-widest text-white/60">Operating Model Comparison</h5>
+            <p className="text-white/40 text-sm font-light">How native healing eliminates the network bottleneck</p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 relative">
+            {/* VS Badge */}
+            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#0a0a0a] border border-white/10 items-center justify-center text-xs font-mono text-white/40 z-10">
+              VS
+            </div>
+
+            {/* Left: Traditional */}
+            <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.01] space-y-6">
+              <div className="flex items-center gap-3 border-b border-white/5 pb-4">
+                <XCircle className="w-5 h-5 text-neutral-500" />
+                <span className="text-sm font-mono uppercase tracking-wider text-neutral-400">Traditional Pull Model</span>
+              </div>
+              <ul className="space-y-4 text-sm text-neutral-400 font-light">
+                {['External agents constantly poll the database for stats.', 'Alerts ping the on-call engineer at 3 AM.', 'Network hops and human reaction time add minutes of lag.', 'Engineers run high-risk remediation scripts manually.'].map((text, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-neutral-700 mt-1.5 shrink-0" />
+                    <span className="leading-relaxed">{text}</span>
+                  </li>
+                ))}
               </ul>
             </div>
-            <div className="space-y-4 pl-4 border-l border-white/5 flex flex-col justify-between">
-              <div className="space-y-1">
-                <span className="text-[9px] font-mono uppercase tracking-widest text-white/40 block">Operating Domain</span>
-                <span className="text-sm font-light text-white">Database Kernel / SRE</span>
+
+            {/* Right: Native (Highlighted) */}
+            <div className="p-8 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent relative overflow-hidden shadow-2xl transition-transform hover:-translate-y-1 duration-500">
+              <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] opacity-20 pointer-events-none" style={{ backgroundColor: theme.primaryColor }} />
+              
+              <div className="flex items-center gap-3 border-b border-white/10 pb-4 relative z-10">
+                <Zap className="w-5 h-5" style={{ color: theme.primaryColor }} />
+                <span className="text-sm font-mono uppercase tracking-wider font-semibold" style={{ color: theme.primaryColor }}>Database-Native Push Model</span>
               </div>
-              <div className="p-6 rounded-2xl border border-white/10 bg-rose-950/[0.02] space-y-3 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl opacity-40 pointer-events-none" style={{ backgroundColor: `${theme.primaryColor}20` }} />
-                <span className="text-[10px] font-mono uppercase tracking-wider block font-semibold" style={{ color: theme.primaryColor }}>Database-Native Push Model</span>
-                <ul className="space-y-2 text-xs text-white/90 font-light">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-                    Stored Procedures monitor internal engine states
+              
+              <ul className="space-y-4 text-sm text-white/80 font-light mt-6 relative z-10">
+                {[
+                  'Stored Procedures natively monitor internal memory and thread states.', 
+                  'The DB Event Scheduler runs checks without external triggers.', 
+                  'Zero network latency between detecting a lock and resolving it.', 
+                  'The database surgically kills rogue queries to save itself.'
+                ].map((text, i) => (
+                  <li key={i} className="flex items-start gap-3 group">
+                    <CheckCircle className="w-4 h-4 mt-0.5 shrink-0 transition-colors" style={{ color: theme.primaryColor }} />
+                    <span className="leading-relaxed group-hover:text-white transition-colors">{text}</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-                    Event Scheduler triggers dynamic baseline checks natively
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-                    0ms network latency between anomaly detection & healing
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: theme.primaryColor }} />
-                    Surgical SQL transactions isolate & terminate blockages safely
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -195,64 +191,78 @@ export function DbmsTheSolution({ theme }: ComponentProps) {
 // 04. SYSTEM ARCHITECTURE
 export function DbmsSystemArchitecture({ theme }: ComponentProps) {
   return (
-    <section id="architecture" className="py-16 border-t border-white/5 space-y-12 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+    <section id="architecture" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full border" style={{ backgroundColor: `${theme.primaryColor}15`, borderColor: `${theme.primaryColor}30` }}>
           <Cpu className="w-4 h-4" style={{ color: theme.primaryColor }} />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
           System Architecture
         </h3>
       </div>
 
-      <div className="space-y-8 max-w-4xl">
-        <h4 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
-          A decoupled, telemetry-driven orchestration engine.
+      <div className="space-y-12 max-w-5xl">
+        <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
+          A decoupled, native-first orchestration engine.
         </h4>
 
-        <div className="space-y-6 text-[#E1E0CC]/80 font-light leading-relaxed text-base md:text-lg max-w-3xl">
+        <div className="space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
           <p>
-            The system operates as a hybrid architecture. The core execution loop (detection, anomaly scoring, and recovery execution) runs natively inside the database layer using MySQL Stored Procedures orchestrated by the Event Scheduler.
+            The architecture is intentionally split. The critical execution loop—detecting anomalies, scoring severity, and executing recovery—runs <strong className="text-white font-normal">entirely inside MySQL</strong> using Stored Procedures and the Event Scheduler. 
           </p>
           <p>
-            This is wrapped by a lightweight FastAPI coordination node that handles out-of-process metric logging and sends real-time system state vectors to a Next.js observability dashboard, allowing human-in-the-loop overrides and live telemetry visualization.
+            A lightweight FastAPI node sits on the outside, simply reading the database's internal logs and passing state vectors to a Next.js dashboard. This ensures the database can still heal itself even if the external dashboard or API goes completely offline.
           </p>
         </div>
 
-        {/* Centerpiece 1: Architecture Diagram */}
-        <div className="space-y-4 pt-6">
-          <div className="rounded-3xl border border-white/5 bg-[#030303] overflow-hidden p-3 shadow-2xl relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" />
-            <img
-              src="/PROJECTS/DBMS_SELF_HEALING/Architecture Diagram.webp"
-              alt="DBMS Self Healing Engine System Architecture Diagram"
-              className="w-full h-auto rounded-2xl border border-white/5 bg-black/50 block"
-            />
+        {/* Media Block 1 */}
+        <div className="space-y-5 pt-8">
+          <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-2 sm:p-4 hover:border-white/20 transition-colors group">
+            <div className="rounded-xl overflow-hidden relative shadow-2xl ring-1 ring-white/10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
+              <img
+                src="/PROJECTS/DBMS_SELF_HEALING/Architecture Diagram.webp"
+                alt="Architecture Diagram"
+                className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+            </div>
           </div>
-          <div className="px-2 space-y-1">
-            <h5 className="text-xs font-mono uppercase tracking-wider text-white">System Architecture & Telemetry Flow</h5>
-            <p className="text-xs text-[#E1E0CC]/70 font-light leading-relaxed">
-              Visual map of the decoupled telemetry layout: database engine containing native Stored Procedures and the Event Scheduler, FastAPI orchestration node mapping metric logs, and a Next.js frontend rendering state updates.
-            </p>
+          <div className="flex items-start gap-3 px-2">
+            <ArrowRight className="w-4 h-4 text-white/40 mt-1 shrink-0" />
+            <div>
+              <h5 className="text-sm font-medium text-white">System Architecture & Telemetry Flow</h5>
+              <p className="text-sm text-white/50 font-light mt-1">
+                The architecture is split: native database logic guarantees survival, while a Next.js frontend provides human oversight.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Centerpiece 2: Dynamic Interaction Sequence Diagram */}
-        <div className="space-y-4 pt-8">
-          <div className="rounded-3xl border border-white/5 bg-[#030303] overflow-hidden p-3 shadow-2xl relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.01] to-transparent pointer-events-none" />
-            <img
-              src="/PROJECTS/DBMS_SELF_HEALING/DIAGRAM-Dynamic Interaction Sequence.webp"
-              alt="DBMS Self Healing Engine Dynamic Interaction Sequence Flow"
-              className="w-full h-auto rounded-2xl border border-white/5 bg-black/50 block"
-            />
+        {/* Media Block 2 */}
+        <div className="space-y-5 pt-8">
+          <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-2 sm:p-4 hover:border-white/20 transition-colors group">
+            <div className="rounded-xl overflow-hidden relative shadow-2xl ring-1 ring-white/10">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
+              <img
+                src="/PROJECTS/DBMS_SELF_HEALING/DIAGRAM-Dynamic Interaction Sequence.webp"
+                alt="Interaction Sequence"
+                className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
+                loading="lazy"
+              />
+            </div>
           </div>
-          <div className="px-2 space-y-1">
-            <h5 className="text-xs font-mono uppercase tracking-wider text-white">Dynamic Interaction Sequence</h5>
-            <p className="text-xs text-[#E1E0CC]/70 font-light leading-relaxed">
-              Detailed flow showing telemetry polling, database-native detection triggers, FastAPI route coordination, and recovery action execution pathways.
-            </p>
+          <div className="flex items-start gap-3 px-2">
+            <Activity className="w-4 h-4 text-white/40 mt-1 shrink-0" />
+            <div>
+              <h5 className="text-sm font-medium text-white">Dynamic Interaction Sequence</h5>
+              <p className="text-sm text-white/50 font-light mt-1">
+                How a slow query triggers an internal baseline check, leading to a safe, automated rollback pathway.
+              </p>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
   );
@@ -261,107 +271,111 @@ export function DbmsSystemArchitecture({ theme }: ComponentProps) {
 // 05. STATISTICAL INTELLIGENCE ENGINE
 export function DbmsStatisticalEngine({ theme }: ComponentProps) {
   return (
-    <section id="statistics" className="py-16 border-t border-white/5 space-y-12 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+    <section id="statistics" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full border" style={{ backgroundColor: `${theme.primaryColor}15`, borderColor: `${theme.primaryColor}30` }}>
           <Terminal className="w-4 h-4" style={{ color: theme.primaryColor }} />
-          Statistical Intelligence Engine
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
+          Intelligence Engine
         </h3>
       </div>
 
-      <div className="space-y-8 max-w-4xl">
-        <h4 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight text-white leading-tight">
-          Adaptive baseline calculation and mathematical anomaly detection.
+      <div className="space-y-12 max-w-5xl">
+        <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
+          Teaching the system what "normal" actually looks like.
         </h4>
 
-        <div className="space-y-6 text-[#E1E0CC]/80 font-light leading-relaxed text-base md:text-lg max-w-3xl">
+        <div className="space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
           <p>
-            To prevent catastrophic false-positives—such as killing normal high-concurrency backup processes—the detection engine replaces static threshold alerts with dynamic baseline equations. The database continuously recalculates average behaviors and measures metric deviations using Log-Normalized Z-Scores and Interquartile Range (IQR) analyses.
+            Hardcoded alerts—like triggering an error whenever CPU usage hits 90%—are practically useless in the real world. A heavy, scheduled backup job might spike the CPU naturally every night, and automatically killing that process would be a disaster. The system needed to understand context.
+          </p>
+          <p>
+            So, I built an engine that continuously learns what normal behavior looks like for different times of the day. It calculates a rolling historical baseline and only triggers a healing action if the current database behavior mathematically deviates from that <span className="text-white">specific, time-weighted baseline</span>.
           </p>
         </div>
 
         {/* Mathematical Visualizations */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-          {/* Equation 1 */}
-          <div className="p-6 rounded-2xl border border-white/5 bg-[#030303] flex flex-col justify-between space-y-6">
-            <div className="space-y-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-rose-400">Log-Normalized Z-Score Formula</span>
-              <p className="text-xs text-[#E1E0CC]/75 leading-relaxed font-light">
-                Measures deviations from baseline while mitigating extreme spikes from dominating severity metrics.
-              </p>
-            </div>
-            <div className="py-6 flex items-center justify-center bg-black/40 rounded-xl border border-white/5 font-mono text-lg text-white">
-              <div className="flex items-center">
-                <span className="mr-3">Z =</span>
-                <div className="flex flex-col items-center">
-                  <span className="px-2 pb-1 border-b border-white/40">ln(x_t) - &mu;_ln</span>
-                  <span className="px-2 pt-1">&sigma;_ln</span>
+          
+          {/* Math Card 1 */}
+          <div className="p-8 rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 blur-[50px] rounded-full pointer-events-none" />
+            <div className="space-y-6 relative z-10">
+              <div className="space-y-2">
+                <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-semibold">Log-Normalized Z-Score</span>
+                <p className="text-sm text-white/50 font-light leading-relaxed">
+                  Helps the system measure how far a metric has strayed from the baseline, while safely ignoring massive, momentary spikes.
+                </p>
+              </div>
+              <div className="p-6 bg-black/60 rounded-xl border border-white/5 flex justify-center items-center font-mono text-xl text-white/90 shadow-inner group-hover:border-indigo-500/30 transition-colors">
+                <div className="flex items-center gap-4">
+                  <span>Z =</span>
+                  <div className="flex flex-col items-center">
+                    <span className="px-3 pb-1 border-b border-white/20">ln(x_t) - &mu;_ln</span>
+                    <span className="px-3 pt-1 text-white/60">&sigma;_ln</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Equation 2 */}
-          <div className="p-6 rounded-2xl border border-white/5 bg-[#030303] flex flex-col justify-between space-y-6">
-            <div className="space-y-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-rose-400">Dynamic Threshold Adjuster</span>
-              <p className="text-xs text-[#E1E0CC]/75 leading-relaxed font-light">
-                Uses the Coefficient of Variation (CV) to adjust anomaly sensitivity based on workload volatility.
-              </p>
-            </div>
-            <div className="py-6 flex items-center justify-center bg-black/40 rounded-xl border border-white/5 font-mono text-lg text-white">
-              <div className="flex items-center">
-                <span className="mr-3">CV =</span>
-                <div className="flex flex-col items-center">
-                  <span className="px-2 pb-1 border-b border-white/40">&sigma;</span>
-                  <span className="px-2 pt-1">&mu;</span>
+          {/* Math Card 2 */}
+          <div className="p-8 rounded-2xl border border-white/10 bg-[#0a0a0a] shadow-xl relative overflow-hidden group">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-teal-500/10 blur-[50px] rounded-full pointer-events-none" />
+            <div className="space-y-6 relative z-10">
+              <div className="space-y-2">
+                <span className="text-xs font-mono uppercase tracking-wider text-teal-400 font-semibold">Dynamic Sensitivity</span>
+                <p className="text-sm text-white/50 font-light leading-relaxed">
+                  When traffic is naturally erratic, it loosens the rules to prevent false alarms. When traffic is steady, it tightens them.
+                </p>
+              </div>
+              <div className="p-6 bg-black/60 rounded-xl border border-white/5 flex justify-center items-center font-mono text-xl text-white/90 shadow-inner group-hover:border-teal-500/30 transition-colors">
+                <div className="flex items-center gap-4">
+                  <span>CV =</span>
+                  <div className="flex flex-col items-center">
+                    <span className="px-3 pb-1 border-b border-white/20">&sigma;</span>
+                    <span className="px-3 pt-1 text-white/60">&mu;</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="space-y-6 text-[#E1E0CC]/80 font-light leading-relaxed text-base md:text-lg max-w-3xl">
-          <p>
-            When database volatility (CV) is high, the engine expands anomaly thresholds to prevent alerts during expected peaks. When volatility is low, thresholds automatically tighten to intercept silent degradation signatures.
-          </p>
-        </div>
-
-        {/* Anomaly Detection Centerpieces */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-4">
-          <div className="space-y-3">
-            <div className="rounded-2xl border border-white/5 bg-[#030303] overflow-hidden p-2 shadow-xl">
+        {/* Dashboard Screenshots Grid */}
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-10">
+          <div className="space-y-4 group">
+            <div className="rounded-2xl border border-white/10 bg-[#030303] overflow-hidden p-2 shadow-2xl transition-colors group-hover:border-white/20">
               <img
                 src="/PROJECTS/DBMS_SELF_HEALING/Healing Lifecycle.webp"
-                alt="DBMS Self Healing Engine Anomaly Detection & Healing Pipeline"
-                className="w-full h-auto rounded-xl block object-cover aspect-[4/3]"
+                alt="Healing Pipeline"
+                className="w-full h-auto rounded-xl block object-cover aspect-[4/3] transform group-hover:scale-[1.03] transition-transform duration-700"
+                loading="lazy"
               />
             </div>
-            <div className="px-2 space-y-1">
-              <h5 className="text-xs font-mono uppercase tracking-wider text-white">Closed-Loop Healing Lifecycle</h5>
-              <p className="text-[11px] text-[#E1E0CC]/70 font-light leading-relaxed">
-                The system pipeline showing how metric collection outputs pass through anomaly detection, threshold scoring, decision routing, recovery, and learning feedback cycles.
-              </p>
+            <div className="px-1">
+              <h5 className="text-sm font-medium text-white">Closed-Loop Pipeline</h5>
+              <p className="text-sm text-white/50 font-light mt-1">The step-by-step pipeline from spotting an anomaly to executing a fix and learning from it.</p>
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="rounded-2xl border border-white/5 bg-[#030303] overflow-hidden p-2 shadow-xl">
+          <div className="space-y-4 group">
+            <div className="rounded-2xl border border-white/10 bg-[#030303] overflow-hidden p-2 shadow-2xl transition-colors group-hover:border-white/20">
               <img
                 src="/PROJECTS/DBMS_SELF_HEALING/DASHBOARD-AI-ANALYSIS.webp"
-                alt="DBMS Self Healing Engine Root Cause AI Analysis Interface"
-                className="w-full h-auto rounded-xl block object-cover aspect-[4/3]"
+                alt="AI Analysis Interface"
+                className="w-full h-auto rounded-xl block object-cover aspect-[4/3] transform group-hover:scale-[1.03] transition-transform duration-700"
+                loading="lazy"
               />
             </div>
-            <div className="px-2 space-y-1">
-              <h5 className="text-xs font-mono uppercase tracking-wider text-white">Anomaly Profiling & Severity Scoring</h5>
-              <p className="text-[11px] text-[#E1E0CC]/70 font-light leading-relaxed">
-                Real-time statistical evaluation dashboard graphing anomalies, baseline bounds, standard deviations, and isolation results.
-              </p>
+            <div className="px-1">
+              <h5 className="text-sm font-medium text-white">Severity Scoring UI</h5>
+              <p className="text-sm text-white/50 font-light mt-1">A human-readable view of the database's internal mathematical bounds and anomaly scores.</p>
             </div>
           </div>
-        </div>
+        </div> */}
+
       </div>
     </section>
   );
@@ -371,29 +385,45 @@ export function DbmsStatisticalEngine({ theme }: ComponentProps) {
 export function DbmsWalkthrough({ project, theme }: { project: Project; theme: ProjectTheme }) {
   if (!project.detailedScreenshots) return null;
   return (
-    <section id="screenshots" className="py-16 border-t border-white/5 space-y-10 scroll-mt-28">
-      <div className="flex items-center gap-3">
-        <span className="w-1.5 h-4 rounded-full flex-shrink-0" style={{ backgroundColor: theme.primaryColor }} />
-        <h3 className="text-xs font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/75 flex items-center gap-2">
+    <section id="screenshots" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full border" style={{ backgroundColor: `${theme.primaryColor}15`, borderColor: `${theme.primaryColor}30` }}>
           <Database className="w-4 h-4" style={{ color: theme.primaryColor }} />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-white/60">
           Product Walkthrough
         </h3>
       </div>
-      <PremiumGallery screenshots={project.detailedScreenshots} theme={theme} />
+      <div className="max-w-6xl">
+        <PremiumGallery screenshots={project.detailedScreenshots} theme={theme} />
+      </div>
     </section>
+  );
+}
+
+// Helper SVG for Blockquote
+function QuoteIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      {...props}
+    >
+      <path d="M14.017 21L16.41 14.925H10.846V3H21V11.238L16.326 21H14.017ZM3.068 21L5.461 14.925H-0.103V3H10.051V11.238L5.377 21H3.068Z" />
+    </svg>
   );
 }
 
 // Main Default Export
 export default function DbmsSelfHealingCaseStudy({ project, theme }: { project: Project; theme: ProjectTheme }) {
   return (
-    <>
+    <div className="space-y-12 pb-24">
       <DbmsCoreProblem theme={theme} />
       <DbmsWhyIBuiltThis theme={theme} />
       <DbmsTheSolution theme={theme} />
       <DbmsStatisticalEngine theme={theme} />
       <DbmsSystemArchitecture theme={theme} />
       <DbmsWalkthrough project={project} theme={theme} />
-    </>
+    </div>
   );
 }
