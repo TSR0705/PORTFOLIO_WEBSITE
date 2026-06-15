@@ -96,7 +96,7 @@ const PrismaHero = () => {
           playsInline
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='100%25' height='100%25' fill='%23000'/%3E%3C/svg%3E"
           className="absolute inset-0 h-full w-full object-cover"
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260405_170732_8a9ccda6-5cff-4628-b164-059c500a2b41.mp4"
+          src="/HERO-VIDEO.webm"
         />
 
         {/* Noise overlay */}
