@@ -25,7 +25,7 @@ import QuizArenaCaseStudy from "@/components/projects/quiz-arena-case-study";
 import SaylixTranslatorCaseStudy from "@/components/projects/saylix-translator-case-study";
 import SmartTabOrganizerCaseStudy from "@/components/projects/smart-tab-organizer-case-study";
 import WebloomCaseStudy from "@/components/projects/webloom-case-study";
-import WhoIAmCaseStudy from "@/components/projects/who-i-am-case-study";
+import ExposurCaseStudy from "@/components/projects/exposur-case-study";
 
 const CaseStudyComponents: Record<string, React.ComponentType<{ project: any; theme: any }>> = {
   "dbms-self-healing": DbmsSelfHealingCaseStudy,
@@ -38,7 +38,7 @@ const CaseStudyComponents: Record<string, React.ComponentType<{ project: any; th
   "saylix-translator": SaylixTranslatorCaseStudy,
   "smart-tab-organizer": SmartTabOrganizerCaseStudy,
   "webloom": WebloomCaseStudy,
-  "who-i-am": WhoIAmCaseStudy,
+  "exposur": ExposurCaseStudy,
 };
 
 import { Metadata } from "next";

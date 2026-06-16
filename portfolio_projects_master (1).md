@@ -254,11 +254,11 @@ An accessible multilingual translation app with voice input, comparison mode, an
 
 ---
 
-## 8) WHO-I-AM
+## 8) EXPOSUR
 
 **Type:** Docker Learning Project / Personal Utility App  
-**Live Demo:** https://who-i-am-oidy.onrender.com  
-**GitHub:** https://github.com/TSR0705/WHO-I-AM
+**Live Demo:** https://exposur.onrender.com  
+**GitHub:** https://github.com/TSR0705/EXPOSUR
 
 ### Short Description
 A simple web app that displays user environment details such as IP, browser, OS, device type, and location, built while learning Docker.

@@ -57,7 +57,7 @@ import { lmsPlatformProject } from "./projects/lms-platform";
 import { saylixTranslatorProject } from "./projects/saylix-translator";
 import { smartTabOrganizerProject } from "./projects/smart-tab-organizer";
 import { androidTaskManagerProject } from "./projects/android-task-manager";
-import { whoIAmProject } from "./projects/who-i-am";
+import { exposurProject } from "./projects/exposur";
 import { fcfsSchedulerSimulatorProject } from "./projects/fcfs-scheduler-simulator";
 import { quizArenaProject } from "./projects/quiz-arena";
 
@@ -70,7 +70,7 @@ export const projects: Project[] = [
   saylixTranslatorProject,
   smartTabOrganizerProject,
   androidTaskManagerProject,
-  whoIAmProject,
+  exposurProject,
   fcfsSchedulerSimulatorProject,
   quizArenaProject,
 ];

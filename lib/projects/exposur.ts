@@ -1,9 +1,9 @@
 import { Project } from "../projects";
 
-export const whoIAmProject: Project = {
-    id: "who-i-am",
-    title: "WHO-I-AM",
-    slug: "who-i-am",
+export const exposurProject: Project = {
+    id: "exposur",
+    title: "EXPOSUR",
+    slug: "exposur",
     category: "Cloud / DevOps",
     shortDescription: "A simple web app that displays user environment details such as IP, browser, OS, device type, and location, built while learning Docker.",
     fullDescription: "This was a practical learning project focused on containerization and deployment portability rather than app complexity.",
