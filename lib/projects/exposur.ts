@@ -29,6 +29,20 @@ export const exposurProject: Project = {
       gradient: "from-[#E1E0CC]/10 via-neutral-950 to-neutral-950",
       shadow: "shadow-[#E1E0CC]/20",
       iconName: "UserCheck",
-      imageSrc: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
-    }
+      imageSrc: "/PROJECTS/EXPOSUR/HERO-SECTION.webp",
+    },
+    detailedScreenshots: [
+      {
+        url: "/PROJECTS/EXPOSUR/DASHBOARD-01.webp",
+        title: "Environment Telemetry Dashboard",
+        description: "Aggregated, real-time client diagnostics detailing user IP geolocation, browser headers, OS architecture, and device parameters in a unified interface.",
+        category: "Interface"
+      },
+      {
+        url: "/PROJECTS/EXPOSUR/DASHBOARD-02.webp",
+        title: "DNS Diagnostics & Routing Integrity",
+        description: "Deeper diagnostic tab highlighting connection status, active headers, and WebRTC proxy validation check logs.",
+        category: "Diagnostics"
+      }
+    ]
   };

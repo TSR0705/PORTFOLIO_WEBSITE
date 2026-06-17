@@ -141,6 +141,12 @@ export default async function ProjectDetailPage({ params }: Props) {
     { id: "architecture", label: "System Architecture" },
     { id: "statistics", label: "Statistical Engine" },
     ...(project.screenshots || project.detailedScreenshots ? [{ id: "screenshots", label: "Walkthrough" }] : []),
+  ] : project.id === "exposur" ? [
+    { id: "overview", label: "Executive Summary" },
+    { id: "architecture", label: "Reverse Proxy & Routing" },
+    { id: "dns-leak", label: "DNS Leak Engine" },
+    { id: "fingerprint", label: "Client Fingerprinting" },
+    { id: "screenshots", label: "Walkthrough" },
   ] : [
     { id: "overview", label: "Executive Summary" },
     ...(project.problemStatement ? [{ id: "problem", label: "Core Problem" }] : []),
