@@ -66,7 +66,8 @@ import {
   SiLucide,
   SiSqlalchemy,
   SiPydantic,
-  SiShadcnui
+  SiShadcnui,
+  SiPostgresql
 } from "react-icons/si";
 
 export interface ProjectTheme {
@@ -116,6 +117,8 @@ export const skillDetails: Record<string, { icon: any; bg: string; text: string;
   "Git": { icon: SiGit, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
   "GitHub": { icon: FaGithub, bg: "bg-[#181717]", text: "text-white", border: "border-white/20" },
   "Postman": { icon: SiPostman, bg: "bg-[#FF6C37]", text: "text-white" },
+  "PostgreSQL": { icon: SiPostgresql, bg: "bg-[#4169E1]", text: "text-white" },
+  "GeoLite2": { icon: FaGlobe, bg: "bg-[#3182CE]", text: "text-white" },
   "Python": { icon: FaPython, bg: "bg-[#3776AB]", text: "text-white" },
   "Python 3.11+": { icon: FaPython, bg: "bg-[#3776AB]", text: "text-white" },
   "Java": { icon: FaJava, bg: "bg-[#B07219]", text: "text-white" },
