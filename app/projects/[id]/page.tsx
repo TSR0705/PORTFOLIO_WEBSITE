@@ -249,8 +249,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             </div>
 
             {/* Right Column: Project Access Card (Premium Sidebar Layout) */}
-            <div className={`lg:col-span-4 p-7 rounded-3xl border ${theme.borderMuted} bg-gradient-to-b from-white/[0.03] to-transparent backdrop-blur-md relative overflow-hidden space-y-6 transition-all duration-500 ${theme.borderActive} shadow-2xl`}>
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20 pointer-events-none" style={{ backgroundColor: theme.primaryColor }} />
+            <div className={`lg:col-span-4 p-7 rounded-3xl border ${theme.borderMuted} bg-neutral-950/85 backdrop-blur-md relative overflow-hidden space-y-6 transition-all duration-500 ${theme.borderActive} shadow-2xl`}>
               
               <div className="space-y-4">
                 <h3 className="text-[10px] font-mono uppercase tracking-[0.25em] text-[#E1E0CC]/40 flex items-center gap-2 border-b border-white/5 pb-2.5">
