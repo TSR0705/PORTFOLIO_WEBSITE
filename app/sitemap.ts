@@ -5,7 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
 
   // Static routes
-  const staticRoutes = ["", "/about", "/projects", "/recognition", "/contact", "/skills"];
+  const staticRoutes = ["", "/about", "/projects", "/recognition", "/contact"];
   const staticEntries = staticRoutes.map((route) => ({
     url: `${siteUrl}${route}`,
     lastModified: new Date(),
