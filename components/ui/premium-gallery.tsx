@@ -110,7 +110,7 @@ export default function PremiumGallery({ screenshots, theme }: PremiumGalleryPro
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[14px]">
                 <img
                   src={activeItem.url}
-                  alt={activeItem.title}
+                  alt={`${activeItem.title} - ${activeItem.description}`}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.005]"
                 />
                 
@@ -225,7 +225,7 @@ export default function PremiumGallery({ screenshots, theme }: PremiumGalleryPro
             <div className="rounded-xl overflow-hidden border border-white/10 bg-neutral-950 shadow-2xl relative max-w-full">
               <img
                 src={activeItem.url}
-                alt={activeItem.title}
+                alt={`${activeItem.title} - ${activeItem.description}`}
                 className="max-h-[65vh] max-w-full object-contain"
               />
             </div>

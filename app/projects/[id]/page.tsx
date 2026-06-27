@@ -58,6 +58,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
   const projectUrl = `${siteUrl}/projects/${project.id}`;
+  const theme = getProjectTheme(project.id);
+  const ogImageUrl = theme?.imageSrc ? (theme.imageSrc.startsWith("http") ? theme.imageSrc : `${siteUrl}${theme.imageSrc}`) : `${siteUrl}/MY_IMAGE.webp`;
 
   return {
     title: `${project.title} | Software Engineering Case Study`,
@@ -83,7 +85,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Tanmay Singh Portfolio",
       images: [
         {
-          url: "/MY_IMAGE.webp",
+          url: ogImageUrl,
           width: 1200,
           height: 630,
           alt: project.title,
@@ -95,7 +97,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${project.title} - Technical Case Study`,
       description: project.shortDescription,
       creator: "@TanmaySinghRa18",
-      images: ["/MY_IMAGE.webp"],
+      images: [ogImageUrl],
     },
   };
 }
@@ -169,6 +171,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
   const projectUrl = `${siteUrl}/projects/${project.id}`;
+  const ogImageUrl = theme?.imageSrc ? (theme.imageSrc.startsWith("http") ? theme.imageSrc : `${siteUrl}${theme.imageSrc}`) : `${siteUrl}/MY_IMAGE.webp`;
   
   const projectSchema = {
     "@context": "https://schema.org",
@@ -177,11 +180,21 @@ export default async function ProjectDetailPage({ params }: Props) {
     "name": project.title,
     "description": project.shortDescription,
     "applicationCategory": "DeveloperApplication",
+    "applicationSubCategory": "DeveloperTool",
     "operatingSystem": "All",
     "programmingLanguage": project.techStack,
+    "softwareVersion": "1.0.0",
     "url": projectUrl,
+    "image": ogImageUrl,
     "author": {
       "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      "name": "Tanmay Singh",
+      "url": siteUrl
+    },
+    "creator": {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
       "name": "Tanmay Singh",
       "url": siteUrl
     },
@@ -189,15 +202,78 @@ export default async function ProjectDetailPage({ params }: Props) {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
-    }
+    },
+    ...(project.githubUrl ? { "codeRepository": project.githubUrl } : {})
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${projectUrl}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": siteUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Projects",
+        "item": `${siteUrl}/projects`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": project.title,
+        "item": projectUrl
+      }
+    ]
+  };
+
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "@id": `${projectUrl}/#article`,
+    "headline": `${project.title} | Software Engineering Case Study`,
+    "description": project.shortDescription,
+    "image": ogImageUrl,
+    "datePublished": `${project.year}-01-01T00:00:00Z`,
+    "dateModified": new Date().toISOString(),
+    "author": {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      "name": "Tanmay Singh",
+      "url": siteUrl
+    },
+    "publisher": {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      "name": "Tanmay Singh",
+      "url": siteUrl
+    },
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": project.title
+    },
+    "inLanguage": "en-US"
   };
 
   return (
     <main className="min-h-screen w-full bg-black text-white px-6 md:px-12 py-28 md:py-36 relative overflow-hidden flex flex-col items-center">
-      {/* Inject Project Case Study Schema */}
+      {/* Inject Rich Structured Data Schemas */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(projectSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       {/* Noise overlay */}
@@ -344,7 +420,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className="relative w-full overflow-hidden rounded-[24px]">
             <img
               src={theme.imageSrc}
-              alt={project.title}
+              alt={`${project.title} - ${project.shortDescription}`}
               className="w-full h-auto block object-contain"
             />
             {/* Edge-blending subtle vignette (12% fade at edges) */}

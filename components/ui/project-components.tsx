@@ -24,6 +24,8 @@ export function ProjectBadge({
   );
 }
 
+import Link from "next/link";
+
 // Reusable tech pill inheriting icons/colors from the Engineering Toolkit mapping
 export function TechBadge({
   tech,
@@ -42,23 +44,48 @@ export function TechBadge({
   };
   const IconComp = details.icon;
 
-  if (variant === "compact") {
+  const techToProjectMap: Record<string, string> = {
+    "Docker": "/projects/loadlab-deploybot",
+    "Kubernetes": "/projects/loadlab-deploybot",
+    "Jenkins": "/projects/loadlab-deploybot",
+    "GitHub Actions": "/projects/loadlab-deploybot",
+    "React": "/projects/codeweave",
+    "Next.js": "/projects/codeweave",
+    "TypeScript": "/projects/codeweave",
+    "MySQL": "/projects/dbms-self-healing",
+    "MongoDB": "/projects/codeweave",
+    "Express.js": "/projects/codeweave",
+    "Node.js": "/projects/codeweave",
+    "Java": "/projects/exposur",
+    "REST APIs": "/projects/exposur"
+  };
+
+  const projectUrl = techToProjectMap[tech];
+
+  const content = (
+    <>
+      <IconComp className={`${variant === "compact" ? "w-3.5 h-3.5" : "w-4 h-4"} flex-shrink-0`} />
+      {tech}
+    </>
+  );
+
+  const classes = `inline-flex items-center gap-1.5 transition-all duration-300 select-none hover:scale-[1.03] shadow-sm hover:shadow-md ${
+    variant === "compact"
+      ? `text-[11px] font-bold px-3.5 py-1 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
+      : `text-xs md:text-sm font-bold px-4 py-1.5 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
+  } ${className}`;
+
+  if (projectUrl) {
     return (
-      <span
-        className={`inline-flex items-center gap-1.5 text-[11px] font-bold px-3.5 py-1 rounded-full transition-all duration-300 select-none hover:scale-[1.03] shadow-sm hover:shadow-md cursor-default ${details.bg} ${details.text} ${details.border || "border border-transparent"} ${className}`}
-      >
-        <IconComp className="w-3.5 h-3.5 flex-shrink-0" />
-        {tech}
-      </span>
+      <Link href={projectUrl} className={`${classes} cursor-pointer hover:opacity-90`}>
+        {content}
+      </Link>
     );
   }
 
   return (
-    <span
-      className={`inline-flex items-center gap-2 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full transition-all duration-300 select-none hover:scale-[1.03] shadow-md cursor-default ${details.bg} ${details.text} ${details.border || "border border-transparent"} ${className}`}
-    >
-      <IconComp className="w-4 h-4 flex-shrink-0" />
-      {tech}
+    <span className={`${classes} cursor-default`}>
+      {content}
     </span>
   );
 }

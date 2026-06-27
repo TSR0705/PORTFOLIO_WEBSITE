@@ -125,6 +125,16 @@ const personSchema = {
     "https://www.linkedin.com/in/tanmay-singh-rajput",
     "https://x.com/TanmaySinghRa18",
     "https://leetcode.com/u/tanmay_singh_rajput/"
+  ],
+  "knowsAbout": [
+    "Backend Development",
+    "Cloud Computing",
+    "DevOps",
+    "Distributed Systems",
+    "Software Engineering",
+    "System Design",
+    "Database Reliability",
+    "Cybersecurity"
   ]
 };
 
@@ -137,7 +147,33 @@ const websiteSchema = {
   "description": "Portfolio of Tanmay Singh, a B.Tech Computer Science and Engineering (Cloud Computing) student at SRMIST. Explore software engineering projects, backend systems, cloud-native applications, distributed systems, technical case studies, achievements, and engineering work.",
   "publisher": {
     "@id": `${siteUrl}/#person`
-  }
+  },
+  "hasPart": [
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/about/#webpage`,
+      "url": `${siteUrl}/about`,
+      "name": "About Me"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": `${siteUrl}/projects/#collection`,
+      "url": `${siteUrl}/projects`,
+      "name": "Projects Deck"
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/recognition/#webpage`,
+      "url": `${siteUrl}/recognition`,
+      "name": "Recognition & Achievements"
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${siteUrl}/contact/#webpage`,
+      "url": `${siteUrl}/contact`,
+      "name": "Contact Professional Connection"
+    }
+  ]
 };
 
 const profilePageSchema = {

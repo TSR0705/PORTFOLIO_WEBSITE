@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   FaReact,
   FaDocker,
@@ -205,6 +206,35 @@ export default function SkillsSection() {
                       const x = (50 + 50 * Math.cos(angle)).toFixed(4);
                       const y = (50 + 50 * Math.sin(angle)).toFixed(4);
 
+                      const techToProjectMap: Record<string, string> = {
+                        "Docker": "/projects/loadlab-deploybot",
+                        "Kubernetes": "/projects/loadlab-deploybot",
+                        "Jenkins": "/projects/loadlab-deploybot",
+                        "GitHub Actions": "/projects/loadlab-deploybot",
+                        "React": "/projects/codeweave",
+                        "Next.js": "/projects/codeweave",
+                        "TypeScript": "/projects/codeweave",
+                        "MySQL": "/projects/dbms-self-healing",
+                        "MongoDB": "/projects/codeweave",
+                        "Express.js": "/projects/codeweave",
+                        "Node.js": "/projects/codeweave",
+                        "Java": "/projects/exposur",
+                        "REST APIs": "/projects/exposur"
+                      };
+
+                      const projectUrl = techToProjectMap[cfg.name];
+                      const iconEl = (
+                        <div
+                          title={cfg.name}
+                          className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer orbit-icon-anim"
+                          style={{
+                            animation: `counter-spin ${20 + orbitIdx * 10}s linear infinite`,
+                          }}
+                        >
+                          <cfg.Icon className={`${isMobile ? "w-5 h-5" : "w-6 h-6"}`} style={{ color: cfg.color }} />
+                        </div>
+                      );
+
                       return (
                         <div
                           key={iconIdx}
@@ -215,15 +245,13 @@ export default function SkillsSection() {
                             transform: "translate(-50%, -50%)",
                           }}
                         >
-                          <div
-                            title={cfg.name}
-                            className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer orbit-icon-anim"
-                            style={{
-                              animation: `counter-spin ${20 + orbitIdx * 10}s linear infinite`,
-                            }}
-                          >
-                            <cfg.Icon className={`${isMobile ? "w-5 h-5" : "w-6 h-6"}`} style={{ color: cfg.color }} />
-                          </div>
+                          {projectUrl ? (
+                            <Link href={projectUrl}>
+                              {iconEl}
+                            </Link>
+                          ) : (
+                            iconEl
+                          )}
                         </div>
                       );
                     })}
