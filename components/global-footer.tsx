@@ -66,7 +66,7 @@ export default function GlobalFooter() {
             <div className="flex flex-col gap-4">
               <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 w-fit group select-none">
                 <Image
-                  src="/MY_LOGO.webp"
+                  src="/MY-LOGO-WITH-BACKGROUND.webp"
                   alt="Tanmay Singh Logo"
                   width={42}
                   height={42}
