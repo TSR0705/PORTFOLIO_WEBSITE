@@ -15,9 +15,53 @@ interface ProjectScrollRailProps {
 
 export default function ProjectScrollRail({ sections, primaryColor }: ProjectScrollRailProps) {
   const [activeSection, setActiveSection] = useState<string>("");
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const activeIndex = sections.findIndex((s) => s.id === activeSection);
   const safeActiveIndex = activeIndex === -1 ? 0 : activeIndex;
+
+  // Track visibility scoped to case-study-article and exclude footer overlap
+  useEffect(() => {
+    const article = document.getElementById("case-study-article");
+    const footer = document.querySelector("footer");
+
+    if (!article) return;
+
+    let isArticleIntersecting = false;
+    let isFooterIntersecting = false;
+
+    const checkVisibility = () => {
+      setIsVisible(isArticleIntersecting && !isFooterIntersecting);
+    };
+
+    const articleObserver = new IntersectionObserver(
+      ([entry]) => {
+        isArticleIntersecting = entry.isIntersecting;
+        checkVisibility();
+      },
+      { root: null, threshold: 0.01 }
+    );
+
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => {
+        isFooterIntersecting = entry.isIntersecting;
+        checkVisibility();
+      },
+      { root: null, rootMargin: "120px 0px 0px 0px", threshold: 0 }
+    );
+
+    articleObserver.observe(article);
+    if (footer) {
+      footerObserver.observe(footer);
+    }
+
+    return () => {
+      articleObserver.disconnect();
+      if (footer) {
+        footerObserver.disconnect();
+      }
+    };
+  }, []);
 
   const isCompact = sections.length > 8;
   const gapClass = isCompact ? "gap-3" : "gap-5";
@@ -85,10 +129,17 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
   if (sections.length === 0) return null;
 
   return (
-    <div 
+    <motion.div 
       className="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-end py-4 pointer-events-none w-48"
       role="navigation"
       aria-label="Case Study Section Rail"
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ 
+        opacity: isVisible ? 1 : 0, 
+        x: isVisible ? 0 : 20,
+        pointerEvents: isVisible ? "auto" : "none"
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       {/* 1. Step Counter */}
       <div className="mb-6 text-right pr-1 pointer-events-auto select-none">
@@ -159,6 +210,6 @@ export default function ProjectScrollRail({ sections, primaryColor }: ProjectScr
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }

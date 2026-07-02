@@ -424,14 +424,14 @@ export default async function ProjectDetailPage({ params }: Props) {
         </div>
       </div>
 
-      <div className="w-full max-w-4xl z-10 space-y-16">
+      <article id="case-study-article" className="w-full max-w-4xl z-10 space-y-16">
         {(() => {
           const CaseStudyComponent = CaseStudyComponents[project.id];
           return CaseStudyComponent ? (
             <CaseStudyComponent project={project} theme={theme} />
           ) : null;
         })()}
-      </div>
+      </article>
     </main>
   );
 }
