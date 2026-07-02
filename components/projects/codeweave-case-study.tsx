@@ -18,6 +18,7 @@ import {
   BarChart2
 } from "lucide-react";
 import { Project } from "@/lib/projects";
+import ZoomableImage from "@/components/ui/zoomable-image";
 import { ProjectTheme } from "@/lib/project-design";
 import { ArchitectureGrid } from "@/components/ui/project-components";
 import MermaidRenderer from "@/components/ui/mermaid-renderer";
@@ -441,13 +442,11 @@ export default function CodeweaveCaseStudy({ project, theme }: ComponentProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {project.screenshots.map((img, idx) => (
               <div key={idx} className="space-y-3">
-                <div className="rounded-2xl overflow-hidden border border-white/10 bg-neutral-950 shadow-2xl relative group">
-                  <img
+                  <ZoomableImage
                     src={img}
                     alt={`Walkthrough screenshot ${idx + 1}`}
-                    className="w-full aspect-[16/10] object-cover group-hover:scale-[1.02] transition-transform duration-700"
+                    wrapperClassName="w-full aspect-[16/10] overflow-hidden"
                   />
-                </div>
                 <p className="text-[10px] font-mono text-[#E1E0CC]/70 uppercase tracking-widest block text-right pr-2">
                   Interface View 0{idx + 1}
                 </p>

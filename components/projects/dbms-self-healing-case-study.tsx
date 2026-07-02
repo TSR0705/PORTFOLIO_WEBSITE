@@ -16,6 +16,7 @@ import {
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
 import PremiumGallery from "@/components/ui/premium-gallery";
+import ZoomableImage from "@/components/ui/zoomable-image";
 
 interface ComponentProps {
   theme: ProjectTheme;
@@ -217,17 +218,11 @@ export function DbmsSystemArchitecture({ theme }: ComponentProps) {
 
         {/* Media Block 1 */}
         <div className="space-y-5 pt-8">
-          <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-2 sm:p-4 hover:border-white/20 transition-colors group">
-            <div className="rounded-xl overflow-hidden relative shadow-2xl ring-1 ring-white/10">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
-              <img
-                src="/PROJECTS/DBMS_SELF_HEALING/Architecture Diagram.webp"
-                alt="Architecture Diagram"
-                className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
-            </div>
-          </div>
+          <ZoomableImage
+            src="/PROJECTS/DBMS_SELF_HEALING/Architecture Diagram.webp"
+            alt="System Architecture & Telemetry Flow"
+            wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
+          />
           <div className="flex items-start gap-3 px-2">
             <ArrowRight className="w-4 h-4 text-white/40 mt-1 shrink-0" />
             <div>
@@ -241,17 +236,11 @@ export function DbmsSystemArchitecture({ theme }: ComponentProps) {
 
         {/* Media Block 2 */}
         <div className="space-y-5 pt-8">
-          <div className="rounded-2xl bg-white/[0.02] border border-white/10 p-2 sm:p-4 hover:border-white/20 transition-colors group">
-            <div className="rounded-xl overflow-hidden relative shadow-2xl ring-1 ring-white/10">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10 pointer-events-none" />
-              <img
-                src="/PROJECTS/DBMS_SELF_HEALING/DIAGRAM-Dynamic Interaction Sequence.webp"
-                alt="Interaction Sequence"
-                className="w-full h-auto object-cover transform group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
-            </div>
-          </div>
+          <ZoomableImage
+            src="/PROJECTS/DBMS_SELF_HEALING/DIAGRAM-Dynamic Interaction Sequence.webp"
+            alt="Dynamic Interaction Sequence Diagram"
+            wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
+          />
           <div className="flex items-start gap-3 px-2">
             <Activity className="w-4 h-4 text-white/40 mt-1 shrink-0" />
             <div>

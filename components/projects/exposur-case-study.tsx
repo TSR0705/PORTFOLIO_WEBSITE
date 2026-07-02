@@ -16,6 +16,7 @@ import {
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
 import PremiumGallery from "@/components/ui/premium-gallery";
+import ZoomableImage from "@/components/ui/zoomable-image";
 
 interface ComponentProps {
   theme: ProjectTheme;
@@ -145,16 +146,11 @@ export function ExposurProxyRouting({ theme }: ComponentProps) {
           </div>
 
           <div className="lg:col-span-6 space-y-4">
-            <div className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-2 shadow-2xl group hover:border-[#E1E0CC]/20 transition-all duration-500">
-              <div className="rounded-xl overflow-hidden relative ring-1 ring-white/5">
-                <img
-                  src="/PROJECTS/EXPOSUR/Architecture-diagram.webp"
-                  alt="EXPOSUR Architecture Diagram"
-                  className="w-full h-auto object-cover transform group-hover:scale-[1.01] transition-transform duration-700 ease-out"
-                  loading="lazy"
-                />
-              </div>
-            </div>
+            <ZoomableImage
+              src="/PROJECTS/EXPOSUR/Architecture-diagram.webp"
+              alt="EXPOSUR Architecture Diagram"
+              wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/5"
+            />
             <div className="flex items-start gap-2.5 px-1">
               <ArrowRight className="w-4 h-4 text-white/40 mt-1 shrink-0" />
               <p className="text-xs text-white/50 font-light leading-relaxed">
@@ -193,16 +189,11 @@ export function ExposurDnsLeakEngine({ theme }: ComponentProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-6 space-y-4">
-            <div className="rounded-2xl bg-[#0a0a0a] border border-white/5 p-2 shadow-2xl group hover:border-[#E1E0CC]/20 transition-all duration-500">
-              <div className="rounded-xl overflow-hidden relative ring-1 ring-white/5">
-                <img
-                  src="/PROJECTS/EXPOSUR/DNS-LEAK-TEST-PROCEDURE-DIAGRAM.webp"
-                  alt="DNS Leak Test Procedure"
-                  className="w-full h-auto object-cover transform group-hover:scale-[1.01] transition-transform duration-700 ease-out"
-                  loading="lazy"
-                />
-              </div>
-            </div>
+            <ZoomableImage
+              src="/PROJECTS/EXPOSUR/DNS-LEAK-TEST-PROCEDURE-DIAGRAM.webp"
+              alt="DNS Leak Test Procedure Diagram"
+              wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/5"
+            />
             <div className="flex items-start gap-2.5 px-1">
               <Shuffle className="w-4 h-4 text-white/40 mt-1 shrink-0" />
               <p className="text-xs text-white/50 font-light leading-relaxed">

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProjectTheme } from "@/lib/project-design";
 
 interface ScreenshotItem {
@@ -120,11 +120,6 @@ export default function PremiumGallery({ screenshots, theme, showTimeline = fals
                 {/* Subtle vignette */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/8 via-transparent to-black/8 pointer-events-none rounded-[14px]" />
                 
-                {/* Floating zoom badge */}
-                <div className="absolute bottom-4 right-4 p-2 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 text-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center gap-1.5 text-[10px] font-mono tracking-wider uppercase">
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  Maximize View
-                </div>
               </div>
             </div>
 
