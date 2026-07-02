@@ -149,6 +149,14 @@ export default async function ProjectDetailPage({ params }: Props) {
     { id: "dns-leak", label: "DNS Leak Engine" },
     { id: "fingerprint", label: "Client Fingerprinting" },
     { id: "screenshots", label: "Walkthrough" },
+  ] : project.id === "lms-platform" ? [
+    { id: "overview", label: "Executive Summary" },
+    { id: "problem", label: "The Core Problem" },
+    { id: "motivation", label: "Why I Built This" },
+    { id: "solution", label: "The Solution" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "enrollment", label: "Secure Enrollment" },
+    { id: "screenshots", label: "Walkthrough" },
   ] : [
     { id: "overview", label: "Executive Summary" },
     ...(project.problemStatement ? [{ id: "problem", label: "Core Problem" }] : []),
@@ -383,19 +391,6 @@ export default async function ProjectDetailPage({ params }: Props) {
                       Video Demo
                     </a>
                   )}
-                </div>
-              </div>
-
-              <div className="border-t border-white/5 pt-4 space-y-3.5">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#E1E0CC]/40">Released</span>
-                  <span className="text-white font-medium font-mono">{project.year}</span>
-                </div>
-                <div className="flex flex-col gap-1 border-t border-white/5 pt-3 text-xs">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-[#E1E0CC]/40">Classification</span>
-                  <span className="text-[#E1E0CC]/80 text-[11px] leading-relaxed font-sans font-normal">
-                    {project.projectType}
-                  </span>
                 </div>
               </div>
             </div>

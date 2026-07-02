@@ -345,10 +345,10 @@ A JavaFX-based FCFS scheduling simulator that visualizes process execution and s
 
 ---
 
-## 11) Modern LMS Platform
+## 11) Courselly
 
 **Type:** Learning Management System / Full-Stack Product  
-**Live Demo:** Not shared yet  
+**Live Demo:** https://learnwithcoursely.vercel.app/  
 **GitHub:** https://github.com/TSR0705/LMS-WEBSITE  
 **Demo Video:** https://drive.google.com/file/d/103UvOWz5ZBfVC-xi9GxieflEXr6etn9V/view?usp=sharing
 
@@ -424,7 +424,7 @@ If the portfolio has limited space, feature these first:
 3. AI-Powered DBMS Self-Healing Engine
 4. Webloom
 5. CodeWeave
-6. LMS Platform
+6. Courselly
 7. SAYLIX Translator
 8. Smart Tab Organizer
 
