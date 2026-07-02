@@ -14,9 +14,10 @@ interface ScreenshotItem {
 interface PremiumGalleryProps {
   screenshots: ScreenshotItem[];
   theme: ProjectTheme;
+  showTimeline?: boolean;
 }
 
-export default function PremiumGallery({ screenshots, theme }: PremiumGalleryProps) {
+export default function PremiumGallery({ screenshots, theme, showTimeline = false }: PremiumGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(false);
 
@@ -48,59 +49,58 @@ export default function PremiumGallery({ screenshots, theme }: PremiumGalleryPro
   }, [lightboxOpen, screenshots.length]);
 
   return (
-    <div className="space-y-6">
-      {/* Ambient background glow behind the entire gallery container */}
-      <div className="relative rounded-[32px] border border-white/5 bg-zinc-950/20 backdrop-blur-md p-6 lg:p-8 shadow-2xl overflow-hidden">
-        
-        {/* Dynamic ambient color wash */}
-        <div 
-          className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[140px] opacity-100 pointer-events-none -z-10 transition-all duration-700"
-          style={{
-            background: `radial-gradient(circle, ${theme.primaryColor}0f 0%, transparent 70%)`
-          }} 
-        />
-        
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <div className="space-y-6 relative">
+      {/* Dynamic ambient color wash */}
+      <div 
+        className="absolute -top-40 -left-40 w-96 h-96 rounded-full blur-[140px] opacity-100 pointer-events-none -z-10 transition-all duration-700"
+        style={{
+          background: `radial-gradient(circle, ${theme.primaryColor}0f 0%, transparent 70%)`
+        }} 
+      />
+      
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Timeline Navigation (3 cols on lg) */}
-          <div className="lg:col-span-3 space-y-4">
-            <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/35 block mb-2 pl-2">
-              Incidents & Views Timeline
-            </span>
-            
-            {/* Styled Vertical Timeline Stepper */}
-            <div className="relative border-l border-white/10 pl-5 ml-2.5 py-1 space-y-5 max-h-[360px] lg:max-h-none overflow-y-auto lg:overflow-y-visible scrollbar-thin">
-              {screenshots.map((item, idx) => {
-                const isActive = idx === activeIndex;
-                return (
-                  <button
-                    key={item.url}
-                    onClick={() => setActiveIndex(idx)}
-                    className="group relative flex flex-col items-start text-left w-full transition-all duration-300"
-                  >
-                    {/* Glowing Timeline Indicator Node */}
-                    <div 
-                      className="absolute -left-[26px] top-1 w-2.5 h-2.5 rounded-full bg-black border-2 transition-all duration-300 group-hover:scale-125" 
-                      style={{ 
-                        borderColor: isActive ? theme.primaryColor : "rgba(255,255,255,0.2)", 
-                        boxShadow: isActive ? `0 0 10px ${theme.primaryColor}80, 0 0 4px ${theme.primaryColor}` : "none"
-                      }} 
-                    />
-                    
-                    <span className={`font-mono text-[9px] tracking-wider transition-colors ${isActive ? 'text-white font-bold' : 'text-[#E1E0CC]/35'}`}>
-                      STEP 0{idx + 1}
-                    </span>
-                    <span className={`text-[11px] font-medium font-sans truncate w-full transition-colors ${isActive ? 'text-white' : 'text-[#E1E0CC]/40 group-hover:text-[#E1E0CC]/70'}`}>
-                      {item.title}
-                    </span>
-                  </button>
-                );
-              })}
+          {showTimeline && (
+            <div className="lg:col-span-3 space-y-4">
+              <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/35 block mb-2 pl-2">
+                Incidents & Views Timeline
+              </span>
+              
+              {/* Styled Vertical Timeline Stepper */}
+              <div className="relative border-l border-white/10 pl-5 ml-2.5 py-1 space-y-5 max-h-[360px] lg:max-h-none overflow-y-auto lg:overflow-y-visible scrollbar-thin">
+                {screenshots.map((item, idx) => {
+                  const isActive = idx === activeIndex;
+                  return (
+                    <button
+                      key={item.url}
+                      onClick={() => setActiveIndex(idx)}
+                      className="group relative flex flex-col items-start text-left w-full transition-all duration-300"
+                    >
+                      {/* Glowing Timeline Indicator Node */}
+                      <div 
+                        className="absolute -left-[26px] top-1 w-2.5 h-2.5 rounded-full bg-black border-2 transition-all duration-300 group-hover:scale-125" 
+                        style={{ 
+                          borderColor: isActive ? theme.primaryColor : "rgba(255,255,255,0.2)", 
+                          boxShadow: isActive ? `0 0 10px ${theme.primaryColor}80, 0 0 4px ${theme.primaryColor}` : "none"
+                        }} 
+                      />
+                      
+                      <span className={`font-mono text-[9px] tracking-wider transition-colors ${isActive ? 'text-white font-bold' : 'text-[#E1E0CC]/35'}`}>
+                        STEP 0{idx + 1}
+                      </span>
+                      <span className={`text-[11px] font-medium font-sans truncate w-full transition-colors ${isActive ? 'text-white' : 'text-[#E1E0CC]/40 group-hover:text-[#E1E0CC]/70'}`}>
+                        {item.title}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Right Column: Visual Viewport & Detailed Explanation (9 cols on lg) */}
-          <div className="lg:col-span-9 space-y-6">
+          {/* Right Column: Visual Viewport & Detailed Explanation */}
+          <div className={showTimeline ? "lg:col-span-9 space-y-6" : "lg:col-span-12 space-y-6 w-full"}>
             
             {/* Visual Viewport: Hero Image display */}
             <div 
@@ -189,7 +189,6 @@ export default function PremiumGallery({ screenshots, theme }: PremiumGalleryPro
 
           </div>
         </div>
-      </div>
 
       {/* Fullscreen Lightbox Modal */}
       {lightboxOpen && (
