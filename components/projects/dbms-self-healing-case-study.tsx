@@ -121,7 +121,7 @@ export function DbmsTheSolution({ theme }: ComponentProps) {
             className="absolute inset-0 opacity-20 blur-[100px] transition-opacity duration-700 group-hover:opacity-30 pointer-events-none" 
             style={{ background: `radial-gradient(circle at 50% 50%, ${theme.primaryColor}, transparent 70%)` }}
           />
-          <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay pointer-events-none"></div>
+          <div className={`absolute inset-0 bg-[url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")] opacity-[0.015] mix-blend-overlay pointer-events-none`}></div>
           
           <span className="text-xs font-mono uppercase tracking-[0.3em] text-white/50 mb-6 block z-10">Architectural Paradigm</span>
           <h3 className="text-2xl sm:text-4xl md:text-5xl font-extralight tracking-tight leading-tight text-white max-w-3xl z-10">

@@ -19,7 +19,7 @@ export default function MermaidRenderer({ chart, id }: MermaidRendererProps) {
         const mermaid = (await import("mermaid")).default;
         mermaid.initialize({
           startOnLoad: false,
-          theme: "dark",
+          theme: "base",
           securityLevel: "loose",
           themeVariables: {
             background: "#000000",
