@@ -157,6 +157,18 @@ export default async function ProjectDetailPage({ params }: Props) {
     { id: "architecture", label: "System Architecture" },
     { id: "enrollment", label: "Secure Enrollment" },
     { id: "screenshots", label: "Walkthrough" },
+  ] : project.id === "fcfs-scheduler-simulator" ? [
+    { id: "overview", label: "Executive Summary" },
+    { id: "problem", label: "The Core Problem" },
+    { id: "motivation", label: "Why I Built This" },
+    { id: "solution", label: "The Solution" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "algorithm", label: "Scheduling Algorithm" },
+    { id: "workflow", label: "Simulation Workflow" },
+    { id: "analytics", label: "Performance Analytics" },
+    { id: "visualization", label: "Interactive Visualization" },
+    { id: "highlights", label: "Engineering Highlights" },
+    { id: "lessons", label: "Lessons Learned" },
   ] : [
     { id: "overview", label: "Executive Summary" },
     ...(project.problemStatement ? [{ id: "problem", label: "Core Problem" }] : []),

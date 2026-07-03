@@ -4,6 +4,7 @@ export const fcfsSchedulerSimulatorProject: Project = {
     id: "fcfs-scheduler-simulator",
     title: "FCFS Scheduler Simulator",
     slug: "fcfs-scheduler-simulator",
+    githubUrl: "https://github.com/TSR0705/FCFS-SCHEDULING-SIMULATOR",
     category: "Desktop App",
     shortDescription: "A JavaFX desktop tool that simulates the First-Come, First-Served CPU scheduling algorithm with real-time visualization and metrics.",
     fullDescription: "This is a strong core CSE project because it demonstrates operating system concepts through a polished simulation interface.",
@@ -29,6 +30,20 @@ export const fcfsSchedulerSimulatorProject: Project = {
       gradient: "from-orange-950/15 via-neutral-950 to-neutral-950",
       shadow: "shadow-orange-500/20",
       iconName: "Cpu",
-      imageSrc: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop",
-    }
+      imageSrc: "/PROJECTS/FCFS Scheduler Simulator/HERO.webp",
+    },
+    detailedScreenshots: [
+      {
+        url: "/PROJECTS/FCFS Scheduler Simulator/HERO.webp",
+        title: "FCFS Simulator Main Interface",
+        description: "Visualizes process queues, Gantt chart construction, and step-by-step CPU execution states.",
+        category: "Simulation View"
+      },
+      {
+        url: "/PROJECTS/FCFS Scheduler Simulator/DASHBOARD.webp",
+        title: "Simulation Dashboard & Performance Analytics",
+        description: "Renders real-time execution statistics, process parameter inputs, and final metrics comparison charts.",
+        category: "Analytics Dashboard"
+      }
+    ]
   };
