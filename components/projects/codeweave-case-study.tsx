@@ -377,52 +377,7 @@ export function CodeweaveSecurity({ theme }: { theme: ProjectTheme }) {
   );
 }
 
-// 08. ENGINEERING HIGHLIGHTS
-// 08. ENGINEERING HIGHLIGHTS
-export function CodeweaveHighlights({ theme }: { theme: ProjectTheme }) {
-  return (
-    <section id="highlights" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
-      <div className="flex items-center gap-4">
-        <div className="flex items-center justify-center w-8 h-8 rounded-full border border-amber-500/20 bg-amber-500/5">
-          <Terminal className="w-4 h-4 text-amber-400" />
-        </div>
-        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/60">
-          Engineering Highlights
-        </h3>
-      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
-        {[
-          { title: "Real-Time Collaboration Engine", desc: "Event-driven architecture using Socket.IO to broadcast text changes and synchronize cursor locations dynamically." },
-          { title: "REST & WebSockets Hybrid", desc: "Decouples transaction endpoints (projects, accounts) from state-synchronizing long-polling tunnels." },
-          { title: "Browser-Based IDE Sandbox", desc: "Monaco Editor integration supporting syntax validation, active workspace file trees, and responsive tab managers." },
-          { title: "Dual-Database Persistence", desc: "Coordinates MongoDB collections for persistent files/threads with a Redis instance for session state." },
-          { title: "Redis Session Caching", desc: "Enforces stateless JWT token verifications backed by in-memory Redis buffers for session management." },
-          { title: "Context-Aware AI Ingestion", desc: "Integrates Google Gemini to ingest dynamic workspace file trees directly, generating clean debugging explanations." },
-          { title: "Decoupled Service Model", desc: "Modular Express backend dividing business controllers, WebSocket managers, and AI routing classes." },
-          { title: "Observability Pipeline", desc: "Implements Winston structured console logging for debugging concurrent socket transactions." },
-          { title: "Docker Deployment Ready", desc: "Containerized application blueprint enabling deployment configurations across container environments." },
-          { title: "Scalable Client-Server Blueprint", desc: "Asynchronous multi-user architecture supporting collaborative workspace instances." }
-        ].map((item, idx) => (
-          <div key={idx} className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-amber-500/20 transition-all duration-300 relative group overflow-hidden">
-            <div className="absolute top-0 left-0 w-1 h-full bg-amber-500/10 group-hover:bg-amber-500/30 transition-colors" />
-            <div className="space-y-2">
-              <span className="font-mono text-[9px] tracking-widest text-amber-400/80 block uppercase">
-                Highlight 0{idx < 9 ? `0${idx + 1}` : idx + 1}
-              </span>
-              <h4 className="text-base font-semibold text-white tracking-wide uppercase">
-                {item.title}
-              </h4>
-              <p className="text-[#E1E0CC]/75 text-sm leading-relaxed font-sans font-light">
-                {item.desc}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 // 09. WALKTHROUGH
 export function CodeweaveWalkthrough({ project, theme }: ComponentProps) {
@@ -509,7 +464,6 @@ export default function CodeweaveCaseStudy({ project, theme }: ComponentProps) {
       <CodeweaveCollaboration theme={theme} />
       <CodeweaveAiWorkflow theme={theme} />
       <CodeweaveSecurity theme={theme} />
-      <CodeweaveHighlights theme={theme} />
       <CodeweaveWalkthrough project={project} theme={theme} />
       <CodeweaveLessons theme={theme} />
     </div>

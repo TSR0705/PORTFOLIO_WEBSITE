@@ -4,6 +4,8 @@ export const codeweaveProject: Project = {
     id: "codeweave",
     title: "CodeWeave",
     slug: "codeweave",
+    githubUrl: "https://github.com/TSR0705/CodeWeave",
+    liveUrl: "https://codeweave-wheat.vercel.app/",
     category: "Full Stack",
     shortDescription: "A production-grade collaborative coding workspace with real-time text synchronization, file tree organization, and embedded AI coding assistance.",
     fullDescription: "This project shows real-time collaboration, backend orchestration, AI integration, and workspace-level product thinking.",

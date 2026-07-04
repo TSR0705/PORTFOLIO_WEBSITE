@@ -23,12 +23,33 @@ export default function MermaidRenderer({ chart, id }: MermaidRendererProps) {
           securityLevel: "loose",
           themeVariables: {
             background: "#000000",
-            primaryColor: "#E1E0CC",
+            primaryColor: "#111111",
             primaryTextColor: "#ffffff",
+            primaryBorderColor: "#E1E0CC",
             lineColor: "#E1E0CC",
             secondaryColor: "#111111",
             tertiaryColor: "#1a1a1a",
           },
+          themeCSS: `
+            .node rect, .node circle, .node polygon, .node path {
+              fill: #0a0a0a !important;
+              stroke: #E1E0CC !important;
+              stroke-width: 1px !important;
+            }
+            .node .label {
+              color: #ffffff !important;
+              font-weight: 300 !important;
+            }
+            .edgePath .path {
+              stroke: #E1E0CC !important;
+            }
+            .edgeLabel rect {
+              fill: #000000 !important;
+            }
+            .edgeLabel span {
+              color: #ffffff !important;
+            }
+          `,
         });
         
         // Generate a valid element id
