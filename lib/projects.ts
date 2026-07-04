@@ -49,29 +49,21 @@ export interface Project {
   detailedScreenshots?: { url: string; title: string; description: string; category: string }[];
 }
 
-import { loadlabDeploybotProject } from "./projects/loadlab-deploybot";
 import { dbmsSelfHealingProject } from "./projects/dbms-self-healing";
-import { webloomProject } from "./projects/webloom";
 import { codeweaveProject } from "./projects/codeweave";
 import { lmsPlatformProject } from "./projects/lms-platform";
-import { smartTabOrganizerProject } from "./projects/smart-tab-organizer";
 // import { androidTaskManagerProject } from "./projects/android-task-manager";
 import { exposurProject } from "./projects/exposur";
 import { fcfsSchedulerSimulatorProject } from "./projects/fcfs-scheduler-simulator";
-import { quizArenaProject } from "./projects/quiz-arena";
 import { androidTaskManagerProject } from "./projects/android-task-manager";
 
 export const projects: Project[] = [
-  loadlabDeploybotProject,
   dbmsSelfHealingProject,
-  webloomProject,
   codeweaveProject,
   lmsPlatformProject,
-  smartTabOrganizerProject,
   // androidTaskManagerProject,
   exposurProject,
   fcfsSchedulerSimulatorProject,
-  quizArenaProject,
 ];
 
 export const getProjectTheme = (id: string): ProjectTheme => {
