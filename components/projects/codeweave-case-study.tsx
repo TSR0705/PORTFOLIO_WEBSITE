@@ -11,12 +11,14 @@ import {
   ShieldCheck, 
   Users, 
   Activity,
-  Bot
+  Bot,
+  ArrowRight
 } from "lucide-react";
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
 import PremiumGallery from "@/components/ui/premium-gallery";
 import ZoomableImage from "@/components/ui/zoomable-image";
+import MermaidRenderer from "@/components/ui/mermaid-renderer";
 
 interface ComponentProps {
   project: Project;
@@ -176,7 +178,7 @@ export function CodeweaveTheSolution({ theme }: { theme: ProjectTheme }) {
 }
 
 // 04. SYSTEM ARCHITECTURE
-export function CodeweaveSystemArchitecture({ theme }: { theme: ProjectTheme }) {
+export function CodeweaveSystemArchitecture({ project, theme }: { project: Project; theme: ProjectTheme }) {
   return (
     <section id="architecture" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -194,51 +196,60 @@ export function CodeweaveSystemArchitecture({ theme }: { theme: ProjectTheme }) 
             An event-driven architecture designed around independent services.
           </h4>
           <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
-            The system communicates through dynamic HTTP queries and persistent WebSocket connections to coordinate and synchronize workspace states across all layers.
+            The application follows an event-driven architecture designed around independent services that communicate through HTTP and persistent WebSocket connections.
           </p>
         </div>
 
-        {/* Layer Blocks */}
-        <div className="p-8 rounded-2xl border border-white/5 bg-[#080808] relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 blur-[60px] rounded-full pointer-events-none" />
-          <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/40 mb-8 pb-3 border-b border-white/5">Layered Architecture Model</h5>
-          
-          <div className="space-y-4 max-w-3xl mx-auto font-mono text-xs">
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
-              <div>
-                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Presentation Layer</span>
-                <span className="text-[#E1E0CC]/80">A React Single Page Application built with Vite provides the collaborative IDE, project explorer, editor tabs, and AI interaction interface.</span>
-              </div>
+        {/* Dynamic Mermaid Diagram */}
+        {project.mermaidDiagram && (
+          <div className="space-y-5 pt-4">
+            <div className="rounded-2xl border border-white/10 bg-[#030303] overflow-hidden p-6 shadow-2xl">
+              <MermaidRenderer chart={project.mermaidDiagram} id="codeweave-architecture-diagram" />
             </div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+            <div className="flex items-start gap-3 px-2">
+              <ArrowRight className="w-4 h-4 text-white/40 mt-1 shrink-0" />
               <div>
-                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Communication Layer</span>
-                <span className="text-[#E1E0CC]/80">REST APIs handle authentication and project operations, while Socket.IO manages real-time synchronization between connected developers.</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
-              <div>
-                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Application Layer</span>
-                <span className="text-[#E1E0CC]/80">Express orchestrates business logic, authentication, project management, and AI request routing.</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
-              <div>
-                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Storage Layer</span>
-                <span className="text-[#E1E0CC]/80">MongoDB persists users, projects, conversations, and workspace state, while Redis accelerates authentication workflows and token validation.</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
-              <div>
-                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">AI Layer</span>
-                <span className="text-[#E1E0CC]/80">Google Gemini acts as an intelligent participant within collaborative sessions, generating code, explanations, and project structures when explicitly invoked.</span>
+                <h5 className="text-sm font-medium text-white">Event-Driven Flow & Storage Ingestion</h5>
+                <p className="text-sm text-white/50 font-light mt-1">
+                  Keystroke and cursors sync instantly via Socket.io tunnels, buffered transiently inside Redis, written periodically to MongoDB, and ingested into Google Gemini for contextual AI assistance.
+                </p>
               </div>
             </div>
           </div>
+        )}
+
+        {/* Layer Blocks */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+          {[
+            {
+              layer: "Presentation Layer",
+              desc: "A React Single Page Application built with Vite provides the collaborative IDE, project explorer, editor tabs, and AI interaction interface."
+            },
+            {
+              layer: "Communication Layer",
+              desc: "REST APIs handle authentication and project operations, while Socket.IO manages real-time synchronization between connected developers."
+            },
+            {
+              layer: "Application Layer",
+              desc: "Express orchestrates business logic, authentication, project management, and AI request routing."
+            },
+            {
+              layer: "Storage Layer",
+              desc: "MongoDB persists users, projects, conversations, and workspace state, while Redis accelerates authentication workflows and token validation."
+            },
+            {
+              layer: "AI Layer",
+              desc: "Google Gemini acts as an intelligent participant within collaborative sessions, generating code, explanations, and project structures when explicitly invoked."
+            }
+          ].map((item, idx) => (
+            <div key={idx} className="p-6 rounded-xl border border-white/5 bg-[#0a0a0a] relative overflow-hidden group hover:border-amber-500/25 transition-all duration-300">
+              <div className="absolute top-0 left-0 w-1 h-full bg-amber-500/20 group-hover:bg-amber-500/40 transition-colors" />
+              <div className="space-y-2">
+                <span className="text-amber-400 font-semibold block text-[10px] uppercase tracking-wider">{item.layer}</span>
+                <p className="text-sm text-[#E1E0CC]/70 font-light leading-relaxed">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -367,6 +378,7 @@ export function CodeweaveSecurity({ theme }: { theme: ProjectTheme }) {
 }
 
 // 08. ENGINEERING HIGHLIGHTS
+// 08. ENGINEERING HIGHLIGHTS
 export function CodeweaveHighlights({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="highlights" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
@@ -379,24 +391,32 @@ export function CodeweaveHighlights({ theme }: { theme: ProjectTheme }) {
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-5xl font-mono text-xs">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl">
         {[
-          { title: "Real-Time Collaboration", desc: "Event-driven architecture using Socket.IO for real-time collaboration." },
-          { title: "Hybrid Communication", desc: "REST and WebSocket hybrid communication model." },
-          { title: "IDE Workspace Integration", desc: "Monaco Editor integration for a browser-based IDE experience." },
-          { title: "Workspace Storage", desc: "Persistent project and conversation storage with MongoDB." },
-          { title: "Session Cache", desc: "Redis-backed authentication and token verification." },
-          { title: "Gemini AI Engine", desc: "Context-aware AI assistance powered by Google Gemini." },
-          { title: "Modular Architecture", desc: "Modular Express backend with separated service responsibilities." },
-          { title: "Logging & Health", desc: "Structured logging and observability using Winston." },
-          { title: "Docker Container Ready", desc: "Docker-ready deployment architecture." },
-          { title: "Client-Server Design", desc: "Scalable client-server design supporting collaborative development." }
+          { title: "Real-Time Collaboration Engine", desc: "Event-driven architecture using Socket.IO to broadcast text changes and synchronize cursor locations dynamically." },
+          { title: "REST & WebSockets Hybrid", desc: "Decouples transaction endpoints (projects, accounts) from state-synchronizing long-polling tunnels." },
+          { title: "Browser-Based IDE Sandbox", desc: "Monaco Editor integration supporting syntax validation, active workspace file trees, and responsive tab managers." },
+          { title: "Dual-Database Persistence", desc: "Coordinates MongoDB collections for persistent files/threads with a Redis instance for session state." },
+          { title: "Redis Session Caching", desc: "Enforces stateless JWT token verifications backed by in-memory Redis buffers for session management." },
+          { title: "Context-Aware AI Ingestion", desc: "Integrates Google Gemini to ingest dynamic workspace file trees directly, generating clean debugging explanations." },
+          { title: "Decoupled Service Model", desc: "Modular Express backend dividing business controllers, WebSocket managers, and AI routing classes." },
+          { title: "Observability Pipeline", desc: "Implements Winston structured console logging for debugging concurrent socket transactions." },
+          { title: "Docker Deployment Ready", desc: "Containerized application blueprint enabling deployment configurations across container environments." },
+          { title: "Scalable Client-Server Blueprint", desc: "Asynchronous multi-user architecture supporting collaborative workspace instances." }
         ].map((item, idx) => (
-          <div key={idx} className="p-5 rounded-xl border border-white/5 bg-[#0a0a0a] space-y-2">
-            <span className="text-amber-400 font-semibold block uppercase tracking-wider">{item.title}</span>
-            <p className="text-[#E1E0CC]/60 font-light leading-relaxed text-[11px]">
-              {item.desc}
-            </p>
+          <div key={idx} className="p-6 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-amber-500/20 transition-all duration-300 relative group overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-amber-500/10 group-hover:bg-amber-500/30 transition-colors" />
+            <div className="space-y-2">
+              <span className="font-mono text-[9px] tracking-widest text-amber-400/80 block uppercase">
+                Highlight 0{idx < 9 ? `0${idx + 1}` : idx + 1}
+              </span>
+              <h4 className="text-base font-semibold text-white tracking-wide uppercase">
+                {item.title}
+              </h4>
+              <p className="text-[#E1E0CC]/75 text-sm leading-relaxed font-sans font-light">
+                {item.desc}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -485,7 +505,7 @@ export default function CodeweaveCaseStudy({ project, theme }: ComponentProps) {
       <CodeweaveCoreProblem theme={theme} />
       <CodeweaveWhyIBuiltThis theme={theme} />
       <CodeweaveTheSolution theme={theme} />
-      <CodeweaveSystemArchitecture theme={theme} />
+      <CodeweaveSystemArchitecture project={project} theme={theme} />
       <CodeweaveCollaboration theme={theme} />
       <CodeweaveAiWorkflow theme={theme} />
       <CodeweaveSecurity theme={theme} />
