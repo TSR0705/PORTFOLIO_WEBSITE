@@ -2,20 +2,20 @@
 
 import React from "react";
 import { 
+  Sparkles, 
   Cpu, 
   AlertCircle, 
-  Sparkles, 
   CheckCircle, 
   Terminal, 
   Layers, 
   ShieldCheck, 
   Users, 
-  MessageSquare, 
-  ArrowRight,
-  Sparkle
+  Activity,
+  Bot
 } from "lucide-react";
-import { Project } from "@/lib/projects";
 import { ProjectTheme } from "@/lib/project-design";
+import { Project } from "@/lib/projects";
+import PremiumGallery from "@/components/ui/premium-gallery";
 import ZoomableImage from "@/components/ui/zoomable-image";
 
 interface ComponentProps {
@@ -24,12 +24,12 @@ interface ComponentProps {
 }
 
 // 01. THE CORE PROBLEM
-export function CodeWeaveCoreProblem({ theme }: ComponentProps) {
+export function CodeweaveCoreProblem({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="problem" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20">
-          <AlertCircle className="w-4 h-4 text-amber-400" />
+          <AlertCircle className="w-4 h-4 text-amber-500" />
         </div>
         <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/60">
           The Core Problem
@@ -38,34 +38,50 @@ export function CodeWeaveCoreProblem({ theme }: ComponentProps) {
       
       <div className="space-y-10 max-w-5xl">
         <h4 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-[1.15]">
-          Modern software development <br/>
-          <span className="font-medium text-amber-400">rarely happens in isolation.</span>
+          Modern software development <span className="font-medium text-amber-400">rarely happens in isolation.</span>
         </h4>
         
-        <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg font-sans max-w-4xl">
-          Developers constantly switch between code editors, messaging platforms, version control systems, and AI assistants. This friction breaks focus and slows down collaboration. While collaborative editors solve real-time synchronization, they often treat communication, code editing, and AI assistance as separate workflows. The challenge was to design a browser-based workspace where multiple developers could edit code simultaneously, communicate in real time, and interact with an AI assistant—all within a single, synchronized environment.
-        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+          <div className="lg:col-span-7 space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg">
+            <p>
+              Developers constantly switch between code editors, messaging platforms, version control, and AI assistants, breaking focus and slowing collaboration. While collaborative editors solve real-time synchronization, they often treat communication, code editing, and AI assistance as separate workflows.
+            </p>
+            <p>
+              The challenge was to design a browser-based workspace where multiple developers could edit code simultaneously, communicate in real time, and interact with an AI assistant—all within a single, synchronized environment.
+            </p>
+          </div>
+          
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <div className="relative p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm group hover:border-white/20 transition-colors duration-500">
+              <div className="absolute top-0 left-0 w-1 h-full rounded-l-2xl" style={{ backgroundColor: theme.primaryColor }} />
+              <QuoteIcon className="w-10 h-10 text-white/10 absolute top-4 left-6" />
+              <blockquote className="relative z-10 text-white/90 italic font-light text-xl leading-relaxed pt-4">
+                "Context switching is the silent killer of engineering velocity. Moving between code, chat, and AI breaks developer flow and fractures collaboration."
+              </blockquote>
+            </div>
+          </div>
+        </div>
 
         {/* Three Problem Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
           <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-amber-500/20 transition-all duration-300 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">01. Fragmented Collaboration</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">Problem 01 — Fragmented Collaboration</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
               Developers frequently switch between IDEs, chat applications, and AI tools, creating unnecessary context switching during collaborative development.
             </p>
           </div>
 
           <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-amber-500/20 transition-all duration-300 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">02. Real-Time Sync</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">Problem 02 — State Sync</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
               Keeping multiple users synchronized while maintaining a consistent project state requires an event-driven communication model capable of handling concurrent updates.
             </p>
           </div>
 
           <div className="p-8 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-amber-500/20 transition-all duration-300 space-y-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">03. Disconnected AI</span>
+            <span className="text-xs font-mono uppercase tracking-widest text-amber-400 font-semibold block">Problem 03 — Disconnected AI</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
-              Most AI coding assistants operate outside the collaborative environment. Developers must leave their workflow to generate code or debug, interrupting productivity.
+              Most AI coding assistants operate outside the collaborative environment. Developers must leave their workflow to generate code, debug, or seek explanations.
             </p>
           </div>
         </div>
@@ -75,7 +91,7 @@ export function CodeWeaveCoreProblem({ theme }: ComponentProps) {
 }
 
 // 02. WHY I BUILT THIS
-export function CodeWeaveWhyIBuiltThis({ theme }: ComponentProps) {
+export function CodeweaveWhyIBuiltThis({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="motivation" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -88,12 +104,12 @@ export function CodeWeaveWhyIBuiltThis({ theme }: ComponentProps) {
       </div>
 
       <div className="space-y-8 max-w-4xl">
-        <h4 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-[1.15]">
-          Exploring the mechanics of <br />
-          <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">real-time developer workspaces at scale.</span>
+        <h4 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-tight">
+          Exploring real-time communication <br/>
+          <span className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">at scale.</span>
         </h4>
 
-        <div className="space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl font-sans">
+        <div className="space-y-6 text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
           <p>
             I wanted to understand how collaborative development platforms manage real-time communication at scale. Rather than building another online code editor, I focused on the systems that enable collaborative software engineering—WebSocket communication, shared state synchronization, persistent storage, and AI-assisted development.
           </p>
@@ -107,7 +123,7 @@ export function CodeWeaveWhyIBuiltThis({ theme }: ComponentProps) {
 }
 
 // 03. THE SOLUTION
-export function CodeWeaveTheSolution({ theme }: ComponentProps) {
+export function CodeweaveTheSolution({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="solution" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -120,42 +136,37 @@ export function CodeWeaveTheSolution({ theme }: ComponentProps) {
       </div>
 
       <div className="space-y-12 max-w-5xl">
-        <div className="space-y-4">
-          <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
-            A decoupled client-server architecture.
-          </h4>
-          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
-            CodeWeave adopts a decoupled client-server architecture where each subsystem is responsible for a single concern. This separation allows the platform to remain modular, scalable, and responsive while supporting simultaneous collaboration across multiple users.
-          </p>
-        </div>
+        <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-4xl">
+          CodeWeave adopts a decoupled client-server architecture where each subsystem is responsible for a single concern. This separation allows the platform to remain modular, scalable, and responsive while supporting simultaneous collaboration across multiple users.
+        </p>
 
-        {/* Core Component Highlights */}
+        {/* Dynamic Solution Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
           <div className="p-8 rounded-2xl border border-white/5 bg-[#0a0a0a] space-y-4">
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">React Frontend & Monaco</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">React & Monaco Editor Frontend</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
-              Provides a modern web IDE experience powered by the Monaco Editor, supplying syntax layouts, file tree tabs, and team cursor positions.
+              Provides a modern web-based IDE experience with full syntax highlights, multi-tab navigation, and workspace tree visualization.
             </p>
           </div>
 
           <div className="p-8 rounded-2xl border border-white/5 bg-[#0a0a0a] space-y-4">
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">Express & Socket.IO Gateway</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">Express & Socket.IO Services</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
-              Express exposes REST endpoints for application services, while Socket.IO maintains low-latency communication channels between collaborators.
+              Exposes REST endpoints for system queries and maintains persistent WebSocket communication channels for low-latency keystroke sync.
             </p>
           </div>
 
           <div className="p-8 rounded-2xl border border-white/5 bg-[#0a0a0a] space-y-4">
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">MongoDB & Redis Layer</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">MongoDB & Redis Storage Layer</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
-              MongoDB persists project structures and chat records, while Redis accelerates authentication workflows and validates active session tokens.
+              MongoDB persists collaborative projects and user conversations, while a Redis cache accelerates session authentication.
             </p>
           </div>
 
           <div className="p-8 rounded-2xl border border-white/5 bg-[#0a0a0a] space-y-4">
-            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">Google Gemini API</span>
+            <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-semibold block">Embedded Gemini AI Engine</span>
             <p className="text-sm text-[#E1E0CC]/60 font-light leading-relaxed">
-              Integrates directly into active collaborative rooms to provide contextual coding assistance, debugging, and file generation.
+              Integrates directly into collaborative rooms to generate project files, debug code, and provide context-aware insights.
             </p>
           </div>
         </div>
@@ -165,7 +176,7 @@ export function CodeWeaveTheSolution({ theme }: ComponentProps) {
 }
 
 // 04. SYSTEM ARCHITECTURE
-export function CodeWeaveSystemArchitecture({ theme }: ComponentProps) {
+export function CodeweaveSystemArchitecture({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="architecture" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -183,47 +194,49 @@ export function CodeWeaveSystemArchitecture({ theme }: ComponentProps) {
             An event-driven architecture designed around independent services.
           </h4>
           <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
-            The system maps presentation elements directly to isolated communication layers, utilizing WebSockets for live states and HTTP REST endpoints for persistent project operations.
+            The system communicates through dynamic HTTP queries and persistent WebSocket connections to coordinate and synchronize workspace states across all layers.
           </p>
         </div>
 
-        {/* Visual Architecture Layers */}
+        {/* Layer Blocks */}
         <div className="p-8 rounded-2xl border border-white/5 bg-[#080808] relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 blur-[60px] rounded-full pointer-events-none" />
-          <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/40 mb-8 pb-3 border-b border-white/5">Layered Architecture Stack</h5>
+          <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/40 mb-8 pb-3 border-b border-white/5">Layered Architecture Model</h5>
           
           <div className="space-y-4 max-w-3xl mx-auto font-mono text-xs">
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">01. Presentation Layer</span>
-              <span className="text-[#E1E0CC]/80">React SPA built with Vite, providing the collaborative IDE, explorer, tabs, and chat panels.</span>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+              <div>
+                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Presentation Layer</span>
+                <span className="text-[#E1E0CC]/80">A React Single Page Application built with Vite provides the collaborative IDE, project explorer, editor tabs, and AI interaction interface.</span>
+              </div>
             </div>
 
-            <div className="flex justify-center text-[#E1E0CC]/30 py-0.5"><ArrowRight className="w-4 h-4 rotate-90" /></div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">02. Communication Layer</span>
-              <span className="text-[#E1E0CC]/80">Socket.IO managing low-latency WebSocket streams and Express REST APIs handling system services.</span>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+              <div>
+                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Communication Layer</span>
+                <span className="text-[#E1E0CC]/80">REST APIs handle authentication and project operations, while Socket.IO manages real-time synchronization between connected developers.</span>
+              </div>
             </div>
 
-            <div className="flex justify-center text-[#E1E0CC]/30 py-0.5"><ArrowRight className="w-4 h-4 rotate-90" /></div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">03. Application Layer</span>
-              <span className="text-[#E1E0CC]/80">Express routers processing business logic, workspace authorization, and Gemini routing.</span>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+              <div>
+                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Application Layer</span>
+                <span className="text-[#E1E0CC]/80">Express orchestrates business logic, authentication, project management, and AI request routing.</span>
+              </div>
             </div>
 
-            <div className="flex justify-center text-[#E1E0CC]/30 py-0.5"><ArrowRight className="w-4 h-4 rotate-90" /></div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">04. Storage Layer</span>
-              <span className="text-[#E1E0CC]/80">MongoDB storing user collections, JSON file trees, and chat logs. Redis validating tokens and active session variables.</span>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+              <div>
+                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">Storage Layer</span>
+                <span className="text-[#E1E0CC]/80">MongoDB persists users, projects, conversations, and workspace state, while Redis accelerates authentication workflows and token validation.</span>
+              </div>
             </div>
 
-            <div className="flex justify-center text-[#E1E0CC]/30 py-0.5"><ArrowRight className="w-4 h-4 rotate-90" /></div>
-
-            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-              <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">05. AI Layer</span>
-              <span className="text-[#E1E0CC]/80">Google Gemini API evaluating active coding selections and writing code contextually.</span>
+            <div className="p-4 rounded-xl border border-white/5 bg-white/[0.01] flex items-center justify-between">
+              <div>
+                <span className="text-amber-400 font-semibold uppercase block text-[9px] mb-1">AI Layer</span>
+                <span className="text-[#E1E0CC]/80">Google Gemini acts as an intelligent participant within collaborative sessions, generating code, explanations, and project structures when explicitly invoked.</span>
+              </div>
             </div>
           </div>
         </div>
@@ -233,7 +246,7 @@ export function CodeWeaveSystemArchitecture({ theme }: ComponentProps) {
 }
 
 // 05. REAL-TIME COLLABORATION
-export function CodeWeaveRealTimeCollaboration({ theme }: ComponentProps) {
+export function CodeweaveCollaboration({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="collaboration" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -248,20 +261,31 @@ export function CodeWeaveRealTimeCollaboration({ theme }: ComponentProps) {
       <div className="space-y-12 max-w-5xl">
         <div className="space-y-4">
           <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
-            Every workspace operates as a synchronized room.
+            Every workspace operates as a synchronized communication room.
           </h4>
-          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl font-sans">
+          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
             When a developer edits code or sends a project message, the client emits a WebSocket event to the server. The server persists the update, broadcasts the change to all connected participants, and maintains a consistent workspace state across every active client. This event-driven model minimizes latency while ensuring every participant shares the same project context.
           </p>
         </div>
 
-        {/* Working Demo 03 Screenshot */}
-        <div className="space-y-6 pt-4 max-w-4xl">
-          <ZoomableImage
-            src="/PROJECTS/CODEWEAVE/WORKIND DEMO-03.webp"
-            alt="Real-Time State Synchronization and Workspace Chat"
-            wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
-          />
+        {/* Visual Showcase */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 max-w-5xl">
+          <div className="space-y-4">
+            <ZoomableImage
+              src="/PROJECTS/CODEWEAVE/WORKIND DEMO-01.webp"
+              alt="Real-Time Typing Synchronization"
+              wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
+            />
+            <p className="text-xs font-mono text-[#E1E0CC]/40 tracking-wider">TYPING SYNCHRONIZATION INTERFACE</p>
+          </div>
+          <div className="space-y-4">
+            <ZoomableImage
+              src="/PROJECTS/CODEWEAVE/WORKIND DEMO-02.webp"
+              alt="Multi-File Editor Tabs"
+              wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
+            />
+            <p className="text-xs font-mono text-[#E1E0CC]/40 tracking-wider">MULTI-FILE TAB SYNCHRONIZATION</p>
+          </div>
         </div>
       </div>
     </section>
@@ -269,12 +293,12 @@ export function CodeWeaveRealTimeCollaboration({ theme }: ComponentProps) {
 }
 
 // 06. AI CODING WORKFLOW
-export function CodeWeaveAICodingWorkflow({ theme }: ComponentProps) {
+export function CodeweaveAiWorkflow({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="ai-workflow" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-amber-500/20 bg-amber-500/5">
-          <Sparkle className="w-4 h-4 text-amber-400" />
+          <Bot className="w-4 h-4 text-amber-400" />
         </div>
         <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/60">
           AI Coding Workflow
@@ -284,20 +308,21 @@ export function CodeWeaveAICodingWorkflow({ theme }: ComponentProps) {
       <div className="space-y-12 max-w-5xl">
         <div className="space-y-4">
           <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
-            Embedding AI directly into the collaboration loop.
+            Embedding intelligent assistance directly into the collaboration workspace.
           </h4>
-          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl font-sans">
+          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
             Rather than treating AI as an external assistant, CodeWeave embeds it directly into the collaboration workflow. When a developer invokes @ai, the Socket Gateway detects the request, forwards the prompt to Gemini, stores the generated response, and broadcasts the result to every participant within the project room. The AI therefore becomes another active collaborator rather than a separate application.
           </p>
         </div>
 
-        {/* Working Demo 04 Screenshot */}
-        <div className="space-y-6 pt-4 max-w-4xl">
+        {/* Visual Showcase */}
+        <div className="space-y-4 max-w-4xl">
           <ZoomableImage
-            src="/PROJECTS/CODEWEAVE/WORKIND DEMO-04.webp"
-            alt="Context-Aware AI Assistant integration within Collaborative Editor"
+            src="/PROJECTS/CODEWEAVE/WORKIND DEMO-03.webp"
+            alt="Embedded Gemini AI Assistant"
             wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
           />
+          <p className="text-xs font-mono text-[#E1E0CC]/40 tracking-wider">CONTEXT-AWARE AI CHAT ASSISTANT</p>
         </div>
       </div>
     </section>
@@ -305,7 +330,7 @@ export function CodeWeaveAICodingWorkflow({ theme }: ComponentProps) {
 }
 
 // 07. SECURITY & COMMUNICATION
-export function CodeWeaveSecurity({ theme }: ComponentProps) {
+export function CodeweaveSecurity({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="security" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -320,32 +345,21 @@ export function CodeWeaveSecurity({ theme }: ComponentProps) {
       <div className="space-y-12 max-w-5xl">
         <div className="space-y-4">
           <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
-            Token-based authentication across REST and WebSocket connections.
+            Securing persistent tunnels and API endpoints.
           </h4>
-          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl font-sans">
+          <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-lg max-w-3xl">
             Authentication is enforced through JWT verification across both REST endpoints and persistent WebSocket connections. Protected routes validate incoming requests before business logic executes, while Redis-backed token verification strengthens session management. This separation between authentication and application services keeps communication secure without increasing complexity inside the core collaboration engine.
           </p>
         </div>
 
-        {/* Security & Workspace Images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-          <div className="space-y-4">
-            <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/40">01. Workspace Authentication</h5>
-            <ZoomableImage
-              src="/PROJECTS/CODEWEAVE/LOGIN SIGNUP.webp"
-              alt="Secure Login and Signup Screen"
-              wrapperClassName="w-full h-auto shadow-xl ring-1 ring-white/10"
-            />
-          </div>
-
-          <div className="space-y-4">
-            <h5 className="text-[10px] font-mono uppercase tracking-widest text-[#E1E0CC]/40">02. Workspace Access Controls</h5>
-            <ZoomableImage
-              src="/PROJECTS/CODEWEAVE/MANAGE WORKSPACE.webp"
-              alt="Manage Workspace and Member Access panel"
-              wrapperClassName="w-full h-auto shadow-xl ring-1 ring-white/10"
-            />
-          </div>
+        {/* Visual Showcase */}
+        <div className="space-y-4 max-w-4xl">
+          <ZoomableImage
+            src="/PROJECTS/CODEWEAVE/WORKIND DEMO-04.webp"
+            alt="Workspace State Synchronization"
+            wrapperClassName="w-full h-auto shadow-2xl ring-1 ring-white/10"
+          />
+          <p className="text-xs font-mono text-[#E1E0CC]/40 tracking-wider">MONGODB WORKSPACE STATE PERSISTENCE</p>
         </div>
       </div>
     </section>
@@ -353,7 +367,7 @@ export function CodeWeaveSecurity({ theme }: ComponentProps) {
 }
 
 // 08. ENGINEERING HIGHLIGHTS
-export function CodeWeaveHighlights({ theme }: ComponentProps) {
+export function CodeweaveHighlights({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="highlights" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
@@ -365,76 +379,57 @@ export function CodeWeaveHighlights({ theme }: ComponentProps) {
         </h3>
       </div>
 
-      <div className="space-y-12 max-w-5xl">
-        <div className="space-y-4">
-          <h4 className="text-3xl sm:text-4xl font-light tracking-tight text-white leading-tight">
-            Technical highlights of the collaboration workspace.
-          </h4>
-        </div>
-
-        {/* Highlights Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4 font-mono text-xs">
-          {[
-            {
-              title: "Event-Driven Sync",
-              desc: "Employs Socket.IO WebSocket streams to synchronize keystrokes under 45ms."
-            },
-            {
-              title: "Hybrid Communication",
-              desc: "Blends REST endpoints with persistent WebSockets to manage session operations."
-            },
-            {
-              title: "Monaco IDE Integration",
-              desc: "Integrates VS Code's editor core for native syntax layouts and multi-cursor views."
-            },
-            {
-              title: "Persistent Storage",
-              desc: "Persists document states, folder nodes, and conversation threads in MongoDB."
-            },
-            {
-              title: "Redis Session Caching",
-              desc: "Implements transient Redis memory keys to accelerate validation and authentication."
-            },
-            {
-              title: "Embedded Gemini API",
-              desc: "Injects Google Gemini LLM directly inside WebSocket chat threads as a participant."
-            },
-            {
-              title: "Decoupled Architecture",
-              desc: "Maintains a modular Express.js server, decoupling auth, sockets, and AI routing."
-            },
-            {
-              title: "Observability Logging",
-              desc: "Utilizes Winston logs to track network requests and WebSocket exceptions."
-            },
-            {
-              title: "Docker-Ready Setup",
-              desc: "Packaged with Docker configurations to ensure consistent local development environments."
-            },
-            {
-              title: "Scalable Client Design",
-              desc: "Supports concurrent editing sessions across rooms without performance lag."
-            }
-          ].map((item, idx) => (
-            <div key={idx} className="p-5 rounded-xl border border-white/5 bg-[#0a0a0a] space-y-2">
-              <span className="text-amber-400 font-semibold block uppercase tracking-wider">{item.title}</span>
-              <p className="text-[#E1E0CC]/60 font-light leading-relaxed text-[11px]">
-                {item.desc}
-              </p>
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-5xl font-mono text-xs">
+        {[
+          { title: "Real-Time Collaboration", desc: "Event-driven architecture using Socket.IO for real-time collaboration." },
+          { title: "Hybrid Communication", desc: "REST and WebSocket hybrid communication model." },
+          { title: "IDE Workspace Integration", desc: "Monaco Editor integration for a browser-based IDE experience." },
+          { title: "Workspace Storage", desc: "Persistent project and conversation storage with MongoDB." },
+          { title: "Session Cache", desc: "Redis-backed authentication and token verification." },
+          { title: "Gemini AI Engine", desc: "Context-aware AI assistance powered by Google Gemini." },
+          { title: "Modular Architecture", desc: "Modular Express backend with separated service responsibilities." },
+          { title: "Logging & Health", desc: "Structured logging and observability using Winston." },
+          { title: "Docker Container Ready", desc: "Docker-ready deployment architecture." },
+          { title: "Client-Server Design", desc: "Scalable client-server design supporting collaborative development." }
+        ].map((item, idx) => (
+          <div key={idx} className="p-5 rounded-xl border border-white/5 bg-[#0a0a0a] space-y-2">
+            <span className="text-amber-400 font-semibold block uppercase tracking-wider">{item.title}</span>
+            <p className="text-[#E1E0CC]/60 font-light leading-relaxed text-[11px]">
+              {item.desc}
+            </p>
+          </div>
+        ))}
       </div>
     </section>
   );
 }
 
-// 09. LESSONS LEARNED
-export function CodeWeaveLessons({ theme }: ComponentProps) {
+// 09. WALKTHROUGH
+export function CodeweaveWalkthrough({ project, theme }: ComponentProps) {
+  if (!project.detailedScreenshots) return null;
+  return (
+    <section id="screenshots" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
+      <div className="flex items-center gap-4">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full border border-amber-500/20 bg-amber-500/5">
+          <Activity className="w-4 h-4 text-amber-400" />
+        </div>
+        <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/60">
+          Walkthrough Gallery
+        </h3>
+      </div>
+      <div className="max-w-6xl">
+        <PremiumGallery screenshots={project.detailedScreenshots} theme={theme} />
+      </div>
+    </section>
+  );
+}
+
+// 10. LESSONS LEARNED
+export function CodeweaveLessons({ theme }: { theme: ProjectTheme }) {
   return (
     <section id="lessons" className="py-20 border-t border-white/5 space-y-12 scroll-mt-28">
       <div className="flex items-center gap-4">
-        <div className="flex items-center justify-center w-8 h-8 rounded-full border border-amber-500/20 bg-amber-500/5">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/20">
           <CheckCircle className="w-4 h-4 text-amber-400" />
         </div>
         <h3 className="text-sm font-mono uppercase tracking-[0.2em] text-[#E1E0CC]/60">
@@ -445,21 +440,21 @@ export function CodeWeaveLessons({ theme }: ComponentProps) {
       <div className="space-y-10 max-w-5xl">
         <div className="p-8 rounded-2xl border border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent space-y-6">
           <div className="space-y-2">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">01. Designing for Consistency</span>
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">01. Consistency over Actions</span>
             <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-base">
               Building collaborative software requires designing for consistency rather than individual user interactions. Event-driven communication proved essential for synchronizing multiple developers without sacrificing responsiveness.
             </p>
           </div>
           
           <div className="space-y-2 pt-4 border-t border-white/5">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">02. Value of Layered Architecture</span>
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">02. Decoupled Subsystem Layering</span>
             <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-base">
               Separating REST operations, WebSocket communication, AI services, and persistence into independent layers made the architecture significantly easier to extend and maintain.
             </p>
           </div>
 
           <div className="space-y-2 pt-4 border-t border-white/5">
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">03. Context-Aware AI Assistants</span>
+            <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block">03. Shared-Context AI Assistants</span>
             <p className="text-[#E1E0CC]/70 font-light leading-relaxed text-base">
               Integrating AI directly into collaborative workflows demonstrated that intelligent assistants become far more useful when they operate within the shared project context instead of existing as isolated external tools.
             </p>
@@ -470,19 +465,33 @@ export function CodeWeaveLessons({ theme }: ComponentProps) {
   );
 }
 
+// Helper SVG for Blockquote
+function QuoteIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="currentColor" 
+      {...props}
+    >
+      <path d="M14.017 21L16.41 14.925H10.846V3H21V11.238L16.326 21H14.017ZM3.068 21L5.461 14.925H-0.103V3H10.051V11.238L5.377 21H3.068Z" />
+    </svg>
+  );
+}
+
 // Main Default Export
 export default function CodeweaveCaseStudy({ project, theme }: ComponentProps) {
   return (
     <div className="space-y-12 pb-24">
-      <CodeWeaveCoreProblem project={project} theme={theme} />
-      <CodeWeaveWhyIBuiltThis project={project} theme={theme} />
-      <CodeWeaveTheSolution project={project} theme={theme} />
-      <CodeWeaveSystemArchitecture project={project} theme={theme} />
-      <CodeWeaveRealTimeCollaboration project={project} theme={theme} />
-      <CodeWeaveAICodingWorkflow project={project} theme={theme} />
-      <CodeWeaveSecurity project={project} theme={theme} />
-      <CodeWeaveHighlights project={project} theme={theme} />
-      <CodeWeaveLessons project={project} theme={theme} />
+      <CodeweaveCoreProblem theme={theme} />
+      <CodeweaveWhyIBuiltThis theme={theme} />
+      <CodeweaveTheSolution theme={theme} />
+      <CodeweaveSystemArchitecture theme={theme} />
+      <CodeweaveCollaboration theme={theme} />
+      <CodeweaveAiWorkflow theme={theme} />
+      <CodeweaveSecurity theme={theme} />
+      <CodeweaveHighlights theme={theme} />
+      <CodeweaveWalkthrough project={project} theme={theme} />
+      <CodeweaveLessons theme={theme} />
     </div>
   );
 }
