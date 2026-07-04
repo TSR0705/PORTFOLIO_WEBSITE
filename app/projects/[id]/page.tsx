@@ -149,6 +149,17 @@ export default async function ProjectDetailPage({ params }: Props) {
     { id: "dns-leak", label: "DNS Leak Engine" },
     { id: "fingerprint", label: "Client Fingerprinting" },
     { id: "screenshots", label: "Walkthrough" },
+  ] : project.id === "codeweave" ? [
+    { id: "overview", label: "Executive Summary" },
+    { id: "problem", label: "The Core Problem" },
+    { id: "motivation", label: "Why I Built This" },
+    { id: "solution", label: "The Solution" },
+    { id: "architecture", label: "System Architecture" },
+    { id: "collaboration", label: "Real-Time Collaboration" },
+    { id: "ai-workflow", label: "AI Coding Workflow" },
+    { id: "security", label: "Security & Communication" },
+    { id: "highlights", label: "Engineering Highlights" },
+    { id: "lessons", label: "Lessons Learned" },
   ] : project.id === "lms-platform" ? [
     { id: "overview", label: "Executive Summary" },
     { id: "problem", label: "The Core Problem" },

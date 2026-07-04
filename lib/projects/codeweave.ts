@@ -4,6 +4,8 @@ export const codeweaveProject: Project = {
     id: "codeweave",
     title: "CodeWeave",
     slug: "codeweave",
+    githubUrl: "https://github.com/TSR0705/AGENTIC-AI-PROJECT",
+    liveUrl: "https://codeweave-wheat.vercel.app",
     category: "Full Stack",
     shortDescription: "A production-grade collaborative coding workspace with real-time text synchronization, file tree organization, and embedded AI coding assistance.",
     fullDescription: "This project shows real-time collaboration, backend orchestration, AI integration, and workspace-level product thinking.",
@@ -144,6 +146,50 @@ export const codeweaveProject: Project = {
       gradient: "from-amber-950/15 via-neutral-950 to-neutral-950",
       shadow: "shadow-amber-500/20",
       iconName: "Code",
-      imageSrc: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop",
-    }
+      imageSrc: "/PROJECTS/CODEWEAVE/WORKIND DEMO-01.webp",
+    },
+    detailedScreenshots: [
+      {
+        url: "/PROJECTS/CODEWEAVE/WORKIND DEMO-01.webp",
+        title: "Collaborative Coding Workspace",
+        description: "Monaco-powered multi-user editor panel with synchronized tabs and inline cursor metrics.",
+        category: "IDE Interface"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/WORKIND DEMO-02.webp",
+        title: "Workspace File Explorer & Editor View",
+        description: "Enables folder management, project mutations, and active edit state tracking across rooms.",
+        category: "File Workspace"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/WORKIND DEMO-03.webp",
+        title: "Real-Time State Synchronization & Dynamic Chat",
+        description: "Allows connected collaborators to discuss logic modifications and track code executions.",
+        category: "Real-Time Collaboration"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/WORKIND DEMO-04.webp",
+        title: "Context-Aware AI Assistant & Chat Window",
+        description: "Invokes Google Gemini with active workspace context to resolve logic compilation warnings.",
+        category: "AI Sandbox Integration"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/DASHBOARD.webp",
+        title: "Collaborative Dashboard",
+        description: "Workspace analytics, session controls, and workspace access log indicators.",
+        category: "Analytics View"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/MANAGE WORKSPACE.webp",
+        title: "Workspace Management Screen",
+        description: "Allows project creators to edit permissions, invite members, and adjust workspace details.",
+        category: "Workspace Controls"
+      },
+      {
+        url: "/PROJECTS/CODEWEAVE/LOGIN SIGNUP.webp",
+        title: "Login & Signup Interface",
+        description: "Provides secure token-based user authentication using JWT and persistent databases.",
+        category: "Security"
+      }
+    ]
   };
