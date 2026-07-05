@@ -35,7 +35,7 @@ const achievementsList = achievementsData
 
 export default function AchievementsSection() {
   return (
-    <section id="achievements" className="min-h-screen w-full bg-black text-white px-6 py-20 md:py-32 relative overflow-hidden">
+    <section id="recognition" className="min-h-screen w-full bg-black text-white px-6 py-20 md:py-32 relative overflow-hidden scroll-mt-28">
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 space-y-16">

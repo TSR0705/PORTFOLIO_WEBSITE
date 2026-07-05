@@ -26,37 +26,8 @@ export const metadata: Metadata = {
 
 import { projects } from "@/lib/projects";
 
-export default function ProjectsPage() {
-  const collectionSchema = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": `${siteUrl}/projects/#collection`,
-    "url": `${siteUrl}/projects`,
-    "name": "Projects Deck | Tanmay Singh",
-    "description": "Selected engineering works and system design case studies by Tanmay Singh.",
-    "about": {
-      "@type": "Person",
-      "name": "Tanmay Singh"
-    },
-    "mainEntity": {
-      "@type": "ItemList",
-      "itemListElement": projects.map((p, idx) => ({
-        "@type": "ListItem",
-        "position": idx + 1,
-        "url": `${siteUrl}/projects/${p.id}`,
-        "name": p.title,
-        "description": p.shortDescription
-      }))
-    }
-  };
+import { redirect } from "next/navigation";
 
-  return (
-    <main className="min-h-screen w-full bg-black flex flex-col items-center justify-center pt-24 pb-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
-      />
-      <ProjectShowcase />
-    </main>
-  );
+export default function ProjectsPage() {
+  redirect("/#projects");
 }

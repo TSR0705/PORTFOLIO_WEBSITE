@@ -7,10 +7,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
   { name: "Home", target: "/" },
-  { name: "About", target: "/about" },
-  { name: "Projects", target: "/projects" },
-  { name: "Skills", target: "/#skills" },
-  { name: "Recognition", target: "/recognition" },
+  { name: "About", target: "/#about" },
+  { name: "Projects", target: "/#projects" },
+  { name: "Recognition", target: "/#recognition" },
   { name: "Contact", target: "/contact" },
 ];
 
@@ -19,6 +18,7 @@ export default function GlobalNavbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("/");
 
   // Hide navbar on 404 page (when pathname is not matching any defined routes)
   const validRoutes = ["/", "/about", "/projects", "/recognition", "/contact"];
@@ -31,6 +31,33 @@ export default function GlobalNavbar() {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
+      }
+
+      if (pathname === "/") {
+        const scrollPosition = window.scrollY + 200;
+        const sections = [
+          { id: "/", offset: 0 },
+          { id: "/#about", element: document.getElementById("about") },
+          { id: "/#projects", element: document.getElementById("projects") },
+          { id: "/#recognition", element: document.getElementById("recognition") },
+        ];
+
+        let currentActive = "/";
+        for (const sec of sections) {
+          if (sec.element) {
+            const top = sec.element.offsetTop;
+            const height = sec.element.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              currentActive = sec.id;
+            }
+          }
+        }
+
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+          currentActive = "/#recognition";
+        }
+
+        setActiveSection(currentActive);
       }
     };
 
@@ -52,7 +79,7 @@ export default function GlobalNavbar() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [pathname]);
 
   // Enlarge state: Scrolled on home page OR on any subpage
   const isEnlarged = isScrolled || pathname !== "/";
@@ -116,7 +143,9 @@ export default function GlobalNavbar() {
                   className="flex flex-col gap-3.5 w-full border-t border-[#E1E0CC]/10 pt-4"
                 >
                   {navItems.map((item) => {
-                    const isActive = pathname === item.target;
+                    const isActive = pathname === "/" 
+                      ? activeSection === item.target 
+                      : pathname === item.target;
                     return (
                       <Link
                         key={item.name}
@@ -149,7 +178,9 @@ export default function GlobalNavbar() {
           /* Desktop Menu items */
           <div className="flex items-center gap-6 md:gap-10 lg:gap-14">
             {navItems.map((item) => {
-              const isActive = pathname === item.target;
+              const isActive = pathname === "/" 
+                ? activeSection === item.target 
+                : pathname === item.target;
               return (
                 <Link
                   key={item.name}

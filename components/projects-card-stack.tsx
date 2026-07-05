@@ -64,7 +64,7 @@ export default function ProjectsCardStack() {
   }, []);
 
   return (
-    <section id="project-carousel" className="w-full bg-black text-white px-6 py-20 relative border-t border-white/5 overflow-hidden">
+    <section id="projects" className="w-full bg-black text-white px-6 py-20 relative border-t border-white/5 overflow-hidden scroll-mt-28">
       {/* Background glow styling */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#E1E0CC]/[0.015] rounded-full blur-[140px] pointer-events-none" />
 

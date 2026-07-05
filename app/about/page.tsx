@@ -24,10 +24,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { redirect } from "next/navigation";
+
 export default function AboutPage() {
-  return (
-    <main className="min-h-screen w-full bg-black pt-28 md:pt-36 flex flex-col justify-center pb-12 md:pb-20">
-      <AboutSection />
-    </main>
-  );
+  redirect("/#about");
 }

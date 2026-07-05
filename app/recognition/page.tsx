@@ -24,10 +24,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { redirect } from "next/navigation";
+
 export default function RecognitionPage() {
-  return (
-    <main className="min-h-screen w-full bg-black pt-28 md:pt-36">
-      <AchievementsSection />
-    </main>
-  );
+  redirect("/#recognition");
 }

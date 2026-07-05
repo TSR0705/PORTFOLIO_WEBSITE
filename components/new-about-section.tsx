@@ -131,7 +131,7 @@ export default function NewAboutSection() {
   };
 
   return (
-    <section className={`relative min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-140px)] w-full overflow-y-auto lg:landscape:overflow-hidden bg-black text-white flex items-center ${instrumentSerif.variable} py-8 md:py-16 lg:py-0`}>
+    <section id="about" className={`scroll-mt-28 relative min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-140px)] w-full overflow-y-auto lg:landscape:overflow-hidden bg-black text-white flex items-center ${instrumentSerif.variable} py-8 md:py-16 lg:py-0`}>
       
       {/* Structural Hairlines (Desktop landscape only) */}
       <div className="absolute inset-0 pointer-events-none z-0">
