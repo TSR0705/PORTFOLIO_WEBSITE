@@ -129,7 +129,7 @@ export const ProfessionalConnect = () => {
   ];
 
   return (
-    <section id="contact" className="min-h-screen w-full bg-black overflow-hidden relative flex flex-col justify-between py-20 md:py-32">
+    <section id="contact" className="w-full bg-black overflow-hidden relative py-24 md:py-32 scroll-mt-28">
       {/* Cinematic Theme Background */}
       <div className="absolute inset-0">
         <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
@@ -139,20 +139,19 @@ export const ProfessionalConnect = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center p-8 max-w-7xl mx-auto w-full my-auto">
+      <div className="relative z-10 flex flex-col items-center justify-center px-6 md:px-12 lg:px-16 max-w-7xl mx-auto w-full">
         {/* Header Section */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
-          <div className="inline-block mb-4 px-4 py-1.5 bg-white/5 rounded-full border border-[#E1E0CC]/20 backdrop-blur-md">
-            <span className="text-xs font-mono tracking-widest uppercase" style={{ color: "#E1E0CC" }}>
-              Connect & Collaborate
-            </span>
-          </div>
+          <span className="text-[10px] md:text-xs font-mono tracking-[0.35em] text-[#E1E0CC]/60 uppercase block mb-3">
+            Connect & Collaborate
+          </span>
           
-          <h2 className="font-light leading-[0.85] tracking-tighter text-white text-[10vw] md:text-[6vw] mb-6">
-            Get in <span className="font-medium text-[#E1E0CC]">Touch</span>
+          <h2 className="text-4xl md:text-6xl font-light tracking-tighter leading-[1.05] text-white">
+            Get in <span className="font-semibold text-[#E1E0CC]">Touch</span>
           </h2>
+          <div className="h-[1px] w-24 bg-gradient-to-r from-[#E1E0CC]/40 to-transparent mt-5 mb-6 mx-auto" />
           
-          <p className="text-white/60 text-sm md:text-base font-sans max-w-xl mx-auto leading-relaxed">
+          <p className="text-white/40 text-xs md:text-sm font-sans max-w-xl mx-auto leading-relaxed">
             Join my professional networks and directories to explore ongoing code pipelines, hackathons, and research updates.
           </p>
         </div>

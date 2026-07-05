@@ -16,28 +16,16 @@ import {
 } from "@/components/ui/project-components";
 import ProjectScrollRail from "@/components/ui/project-scroll-rail";
 import DbmsSelfHealingCaseStudy from "@/components/projects/dbms-self-healing-case-study";
-import LoadlabDeploybotCaseStudy from "@/components/projects/loadlab-deploybot-case-study";
 import CodeweaveCaseStudy from "@/components/projects/codeweave-case-study";
-import AndroidTaskManagerCaseStudy from "@/components/projects/android-task-manager-case-study";
 import FcfsSchedulerSimulatorCaseStudy from "@/components/projects/fcfs-scheduler-simulator-case-study";
 import LmsPlatformCaseStudy from "@/components/projects/lms-platform-case-study";
-import QuizArenaCaseStudy from "@/components/projects/quiz-arena-case-study";
-import SaylixTranslatorCaseStudy from "@/components/projects/saylix-translator-case-study";
-import SmartTabOrganizerCaseStudy from "@/components/projects/smart-tab-organizer-case-study";
-import WebloomCaseStudy from "@/components/projects/webloom-case-study";
 import ExposurCaseStudy from "@/components/projects/exposur-case-study";
 
 const CaseStudyComponents: Record<string, React.ComponentType<{ project: any; theme: any }>> = {
   "dbms-self-healing": DbmsSelfHealingCaseStudy,
-  "loadlab-deploybot": LoadlabDeploybotCaseStudy,
   "codeweave": CodeweaveCaseStudy,
-  "android-task-manager": AndroidTaskManagerCaseStudy,
   "fcfs-scheduler-simulator": FcfsSchedulerSimulatorCaseStudy,
   "lms-platform": LmsPlatformCaseStudy,
-  "quiz-arena": QuizArenaCaseStudy,
-  "saylix-translator": SaylixTranslatorCaseStudy,
-  "smart-tab-organizer": SmartTabOrganizerCaseStudy,
-  "webloom": WebloomCaseStudy,
   "exposur": ExposurCaseStudy,
 };
 

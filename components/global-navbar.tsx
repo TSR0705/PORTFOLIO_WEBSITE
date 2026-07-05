@@ -10,7 +10,7 @@ const navItems = [
   { name: "About", target: "/#about" },
   { name: "Projects", target: "/#projects" },
   { name: "Recognition", target: "/#recognition" },
-  { name: "Contact", target: "/contact" },
+  { name: "Contact", target: "/#contact" },
 ];
 
 export default function GlobalNavbar() {
@@ -40,6 +40,7 @@ export default function GlobalNavbar() {
           { id: "/#about", element: document.getElementById("about") },
           { id: "/#projects", element: document.getElementById("projects") },
           { id: "/#recognition", element: document.getElementById("recognition") },
+          { id: "/#contact", element: document.getElementById("contact") },
         ];
 
         let currentActive = "/";
