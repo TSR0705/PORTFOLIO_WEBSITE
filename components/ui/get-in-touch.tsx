@@ -9,12 +9,19 @@ export const ProfessionalConnect = () => {
 
   useEffect(() => {
     setIsLoaded(true);
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
+
+  const handleSectionMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  const handleSectionMouseLeave = () => {
+    setMousePosition({ x: -9999, y: -9999 });
+  };
 
   const socialPlatforms = [
     {
@@ -129,7 +136,12 @@ export const ProfessionalConnect = () => {
   ];
 
   return (
-    <section id="contact" className="w-full bg-black overflow-hidden relative py-24 md:py-32 scroll-mt-28">
+    <section 
+      id="contact" 
+      onMouseMove={handleSectionMouseMove}
+      onMouseLeave={handleSectionMouseLeave}
+      className="w-full bg-black overflow-hidden relative py-24 md:py-32 scroll-mt-28"
+    >
       {/* Cinematic Theme Background */}
       <div className="absolute inset-0">
         <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
@@ -226,7 +238,7 @@ export const ProfessionalConnect = () => {
 
       {/* Mouse Follow Light */}
       <div 
-        className="pointer-events-none fixed w-96 h-96 rounded-full opacity-20 blur-[100px] transition-all duration-200 ease-out z-0"
+        className="pointer-events-none absolute w-96 h-96 rounded-full opacity-20 blur-[100px] transition-all duration-200 ease-out z-0"
         style={{
           background: "radial-gradient(circle, rgba(225, 224, 204, 0.15), transparent)",
           left: `${mousePosition.x - 192}px`,

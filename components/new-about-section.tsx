@@ -76,21 +76,19 @@ export default function NewAboutSection() {
   // Parallax tracking (only on landscape desktops)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      setMousePosition({
-        x: clientX / innerWidth - 0.5,
-        y: clientY / innerHeight - 0.5,
-      });
-    };
+  const handleSectionMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const mediaQuery = window.matchMedia("(min-width: 1024px) and (orientation: landscape)");
-    if (mediaQuery.matches) {
-      window.addEventListener("mousemove", handleMouseMove);
-    }
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    if (!mediaQuery.matches) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setMousePosition({ x, y });
+  };
+
+  const handleSectionMouseLeave = () => {
+    setMousePosition({ x: 0, y: 0 });
+  };
 
   const portraitX = useSpring(0, { damping: 20, stiffness: 80 });
   const portraitY = useSpring(0, { damping: 20, stiffness: 80 });
@@ -131,7 +129,12 @@ export default function NewAboutSection() {
   };
 
   return (
-    <section id="about" className={`scroll-mt-28 relative min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-140px)] w-full overflow-y-auto lg:landscape:overflow-hidden bg-black text-white flex items-center ${instrumentSerif.variable} py-8 md:py-16 lg:py-0`}>
+    <section 
+      id="about" 
+      onMouseMove={handleSectionMouseMove}
+      onMouseLeave={handleSectionMouseLeave}
+      className={`scroll-mt-28 relative min-h-[calc(100svh-80px)] md:min-h-[calc(100svh-140px)] w-full overflow-y-auto lg:landscape:overflow-hidden bg-black text-white flex items-center ${instrumentSerif.variable} py-8 md:py-16 lg:py-0`}
+    >
       
       {/* Structural Hairlines (Desktop landscape only) */}
       <div className="absolute inset-0 pointer-events-none z-0">
