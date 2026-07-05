@@ -1,5 +1,6 @@
 import { ProjectShowcase } from "@/components/ui/project-showcase";
 import { Metadata } from "next";
+import { projects } from "@/lib/projects";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tanmaysinghrajput.vercel.app";
 
@@ -24,10 +25,37 @@ export const metadata: Metadata = {
   }
 };
 
-import { projects } from "@/lib/projects";
-
-import { redirect } from "next/navigation";
-
 export default function ProjectsPage() {
-  redirect("/#projects");
+  const collectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${siteUrl}/projects/#collection`,
+    "url": `${siteUrl}/projects`,
+    "name": "Projects Deck | Tanmay Singh",
+    "description": "Selected engineering works and system design case studies by Tanmay Singh.",
+    "about": {
+      "@type": "Person",
+      "name": "Tanmay Singh"
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": projects.map((p, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "url": `${siteUrl}/projects/${p.id}`,
+        "name": p.title,
+        "description": p.shortDescription
+      }))
+    }
+  };
+
+  return (
+    <main className="min-h-screen w-full bg-black flex flex-col items-center justify-center pt-24 pb-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+      />
+      <ProjectShowcase />
+    </main>
+  );
 }
