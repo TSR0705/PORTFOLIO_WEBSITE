@@ -149,7 +149,7 @@ export default function NewAboutSection() {
       />
 
       {/* Main Container */}
-      <div className="relative mx-auto w-full max-w-7xl px-6 md:px-12 z-10">
+      <div className="relative mx-auto w-full max-w-7xl px-6 md:px-12 lg:px-16 z-10">
         
         {/* Grid layout: Spans 5/7 split on desktop landscape to balance button layout */}
         <div className="grid grid-cols-1 md:landscape:grid-cols-12 gap-10 md:landscape:gap-8 lg:landscape:gap-12 items-center">

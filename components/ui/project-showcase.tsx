@@ -91,18 +91,18 @@ export function ProjectShowcase() {
   };
 
   return (
-    <section id="projects" ref={containerRef} onMouseMove={handleMouseMove} className="relative w-full max-w-4xl mx-auto px-6 py-20 scroll-mt-28">
+    <section id="projects" ref={containerRef} onMouseMove={handleMouseMove} className="relative w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-24 md:py-32 scroll-mt-28">
       
       {/* Premium Header */}
       <div className="mb-16">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="h-[1px] w-6 bg-[#E1E0CC]" />
-          <span className="text-[10px] font-mono tracking-[0.2em] text-[#E1E0CC]/80 uppercase">PORTFOLIO LOG</span>
-        </div>
-        <h1 className="text-4xl md:text-6xl font-light tracking-tighter leading-none text-white mb-4">
-          Selected <span className="font-medium text-[#E1E0CC]">Works</span>
-        </h1>
-        <p className="text-white/40 text-xs md:text-sm font-sans max-w-lg leading-relaxed">
+        <span className="text-[10px] md:text-xs font-mono tracking-[0.35em] text-[#E1E0CC]/60 uppercase block mb-3">
+          PORTFOLIO LOG
+        </span>
+        <h2 className="text-4xl md:text-6xl font-light tracking-tighter leading-[1.05] text-white">
+          Selected <span className="font-semibold text-[#E1E0CC]">Works</span>
+        </h2>
+        <div className="h-[1px] w-24 bg-gradient-to-r from-[#E1E0CC]/40 to-transparent mt-5 mb-6" />
+        <p className="text-white/40 text-xs md:text-sm font-sans max-w-xl leading-relaxed">
           A dynamic archive of interactive designs, real-time collaboration engines, and spatial computing constructs.
         </p>
       </div>

@@ -109,25 +109,25 @@ export default function SkillsSection() {
   const iconsPerOrbit = Math.ceil(orbitIconConfigs.length / orbitCount);
 
   return (
-    <section id="skills" className="w-full bg-black text-white px-6 md:px-16 py-24 relative overflow-hidden flex items-center">
+    <section id="skills" className="w-full bg-black text-white px-6 md:px-12 lg:px-16 py-24 md:py-32 relative overflow-hidden flex items-center">
       {/* Noise overlay */}
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.6] mix-blend-overlay" />
 
-      <div className="max-w-[90rem] mx-auto w-full relative z-10 grid gap-12 lg:grid-cols-12 items-center">
+      <div className="max-w-7xl mx-auto w-full relative z-10 grid gap-12 lg:grid-cols-12 items-center">
         
         {/* Left Side: Header & Skills Grid (Spans 7 columns) */}
         <div className="lg:col-span-7 space-y-12">
           
           {/* Headline & Description */}
           <div className="space-y-4">
-            <span className="text-xs font-mono tracking-[0.3em] uppercase text-[#E1E0CC]/95 font-medium block">
+            <span className="text-[10px] md:text-xs font-mono tracking-[0.35em] text-[#E1E0CC]/60 uppercase block mb-3">
               Technical Expertise
             </span>
-            <h2 className="text-4xl sm:text-6xl font-light tracking-tighter leading-none text-white">
-              Engineering <span className="font-medium text-[#E1E0CC]">Toolkit.</span>
+            <h2 className="text-4xl md:text-6xl font-light tracking-tighter leading-[1.05] text-white">
+              Engineering <span className="font-semibold text-[#E1E0CC]">Toolkit.</span>
             </h2>
-            <div className="h-[1px] w-28 bg-gradient-to-r from-[#E1E0CC]/60 to-transparent mt-3" />
-            <p className="text-white/85 text-sm sm:text-base leading-relaxed font-sans max-w-2xl pt-2">
+            <div className="h-[1px] w-24 bg-gradient-to-r from-[#E1E0CC]/40 to-transparent mt-5 mb-6" />
+            <p className="text-white/40 text-xs md:text-sm font-sans max-w-xl leading-relaxed">
               A curated stack of technologies, platforms, and tools used to design, build, and deploy scalable software systems.
             </p>
           </div>

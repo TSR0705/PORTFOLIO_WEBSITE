@@ -35,23 +35,26 @@ const achievementsList = achievementsData
 
 export default function AchievementsSection() {
   return (
-    <section id="recognition" className="min-h-screen w-full bg-black text-white px-6 py-20 md:py-32 relative overflow-hidden scroll-mt-28">
+    <section id="recognition" className="w-full bg-black text-white px-6 md:px-12 lg:px-16 py-24 md:py-32 relative overflow-hidden scroll-mt-28">
       <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.7] mix-blend-overlay" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 space-y-16">
         
         {/* Section Heading */}
         <div>
+          <span className="text-[10px] md:text-xs font-mono tracking-[0.35em] text-[#E1E0CC]/60 uppercase block mb-3">
+            RECOGNITION
+          </span>
           <motion.h2 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-light leading-[0.85] tracking-[0.18em] text-[8vw] md:text-[5vw] text-[#E1E0CC]" 
+            className="text-4xl md:text-6xl font-light tracking-tighter leading-[1.05] text-white" 
           >
-            RECOGNITION
+            Honors & <span className="font-semibold text-[#E1E0CC]">Recognition</span>
           </motion.h2>
-          <div className="h-[1px] w-full bg-white/10 mt-6 md:mt-8" />
+          <div className="h-[1px] w-24 bg-gradient-to-r from-[#E1E0CC]/40 to-transparent mt-5 mb-6" />
         </div>
 
         {/* 3D Perspective Achievements Showcase Slider */}
