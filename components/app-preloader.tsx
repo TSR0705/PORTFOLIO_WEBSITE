@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MorphingSquare } from "@/components/ui/morphing-square"
+import RippleWaveLoader from "@/components/ui/demo"
 
 export default function AppPreloader() {
   const [loading, setLoading] = useState(true)
@@ -18,23 +18,16 @@ export default function AppPreloader() {
     // Disable scroll during load
     document.body.style.overflow = "hidden"
 
-    const handleLoad = () => {
+    // Hide loader after a fixed timeout (e.g., 2.3 seconds)
+    const timeout = setTimeout(() => {
       setLoading(false)
       sessionStorage.setItem("portfolio-preloader-loaded", "true")
       document.body.style.overflow = ""
-    }
+    }, 2300)
 
-    if (document.readyState === "complete") {
-      const timeout = setTimeout(handleLoad, 400)
-      return () => clearTimeout(timeout)
-    } else {
-      window.addEventListener("load", handleLoad)
-      const fallback = setTimeout(handleLoad, 2000)
-      return () => {
-        window.removeEventListener("load", handleLoad)
-        clearTimeout(fallback)
-        document.body.style.overflow = ""
-      }
+    return () => {
+      clearTimeout(timeout)
+      document.body.style.overflow = ""
     }
   }, [])
 
@@ -46,11 +39,16 @@ export default function AppPreloader() {
           initial={{ opacity: 1 }}
           exit={{ 
             opacity: 0, 
-            transition: { duration: 0.4, ease: "easeInOut" } 
+            y: -20,
+            transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } 
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-black select-none"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#090909] select-none"
         >
-          <MorphingSquare message="Loading..." />
+
+
+          <div className="flex flex-col items-center justify-center gap-6 z-10">
+            <RippleWaveLoader />
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
