@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   { name: "Home", target: "/" },
   { name: "About", target: "/#about" },
-  { name: "Projects", target: "/projects" },
+  { name: "Projects", target: "/#projects" },
   { name: "Recognition", target: "/#recognition" },
   { name: "Contact", target: "/contact" },
 ];
@@ -38,7 +38,7 @@ export default function GlobalNavbar() {
         const sections = [
           { id: "/", offset: 0 },
           { id: "/#about", element: document.getElementById("about") },
-          { id: "/projects", element: document.getElementById("projects") },
+          { id: "/#projects", element: document.getElementById("projects") },
           { id: "/#recognition", element: document.getElementById("recognition") },
         ];
 

@@ -91,7 +91,7 @@ export function ProjectShowcase() {
   };
 
   return (
-    <section ref={containerRef} onMouseMove={handleMouseMove} className="relative w-full max-w-4xl mx-auto px-6 py-20">
+    <section id="projects" ref={containerRef} onMouseMove={handleMouseMove} className="relative w-full max-w-4xl mx-auto px-6 py-20 scroll-mt-28">
       
       {/* Premium Header */}
       <div className="mb-16">
