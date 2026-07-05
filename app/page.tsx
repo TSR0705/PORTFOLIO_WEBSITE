@@ -6,7 +6,7 @@ import { ProfessionalConnect } from "@/components/ui/get-in-touch";
 
 export default function Home() {
   return (
-    <main className="min-h-screen w-full bg-black pt-20 md:pt-28">
+    <main className="min-h-screen w-full bg-black">
       <AboutSection />
       <ProjectShowcase />
       <SkillsSection />
