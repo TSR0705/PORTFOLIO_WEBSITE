@@ -37,7 +37,7 @@ export function MorphingSquare({
   return (
     <div className={cn(morphingSquareVariants({ messagePlacement }))}>
       <motion.div
-        className={cn("w-10 h-10 bg-[#E1E0CC]", className)}
+        className={cn("w-10 h-10 bg-white", className)}
         animate={{
           borderRadius: ["6%", "50%", "6%"],
           rotate: [0, 180, 360],
@@ -49,7 +49,7 @@ export function MorphingSquare({
         }}
         {...props}
       />
-      {message && <div>{message}</div>}
+      {message && <div className="text-white text-sm font-sans tracking-wide mt-3">{message}</div>}
     </div>
   )
 }
