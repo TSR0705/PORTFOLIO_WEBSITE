@@ -1,11 +1,11 @@
 "use client"
 
 import { cva } from "class-variance-authority"
-import { HTMLMotionProps, motion } from "motion/react"
+import { motion, HTMLMotionProps } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
-const morphingSquareVariants = cva("flex gap-2 items-center justify-center", {
+const morphingSquareVariants = cva("flex gap-2 items-center justify-center font-sans text-sm text-white/80 tracking-wide", {
   variants: {
     messagePlacement: {
       bottom: "flex-col",
@@ -49,7 +49,7 @@ export function MorphingSquare({
         }}
         {...props}
       />
-      {message && <div className="text-white text-sm font-sans tracking-wide mt-3">{message}</div>}
+      {message && <div>{message}</div>}
     </div>
   )
 }
