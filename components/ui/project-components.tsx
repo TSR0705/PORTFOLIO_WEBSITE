@@ -212,68 +212,47 @@ export function ProjectCard({
   theme: ProjectTheme;
   onClick: () => void;
 }) {
-  const IconComponent = (Lucide as any)[theme.iconName] || Lucide.Code;
-
   return (
     <div
       onClick={onClick}
-      className={`relative h-full w-full bg-black overflow-hidden flex flex-col justify-between rounded-3xl border transition-all duration-500 ${
+      className={`group relative h-full w-full bg-black overflow-hidden flex flex-col justify-end rounded-3xl border transition-all duration-500 ${
         active
-          ? `cursor-pointer ${theme.borderActive} ${theme.shadow} shadow-2xl`
+          ? `cursor-pointer ${theme.borderActive} shadow-[inset_0_0_20px_rgba(255,255,255,0.05)] shadow-2xl`
           : "cursor-default border-white/5"
       }`}
     >
-      {/* Background Image with overlay gradient */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
           src={theme.imageSrc}
           alt={item.title}
-          className="h-full w-full object-cover transition-transform duration-700"
+          className={`h-full w-full object-cover transition-transform duration-1000 ease-out ${
+            active ? "group-hover:scale-105" : ""
+          }`}
           draggable={false}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
-        <div className={`absolute inset-0 opacity-[0.06] ${theme.bgGlow} mix-blend-color z-10`} />
+        {/* Subtle ambient glow */}
+        <div className={`absolute inset-0 opacity-[0.08] ${theme.bgGlow} mix-blend-color z-10`} />
       </div>
 
-      {/* Card Content Header */}
-      <div className="relative z-20 p-5 flex justify-between items-start gap-4">
-        <span className="inline-flex items-center gap-1.5 text-[9px] font-mono tracking-wider uppercase text-white/50 bg-black/40 border border-white/10 px-2 py-0.5 rounded-md">
-          <IconComponent className={`w-3 h-3 ${theme.accentText}`} />
-          {item.category.replace("-", " ")}
-        </span>
-
-        <ProjectBadge status={item.status} theme={theme} />
-      </div>
-
-      {/* Card Content Footer & Details */}
-      <div className="relative z-20 p-6 pt-0 space-y-4">
-        <div>
-          <h3 className="text-xl font-medium tracking-tight text-white flex items-center gap-2 mb-1.5">
+      {/* Card Content Footer (Glassmorphism) */}
+      <div className="relative z-20 p-5 md:p-6 space-y-2.5 bg-black/40 backdrop-blur-md border-t border-white/10 transition-transform duration-500">
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-lg md:text-xl font-medium tracking-wide text-white flex items-center gap-2">
             {item.title}
-            {item.featured && <Lucide.Sparkles className={`w-4 h-4 ${theme.accentText}`} />}
           </h3>
-          <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans line-clamp-2">
-            {item.description}
-          </p>
-        </div>
-
-        {/* Tech stack & Action buttons */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-white/5">
-          {/* Tech Pills */}
-          <div className="flex flex-wrap gap-1">
-            {item.techStack.slice(0, 3).map((tech: string) => (
-              <TechBadge key={tech} tech={tech} variant="compact" />
-            ))}
+          <div className="transition-opacity duration-500">
+            <ProjectLinks
+              githubUrl={item.githubUrl}
+              liveUrl={item.liveUrl}
+              theme={theme}
+              variant="compact"
+            />
           </div>
-
-          {/* Links */}
-          <ProjectLinks
-            githubUrl={item.githubUrl}
-            liveUrl={item.liveUrl}
-            theme={theme}
-            variant="compact"
-          />
         </div>
+        <p className="text-white/70 text-xs md:text-sm leading-relaxed font-sans line-clamp-2 max-w-[90%]">
+          {item.description}
+        </p>
       </div>
     </div>
   );

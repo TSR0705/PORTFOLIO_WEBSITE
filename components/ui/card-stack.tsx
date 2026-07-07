@@ -103,8 +103,8 @@ export function CardStack<T extends CardStackItem>({
   activeScale = 1.03,
   inactiveScale = 0.94,
 
-  springStiffness = 280,
-  springDamping = 28,
+  springStiffness = 200,
+  springDamping = 24,
 
   loop = true,
   autoAdvance = false,
