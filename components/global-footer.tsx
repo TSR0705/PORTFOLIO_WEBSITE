@@ -23,7 +23,7 @@ export default function GlobalFooter() {
     };
 
     updateTime();
-    const interval = setInterval(updateTime, 1000);
+    const interval = setInterval(updateTime, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -101,7 +101,7 @@ export default function GlobalFooter() {
             {/* Live Time Clock */}
             {time && (
               <div className="text-xs font-mono text-white/50 uppercase tracking-widest">
-                Chennai, IN &bull; <span className="text-[#E1E0CC]">{time}</span> (IST)
+                Chennai, IN &bull; <span className="text-[#E1E0CC]" suppressHydrationWarning>{time}</span> (IST)
               </div>
             )}
           </div>

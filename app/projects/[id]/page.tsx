@@ -5,32 +5,41 @@ import {
   ArrowLeft, 
   Sparkles, 
   FolderCode,
-  Link2
+  Link2,
+  GitBranch,
+  ArrowUpRight,
+  Play,
+  Cpu,
+  Database,
+  Layers,
+  Shield,
+  Smartphone
 } from "lucide-react";
-import * as Lucide from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+
+const pageThemeIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  Code: Cpu,
+  Cpu,
+  Database,
+  Layers,
+  Shield,
+  Smartphone
+};
 import { getProjectTheme } from "@/lib/projects";
 import {
   ProjectBadge,
   TechBadge
 } from "@/components/ui/project-components";
 import ProjectScrollRail from "@/components/ui/project-scroll-rail";
-import DbmsSelfHealingCaseStudy from "@/components/projects/dbms-self-healing-case-study";
-import CodeweaveCaseStudy from "@/components/projects/codeweave-case-study";
-import AndroidTaskManagerCaseStudy from "@/components/projects/android-task-manager-case-study";
-import FcfsSchedulerSimulatorCaseStudy from "@/components/projects/fcfs-scheduler-simulator-case-study";
-import LmsPlatformCaseStudy from "@/components/projects/lms-platform-case-study";
-import SaylixTranslatorCaseStudy from "@/components/projects/saylix-translator-case-study";
-import ExposurCaseStudy from "@/components/projects/exposur-case-study";
+import dynamic from "next/dynamic";
 
 const CaseStudyComponents: Record<string, React.ComponentType<{ project: any; theme: any }>> = {
-  "dbms-self-healing": DbmsSelfHealingCaseStudy,
-  "codeweave": CodeweaveCaseStudy,
-  "android-task-manager": AndroidTaskManagerCaseStudy,
-  "fcfs-scheduler-simulator": FcfsSchedulerSimulatorCaseStudy,
-  "lms-platform": LmsPlatformCaseStudy,
-  "saylix-translator": SaylixTranslatorCaseStudy,
-  "exposur": ExposurCaseStudy,
+  "dbms-self-healing": dynamic(() => import("@/components/projects/dbms-self-healing-case-study")),
+  "codeweave": dynamic(() => import("@/components/projects/codeweave-case-study")),
+  "android-task-manager": dynamic(() => import("@/components/projects/android-task-manager-case-study")),
+  "fcfs-scheduler-simulator": dynamic(() => import("@/components/projects/fcfs-scheduler-simulator-case-study")),
+  "lms-platform": dynamic(() => import("@/components/projects/lms-platform-case-study")),
+  "saylix-translator": dynamic(() => import("@/components/projects/saylix-translator-case-study")),
+  "exposur": dynamic(() => import("@/components/projects/exposur-case-study")),
 };
 
 import { Metadata } from "next";
@@ -124,7 +133,7 @@ export default async function ProjectDetailPage({ params }: Props) {
   const theme = getProjectTheme(project.id);
 
 
-  const IconComponent = (Lucide as any)[theme.iconName] || Lucide.Cpu;
+  const IconComponent = pageThemeIconMap[theme.iconName] || Cpu;
 
   // Dynamic Case Study Rails Section Array
   const sections = project.id === "dbms-self-healing" ? [
@@ -375,7 +384,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300 text-center w-full text-white/80 hover:text-white"
                     >
-                      <FaGithub className="w-4 h-4" />
+                      <GitBranch className="w-4 h-4" />
                       Source Code
                     </a>
                   )}
@@ -392,7 +401,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       } as React.CSSProperties}
                     >
                       Live Demo
-                      <Lucide.ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                      <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
                     </a>
                   )}
                   {project.demoUrl && (
@@ -402,7 +411,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300 text-center w-full text-white/80 hover:text-white"
                     >
-                      <Lucide.Play className="w-4 h-4 fill-white/10" />
+                      <Play className="w-4 h-4 fill-white/10" />
                       Video Demo
                     </a>
                   )}
@@ -431,6 +440,8 @@ export default async function ProjectDetailPage({ params }: Props) {
             <img
               src={theme.imageSrc}
               alt={`${project.title} - ${project.shortDescription}`}
+              loading="eager"
+              decoding="async"
               className="w-full h-auto block object-contain"
             />
             {/* Edge-blending subtle vignette (12% fade at edges) */}

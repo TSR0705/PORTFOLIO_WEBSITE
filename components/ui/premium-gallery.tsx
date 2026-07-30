@@ -111,6 +111,8 @@ export default function PremiumGallery({ screenshots, theme, showTimeline = fals
                 <img
                   src={activeItem.url}
                   alt={`${activeItem.title} - ${activeItem.description}`}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.005]"
                 />
                 

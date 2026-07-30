@@ -4,36 +4,34 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
-  FaReact,
-  FaDocker,
-  FaNodeJs,
-  FaGithub,
-  FaJava,
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiKubernetes,
-  SiJenkins,
-  SiPostman,
-  SiMongodb,
-  SiTypescript
-} from "react-icons/si";
+  Code,
+  Layers,
+  Server,
+  Globe,
+  Database,
+  Cpu,
+  Shield,
+  Box,
+  Zap,
+  GitBranch,
+  Send,
+} from "lucide-react";
 import { skillDetails } from "@/lib/project-design";
 import { TechBadge } from "@/components/ui/project-components";
 
 // Curated icons for the Orbit visualizer - clean, flat, matching the project styling without custom glowing outlines
 const orbitIconConfigs = [
-  { Icon: FaReact, color: "#61DAFB", name: "React" },
-  { Icon: SiNextdotjs, color: "#FFFFFF", name: "Next.js" },
-  { Icon: FaNodeJs, color: "#339933", name: "Node.js" },
-  { Icon: SiTypescript, color: "#3178C6", name: "TypeScript" },
-  { Icon: FaJava, color: "#F89820", name: "Java" },
-  { Icon: FaDocker, color: "#2496ED", name: "Docker" },
-  { Icon: SiKubernetes, color: "#326CE5", name: "Kubernetes" },
-  { Icon: SiMongodb, color: "#47A248", name: "MongoDB" },
-  { Icon: SiJenkins, color: "#D24939", name: "Jenkins" },
-  { Icon: SiPostman, color: "#FF6C37", name: "Postman" },
-  { Icon: FaGithub, color: "#FFFFFF", name: "GitHub" },
+  { Icon: Code, color: "#61DAFB", name: "React" },
+  { Icon: Layers, color: "#FFFFFF", name: "Next.js" },
+  { Icon: Server, color: "#339933", name: "Node.js" },
+  { Icon: Code, color: "#3178C6", name: "TypeScript" },
+  { Icon: Cpu, color: "#F89820", name: "Java" },
+  { Icon: Box, color: "#2496ED", name: "Docker" },
+  { Icon: Shield, color: "#326CE5", name: "Kubernetes" },
+  { Icon: Database, color: "#47A248", name: "MongoDB" },
+  { Icon: Zap, color: "#D24939", name: "Jenkins" },
+  { Icon: Send, color: "#FF6C37", name: "Postman" },
+  { Icon: GitBranch, color: "#FFFFFF", name: "GitHub" },
 ];
 
 const categories = [

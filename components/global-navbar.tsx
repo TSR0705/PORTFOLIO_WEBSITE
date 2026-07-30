@@ -25,29 +25,40 @@ export default function GlobalNavbar() {
   const showNavbar = pathname ? (validRoutes.includes(pathname) || isProjectDetail) : true;
 
   useEffect(() => {
+    let scrollRafId: number | null = null;
+    let resizeRafId: number | null = null;
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      if (scrollRafId) return;
+      scrollRafId = requestAnimationFrame(() => {
+        const scrolled = window.scrollY > 50;
+        setIsScrolled((prev) => (prev !== scrolled ? scrolled : prev));
+        scrollRafId = null;
+      });
     };
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
-        setIsOpen(false);
-      }
+      if (resizeRafId) return;
+      resizeRafId = requestAnimationFrame(() => {
+        const mobile = window.innerWidth < 768;
+        setIsMobile(mobile);
+        if (!mobile) {
+          setIsOpen(false);
+        }
+        resizeRafId = null;
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
     
     // Run immediately on mount
     handleScroll();
     handleResize();
 
     return () => {
+      if (scrollRafId) cancelAnimationFrame(scrollRafId);
+      if (resizeRafId) cancelAnimationFrame(resizeRafId);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
@@ -122,7 +133,7 @@ export default function GlobalNavbar() {
                         href={item.target}
                         onClick={() => setIsOpen(false)}
                         className="text-[11px] font-mono uppercase tracking-[0.15em] py-1 text-left block w-full hover:text-white transition-colors"
-                        style={{ color: isActive ? "#E1E0CC" : "rgba(225, 224, 204, 0.6)" }}
+                        style={{ color: isActive ? "#E1E0CC" : "rgba(225, 224, 204, 0.9)" }}
                       >
                         {item.name}
                       </Link>
@@ -136,7 +147,7 @@ export default function GlobalNavbar() {
                       window.dispatchEvent(new CustomEvent("open-resume"));
                     }}
                     className="text-[11px] font-mono uppercase tracking-[0.15em] py-1 text-left block w-full hover:text-white transition-colors cursor-pointer focus:outline-none"
-                    style={{ color: "rgba(225, 224, 204, 0.6)" }}
+                    style={{ color: "rgba(225, 224, 204, 0.9)" }}
                   >
                     Resume
                   </button>
@@ -154,10 +165,10 @@ export default function GlobalNavbar() {
                   key={item.name}
                   href={item.target}
                   className="text-xs md:text-sm font-medium transition-colors cursor-pointer select-none"
-                  style={{ color: isActive ? "#E1E0CC" : "rgba(225, 224, 204, 0.8)" }}
+                  style={{ color: isActive ? "#E1E0CC" : "rgba(225, 224, 204, 0.9)" }}
                   onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
                   onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.color = "rgba(225, 224, 204, 0.8)";
+                    if (!isActive) e.currentTarget.style.color = "rgba(225, 224, 204, 0.9)";
                   }}
                 >
                   {item.name}
@@ -169,9 +180,9 @@ export default function GlobalNavbar() {
             <button
               onClick={() => window.dispatchEvent(new CustomEvent("open-resume"))}
               className="text-xs md:text-sm font-medium transition-colors cursor-pointer select-none focus:outline-none"
-              style={{ color: "rgba(225, 224, 204, 0.8)" }}
+              style={{ color: "rgba(225, 224, 204, 0.9)" }}
               onMouseEnter={(e) => (e.currentTarget.style.color = "#E1E0CC")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225, 224, 204, 0.8)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(225, 224, 204, 0.9)")}
             >
               Resume
             </button>

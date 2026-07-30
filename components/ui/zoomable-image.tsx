@@ -50,6 +50,8 @@ export default function ZoomableImage({ src, alt, className = "", wrapperClassNa
         <img 
           src={src} 
           alt={alt} 
+          loading="lazy"
+          decoding="async"
           className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.01] ${className}`}
         />
 
@@ -81,6 +83,8 @@ export default function ZoomableImage({ src, alt, className = "", wrapperClassNa
             <img 
               src={src} 
               alt={alt} 
+              loading="eager"
+              decoding="async"
               className="max-w-full max-h-[80vh] object-contain block"
             />
           </div>

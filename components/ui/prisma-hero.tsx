@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
 
 /* ---------------- WordsPullUp ---------------- */
@@ -84,19 +84,49 @@ export const WordsPullUpMultiStyle = ({ segments, className = "", style }: Words
 };
 
 const PrismaHero = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!video.src) {
+              video.src = "/HERO-VIDEO.webm";
+              video.load();
+              video.play().catch(() => {});
+            } else {
+              video.play().catch(() => {});
+            }
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="h-[100dvh] w-full" id="home">
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
         
-        {/* Background video with poster fallback */}
+        {/* Background video with lazy IntersectionObserver loading */}
         <video
+          ref={videoRef}
           autoPlay
           loop
           muted
           playsInline
+          preload="none"
           poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3Crect width='100%25' height='100%25' fill='%23000'/%3E%3C/svg%3E"
           className="absolute inset-0 h-full w-full object-cover"
-          src="/HERO-VIDEO.webm"
         />
 
         {/* Noise overlay */}

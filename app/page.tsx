@@ -1,6 +1,8 @@
 import { PrismaHero } from "@/components/ui/prisma-hero";
-import ProjectsCardStack from "@/components/projects-card-stack";
-import SkillsSection from "@/components/skills-section";
+import dynamic from "next/dynamic";
+
+const ProjectsCardStack = dynamic(() => import("@/components/projects-card-stack"));
+const SkillsSection = dynamic(() => import("@/components/skills-section"));
 
 export default function Home() {
   return (

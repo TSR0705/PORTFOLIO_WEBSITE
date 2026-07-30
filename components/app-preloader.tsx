@@ -9,9 +9,11 @@ export default function AppPreloader() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
-    // Check session storage to see if preloader already ran in this session
-    const hasLoaded = sessionStorage.getItem("portfolio-preloader-loaded")
-    if (hasLoaded) {
+    // Check session storage or reduced motion preference
+    const hasLoaded = typeof window !== "undefined" && sessionStorage.getItem("portfolio-preloader-loaded")
+    const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    if (hasLoaded || prefersReducedMotion) {
       setLoading(false)
       return
     }
@@ -19,23 +21,23 @@ export default function AppPreloader() {
     // Disable scroll during load
     document.body.style.overflow = "hidden"
 
-    // Simulate progress counting up
+    // Fast progress count for quick LCP
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(progressInterval)
           return 100
         }
-        return prev + 1
+        return prev + 5
       })
-    }, 15) // ~1.5s to reach 100
+    }, 25) // ~500ms to reach 100
 
-    // Hide loader after a fixed timeout (e.g., 2.3 seconds)
+    // Hide loader after short duration (650ms)
     const timeout = setTimeout(() => {
       setLoading(false)
       sessionStorage.setItem("portfolio-preloader-loaded", "true")
       document.body.style.overflow = ""
-    }, 2300)
+    }, 650)
 
     return () => {
       clearInterval(progressInterval)

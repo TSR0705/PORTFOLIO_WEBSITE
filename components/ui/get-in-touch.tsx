@@ -4,16 +4,26 @@ import React, { useState, useEffect } from "react";
 
 export const ProfessionalConnect = () => {
   const [, setHoveredIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
+  const lightRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsLoaded(true);
+    let rafId: number | null = null;
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      if (rafId) return;
+      rafId = requestAnimationFrame(() => {
+        if (lightRef.current) {
+          lightRef.current.style.transform = `translate3d(${e.clientX - 192}px, ${e.clientY - 192}px, 0)`;
+        }
+        rafId = null;
+      });
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const socialPlatforms = [
@@ -226,11 +236,11 @@ export const ProfessionalConnect = () => {
 
       {/* Mouse Follow Light */}
       <div 
-        className="pointer-events-none fixed w-96 h-96 rounded-full opacity-20 blur-[100px] transition-all duration-200 ease-out z-0"
+        ref={lightRef}
+        className="pointer-events-none fixed top-0 left-0 w-96 h-96 rounded-full opacity-20 blur-[100px] transition-transform duration-200 ease-out z-0"
         style={{
           background: "radial-gradient(circle, rgba(225, 224, 204, 0.15), transparent)",
-          left: `${mousePosition.x - 192}px`,
-          top: `${mousePosition.y - 192}px`,
+          willChange: "transform",
         }}
       />
     </section>

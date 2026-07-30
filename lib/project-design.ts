@@ -1,74 +1,30 @@
+import React from "react";
 import {
-  FaReact,
-  FaAws,
-  FaDocker,
-  FaNodeJs,
-  FaGithub,
-  FaJava,
-  FaPython,
-  FaChartLine,
-  FaCode,
-  FaMicrochip,
-  FaFileAlt,
-  FaMicrophone,
-  FaDatabase,
-  FaMobileAlt,
-  FaUniversalAccess,
-  FaBrain,
-  FaProjectDiagram,
-  FaPlug,
-  FaSyncAlt,
-  FaStream,
-  FaSitemap,
-  FaShieldAlt,
-  FaGlobe,
-} from "react-icons/fa";
-import {
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiMongodb,
-  SiKubernetes,
-  SiJenkins,
-  SiRabbitmq,
-  SiGrafana,
-  SiPostman,
-  SiHuggingface,
-  SiExpress,
-  SiSwagger,
-  SiMysql,
-  SiGithubactions,
-  SiGit,
-  SiCplusplus,
-  SiC,
-  SiTypescript,
-  SiKotlin,
-  SiFastapi,
-  SiBun,
-  SiApachemaven,
-  SiSolidity,
-  SiStripe,
-  SiClerk,
-  SiVite,
-  SiFramer,
-  SiReactrouter,
-  SiRedis,
-  SiSocketdotio,
-  SiGooglegemini,
-  SiSanity,
-  SiGooglechrome,
-  SiAndroid,
-  SiMaterialdesign,
-  SiRailway,
-  SiVercel,
-  SiLucide,
-  SiSqlalchemy,
-  SiPydantic,
-  SiShadcnui,
-  SiPostgresql
-} from "react-icons/si";
+  Code,
+  Layers,
+  Sparkles,
+  Server,
+  Globe,
+  Database,
+  Cpu,
+  Shield,
+  Zap,
+  Activity,
+  GitBranch,
+  Send,
+  Lock,
+  CreditCard,
+  FileText,
+  Smartphone,
+  Triangle,
+  BarChart3,
+  Mic,
+  Eye,
+  Share2,
+  Repeat,
+  CheckCircle2,
+  Box
+} from "lucide-react";
 
 export interface ProjectTheme {
   primaryColor: string;     // Hex color code (e.g. #10B981)
@@ -82,97 +38,146 @@ export interface ProjectTheme {
   imageSrc: string;          // Project banner image URL
 }
 
+// Clean 0kb inline SVG icons for brand badges using React.createElement for TS files
+const SvgReact = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round", strokeLinejoin: "round", ...props },
+    React.createElement("circle", { cx: 12, cy: 12, r: 2, fill: "currentColor" }),
+    React.createElement("ellipse", { cx: 12, cy: 12, rx: 9, ry: 4 }),
+    React.createElement("ellipse", { cx: 12, cy: 12, rx: 9, ry: 4, transform: "rotate(60 12 12)" }),
+    React.createElement("ellipse", { cx: 12, cy: 12, rx: 9, ry: 4, transform: "rotate(120 12 12)" })
+  );
+
+const SvgNextJs = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.4 17.5l-5.6-7.8v7.8h-1.8V7.5h1.8l5.6 7.8V7.5h1.8v10z" })
+  );
+
+const SvgNode = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M12 2L2 7.5v9L12 22l10-5.5v-9L12 2zm-1 14.5l-5-2.8v-5.4l5 2.8v5.4zm2 0v-5.4l5-2.8v5.4l-5 2.8z" })
+  );
+
+const SvgDocker = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M13.98 11.08h2.12v2.13h-2.12zm-3.18 0h2.12v2.13h-2.12zm-3.18 0h2.12v2.13H7.62zm-3.18 0h2.12v2.13H4.44zm9.54-3.18h2.12v2.13h-2.12zm-3.18 0h2.12v2.13h-2.12zm-3.18 0h2.12v2.13H7.62zm6.36-3.18h2.12v2.13h-2.12zM.5 14.26c.86 3.19 3.9 5.48 7.37 5.48 4.41 0 8.04-3.4 8.27-7.79.88-.38 1.93-.19 2.58.46.75.76 1.76.94 2.7.53 0 0-.66-1.57-2.31-2.09-.85-.27-1.74-.08-2.45.39-.06-.5-.22-.98-.47-1.42H.5v4.44z" })
+  );
+
+const SvgGithub = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" })
+  );
+
+const SvgJava = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M4.6 18.5c1.4.1 3.5.2 5.4.2 4.1 0 7.8-.8 7.8-2.6 0-1.3-2.1-2.1-5.1-2.4.6-.7 1.1-1.5 1.4-2.5 3.4.5 5.7 1.8 5.7 3.9 0 3-4.9 4.3-10.2 4.3-2.4 0-4.4-.3-5.7-.6l.7-.3zM12 2C8.7 2 6 4.7 6 8c0 1.8.8 3.4 2.1 4.5-.4.6-.9 1.4-1.4 2.3C5.1 13.5 4 11.4 4 9c0-4.4 3.6-8 8-8s8 3.6 8 8c0 2.4-1.1 4.5-2.7 5.8-.5-.9-1-1.7-1.4-2.3 1.3-1.1 2.1-2.7 2.1-4.5 0-3.3-2.7-6-6-6z" })
+  );
+
+const SvgKubernetes = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M12 2L3.5 7v10L12 22l8.5-5V7L12 2zm0 2.3l6.5 3.8v7.6L12 19.5l-6.5-3.8V8.1L12 4.3z" })
+  );
+
+const SvgMongodb = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M12 0s-4 4.5-4 10.5c0 4.1 2.5 7.5 4 8.5 1.5-1 4-4.4 4-8.5C16 4.5 12 0 12 0zm0 17c-.8-.7-2-2.8-2-6.5 0-3.5 1.6-6.5 2-7.3.4.8 2 3.8 2 7.3 0 3.7-1.2 5.8-2 6.5z" })
+  );
+
+const SvgPython = (props: React.SVGProps<SVGSVGElement>) =>
+  React.createElement("svg", { viewBox: "0 0 24 24", fill: "currentColor", ...props },
+    React.createElement("path", { d: "M11.9 2c-4.4 0-4.1 1.9-4.1 1.9v2h4.2v.6H6.1S4 6.2 4 10.6s1.8 4.2 1.8 4.2h1.1v-1.6s-.1-1.8 1.8-1.8h4.2s1.7 0 1.7-1.6V5.9s.4-3.9-3.5-3.9zm-1.8 1.3c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7zm1.8 18.7c4.4 0 4.1-1.9 4.1-1.9v-2h-4.2v-.6h5.9s2.1.3 2.1-4.1-1.8-4.2-1.8-4.2h-1.1v1.6s.1 1.8-1.8 1.8h-4.2s-1.7 0-1.7 1.6v3.8s-.4 3.9 3.5 3.9zm1.8-1.3c-.4 0-.7-.3-.7-.7s.3-.7.7-.7.7.3.7.7-.3.7-.7.7z" })
+  );
+
 // Detailed brand background, text color, and icon configuration for solid badges
 export const skillDetails: Record<string, { icon: any; bg: string; text: string; border?: string }> = {
-  "HTML": { icon: SiHtml5, bg: "bg-[#E34F26]", text: "text-white" },
-  "CSS": { icon: SiCss, bg: "bg-[#1572B6]", text: "text-white" },
-  "JavaScript": { icon: SiJavascript, bg: "bg-[#F7DF1E]", text: "text-black" },
-  "React": { icon: FaReact, bg: "bg-[#61DAFB]", text: "text-black" },
-  "React.js": { icon: FaReact, bg: "bg-[#61DAFB]", text: "text-black" },
-  "Next.js": { icon: SiNextdotjs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "Next.js 14": { icon: SiNextdotjs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "Next.js 15": { icon: SiNextdotjs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "Tailwind CSS": { icon: SiTailwindcss, bg: "bg-[#06B6D4]", text: "text-white" },
+  "HTML": { icon: Code, bg: "bg-[#E34F26]", text: "text-white" },
+  "CSS": { icon: Layers, bg: "bg-[#1572B6]", text: "text-white" },
+  "JavaScript": { icon: Code, bg: "bg-[#F7DF1E]", text: "text-black" },
+  "React": { icon: SvgReact, bg: "bg-[#61DAFB]", text: "text-black" },
+  "React.js": { icon: SvgReact, bg: "bg-[#61DAFB]", text: "text-black" },
+  "Next.js": { icon: SvgNextJs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Next.js 14": { icon: SvgNextJs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Next.js 15": { icon: SvgNextJs, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Tailwind CSS": { icon: Sparkles, bg: "bg-[#06B6D4]", text: "text-white" },
   
-  "Node.js": { icon: FaNodeJs, bg: "bg-[#339933]", text: "text-white" },
-  "Express.js": { icon: SiExpress, bg: "bg-[#000000]", text: "text-white", border: "border-white/25" },
-  "Express": { icon: SiExpress, bg: "bg-[#000000]", text: "text-white", border: "border-white/25" },
-  "REST APIs": { icon: SiSwagger, bg: "bg-[#0052CC]", text: "text-white" },
-  "MySQL": { icon: SiMysql, bg: "bg-[#00758F]", text: "text-white" },
-  "MySQL 8.0": { icon: SiMysql, bg: "bg-[#00758F]", text: "text-white" },
-  "MongoDB": { icon: SiMongodb, bg: "bg-[#47A248]", text: "text-white" },
-  "MongoDB Atlas": { icon: SiMongodb, bg: "bg-[#47A248]", text: "text-white" },
+  "Node.js": { icon: SvgNode, bg: "bg-[#339933]", text: "text-white" },
+  "Express.js": { icon: Server, bg: "bg-[#000000]", text: "text-white", border: "border-white/25" },
+  "Express": { icon: Server, bg: "bg-[#000000]", text: "text-white", border: "border-white/25" },
+  "REST APIs": { icon: Globe, bg: "bg-[#0052CC]", text: "text-white" },
+  "MySQL": { icon: Database, bg: "bg-[#00758F]", text: "text-white" },
+  "MySQL 8.0": { icon: Database, bg: "bg-[#00758F]", text: "text-white" },
+  "MongoDB": { icon: SvgMongodb, bg: "bg-[#47A248]", text: "text-white" },
+  "MongoDB Atlas": { icon: SvgMongodb, bg: "bg-[#47A248]", text: "text-white" },
   
-  "Docker": { icon: FaDocker, bg: "bg-[#2496ED]", text: "text-white" },
-  "Containerized deployment": { icon: FaDocker, bg: "bg-[#2496ED]", text: "text-white" },
-  "Kubernetes": { icon: SiKubernetes, bg: "bg-[#326CE5]", text: "text-white" },
-  "@kubernetes/client-node": { icon: SiKubernetes, bg: "bg-[#326CE5]", text: "text-white" },
-  "Jenkins": { icon: SiJenkins, bg: "bg-[#D24939]", text: "text-white" },
-  "GitHub Actions": { icon: SiGithubactions, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "AWS EC2": { icon: FaAws, bg: "bg-[#FF9900]", text: "text-white" },
-  "AWS IAM": { icon: FaAws, bg: "bg-[#232F3E]", text: "text-white" },
-  "RabbitMQ": { icon: SiRabbitmq, bg: "bg-[#FF6600]", text: "text-white" },
-  "Grafana": { icon: SiGrafana, bg: "bg-[#F46800]", text: "text-white" },
+  "Docker": { icon: SvgDocker, bg: "bg-[#2496ED]", text: "text-white" },
+  "Containerized deployment": { icon: SvgDocker, bg: "bg-[#2496ED]", text: "text-white" },
+  "Kubernetes": { icon: SvgKubernetes, bg: "bg-[#326CE5]", text: "text-white" },
+  "@kubernetes/client-node": { icon: SvgKubernetes, bg: "bg-[#326CE5]", text: "text-white" },
+  "Jenkins": { icon: Cpu, bg: "bg-[#D24939]", text: "text-white" },
+  "GitHub Actions": { icon: SvgGithub, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "AWS EC2": { icon: Server, bg: "bg-[#FF9900]", text: "text-white" },
+  "AWS IAM": { icon: Shield, bg: "bg-[#232F3E]", text: "text-white" },
+  "RabbitMQ": { icon: Zap, bg: "bg-[#FF6600]", text: "text-white" },
+  "Grafana": { icon: Activity, bg: "bg-[#F46800]", text: "text-white" },
   
-  "Git": { icon: SiGit, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "GitHub": { icon: FaGithub, bg: "bg-[#181717]", text: "text-white", border: "border-white/20" },
-  "Postman": { icon: SiPostman, bg: "bg-[#FF6C37]", text: "text-white" },
-  "PostgreSQL": { icon: SiPostgresql, bg: "bg-[#4169E1]", text: "text-white" },
-  "GeoLite2": { icon: FaGlobe, bg: "bg-[#3182CE]", text: "text-white" },
-  "Python": { icon: FaPython, bg: "bg-[#3776AB]", text: "text-white" },
-  "Python 3.11+": { icon: FaPython, bg: "bg-[#3776AB]", text: "text-white" },
-  "Java": { icon: FaJava, bg: "bg-[#B07219]", text: "text-white" },
-  "JavaFX": { icon: FaJava, bg: "bg-[#B07219]", text: "text-white" },
-  "C++": { icon: SiCplusplus, bg: "bg-[#00599C]", text: "text-white" },
-  "C": { icon: SiC, bg: "bg-[#00599C]", text: "text-white" },
-  "Hugging Face": { icon: SiHuggingface, bg: "bg-[#FFD21E]", text: "text-black" },
-  "Sentence Transformers": { icon: SiHuggingface, bg: "bg-[#FFD21E]", text: "text-black" },
+  "Git": { icon: GitBranch, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "GitHub": { icon: SvgGithub, bg: "bg-[#181717]", text: "text-white", border: "border-white/20" },
+  "Postman": { icon: Send, bg: "bg-[#FF6C37]", text: "text-white" },
+  "PostgreSQL": { icon: Database, bg: "bg-[#4169E1]", text: "text-white" },
+  "GeoLite2": { icon: Globe, bg: "bg-[#3182CE]", text: "text-white" },
+  "Python": { icon: SvgPython, bg: "bg-[#3776AB]", text: "text-white" },
+  "Python 3.11+": { icon: SvgPython, bg: "bg-[#3776AB]", text: "text-white" },
+  "Java": { icon: SvgJava, bg: "bg-[#B07219]", text: "text-white" },
+  "JavaFX": { icon: SvgJava, bg: "bg-[#B07219]", text: "text-white" },
+  "C++": { icon: Code, bg: "bg-[#00599C]", text: "text-white" },
+  "C": { icon: Code, bg: "bg-[#00599C]", text: "text-white" },
+  "Hugging Face": { icon: Cpu, bg: "bg-[#FFD21E]", text: "text-black" },
+  "Sentence Transformers": { icon: Cpu, bg: "bg-[#FFD21E]", text: "text-black" },
 
   // Project Stack Mappings
-  "TypeScript": { icon: SiTypescript, bg: "bg-[#3178C6]", text: "text-white" },
-  "Bun": { icon: SiBun, bg: "bg-[#FBF0DF]", text: "text-black", border: "border-[#E8D4BA]" },
-  "Clerk": { icon: SiClerk, bg: "bg-[#6C47FF]", text: "text-white" },
-  "Stripe": { icon: SiStripe, bg: "bg-[#635BFF]", text: "text-white" },
-  "Solidity": { icon: SiSolidity, bg: "bg-[#363636]", text: "text-white" },
-  "FastAPI": { icon: SiFastapi, bg: "bg-[#009688]", text: "text-white" },
-  "Maven": { icon: SiApachemaven, bg: "bg-[#C71A36]", text: "text-white" },
-  "Kotlin": { icon: SiKotlin, bg: "bg-[#7F52FF]", text: "text-white" },
-  "Vite": { icon: SiVite, bg: "bg-[#646CFF]", text: "text-white" },
-  "Framer Motion": { icon: SiFramer, bg: "bg-[#0055FF]", text: "text-white" },
-  "React Router": { icon: SiReactrouter, bg: "bg-[#CA4245]", text: "text-white" },
-  "Redis": { icon: SiRedis, bg: "bg-[#DC382D]", text: "text-white" },
-  "Socket.io": { icon: SiSocketdotio, bg: "bg-[#010101]", text: "text-white", border: "border-white/20" },
-  "Gemini API": { icon: SiGooglegemini, bg: "bg-[#8E75C8]", text: "text-white" },
-  "Sanity CMS": { icon: SiSanity, bg: "bg-[#F03E2F]", text: "text-white" },
-  "Chrome Extension Manifest V3": { icon: SiGooglechrome, bg: "bg-[#4285F4]", text: "text-white" },
-  "Jetpack Compose": { icon: SiAndroid, bg: "bg-[#3DDC84]", text: "text-black" },
-  "Material 3": { icon: SiMaterialdesign, bg: "bg-[#757575]", text: "text-white" },
-  "Railway": { icon: SiRailway, bg: "bg-[#131313]", text: "text-white", border: "border-white/20" },
-  "Vercel": { icon: SiVercel, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "Lucide Icons": { icon: SiLucide, bg: "bg-[#F97316]", text: "text-white" },
-  "SQLAlchemy": { icon: SiSqlalchemy, bg: "bg-[#E2E8F0]", text: "text-black" },
-  "Pydantic": { icon: SiPydantic, bg: "bg-[#E92063]", text: "text-white" },
-  "shadcn/ui": { icon: SiShadcnui, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
-  "Recharts": { icon: FaChartLine, bg: "bg-[#2563EB]", text: "text-white" },
-  "Chart.js / Recharts": { icon: FaChartLine, bg: "bg-[#2563EB]", text: "text-white" },
+  "TypeScript": { icon: Code, bg: "bg-[#3178C6]", text: "text-white" },
+  "Bun": { icon: Zap, bg: "bg-[#FBF0DF]", text: "text-black", border: "border-[#E8D4BA]" },
+  "Clerk": { icon: Lock, bg: "bg-[#6C47FF]", text: "text-white" },
+  "Stripe": { icon: CreditCard, bg: "bg-[#635BFF]", text: "text-white" },
+  "Solidity": { icon: Code, bg: "bg-[#363636]", text: "text-white" },
+  "FastAPI": { icon: Zap, bg: "bg-[#009688]", text: "text-white" },
+  "Maven": { icon: Box, bg: "bg-[#C71A36]", text: "text-white" },
+  "Kotlin": { icon: Code, bg: "bg-[#7F52FF]", text: "text-white" },
+  "Vite": { icon: Zap, bg: "bg-[#646CFF]", text: "text-white" },
+  "Framer Motion": { icon: Sparkles, bg: "bg-[#0055FF]", text: "text-white" },
+  "React Router": { icon: Layers, bg: "bg-[#CA4245]", text: "text-white" },
+  "Redis": { icon: Database, bg: "bg-[#DC382D]", text: "text-white" },
+  "Socket.io": { icon: Zap, bg: "bg-[#010101]", text: "text-white", border: "border-white/20" },
+  "Gemini API": { icon: Sparkles, bg: "bg-[#8E75C8]", text: "text-white" },
+  "Sanity CMS": { icon: FileText, bg: "bg-[#F03E2F]", text: "text-white" },
+  "Chrome Extension Manifest V3": { icon: Globe, bg: "bg-[#4285F4]", text: "text-white" },
+  "Jetpack Compose": { icon: Smartphone, bg: "bg-[#3DDC84]", text: "text-black" },
+  "Material 3": { icon: Layers, bg: "bg-[#757575]", text: "text-white" },
+  "Railway": { icon: Server, bg: "bg-[#131313]", text: "text-white", border: "border-white/20" },
+  "Vercel": { icon: Triangle, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Lucide Icons": { icon: Sparkles, bg: "bg-[#F97316]", text: "text-white" },
+  "SQLAlchemy": { icon: Database, bg: "bg-[#E2E8F0]", text: "text-black" },
+  "Pydantic": { icon: CheckCircle2, bg: "bg-[#E92063]", text: "text-white" },
+  "shadcn/ui": { icon: Layers, bg: "bg-[#000000]", text: "text-white", border: "border-white/20" },
+  "Recharts": { icon: BarChart3, bg: "bg-[#2563EB]", text: "text-white" },
+  "Chart.js / Recharts": { icon: BarChart3, bg: "bg-[#2563EB]", text: "text-white" },
 
   // Newly mapped custom tags
-  "Sandbox execution model": { icon: FaMicrochip, bg: "bg-[#1E1F22]", text: "text-white" },
-  "Monaco Editor": { icon: FaCode, bg: "bg-[#007ACC]", text: "text-white" },
-  "Winston logging": { icon: FaFileAlt, bg: "bg-[#1C1C1E]", text: "text-white/90", border: "border-white/10" },
-  "Web Speech API": { icon: FaMicrophone, bg: "bg-[#0070F3]", text: "text-white" },
-  "localStorage": { icon: FaDatabase, bg: "bg-[#F39C12]", text: "text-white" },
-  "Responsive UI": { icon: FaMobileAlt, bg: "bg-[#3498DB]", text: "text-white" },
-  "Accessibility-first design": { icon: FaUniversalAccess, bg: "bg-[#2ECC71]", text: "text-white" },
-  "TF-IDF Vectorizer": { icon: FaBrain, bg: "bg-[#8E44AD]", text: "text-white" },
-  "DBSCAN": { icon: FaProjectDiagram, bg: "bg-[#1ABC9C]", text: "text-white" },
-  "Room": { icon: FaDatabase, bg: "bg-[#4285F4]", text: "text-white" },
-  "Hilt": { icon: FaPlug, bg: "bg-[#00E676]", text: "text-black" },
-  "Coroutines": { icon: FaSyncAlt, bg: "bg-[#7F52FF]", text: "text-white" },
-  "Flow / StateFlow": { icon: FaStream, bg: "bg-[#3F51B5]", text: "text-white" },
-  "MVVM": { icon: FaSitemap, bg: "bg-[#9C27B0]", text: "text-white" },
-  "Clean Architecture": { icon: FaShieldAlt, bg: "bg-[#607D8B]", text: "text-white" },
-  "IP detection API": { icon: FaGlobe, bg: "bg-[#E74C3C]", text: "text-white" }
+  "Sandbox execution model": { icon: Cpu, bg: "bg-[#1E1F22]", text: "text-white" },
+  "Monaco Editor": { icon: Code, bg: "bg-[#007ACC]", text: "text-white" },
+  "Winston logging": { icon: FileText, bg: "bg-[#1C1C1E]", text: "text-white/90", border: "border-white/10" },
+  "Web Speech API": { icon: Mic, bg: "bg-[#0070F3]", text: "text-white" },
+  "localStorage": { icon: Database, bg: "bg-[#F39C12]", text: "text-white" },
+  "Responsive UI": { icon: Smartphone, bg: "bg-[#3498DB]", text: "text-white" },
+  "Accessibility-first design": { icon: Eye, bg: "bg-[#2ECC71]", text: "text-white" },
+  "TF-IDF Vectorizer": { icon: Cpu, bg: "bg-[#8E44AD]", text: "text-white" },
+  "DBSCAN": { icon: Share2, bg: "bg-[#1ABC9C]", text: "text-white" },
+  "Room": { icon: Database, bg: "bg-[#4285F4]", text: "text-white" },
+  "Hilt": { icon: Zap, bg: "bg-[#00E676]", text: "text-black" },
+  "Coroutines": { icon: Repeat, bg: "bg-[#7F52FF]", text: "text-white" },
+  "Flow / StateFlow": { icon: Activity, bg: "bg-[#3F51B5]", text: "text-white" },
+  "MVVM": { icon: Layers, bg: "bg-[#9C27B0]", text: "text-white" },
+  "Clean Architecture": { icon: Shield, bg: "bg-[#607D8B]", text: "text-white" },
+  "IP detection API": { icon: Globe, bg: "bg-[#E74C3C]", text: "text-white" }
 };
 
 export const DEFAULT_THEME: ProjectTheme = {

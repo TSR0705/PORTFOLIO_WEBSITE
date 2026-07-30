@@ -6,7 +6,7 @@ import React, {
   useMemo,
   useCallback,
 } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface AchievementItem {
@@ -313,12 +313,10 @@ export const CircularAchievements = ({
                   <motion.span
                     key={i}
                     initial={{
-                      filter: "blur(10px)",
                       opacity: 0,
-                      y: 5,
+                      y: 4,
                     }}
                     animate={{
-                      filter: "blur(0px)",
                       opacity: 1,
                       y: 0,
                     }}
@@ -350,7 +348,7 @@ export const CircularAchievements = ({
               onMouseLeave={() => setHoverPrev(false)}
               aria-label="Previous achievement"
             >
-              <FaArrowLeft size={28} color={hoverPrev ? "#121212" : colorArrowFg} />
+              <ArrowLeft size={24} color={hoverPrev ? "#121212" : colorArrowFg} />
             </button>
             <button
               className="arrow-button next-button"
@@ -362,7 +360,7 @@ export const CircularAchievements = ({
               onMouseLeave={() => setHoverNext(false)}
               aria-label="Next achievement"
             >
-              <FaArrowRight size={28} color={hoverNext ? "#121212" : colorArrowFg} />
+              <ArrowRight size={24} color={hoverNext ? "#121212" : colorArrowFg} />
             </button>
           </div>
         </div>

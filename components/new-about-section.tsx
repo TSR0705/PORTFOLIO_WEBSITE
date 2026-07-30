@@ -51,10 +51,9 @@ function Magnetic({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function NewAboutSection() {
+function LiveClock() {
   const [localTime, setLocalTime] = useState("");
 
-  // Live Chennai clock
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -73,36 +72,33 @@ export default function NewAboutSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // Parallax tracking (only on landscape desktops)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  return <span suppressHydrationWarning>IST: {localTime || "00:00:00 AM"}</span>;
+}
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      setMousePosition({
-        x: clientX / innerWidth - 0.5,
-        y: clientY / innerHeight - 0.5,
-      });
-    };
-    const mediaQuery = window.matchMedia("(min-width: 1024px) and (orientation: landscape)");
-    if (mediaQuery.matches) {
-      window.addEventListener("mousemove", handleMouseMove);
-    }
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
+export default function NewAboutSection() {
   const portraitX = useSpring(0, { damping: 20, stiffness: 80 });
   const portraitY = useSpring(0, { damping: 20, stiffness: 80 });
   const glowX = useSpring(0, { damping: 30, stiffness: 50 });
   const glowY = useSpring(0, { damping: 30, stiffness: 50 });
 
+  // Parallax tracking directly via MotionValues (zero React re-renders)
   useEffect(() => {
-    portraitX.set(mousePosition.x * -20);
-    portraitY.set(mousePosition.y * -20);
-    glowX.set(mousePosition.x * 40);
-    glowY.set(mousePosition.y * 40);
-  }, [mousePosition, portraitX, portraitY, glowX, glowY]);
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { innerWidth, innerHeight } = window;
+      const mouseX = clientX / innerWidth - 0.5;
+      const mouseY = clientY / innerHeight - 0.5;
+      portraitX.set(mouseX * -20);
+      portraitY.set(mouseY * -20);
+      glowX.set(mouseX * 40);
+      glowY.set(mouseY * 40);
+    };
+    const mediaQuery = window.matchMedia("(min-width: 1024px) and (orientation: landscape)");
+    if (mediaQuery.matches) {
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    }
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [portraitX, portraitY, glowX, glowY]);
 
   // Entrance animations
   const slideReveal = {
@@ -173,7 +169,7 @@ export default function NewAboutSection() {
               </div>
               <div className="flex flex-col items-end gap-0.5 font-mono text-[9px] text-white/30 tracking-wider">
                 <span>LOC: 13.0827° N, 80.2707° E</span>
-                <span>IST: {localTime || "00:00:00 AM"}</span>
+                <LiveClock />
               </div>
             </motion.div>
 

@@ -1,9 +1,31 @@
 import React from "react";
-import * as Lucide from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import {
+  Code,
+  GitBranch,
+  ExternalLink,
+  ArrowUpRight,
+  Play,
+  Sparkles,
+  AlertTriangle,
+  CheckCircle,
+  Database,
+  Layers,
+  Shield,
+  Cpu,
+  Smartphone
+} from "lucide-react";
 import { skillDetails } from "@/lib/project-design";
 import { ProjectTheme } from "@/lib/project-design";
 import { Project } from "@/lib/projects";
+
+const projectThemeIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
+  Code,
+  Database,
+  Layers,
+  Shield,
+  Cpu,
+  Smartphone
+};
 
 // Renders a badge for the project status
 export function ProjectBadge({
@@ -37,7 +59,7 @@ export function TechBadge({
   className?: string;
 }) {
   const details = skillDetails[tech] || {
-    icon: Lucide.Cpu,
+    icon: Cpu,
     bg: "bg-[#1E1F22]",
     text: "text-white",
     border: "border-white/5",
@@ -140,7 +162,7 @@ export function ProjectLinks({
             title="GitHub Code"
             onClick={(e) => e.stopPropagation()}
           >
-            <FaGithub className="w-3.5 h-3.5" />
+            <GitBranch className="w-3.5 h-3.5" />
           </a>
         )}
         {liveUrl && (
@@ -153,7 +175,7 @@ export function ProjectLinks({
             title="Live Demo"
             onClick={(e) => e.stopPropagation()}
           >
-            <Lucide.ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5" />
           </a>
         )}
       </div>
@@ -169,7 +191,7 @@ export function ProjectLinks({
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full sm:flex-1"
         >
-          <FaGithub className="w-4 h-4" />
+          <GitBranch className="w-4 h-4" />
           Source Code
         </a>
       )}
@@ -182,7 +204,7 @@ export function ProjectLinks({
           style={{ backgroundColor: theme.primaryColor, color: "#000" }}
         >
           Live Demo
-          <Lucide.ArrowUpRight className="w-4 h-4" />
+          <ArrowUpRight className="w-4 h-4" />
         </a>
       )}
       {demoUrl && (
@@ -192,7 +214,7 @@ export function ProjectLinks({
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full sm:flex-1"
         >
-          <Lucide.Play className="w-4 h-4 fill-white/10" />
+          <Play className="w-4 h-4 fill-white/10" />
           Video Demo
         </a>
       )}
@@ -226,6 +248,8 @@ export function ProjectCard({
         <img
           src={theme.imageSrc}
           alt={item.title}
+          loading={active ? "eager" : "lazy"}
+          decoding="async"
           className="h-full w-full object-cover transition-transform duration-700"
           draggable={false}
         />
@@ -262,7 +286,7 @@ export function ProjectHeader({
   project: Project;
   theme: ProjectTheme;
 }) {
-  const IconComponent = (Lucide as any)[theme.iconName] || Lucide.Code;
+  const IconComponent = projectThemeIconMap[theme.iconName] || Code;
 
   return (
     <>
@@ -283,7 +307,7 @@ export function ProjectHeader({
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tighter leading-none text-white">
           {project.title}{" "}
           {project.featured && (
-            <Lucide.Sparkles className={`inline-block w-8 h-8 ${theme.accentText} ml-2 align-middle`} />
+            <Sparkles className={`inline-block w-8 h-8 ${theme.accentText} ml-2 align-middle`} />
           )}
         </h1>
 
@@ -427,7 +451,7 @@ export function ChallengesSolutions({
             <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/5 rounded-full blur-2xl pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <h4 className="text-xs font-mono uppercase tracking-widest text-red-400 flex items-center gap-2">
-                <Lucide.AlertTriangle className="w-3.5 h-3.5" />
+                <AlertTriangle className="w-3.5 h-3.5" />
                 Roadblock
               </h4>
               <p className="text-white/80 text-xs md:text-sm leading-relaxed font-sans">
@@ -443,7 +467,7 @@ export function ChallengesSolutions({
             <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
             <div className="space-y-3 relative z-10">
               <h4 className="text-xs font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-2">
-                <Lucide.CheckCircle className="w-3.5 h-3.5" />
+                <CheckCircle className="w-3.5 h-3.5" />
                 Resolution
               </h4>
               <p className="text-white/80 text-xs md:text-sm leading-relaxed font-sans">

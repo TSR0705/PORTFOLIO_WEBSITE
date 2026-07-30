@@ -4,47 +4,40 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FaReact,
-  FaAws,
-  FaDocker,
-  FaNodeJs,
-  FaGithub,
-  FaJava,
-  FaPython,
-  FaLinux
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiPostgresql,
-  SiRedis,
-  SiMongodb,
-  SiKubernetes,
-  SiJenkins,
-  SiExpress
-} from "react-icons/si";
+  Code,
+  Layers,
+  Server,
+  Globe,
+  Database,
+  Cpu,
+  Shield,
+  Box,
+  Zap,
+  GitBranch,
+  Terminal,
+} from "lucide-react";
 
 const fallbackUrls = [
   "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
 ];
 
 const iconConfigs = [
-  { Icon: FaReact, color: "#61DAFB", name: "React" },
-  { Icon: SiNextdotjs, color: "#FFFFFF", name: "Next.js" },
-  { Icon: FaNodeJs, color: "#339933", name: "Node.js" },
-  { Icon: SiTypescript, color: "#3178C6", name: "TypeScript" },
-  { Icon: FaJava, color: "#F89820", name: "Java" },
-  { Icon: FaPython, color: "#3776AB", name: "Python" },
-  { Icon: FaDocker, color: "#2496ED", name: "Docker" },
-  { Icon: SiKubernetes, color: "#326CE5", name: "Kubernetes" },
-  { Icon: FaAws, color: "#FF9900", name: "AWS" },
-  { Icon: SiPostgresql, color: "#4169E1", name: "PostgreSQL" },
-  { Icon: SiRedis, color: "#DC382D", name: "Redis" },
-  { Icon: SiMongodb, color: "#47A248", name: "MongoDB" },
-  { Icon: FaGithub, color: "#FFFFFF", name: "GitHub" },
-  { Icon: SiJenkins, color: "#D24939", name: "Jenkins" },
-  { Icon: FaLinux, color: "#FCC624", name: "Linux" },
-  { Icon: SiExpress, color: "#FFFFFF", name: "Express" },
+  { Icon: Code, color: "#61DAFB", name: "React" },
+  { Icon: Layers, color: "#FFFFFF", name: "Next.js" },
+  { Icon: Server, color: "#339933", name: "Node.js" },
+  { Icon: Code, color: "#3178C6", name: "TypeScript" },
+  { Icon: Cpu, color: "#F89820", name: "Java" },
+  { Icon: Code, color: "#3776AB", name: "Python" },
+  { Icon: Box, color: "#2496ED", name: "Docker" },
+  { Icon: Shield, color: "#326CE5", name: "Kubernetes" },
+  { Icon: Globe, color: "#FF9900", name: "AWS" },
+  { Icon: Database, color: "#4169E1", name: "PostgreSQL" },
+  { Icon: Database, color: "#DC382D", name: "Redis" },
+  { Icon: Database, color: "#47A248", name: "MongoDB" },
+  { Icon: GitBranch, color: "#FFFFFF", name: "GitHub" },
+  { Icon: Zap, color: "#D24939", name: "Jenkins" },
+  { Icon: Terminal, color: "#FCC624", name: "Linux" },
+  { Icon: Server, color: "#FFFFFF", name: "Express" },
   { Icon: null, img: fallbackUrls[0], name: "React fallback" },
 ];
 
@@ -115,7 +108,7 @@ export default function FeatureSection() {
         <div className="relative w-[38rem] h-[38rem] translate-y-[20%] md:translate-y-0 md:translate-x-[40%] flex items-center justify-center">
           {/* Center Circle */}
           <div className="w-20 h-20 rounded-full bg-neutral-900 border border-[#E1E0CC]/20 shadow-2xl flex items-center justify-center z-20">
-            <FaReact className="w-10 h-10 text-[#61DAFB]" />
+            <Code className="w-10 h-10 text-[#61DAFB]" />
           </div>
 
           {/* Generate Orbits */}

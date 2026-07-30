@@ -106,6 +106,7 @@ export function CertificateGallery() {
                     fill
                     className="object-cover"
                     sizes="100px"
+                    loading="lazy"
                   />
                 </div>
 
