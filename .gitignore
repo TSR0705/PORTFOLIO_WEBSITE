@@ -45,6 +45,8 @@ CLAUDE.md
 claude.md
 AGENTS.md
 agents.md
+*.jsonl
+portfolio_projects_master*.md
 .planning/
 scratch/
 
