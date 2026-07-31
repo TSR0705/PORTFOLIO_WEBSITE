@@ -113,6 +113,7 @@ const personSchema = {
   "@type": "Person",
   "@id": `${siteUrl}/#person`,
   "name": "Tanmay Singh",
+  "alternateName": ["Tanmay", "Tanmay Singh Rajput", "TSR0705"],
   "url": siteUrl,
   "image": `${siteUrl}/MY_IMAGE.webp`,
   "description": "Tanmay Singh is a B.Tech Computer Science and Engineering (Cloud Computing) student at SRM Institute of Science and Technology. He is a Software Developer focused on Backend Development, Cloud Computing, Distributed Systems, and System Design.",
@@ -129,14 +130,21 @@ const personSchema = {
     "https://leetcode.com/u/tanmay_singh_rajput/"
   ],
   "knowsAbout": [
+    "Software Engineering",
     "Backend Development",
     "Cloud Computing",
     "DevOps",
     "Distributed Systems",
-    "Software Engineering",
     "System Design",
     "Database Reliability",
-    "Cybersecurity"
+    "Cybersecurity",
+    "Node.js",
+    "Next.js",
+    "TypeScript",
+    "Python",
+    "Java",
+    "Docker",
+    "Kubernetes"
   ]
 };
 
