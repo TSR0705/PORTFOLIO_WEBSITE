@@ -2,36 +2,35 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import {
-  Code,
-  Layers,
-  Server,
-  Globe,
-  Database,
-  Cpu,
-  Shield,
-  Box,
-  Zap,
-  GitBranch,
-  Send,
-} from "lucide-react";
 import { skillDetails } from "@/lib/project-design";
 import { TechBadge } from "@/components/ui/project-components";
 
-// Curated icons for the Orbit visualizer - clean, flat, matching the project styling without custom glowing outlines
-const orbitIconConfigs = [
-  { Icon: Code, color: "#61DAFB", name: "React" },
-  { Icon: Layers, color: "#FFFFFF", name: "Next.js" },
-  { Icon: Server, color: "#339933", name: "Node.js" },
-  { Icon: Code, color: "#3178C6", name: "TypeScript" },
-  { Icon: Cpu, color: "#F89820", name: "Java" },
-  { Icon: Box, color: "#2496ED", name: "Docker" },
-  { Icon: Shield, color: "#326CE5", name: "Kubernetes" },
-  { Icon: Database, color: "#47A248", name: "MongoDB" },
-  { Icon: Zap, color: "#D24939", name: "Jenkins" },
-  { Icon: Send, color: "#FF6C37", name: "Postman" },
-  { Icon: GitBranch, color: "#FFFFFF", name: "GitHub" },
+// Curated official SVG brand logos structured by 3 orbit rings with official brand colors
+const orbitRings = [
+  // Ring 1 (Inner - 4 icons)
+  [
+    { logo: "/logos/react.svg", name: "React", color: "#61DAFB" },
+    { logo: "/logos/nextdotjs.svg", name: "Next.js", color: "#FFFFFF" },
+    { logo: "/logos/typescript.svg", name: "TypeScript", color: "#3178C6" },
+    { logo: "/logos/nodedotjs.svg", name: "Node.js", color: "#339933" },
+  ],
+  // Ring 2 (Middle - 5 icons)
+  [
+    { logo: "/logos/docker.svg", name: "Docker", color: "#2496ED" },
+    { logo: "/logos/kubernetes.svg", name: "Kubernetes", color: "#326CE5" },
+    { logo: "/logos/mongodb.svg", name: "MongoDB", color: "#47A248" },
+    { logo: "/logos/postgresql.svg", name: "PostgreSQL", color: "#4169E1" },
+    { logo: "/logos/python.svg", name: "Python", color: "#3776AB" },
+  ],
+  // Ring 3 (Outer - 6 icons)
+  [
+    { logo: "/logos/tailwindcss.svg", name: "Tailwind CSS", color: "#06B6D4" },
+    { logo: "/logos/git.svg", name: "Git", color: "#F05032" },
+    { logo: "/logos/github.svg", name: "GitHub", color: "#FFFFFF" },
+    { logo: "/logos/jenkins.svg", name: "Jenkins", color: "#D24939" },
+    { logo: "/logos/postman.svg", name: "Postman", color: "#FF6C37" },
+    { logo: "/logos/redis.svg", name: "Redis", color: "#DC382D" },
+  ],
 ];
 
 const categories = [
@@ -65,7 +64,6 @@ const categories = [
 ];
 
 export default function SkillsSection() {
-  const orbitCount = 3;
   const [isMobile, setIsMobile] = useState(false);
   const [scale, setScale] = useState(1);
 
@@ -104,7 +102,6 @@ export default function SkillsSection() {
 
   const orbitGap = isMobile ? 3.5 : 5.5; // rem spacing between orbits
   const baseSize = isMobile ? 10 : 16;   // rem base size
-  const iconsPerOrbit = Math.ceil(orbitIconConfigs.length / orbitCount);
 
   return (
     <section id="skills" className="w-full bg-black text-white px-6 md:px-16 py-24 relative overflow-hidden flex items-center">
@@ -174,17 +171,21 @@ export default function SkillsSection() {
             {/* Radial gradient background behind orbits */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(225,224,204,0.02)_0%,transparent_70%)] pointer-events-none rounded-full" />
 
-            {/* Center Circle */}
-            <div className={`${isMobile ? "w-24 h-24" : "w-32 h-32"} rounded-full bg-[#121212] border border-[#E1E0CC]/20 shadow-lg flex items-center justify-center z-20`}>
-              <span className={`${isMobile ? "text-2xl" : "text-4xl"} font-mono font-bold tracking-tighter text-[#E1E0CC]`}>
-                TS
-              </span>
+            {/* Center Circle with Personal Brand Logo */}
+            <div className={`${isMobile ? "w-20 h-20" : "w-24 h-24"} rounded-full bg-black border border-white/20 shadow-2xl flex items-center justify-center z-20 relative overflow-hidden group/center hover:border-white/50 transition-all duration-300`}>
+              <img
+                src="/MY_LOGO.webp"
+                alt="Tanmay Singh logo"
+                className="w-full h-full object-cover rounded-full scale-[1.2] relative z-10 transition-transform duration-300 group-hover/center:scale-125"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
 
             {/* Generated Orbits - clean dotted circles */}
-            {[...Array(orbitCount)].map((_, orbitIdx) => {
+            {orbitRings.map((ring, orbitIdx) => {
               const size = `${baseSize + 2 * orbitGap * orbitIdx}rem`;
-              const angleStep = (2 * Math.PI) / iconsPerOrbit;
+              const angleStep = (2 * Math.PI) / ring.length;
 
               return (
                 <div
@@ -197,62 +198,47 @@ export default function SkillsSection() {
                     animation: `orbit-spin ${20 + orbitIdx * 10}s linear infinite`,
                   }}
                 >
-                  {orbitIconConfigs
-                    .slice(orbitIdx * iconsPerOrbit, orbitIdx * iconsPerOrbit + iconsPerOrbit)
-                    .map((cfg, iconIdx) => {
-                      const angle = iconIdx * angleStep;
-                      const x = (50 + 50 * Math.cos(angle)).toFixed(4);
-                      const y = (50 + 50 * Math.sin(angle)).toFixed(4);
+                  {ring.map((cfg, iconIdx) => {
+                    const angle = iconIdx * angleStep;
+                    const x = (50 + 50 * Math.cos(angle)).toFixed(4);
+                    const y = (50 + 50 * Math.sin(angle)).toFixed(4);
 
-                      const techToProjectMap: Record<string, string> = {
-                        "Docker": "/projects/loadlab-deploybot",
-                        "Kubernetes": "/projects/loadlab-deploybot",
-                        "Jenkins": "/projects/loadlab-deploybot",
-                        "GitHub Actions": "/projects/loadlab-deploybot",
-                        "React": "/projects/codeweave",
-                        "Next.js": "/projects/codeweave",
-                        "TypeScript": "/projects/codeweave",
-                        "MySQL": "/projects/dbms-self-healing",
-                        "MongoDB": "/projects/codeweave",
-                        "Express.js": "/projects/codeweave",
-                        "Node.js": "/projects/codeweave",
-                        "Java": "/projects/exposur",
-                        "REST APIs": "/projects/exposur"
-                      };
-
-                      const projectUrl = techToProjectMap[cfg.name];
-                      const iconEl = (
+                    return (
+                      <div
+                        key={iconIdx}
+                        className="absolute pointer-events-auto"
+                        style={{
+                          left: `${x}%`,
+                          top: `${y}%`,
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      >
                         <div
                           title={cfg.name}
-                          className="bg-neutral-900 border border-white/10 rounded-full p-2 shadow-md flex items-center justify-center transition-transform duration-300 hover:scale-125 hover:border-white/30 cursor-pointer orbit-icon-anim"
+                          className="bg-neutral-900/90 border border-white/15 rounded-full p-2.5 shadow-md flex items-center justify-center transition-all duration-300 hover:scale-115 hover:border-white/40 cursor-default orbit-icon-anim"
                           style={{
                             animation: `counter-spin ${20 + orbitIdx * 10}s linear infinite`,
                           }}
                         >
-                          <cfg.Icon className={`${isMobile ? "w-5 h-5" : "w-6 h-6"}`} style={{ color: cfg.color }} />
+                          <div
+                            className={`${isMobile ? "w-5 h-5" : "w-6 h-6"} flex-shrink-0 relative z-10`}
+                            style={{
+                              backgroundColor: cfg.color,
+                              maskImage: `url(${cfg.logo})`,
+                              WebkitMaskImage: `url(${cfg.logo})`,
+                              maskSize: "contain",
+                              WebkitMaskSize: "contain",
+                              maskRepeat: "no-repeat",
+                              WebkitMaskRepeat: "no-repeat",
+                              maskPosition: "center",
+                              WebkitMaskPosition: "center",
+                            }}
+                            aria-label={`${cfg.name} logo`}
+                          />
                         </div>
-                      );
-
-                      return (
-                        <div
-                          key={iconIdx}
-                          className="absolute pointer-events-auto"
-                          style={{
-                            left: `${x}%`,
-                            top: `${y}%`,
-                            transform: "translate(-50%, -50%)",
-                          }}
-                        >
-                          {projectUrl ? (
-                            <Link href={projectUrl}>
-                              {iconEl}
-                            </Link>
-                          ) : (
-                            iconEl
-                          )}
-                        </div>
-                      );
-                    })}
+                      </div>
+                    );
+                  })}
                 </div>
               );
             })}

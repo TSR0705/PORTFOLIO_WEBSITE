@@ -6,7 +6,6 @@ import {
   Sparkles, 
   FolderCode,
   Link2,
-  GitBranch,
   ArrowUpRight,
   Play,
   Cpu,
@@ -384,7 +383,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-widest py-3 px-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300 text-center w-full text-white/80 hover:text-white"
                     >
-                      <GitBranch className="w-4 h-4" />
+                      <img src="/logos/github.svg" alt="GitHub logo" className="w-4 h-4 object-contain brightness-0 invert" />
                       Source Code
                     </a>
                   )}

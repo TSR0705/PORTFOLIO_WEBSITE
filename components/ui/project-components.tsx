@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Code,
-  GitBranch,
   ExternalLink,
   ArrowUpRight,
   Play,
@@ -48,7 +47,7 @@ export function ProjectBadge({
 
 import Link from "next/link";
 
-// Reusable tech pill inheriting icons/colors from the Engineering Toolkit mapping
+// Reusable tech pill inheriting official brand SVG logos and colors
 export function TechBadge({
   tech,
   variant = "default",
@@ -59,55 +58,34 @@ export function TechBadge({
   className?: string;
 }) {
   const details = skillDetails[tech] || {
-    icon: Cpu,
+    logo: "/logos/code.svg",
     bg: "bg-[#1E1F22]",
     text: "text-white",
     border: "border-white/5",
   };
-  const IconComp = details.icon;
 
-  const techToProjectMap: Record<string, string> = {
-    "Docker": "/projects/loadlab-deploybot",
-    "Kubernetes": "/projects/loadlab-deploybot",
-    "Jenkins": "/projects/loadlab-deploybot",
-    "GitHub Actions": "/projects/loadlab-deploybot",
-    "React": "/projects/codeweave",
-    "Next.js": "/projects/codeweave",
-    "TypeScript": "/projects/codeweave",
-    "MySQL": "/projects/dbms-self-healing",
-    "MongoDB": "/projects/codeweave",
-    "Express.js": "/projects/codeweave",
-    "Node.js": "/projects/codeweave",
-    "Java": "/projects/exposur",
-    "REST APIs": "/projects/exposur"
-  };
-
-  const projectUrl = techToProjectMap[tech];
-
-  const content = (
-    <>
-      <IconComp className={`${variant === "compact" ? "w-3.5 h-3.5" : "w-4 h-4"} flex-shrink-0`} />
-      {tech}
-    </>
-  );
-
-  const classes = `inline-flex items-center gap-1.5 transition-all duration-300 select-none hover:scale-[1.03] shadow-sm hover:shadow-md ${
-    variant === "compact"
-      ? `text-[11px] font-bold px-3.5 py-1 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
-      : `text-xs md:text-sm font-bold px-4 py-1.5 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
-  } ${className}`;
-
-  if (projectUrl) {
-    return (
-      <Link href={projectUrl} className={`${classes} cursor-pointer hover:opacity-90`}>
-        {content}
-      </Link>
-    );
-  }
+  const isDarkText = details.text === "text-black";
 
   return (
-    <span className={`${classes} cursor-default`}>
-      {content}
+    <span
+      className={`inline-flex items-center gap-1.5 transition-all duration-300 select-none hover:scale-[1.03] shadow-sm hover:shadow-md cursor-default ${
+        variant === "compact"
+          ? `text-[11px] font-bold px-3.5 py-1 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
+          : `text-xs md:text-sm font-bold px-4 py-1.5 rounded-full ${details.bg} ${details.text} ${details.border || "border border-transparent"}`
+      } ${className}`}
+    >
+      <img
+        src={details.logo}
+        alt={`${tech} logo`}
+        width={variant === "compact" ? 14 : 16}
+        height={variant === "compact" ? 14 : 16}
+        className={`${variant === "compact" ? "w-3.5 h-3.5" : "w-4 h-4"} object-contain flex-shrink-0 ${
+          isDarkText ? "brightness-0" : "brightness-0 invert"
+        }`}
+        loading="lazy"
+        decoding="async"
+      />
+      {tech}
     </span>
   );
 }
@@ -162,7 +140,7 @@ export function ProjectLinks({
             title="GitHub Code"
             onClick={(e) => e.stopPropagation()}
           >
-            <GitBranch className="w-3.5 h-3.5" />
+            <img src="/logos/github.svg" alt="GitHub logo" className="w-3.5 h-3.5 object-contain brightness-0 invert" />
           </a>
         )}
         {liveUrl && (
@@ -191,7 +169,7 @@ export function ProjectLinks({
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 text-xs font-mono uppercase tracking-wider py-3 px-6 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 hover:border-white/45 transition-colors text-center w-full sm:flex-1"
         >
-          <GitBranch className="w-4 h-4" />
+          <img src="/logos/github.svg" alt="GitHub logo" className="w-4 h-4 object-contain brightness-0 invert" />
           Source Code
         </a>
       )}

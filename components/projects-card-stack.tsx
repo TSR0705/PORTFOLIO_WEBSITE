@@ -24,17 +24,17 @@ export default function ProjectsCardStack() {
       const w = window.innerWidth;
       if (w < 480) {
         // Very small screens (320px - 479px)
-        const width = w - 48; // Allow 24px margins on each side
+        const width = w - 32; // 16px padding on sides
         setDimensions({
           width: width,
-          height: Math.round(width * 0.7)
+          height: 340
         });
       } else if (w < 640) {
         // Small screens (480px - 639px)
-        const width = w - 64; // Allow 32px margins on each side
+        const width = w - 48; // 24px padding on sides
         setDimensions({
           width: width,
-          height: Math.round(width * 0.66)
+          height: 350
         });
       } else {
         // Desktop / tablets (>= 640px)
