@@ -233,6 +233,7 @@ export default function SkillsSection() {
                               maskPosition: "center",
                               WebkitMaskPosition: "center",
                             }}
+                            role="img"
                             aria-label={`${cfg.name} logo`}
                           />
                         </div>

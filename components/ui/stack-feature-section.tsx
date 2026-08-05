@@ -105,6 +105,7 @@ export default function FeatureSection() {
                 maskPosition: "center",
                 WebkitMaskPosition: "center",
               }}
+              role="img"
               aria-label="React logo"
             />
           </div>
@@ -153,6 +154,7 @@ export default function FeatureSection() {
                           maskPosition: "center",
                           WebkitMaskPosition: "center",
                         }}
+                        role="img"
                         aria-label={`${cfg.name} logo`}
                       />
                     </div>
