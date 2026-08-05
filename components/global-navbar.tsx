@@ -99,16 +99,16 @@ export default function GlobalNavbar() {
               
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1.5 text-[9px] font-mono tracking-widest text-[#E1E0CC]/80 uppercase hover:text-white transition-colors py-1 cursor-pointer focus:outline-none"
+                className="flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#E1E0CC]/80 uppercase hover:text-white transition-colors py-2 px-1 min-h-[44px] cursor-pointer focus:outline-none"
                 aria-label="Toggle menu"
               >
                 <span>{isOpen ? "Close" : "Menu"}</span>
                 {isOpen ? (
-                  <svg className="w-3 h-3 text-[#E1E0CC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-[#E1E0CC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 ) : (
-                  <svg className="w-3 h-3 text-[#E1E0CC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3.5 h-3.5 text-[#E1E0CC]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
                   </svg>
                 )}
@@ -123,7 +123,7 @@ export default function GlobalNavbar() {
                   animate={{ height: "auto", opacity: 1, marginTop: 16 }}
                   exit={{ height: 0, opacity: 0, marginTop: 0 }}
                   transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col gap-3.5 w-full border-t border-[#E1E0CC]/10 pt-4"
+                  className="flex flex-col gap-1 w-full border-t border-[#E1E0CC]/10 pt-4"
                 >
                   {navItems.map((item) => {
                     const isActive = pathname === item.target;
@@ -132,7 +132,7 @@ export default function GlobalNavbar() {
                         key={item.name}
                         href={item.target}
                         onClick={() => setIsOpen(false)}
-                        className="text-[11px] font-mono uppercase tracking-[0.15em] py-1 text-left block w-full hover:text-white transition-colors"
+                        className="text-[11px] font-mono uppercase tracking-[0.15em] py-2.5 px-2 min-h-[44px] flex items-center w-full hover:text-white transition-colors rounded-lg active:bg-white/5"
                         style={{ color: isActive ? "#E1E0CC" : "rgba(225, 224, 204, 0.9)" }}
                       >
                         {item.name}

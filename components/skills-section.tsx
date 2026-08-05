@@ -76,7 +76,7 @@ export default function SkillsSection() {
       if (mobile) {
         // Calculate container width: screen width minus padding (approx 48px)
         const containerW = w - 48;
-        const baseDiagWidth = 400; // 25rem (25 * 16px)
+        const baseDiagWidth = 464; // Orbit 2 diameter + icon width for zero mobile clipping
         if (containerW < baseDiagWidth) {
           setScale(containerW / baseDiagWidth);
         } else {
